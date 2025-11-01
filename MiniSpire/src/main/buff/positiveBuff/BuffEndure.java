@@ -7,7 +7,7 @@ public class BuffEndure implements Buff {
 	String name = "Endure";
 	int duration = 0;
 	
-	public BuffStrength(int duration) {
+	public BuffEndure(int duration) {
 		this.duration = duration;
 	}
 

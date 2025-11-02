@@ -54,7 +54,7 @@ public class Main {
 		        userInput = scanner.nextLine();
 		        
 		        while (!game.isValidInput(userInput)) {
-		            System.out.println(" Invalid input. Format: <action> <target>. (e.g. 'play 1')");
+		            System.out.println(" Invalid input. Format: <action> <target>. (e.g. 'p 1')");
 		            System.out.print("Action >> ");
 		            userInput = scanner.nextLine();
 		        }

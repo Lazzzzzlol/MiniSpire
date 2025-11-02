@@ -70,7 +70,7 @@ public class NodeBattle extends Node {
 		
 		switch (parts[0]) {
 		
-			case "play":
+			case "p":
 				playcard(Integer.parseInt(parts[1]));
 				break;
 				
@@ -91,7 +91,7 @@ public class NodeBattle extends Node {
 		String[] parts = input.split(" ");
 		if (parts.length != 2) return false;
 		
-		if (parts[0].equals("play")) {
+		if (parts[0].equals("p")) {
 			try {
 				int cardIndex = Integer.parseInt(parts[1]);
 				Player player = Player.getInstance();

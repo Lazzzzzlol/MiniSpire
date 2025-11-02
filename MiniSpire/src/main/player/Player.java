@@ -123,7 +123,7 @@ public class Player {
 			handCardList.remove(cardIndex - 1);
 			discardCardList.add(cardToPlay);
 		} else {
-			System.out.println("Not enough action points to play this card.");
+			System.out.println(" >> Not enough action points to play this card.");
 		}
 	}
 	

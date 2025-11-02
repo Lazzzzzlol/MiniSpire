@@ -20,6 +20,15 @@ public class CardFactory implements ResourceFactory {
 		}
 		return instance;
 	}
+
+	private ArrayList<Card> cardPool;
+
+	public CardFactory(){
+
+		cardPool = new ArrayList<>();
+
+		cardPool.add(new CardStrike());
+	}
 	
 	@Override
 	public void init() {

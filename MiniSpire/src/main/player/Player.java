@@ -36,7 +36,7 @@ public class Player {
 	private ArrayList<Card> discardCardList;
 	
 	private ArrayList<Buff> buffList;
-	//ArrayList<Ability> abilityList;
+	//private ArrayList<Ability> abilityList;
 	
 	public Player() {
 		
@@ -181,6 +181,7 @@ public class Player {
 		this.gold += gold;
 		this.totalGold += gold;
 		System.out.println(" >> Gained " + gold + " gold.");
+		System.out.println((" >> Current gold: " + this.gold));
 	}
 	
 	public int getGold() {

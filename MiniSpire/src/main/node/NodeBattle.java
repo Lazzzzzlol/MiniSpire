@@ -1,7 +1,11 @@
 package main.node;
 
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
 import main.Main;
 import main.Util;
+import main.card.Card;
 import main.enemy.Enemy;
 import main.game.Game;
 import main.player.Player;
@@ -11,11 +15,16 @@ public class NodeBattle extends Node {
 	
 	private String enemyType;
 	private Enemy enemy;
+
+	private boolean isWin;
+	private ArrayList<Card> rewardCardList;
 	
 	public NodeBattle(String enemyType) {
 		super("Battle");
 		this.enemyType = enemyType;
 		enemy = setEnemy(enemyType);
+		isWin = false;
+		rewardCardList = new ArrayList<>();
 	}
 
 	@Override
@@ -34,6 +43,9 @@ public class NodeBattle extends Node {
 	
 	@Override
 	public void onDraw() {
+
+		if (isWin)
+			return;
 		
 		Player player = Player.getInstance();
 		
@@ -72,6 +84,11 @@ public class NodeBattle extends Node {
 		
 			case "p":
 				playcard(Integer.parseInt(parts[1]));
+
+				if (enemy.getHp() <= 0)
+					Main.executor.schedule(() -> {
+						onWin();
+					}, 2, TimeUnit.SECONDS);
 				break;
 				
 			default:
@@ -126,12 +143,47 @@ public class NodeBattle extends Node {
 		enemy.onMove();
 		enemy.onEndTurn();
 	}
+
+	public void onWin(){
+
+		isWin = true;
+
+		int gainedGold;
+		gainedGold = 70 + Main.random.nextInt(16);
+		if (enemyType.equals("elite"))
+			gainedGold += (20 + Main.random.nextInt(6));
+
+
+			Util.printBlankLines(3);
+			System.out.println(Main.longLine);
+
+			System.out.println(" >> You defeated " + enemy.getName() + "!");
+			Player.getInstance().addGold(gainedGold);
+
+			System.out.println();
+			System.out.println(" >> Choose a reward card:");
+
+			System.out.println(Main.longLine);
+	}
 	
+	//这边set可能打错了，可能是get
 	private Enemy setEnemy(String enemyType) {
 		return EnemyFactory.getRandomEnemy(enemyType);
 	}
 	
 	public String getEnemyType() {
 		return enemyType;
+	}
+
+	public void setIsWin(boolean isWin){
+		this.isWin = isWin;
+	}
+
+	public boolean getIsWin(){
+		return isWin;
+	}
+
+	public ArrayList<Card> getRewardCardList(){
+		return rewardCardList;
 	}
 }

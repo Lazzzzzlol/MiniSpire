@@ -1,74 +1,74 @@
 ## 战斗卡
 
-### 00 猛击 Strike
+### `00` 猛击 Strike
 **1 行动点**：造成 5 点伤害
 
-### 01 重击 Onslaught
+### `01` 重击 Onslaught
 **1 行动点**：造成 8 点伤害，为目标施加 1 回合 `虚弱`
 
-### 02 撼地 Earthquake
+### `02` 撼地 Earthquake
 **1 行动点**：造成 3 点伤害，重复 3 次
 
-### 03 动乱 Upheaval
+### `03` 动乱 Upheaval
 **1 行动点**：造成 6 点伤害，此次战斗内每打出一次，伤害 +2
 
-### 04 裂膛 Abdomen Tear
+### `04` 裂膛 Abdomen Tear
 **1 行动点**：造成 12 点伤害，受到 3 点伤害
 
-### 05 毁灭打击 Decesive Strike
+### `05` 毁灭打击 Decesive Strike
 **2 行动点**：造成 15 点伤害，为目标施加 1 回合 `易伤`
 
-### 06 生命汲取 Life Drain
+### `06` 生命汲取 Life Drain
 **2 行动点**：造成 5 点伤害，回复等同于造成伤害的生命
 
-### 07 尽毁 Ruination
+### `07` 尽毁 Ruination
 **3 行动点**：造成 25 点伤害，若实际造成的伤害大于 25，再触发一次，至多一次，`移除`
 
 ## 效果卡
 
-### 08 浴血 Bloodbath
+### `08` 浴血 Bloodbath
 **0 行动点**：为自己施加 1 回合 `吸血`
 
-### 09 双重 Double
+### `09` 双重 Double
 **1 行动点**：下一张战斗卡触发两次
 
-### 10 报应 Comeuppance
+### `10` 报应 Comeuppance
 **1 行动点**：为自己施加 1 回合 `反伤`
 
-### 11 愤怒 Rage
+### `11` 愤怒 Rage
 **1 行动点**：为自己施加 2 回合 `强化`
 
-### 12 铁壁 Rampart
+### `12` 铁壁 Rampart
 **1 行动点**：为自己施加 2 回合 `忍耐`
 
-### 13 泰然自若 Equilibrium
+### `13` 泰然自若 Equilibrium
 **1 行动点**：回复 5 生命值，为自己施加 4 回合 `再生`
 
-### 14 插言 Interject
+### `14` 插言 Interject
 **1 行动点**：使敌人在下一回合对任何目标施加的效果无效
 
-### 15 康复 Esuna
+### `15` 康复 Esuna
 **2 行动点**：消除自身所有buff，之后为自己施加 1 回合 `强化`
 
-### 16 死斗 Holmgang
+### `16` 死斗 Holmgang
 **3 行动点**：为自己施加 1 回合 `无敌`
 
-### 17 蛮荒崩裂 Primal Rend
+### `17` 蛮荒崩裂 Primal Rend
 **3 行动点**：造成手牌中所有战斗卡的伤害的总和，`移除`
 
-### 18 祈求恩泽 Pray for Favor
+### `18` 祈求恩泽 Pray for Favor
 **4 行动点**：为自己施加永久的 `恩泽`，`移除`
 
 ## 被动卡（无法被打出）
 
-### 19 恢复石 Recovery Stone
+### `19` 恢复石 Recovery Stone
 抽到并弃置时，回复 6 点生命
 
-### 20 古老辉滴石 Old Radiant Lifegem
+### `20` 古老辉滴石 Old Radiant Lifegem
 抽到并弃置时，回复 12 点生命，为自身施加 3 回合 `恢复`
 
-### 21 黄金树恩惠 Blessing of the Erdtree
+### `21` 黄金树恩惠 Blessing of the Erdtree
 抽到并弃置时，为自身施加 3 回合 `强化`，3 回合 `忍耐`
 
-### 22 死亡烙印 Death Brand
+### `22` 死亡烙印 Death Brand
 抽到并弃置时，受到 4 点伤害

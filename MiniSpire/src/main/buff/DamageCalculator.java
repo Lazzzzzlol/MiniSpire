@@ -16,6 +16,7 @@ public class DamageCalculator {
     }
     
     private static DamageResult calculateDamage(int baseDamage, Object attacker, Object target) {
+        
         float damageMultiplier = 1.0f;
 
         if (isInvincible(target)) {
@@ -55,11 +56,13 @@ public class DamageCalculator {
     }
     
     private static boolean isInvincible(Object target) {
+
         List<Buff> buffs = getBuffList(target);
         return buffs.stream().anyMatch(buff -> "Invincible".equals(buff.getName()));
     }
     
     private static List<Buff> getBuffList(Object obj) {
+
         if (obj instanceof Player) {
             return ((Player) obj).getBuffList();
         } else if (obj instanceof Enemy) {
@@ -69,6 +72,7 @@ public class DamageCalculator {
     }
     
     public static class DamageResult {
+
         private final int finalDamage;
         private final int baseDamage;
         

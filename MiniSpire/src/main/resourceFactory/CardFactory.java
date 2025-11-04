@@ -11,6 +11,10 @@ import main.card.attackCard.Card04AbdomenTear;
 import main.card.attackCard.Card05DecesiveStrike;
 import main.card.attackCard.Card06LifeDrain;
 import main.card.attackCard.Card07Ruination;
+import main.card.attackCard.Card23Ragnarok;
+import main.card.attackCard.Card24FlurryOfBlows;
+import main.card.attackCard.Card25TheSinisterBlade;
+import main.card.attackCard.Card26Stratagem;
 
 import main.card.effectCard.Card08Bloodbath;
 import main.card.effectCard.Card09Double;
@@ -55,6 +59,10 @@ public class CardFactory implements ResourceFactory {
 		cardPool.add(new Card05DecesiveStrike());			//05
 		cardPool.add(new Card06LifeDrain());				//06
 		cardPool.add(new Card07Ruination());				//07
+		cardPool.add(new Card23Ragnarok()); 				//23
+		cardPool.add(new Card24FlurryOfBlows());			//24
+		cardPool.add(new Card25TheSinisterBlade());			//25
+		cardPool.add(new Card26Stratagem());				//26
 
 		cardPool.add(new Card08Bloodbath());				//08
 		cardPool.add(new Card09Double());					//09

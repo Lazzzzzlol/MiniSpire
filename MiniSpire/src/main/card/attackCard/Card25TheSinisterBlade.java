@@ -1,0 +1,22 @@
+package main.card.attackCard;
+
+import main.buff.DamageCalculator;
+import main.enemy.Enemy;
+import main.player.Player;
+
+public class Card25TheSinisterBlade extends AttackCard{
+	
+	String name = "The Sinister Blade";
+	String info = " ";
+	int cost = 1;
+	
+	@Override
+	public void onPlay(Player player, Enemy enemy) {
+		
+	}
+	
+	@Override
+	public String getName() {
+		return name;
+	}
+}

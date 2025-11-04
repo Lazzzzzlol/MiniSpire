@@ -36,5 +36,3 @@ public class BuffStrengthened implements Buff {
 		this.duration += duration;
 	}
 }
-
-	

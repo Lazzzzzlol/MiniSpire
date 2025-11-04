@@ -36,5 +36,3 @@ public class BuffInvincible implements Buff {
 		this.duration += duration;
 	}
 }
-
-	

@@ -36,5 +36,3 @@ public class BuffTough implements Buff {
 		this.duration += duration;
 	}
 }
-
-	

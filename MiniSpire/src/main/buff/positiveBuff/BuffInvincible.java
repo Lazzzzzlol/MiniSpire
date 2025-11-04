@@ -2,12 +2,12 @@ package main.buff.positiveBuff;
 
 import main.buff.Buff;
 
-public class BuffEndure implements Buff {
+public class BuffInvincible implements Buff {
 
-	String name = "Endure";
+	String name = "Invincible";
 	int duration = 0;
 	
-	public BuffEndure(int duration) {
+	public BuffInvincible(int duration) {
 		this.duration = duration;
 	}
 

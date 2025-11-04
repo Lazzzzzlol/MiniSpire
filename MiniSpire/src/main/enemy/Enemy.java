@@ -86,6 +86,10 @@ public class Enemy {
 		return name;
 	}
 
+	public ArrayList<Buff> getBuffList() {
+		return buffList;
+	}
+
 	public String getBuffListString() {
 		
 		if (buffList.size() == 0) 

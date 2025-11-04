@@ -11,6 +11,7 @@ import main.enemy.Enemy;
 import main.game.Game;
 import main.player.Player;
 import main.resourceFactory.EnemyFactory;
+import main.resourceFactory.CardFactory;
 
 public class NodeBattle extends Node {
 	
@@ -26,6 +27,8 @@ public class NodeBattle extends Node {
 		enemy = setEnemy(enemyType);
 		isWin = false;
 		rewardCardList = new ArrayList<>();
+		// reset per-battle state on all cards (Upheaval and any future cards that need it)
+		CardFactory.getInstance().resetCardsForNewBattle();
 	}
 
 	@Override
@@ -65,11 +68,11 @@ public class NodeBattle extends Node {
 		
 		Util.printBlankLines(3);
 		
-		System.out.println(" [Your status :   HP: " + player.getHp() + "/" + player.getMaxHp() + 
-				"   Action points: " + player.getActionPoints() + "/" + player.getMaxActionPoints() + "]");
-		System.out.println(" [Your buff: " + player.getBuffListString() + "]");
+		System.out.println(" [Status:   HP: " + player.getHp() + "/" + player.getMaxHp() + 
+				"   Action points: " + player.getActionPoints() + "/" + player.getMaxActionPoints() + "   ]");
+		System.out.println(" [Buff: " + player.getBuffListString() + "]");
 		System.out.println();
-		System.out.println(" [Your card: " + player.getHandCardListString() + "]");
+		System.out.println(" [Card: " + player.getHandCardListString() + "]");
 		
 		System.out.println(Main.longLine);
 		

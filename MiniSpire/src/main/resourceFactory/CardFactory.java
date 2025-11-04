@@ -107,4 +107,13 @@ public class CardFactory implements ResourceFactory {
 	public Card createCard(int code){
 		return cardPool.get(code);
 	}
+
+	// Reset any per-battle state on cards that need it. Called when a new battle/node starts.
+	public void resetCardsForNewBattle() {
+		for (Card c : cardPool) {
+			if (c instanceof main.card.attackCard.Card03Upheaval) {
+				((main.card.attackCard.Card03Upheaval) c).resetBattle();
+			}
+		}
+	}
 }

@@ -3,9 +3,9 @@ package main.enemy.normalEnemy;
 import main.enemy.Enemy;
 import main.player.Player;
 import main.Main;
-import main.buff.debuff.BuffWeaken;
-import main.buff.positiveBuff.BuffBloodbath;
-import main.buff.positiveBuff.BuffStrength;
+import main.buff.debuff.BuffWeakened;
+import main.buff.positiveBuff.BuffBloodLeeching;
+import main.buff.positiveBuff.BuffStrengthened;
 
 public class Zombie extends Enemy {
 	
@@ -50,17 +50,17 @@ public class Zombie extends Enemy {
 		
 		switch(Main.random.nextInt(3)) {
 			case 0:
-				addBuff(new BuffBloodbath(1), 1);
+				addBuff(new BuffBloodLeeching(1), 1);
 				System.out.println(buffList);
 				break;
 				
 			case 1:
-				addBuff(new BuffStrength(1), 1);
+				addBuff(new BuffStrengthened(1), 1);
 				System.out.println(buffList);
 				break;
 				
 			case 2:
-				Player.getInstance().addBuff(new BuffWeaken(1), 1);
+				Player.getInstance().addBuff(new BuffWeakened(1), 1);
 				break;
 		}
 		

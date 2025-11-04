@@ -30,7 +30,7 @@ public class Main {
 		printGameBeginMessage(executor);
 		
 		//等待用户输入开始游戏
-		while (!userInput.equals("start")) {
+		while (!userInput.equals("s")) {
 			userInput = scanner.nextLine();
 		}
 		
@@ -62,7 +62,7 @@ public class Main {
 		        game.onInput(userInput);
 		
 		        Util.printBlankLines(3);
-		        if (!userInput.equals("end turn"))
+		        if (!userInput.equals("e"))
 		        	game.onDraw();
 		        else
 		        	game.setIsEndTurn(true);
@@ -110,7 +110,7 @@ public class Main {
 		
 		executor.schedule(() -> {
 			System.out.println();
-			System.out.println(" [Type 'start' to begin...]");
+			System.out.println(" [Type 's' to begin...]");
 			System.out.println();
 			System.out.println(longLine);
 		}, logo.size() * 200 + 500, TimeUnit.MILLISECONDS);

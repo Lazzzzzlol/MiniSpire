@@ -1,6 +1,7 @@
 package main.card.attackCard;
 
-import main.buff.debuff.BuffWeaken;
+import main.buff.DamageCalculator;
+import main.buff.debuff.BuffWeakened;
 import main.enemy.Enemy;
 import main.player.Player;
 
@@ -11,8 +12,13 @@ public class Card01Onslaught extends AttackCard{
 
 	@Override
 	public void onPlay(Player player, Enemy enemy) {
-		enemy.deductHp(8);
-		enemy.addBuff(new BuffWeaken(1), 1);
+
+		int baseDamage = 8;
+
+		DamageCalculator.DamageResult result = DamageCalculator.calculateDamageToEnemy(baseDamage, enemy);
+		enemy.deductHp(result.getFinalDamage());
+		
+		enemy.addBuff(new BuffWeakened(1), 1);
 	}
 	
 	@Override

@@ -7,6 +7,7 @@ import main.player.Player;
 public class Card00Strike extends AttackCard{
 	
 	String name = "Strike";
+	String info = "Deal 8 damage. ";
 	int cost = 1;
 	
 	@Override

@@ -7,6 +7,7 @@ import main.player.Player;
 public class Card06LifeDrain extends AttackCard{
 	
 	String name = "Life Drain";
+	String info = "Deal 6 damage; Heal for the damage dealt. ";
 	int cost = 2;
 	
 	@Override

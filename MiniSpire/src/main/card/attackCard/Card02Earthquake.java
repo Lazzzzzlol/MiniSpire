@@ -7,6 +7,7 @@ import main.player.Player;
 public class Card02Earthquake extends AttackCard{
 	
 	String name = "Earthquake";
+	String info = "Deal 3 damage for 3 times. ";
 	int cost = 1;
 	
 	@Override

@@ -8,6 +8,7 @@ import main.player.Player;
 public class Card05DecesiveStrike extends AttackCard{
 	
 	String name = "Decisive Strike";
+	String info = "Deal 15 damage; Apply 1 round Vulnerable. ";
 	int cost = 2;
 
 	@Override

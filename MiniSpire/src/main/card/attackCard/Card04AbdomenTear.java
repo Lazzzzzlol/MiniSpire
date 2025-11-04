@@ -7,6 +7,7 @@ import main.player.Player;
 public class Card04AbdomenTear extends AttackCard{
 	
 	String name = "Abdomen Tear";
+	String info = "Deal 12 damage; Take 3 damage. ";
 	int cost = 1;
 	
 	@Override

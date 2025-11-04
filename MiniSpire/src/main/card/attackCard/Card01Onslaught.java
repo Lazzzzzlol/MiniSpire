@@ -8,6 +8,7 @@ import main.player.Player;
 public class Card01Onslaught extends AttackCard{
 
 	String name = "Onslaught";
+	String info = "Deal 8 damage; Apply 1 round Weakened. ";
 	int cost = 1;
 
 	@Override

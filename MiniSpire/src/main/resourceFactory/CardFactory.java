@@ -104,4 +104,7 @@ public class CardFactory implements ResourceFactory {
 		return drawCardList;
 	}
 
+	public Card createCard(int code){
+		return cardPool.get(code);
+	}
 }

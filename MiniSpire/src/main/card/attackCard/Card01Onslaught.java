@@ -13,7 +13,7 @@ public class Card01Onslaught extends AttackCard{
 	@Override
 	public void onPlay(Player player, Enemy enemy) {
 
-		int baseDamage = 8;
+		int baseDamage = 6;
 
 		DamageCalculator.DamageResult result = DamageCalculator.calculateDamageToEnemy(baseDamage, enemy);
 		enemy.deductHp(result.getFinalDamage());

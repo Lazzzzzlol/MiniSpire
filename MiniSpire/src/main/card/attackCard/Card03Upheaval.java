@@ -14,21 +14,21 @@ public class Card03Upheaval extends AttackCard{
 	@Override
 	public void onPlay(Player player, Enemy enemy) {
 
-		int baseDamage = calculateDamage();
+		int baseDamage = calculateDamage(6);
 
 		DamageCalculator.DamageResult result = DamageCalculator.calculateDamageToEnemy(baseDamage, enemy);
 		enemy.deductHp(result.getFinalDamage());
-		
+
 		timesUsed++;
 	}
 
-	private int calculateDamage() {
+	private int calculateDamage(int base) {
 
-		if (timesUsed == 0) return 6;
+		if (timesUsed == 0) return base;
 
 		int m = timesUsed + 1;
 		int sum = (m * (m + 1)) / 2 - 1;
-		return 6 + sum;
+		return base + sum;
 	}
 
 	public void resetBattle() {

@@ -12,7 +12,7 @@ public class Card00Strike extends AttackCard{
 	@Override
 	public void onPlay(Player player, Enemy enemy) {
 
-		int baseDamage = 6;
+		int baseDamage = 8;
 
 		DamageCalculator.DamageResult result = DamageCalculator.calculateDamageToEnemy(baseDamage, enemy);
 		enemy.deductHp(result.getFinalDamage());

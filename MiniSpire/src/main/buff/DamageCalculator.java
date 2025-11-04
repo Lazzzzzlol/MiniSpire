@@ -28,10 +28,10 @@ public class DamageCalculator {
             for (Buff buff : attackerBuffs) {
                 switch (buff.getName()) {
                     case "Strengthened":
-                        damageMultiplier += 0.5f;
+                        damageMultiplier += 0.25f;
                         break;
                     case "Weakened":
-                        damageMultiplier -= 0.5f;
+                        damageMultiplier -= 0.25f;
                         break;
                 }
             }
@@ -41,10 +41,10 @@ public class DamageCalculator {
         for (Buff buff : targetBuffs) {
             switch (buff.getName()) {
                 case "Vulnerable":
-                    damageMultiplier += 0.5f;
+                    damageMultiplier += 0.25f;
                     break;
                 case "Tough":
-                    damageMultiplier -= 0.5f;
+                    damageMultiplier -= 0.25f;
                     break;
             }
         }

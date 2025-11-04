@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import main.Main;
+import main.ScoreCalculator;
 import main.Util;
 import main.card.Card;
 import main.enemy.Enemy;
@@ -152,13 +153,17 @@ public class NodeBattle extends Node {
 		gainedGold = 70 + Main.random.nextInt(16);
 		if (enemyType.equals("elite"))
 			gainedGold += (20 + Main.random.nextInt(6));
-
+		
+		// 计算并添加得分
+		ScoreCalculator scoreCalculator = ScoreCalculator.getInstance();
+		int gainedScore = scoreCalculator.calculateBattleScore(enemy, enemyType);
 
 			Util.printBlankLines(3);
 			System.out.println(Main.longLine);
 
 			System.out.println(" >> You defeated " + enemy.getName() + "!");
 			Player.getInstance().addGold(gainedGold);
+			scoreCalculator.addScore(gainedScore);
 
 			System.out.println();
 			System.out.println(" >> Choose a reward card:");

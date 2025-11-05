@@ -15,12 +15,11 @@ public class Card07Ruination extends AttackCard{
 		
 		int baseDamage = 25;
 
-		DamageProcessor.DamageResult result = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
-		enemy.deductHp(result.getFinalDamage());
-
-		if (result.getFinalDamage() > 25) {
-			DamageProcessor.DamageResult result2 = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
-			enemy.deductHp(result2.getFinalDamage());
+		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
+		int finalDamage = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
+		
+		if (finalDamage > baseDamage) {
+			DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
 		}
 	}
 	

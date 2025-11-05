@@ -16,8 +16,7 @@ public class Card05DecesiveStrike extends AttackCard{
 
 		int baseDamage = 15;
 
-		DamageProcessor.DamageResult result = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
-		enemy.deductHp(result.getFinalDamage());
+		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
 
 		enemy.addBuff(new BuffVulnerable(1), 1);
 	}

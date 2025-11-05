@@ -17,8 +17,7 @@ public class Card03Upheaval extends AttackCard{
 
 		int baseDamage = calculateDamage(6);
 
-		DamageProcessor.DamageResult result = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
-		enemy.deductHp(result.getFinalDamage());
+		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
 
 		timesUsed++;
 	}

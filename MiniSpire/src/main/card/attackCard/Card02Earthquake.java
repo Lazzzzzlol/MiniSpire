@@ -15,12 +15,9 @@ public class Card02Earthquake extends AttackCard{
 		
 		int baseDamage = 3;
 		
-		DamageProcessor.DamageResult result1 = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
-		DamageProcessor.DamageResult result2 = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
-		DamageProcessor.DamageResult result3 = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
-		enemy.deductHp(result1.getFinalDamage());
-		enemy.deductHp(result2.getFinalDamage());
-		enemy.deductHp(result3.getFinalDamage());
+		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
+		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
+		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
 	}
 	
 	@Override

@@ -15,12 +15,10 @@ public class Card04AbdomenTear extends AttackCard{
 
 		int baseDamage = 12;
 
-		DamageProcessor.DamageResult result = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
-		enemy.deductHp(result.getFinalDamage());
+		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
 
 		int baseSelfDamage = 3;
-		DamageProcessor.DamageResult selfResult = DamageProcessor.calculateDamageToPlayer(baseSelfDamage, player);
-		player.deductHp(selfResult.getFinalDamage());
+		DamageProcessor.applyDamageToPlayer(baseSelfDamage, player);
 	}
 	
 	@Override

@@ -15,8 +15,7 @@ public class Card00Strike extends AttackCard{
 
 		int baseDamage = 8;
 
-		DamageProcessor.DamageResult result = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
-		enemy.deductHp(result.getFinalDamage());
+		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
 	}
 	
 	@Override

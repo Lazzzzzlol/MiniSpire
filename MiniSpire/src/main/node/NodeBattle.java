@@ -143,9 +143,9 @@ public class NodeBattle extends Node {
 		
 		Player player = Player.getInstance();
 		
-		player.onEndTurn();
 		enemy.onMove();
 		enemy.onEndTurn();
+		player.onEndTurn();
 	}
 
 	public void onWin(){

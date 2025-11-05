@@ -34,4 +34,7 @@ public class EffectCard implements Card{
 		return type;
 	}
 
+	public String getRarity(){
+		return rarity;
+	}
 }

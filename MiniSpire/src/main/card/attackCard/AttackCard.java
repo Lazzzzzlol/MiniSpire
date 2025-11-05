@@ -33,4 +33,8 @@ public class AttackCard implements Card{
 	public String getType() {
 		return type;
 	}
+
+	public String getRarity(){
+		return rarity;
+	}
 }

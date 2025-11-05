@@ -9,6 +9,7 @@ public class Card05DecesiveStrike extends AttackCard{
 	
 	String name = "Decisive Strike";
 	String info = "Deal 15 damage; Apply 1 round Vulnerable. ";
+	String rarity = "rare";
 	int cost = 2;
 
 	@Override

@@ -8,6 +8,7 @@ public class Card06LifeDrain extends AttackCard{
 	
 	String name = "Life Drain";
 	String info = "Deal 6 damage; This attack has BloodLeeching. ";
+	String rarity = "rare";
 	int cost = 2;
 	
 	@Override

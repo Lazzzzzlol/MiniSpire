@@ -8,6 +8,7 @@ public class Card04AbdomenTear extends AttackCard{
 	
 	String name = "Abdomen Tear";
 	String info = "Deal 12 damage; Take 3 damage. ";
+	String rarity = "normal";
 	int cost = 1;
 	
 	@Override

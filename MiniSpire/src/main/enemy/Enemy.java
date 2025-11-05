@@ -67,7 +67,7 @@ public class Enemy {
 		}, 1, TimeUnit.SECONDS);
 	}
 	
-	public void healHp(int heal) {
+	public void addHp(int heal) {
 		
 		this.hp += heal;
 		if (this.hp > initialHp)

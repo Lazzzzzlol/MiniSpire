@@ -13,25 +13,19 @@ public class Card23Ragnarok extends AttackCard{
 	@Override
 	public void onPlay(Player player, Enemy enemy) {
 		
-		int baseDamage = 2;
+		int currentDamage = 2;
+		int hits = 4;
 
-		DamageProcessor.DamageResult result1 = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
-		int finalDamage1 = (int) result1.getFinalDamage();
-        enemy.deductHp(finalDamage1);
-
-        DamageProcessor.DamageResult result2 = DamageProcessor.calculateDamageToEnemy(2 * finalDamage1, enemy);
-		int finalDamage2 = (int) result2.getFinalDamage();
-        enemy.deductHp(finalDamage2);
-
-        DamageProcessor.DamageResult result3 = DamageProcessor.calculateDamageToEnemy(2 * finalDamage2, enemy);
-		int finalDamage3 = (int) result3.getFinalDamage();
-        enemy.deductHp(finalDamage3);
-
-        DamageProcessor.DamageResult result4 = DamageProcessor.calculateDamageToEnemy(2 * finalDamage3, enemy);
-		int finalDamage4 = (int) result4.getFinalDamage();
-        enemy.deductHp(finalDamage4);
+		for (int i = 0; i < hits; i++) {
+			int finalDamage = DamageProcessor.calculateDamageToEnemy(currentDamage, enemy);
+			DamageProcessor.applyDamageToEnemy(currentDamage, enemy);
+			
+			if (i < hits - 1) {
+				currentDamage = 2 * finalDamage;
+			}
+		}
 	}
-	
+		
 	@Override
 	public String getName() {
 		return name;

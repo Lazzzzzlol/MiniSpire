@@ -7,7 +7,7 @@ import main.player.Player;
 public class Card06LifeDrain extends AttackCard{
 	
 	String name = "Life Drain";
-	String info = "Deal 6 damage; Heal for the damage dealt. ";
+	String info = "Deal 6 damage; This attack has BloodLeeching. ";
 	int cost = 2;
 	
 	@Override
@@ -15,14 +15,16 @@ public class Card06LifeDrain extends AttackCard{
 
 		int baseDamage = 12;
 
-		DamageProcessor.DamageResult damageResult = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
-		int finalDamage = damageResult.getFinalDamage();
+		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
+		int finalDamage = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
+		
+		if (finalDamage > 0 && !hasBloodLeechingEffect(player)) {
+        	player.addHp(finalDamage);
+    	}
+	}
 
-		enemy.deductHp(finalDamage);
-
-		if (finalDamage > 0) {
-			player.addHp(finalDamage);
-		}
+	private boolean hasBloodLeechingEffect(Player player) {
+    	return player.getBuffList().stream().anyMatch(buff -> "BloodLeeching".equals(buff.getName()));
 	}
 	
 	@Override

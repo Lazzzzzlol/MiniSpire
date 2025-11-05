@@ -16,8 +16,7 @@ public class Card01Onslaught extends AttackCard{
 
 		int baseDamage = 6;
 
-		DamageProcessor.DamageResult result = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
-		enemy.deductHp(result.getFinalDamage());
+		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
 		
 		enemy.addBuff(new BuffWeakened(1), 1);
 	}

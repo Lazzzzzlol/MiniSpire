@@ -1,6 +1,6 @@
 package main.card.attackCard;
 
-import main.buff.DamageCalculator;
+import main.buff.DamageProcessor;
 import main.enemy.Enemy;
 import main.player.Player;
 
@@ -15,7 +15,7 @@ public class Card06LifeDrain extends AttackCard{
 
 		int baseDamage = 12;
 
-		DamageCalculator.DamageResult damageResult = DamageCalculator.calculateDamageToEnemy(baseDamage, enemy);
+		DamageProcessor.DamageResult damageResult = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
 		int finalDamage = damageResult.getFinalDamage();
 
 		enemy.deductHp(finalDamage);

@@ -1,6 +1,6 @@
 package main.card.attackCard;
 
-import main.buff.DamageCalculator;
+import main.buff.DamageProcessor;
 import main.enemy.Enemy;
 import main.player.Player;
 
@@ -15,11 +15,11 @@ public class Card04AbdomenTear extends AttackCard{
 
 		int baseDamage = 12;
 
-		DamageCalculator.DamageResult result = DamageCalculator.calculateDamageToEnemy(baseDamage, enemy);
+		DamageProcessor.DamageResult result = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
 		enemy.deductHp(result.getFinalDamage());
 
 		int baseSelfDamage = 3;
-		DamageCalculator.DamageResult selfResult = DamageCalculator.calculateDamageToPlayer(baseSelfDamage, player);
+		DamageProcessor.DamageResult selfResult = DamageProcessor.calculateDamageToPlayer(baseSelfDamage, player);
 		player.deductHp(selfResult.getFinalDamage());
 	}
 	

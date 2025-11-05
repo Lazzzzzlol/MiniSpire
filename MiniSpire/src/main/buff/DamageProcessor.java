@@ -5,7 +5,7 @@ import main.enemy.Enemy;
 
 import java.util.List;
 
-public class DamageCalculator {
+public class DamageProcessor {
     
     public static DamageResult calculateDamageToEnemy(int baseDamage, Enemy target) {
         return calculateDamage(baseDamage, Player.getInstance(), target);

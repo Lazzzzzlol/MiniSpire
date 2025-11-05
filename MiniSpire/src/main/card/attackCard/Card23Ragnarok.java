@@ -1,6 +1,6 @@
 package main.card.attackCard;
 
-import main.buff.DamageCalculator;
+import main.buff.DamageProcessor;
 import main.enemy.Enemy;
 import main.player.Player;
 
@@ -15,19 +15,19 @@ public class Card23Ragnarok extends AttackCard{
 		
 		int baseDamage = 2;
 
-		DamageCalculator.DamageResult result1 = DamageCalculator.calculateDamageToEnemy(baseDamage, enemy);
+		DamageProcessor.DamageResult result1 = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
 		int finalDamage1 = (int) result1.getFinalDamage();
         enemy.deductHp(finalDamage1);
 
-        DamageCalculator.DamageResult result2 = DamageCalculator.calculateDamageToEnemy(2 * finalDamage1, enemy);
+        DamageProcessor.DamageResult result2 = DamageProcessor.calculateDamageToEnemy(2 * finalDamage1, enemy);
 		int finalDamage2 = (int) result2.getFinalDamage();
         enemy.deductHp(finalDamage2);
 
-        DamageCalculator.DamageResult result3 = DamageCalculator.calculateDamageToEnemy(2 * finalDamage2, enemy);
+        DamageProcessor.DamageResult result3 = DamageProcessor.calculateDamageToEnemy(2 * finalDamage2, enemy);
 		int finalDamage3 = (int) result3.getFinalDamage();
         enemy.deductHp(finalDamage3);
 
-        DamageCalculator.DamageResult result4 = DamageCalculator.calculateDamageToEnemy(2 * finalDamage3, enemy);
+        DamageProcessor.DamageResult result4 = DamageProcessor.calculateDamageToEnemy(2 * finalDamage3, enemy);
 		int finalDamage4 = (int) result4.getFinalDamage();
         enemy.deductHp(finalDamage4);
 	}

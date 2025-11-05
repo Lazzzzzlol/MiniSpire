@@ -1,6 +1,6 @@
 package main.card.attackCard;
 
-import main.buff.DamageCalculator;
+import main.buff.DamageProcessor;
 import main.enemy.Enemy;
 import main.player.Player;
 
@@ -15,11 +15,11 @@ public class Card07Ruination extends AttackCard{
 		
 		int baseDamage = 25;
 
-		DamageCalculator.DamageResult result = DamageCalculator.calculateDamageToEnemy(baseDamage, enemy);
+		DamageProcessor.DamageResult result = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
 		enemy.deductHp(result.getFinalDamage());
 
 		if (result.getFinalDamage() > 25) {
-			DamageCalculator.DamageResult result2 = DamageCalculator.calculateDamageToEnemy(baseDamage, enemy);
+			DamageProcessor.DamageResult result2 = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
 			enemy.deductHp(result2.getFinalDamage());
 		}
 	}

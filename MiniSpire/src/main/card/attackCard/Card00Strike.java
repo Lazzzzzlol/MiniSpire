@@ -1,6 +1,6 @@
 package main.card.attackCard;
 
-import main.buff.DamageCalculator;
+import main.buff.DamageProcessor;
 import main.enemy.Enemy;
 import main.player.Player;
 
@@ -15,7 +15,7 @@ public class Card00Strike extends AttackCard{
 
 		int baseDamage = 8;
 
-		DamageCalculator.DamageResult result = DamageCalculator.calculateDamageToEnemy(baseDamage, enemy);
+		DamageProcessor.DamageResult result = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
 		enemy.deductHp(result.getFinalDamage());
 	}
 	

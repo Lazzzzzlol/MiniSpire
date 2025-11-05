@@ -1,6 +1,6 @@
 package main.card.attackCard;
 
-import main.buff.DamageCalculator;
+import main.buff.DamageProcessor;
 import main.buff.debuff.BuffVulnerable;
 import main.enemy.Enemy;
 import main.player.Player;
@@ -16,7 +16,7 @@ public class Card05DecesiveStrike extends AttackCard{
 
 		int baseDamage = 15;
 
-		DamageCalculator.DamageResult result = DamageCalculator.calculateDamageToEnemy(baseDamage, enemy);
+		DamageProcessor.DamageResult result = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
 		enemy.deductHp(result.getFinalDamage());
 
 		enemy.addBuff(new BuffVulnerable(1), 1);

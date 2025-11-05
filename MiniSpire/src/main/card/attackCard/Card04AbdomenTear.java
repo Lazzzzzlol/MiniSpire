@@ -10,12 +10,10 @@ public class Card04AbdomenTear extends AttackCard{
 	String info = "Deal 12 damage; Take 3 damage. ";
 	String rarity = "normal";
 	int cost = 1;
+	int baseDamage = 12;
 	
 	@Override
 	public void onPlay(Player player, Enemy enemy) {
-
-		int baseDamage = 12;
-
 		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
 
 		int baseSelfDamage = 3;
@@ -25,5 +23,10 @@ public class Card04AbdomenTear extends AttackCard{
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public int getBaseDamage(){
+		return baseDamage;
 	}
 }

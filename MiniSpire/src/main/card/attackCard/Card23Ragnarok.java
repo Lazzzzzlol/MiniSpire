@@ -9,12 +9,11 @@ public class Card23Ragnarok extends AttackCard{
 	String name = "Ragnarok";
 	String info = "Deal 2 damage; Then deal double of damage actually dealt last step; Repeat last step; Repeat last step. ";
 	int cost = 3;
-	
+	int currentDamage = 2;
+	int hits = 4;
+
 	@Override
 	public void onPlay(Player player, Enemy enemy) {
-		
-		int currentDamage = 2;
-		int hits = 4;
 
 		for (int i = 0; i < hits; i++) {
 			int finalDamage = DamageProcessor.calculateDamageToEnemy(currentDamage, enemy);
@@ -29,5 +28,10 @@ public class Card23Ragnarok extends AttackCard{
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public int getBaseDamage(){
+		return currentDamage;
 	}
 }

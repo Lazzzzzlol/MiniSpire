@@ -34,6 +34,7 @@ public class EffectCard implements Card{
 		return type;
 	}
 
+	@Override
 	public String getRarity(){
 		return rarity;
 	}

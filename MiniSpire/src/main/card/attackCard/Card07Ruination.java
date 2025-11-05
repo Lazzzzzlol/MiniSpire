@@ -10,11 +10,10 @@ public class Card07Ruination extends AttackCard{
 	String info = "Deal 25 damage; If it finally deals more than 25 damage, deal 25 damage again, only once. ";
 	String rarity = "legendary";
 	int cost = 3;
+	int baseDamage = 25;
 	
 	@Override
 	public void onPlay(Player player, Enemy enemy) {
-		
-		int baseDamage = 25;
 
 		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
 		int finalDamage = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
@@ -27,5 +26,10 @@ public class Card07Ruination extends AttackCard{
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public int getBaseDamage(){
+		return baseDamage;
 	}
 }

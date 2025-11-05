@@ -32,6 +32,7 @@ public class PassiveCard implements Card{
 		return type;
 	}
 
+	@Override
 	public String getRarity(){
 		return rarity;
 	}

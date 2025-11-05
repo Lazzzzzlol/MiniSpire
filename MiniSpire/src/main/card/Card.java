@@ -6,4 +6,5 @@ public interface Card {
 	String getName();
 	int getCost();
 	String getType();
+	String getRarity();
 }

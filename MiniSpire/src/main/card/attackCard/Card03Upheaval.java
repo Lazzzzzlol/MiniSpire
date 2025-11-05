@@ -10,6 +10,7 @@ public class Card03Upheaval extends AttackCard{
 	String info = "Deal increasing damage from 6 each time played. ";
 	String rarity = "rare";
 	int cost = 1;
+	int baseDamage = 6;
 
 	private int timesUsed = 0;
 
@@ -39,5 +40,10 @@ public class Card03Upheaval extends AttackCard{
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public int getBaseDamage(){
+		return baseDamage;
 	}
 }

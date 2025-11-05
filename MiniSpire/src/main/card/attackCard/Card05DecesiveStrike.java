@@ -11,11 +11,10 @@ public class Card05DecesiveStrike extends AttackCard{
 	String info = "Deal 15 damage; Apply 1 round Vulnerable. ";
 	String rarity = "rare";
 	int cost = 2;
+	int baseDamage = 15;
 
 	@Override
 	public void onPlay(Player player, Enemy enemy) {
-
-		int baseDamage = 15;
 
 		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
 
@@ -30,5 +29,10 @@ public class Card05DecesiveStrike extends AttackCard{
 	@Override
 	public int getCost() {
 		return cost;
+	}
+
+	@Override
+	public int getBaseDamage(){
+		return baseDamage;
 	}
 }

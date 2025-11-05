@@ -11,6 +11,7 @@ public class AttackCard implements Card{
 	private int cost = 1;
 	private String type = "Attack";
 	private String rarity = "normal";
+	private int baseDamage = 1;
 	
 	public void onPlay(Player player, Enemy enemy) {};
 
@@ -34,7 +35,12 @@ public class AttackCard implements Card{
 		return type;
 	}
 
+	@Override
 	public String getRarity(){
 		return rarity;
+	}
+
+	public int getBaseDamage(){
+		return baseDamage;
 	}
 }

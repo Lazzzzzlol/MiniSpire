@@ -11,11 +11,10 @@ public class Card01Onslaught extends AttackCard{
 	String info = "Deal 8 damage; Apply 1 round Weakened. ";
 	String rarity = "normal";
 	int cost = 1;
+	int baseDamage = 6;
 
 	@Override
 	public void onPlay(Player player, Enemy enemy) {
-
-		int baseDamage = 6;
 
 		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
 		
@@ -25,5 +24,10 @@ public class Card01Onslaught extends AttackCard{
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public int getBaseDamage(){
+		return baseDamage;
 	}
 }

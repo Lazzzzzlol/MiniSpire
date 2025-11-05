@@ -9,6 +9,7 @@ public class Card25TheSinisterBlade extends AttackCard{
 	String name = "The Sinister Blade";
 	String info = "Deal 6 damage, draw 1 card. If Attack Card is drawn, gain 2 cost. ";
 	int cost = 1;
+	int baseDamage = 6;
 	
 	@Override
 	public void onPlay(Player player, Enemy enemy) {
@@ -18,5 +19,10 @@ public class Card25TheSinisterBlade extends AttackCard{
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public int getBaseDamage(){
+		return baseDamage;
 	}
 }

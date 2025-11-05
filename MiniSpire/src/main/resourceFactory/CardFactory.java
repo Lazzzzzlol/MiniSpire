@@ -63,6 +63,7 @@ public class CardFactory implements ResourceFactory {
 		cardPool.add(new Card24FlurryOfBlows());			//24
 		cardPool.add(new Card25TheSinisterBlade());			//25
 		cardPool.add(new Card26Stratagem());				//26
+		cardPool.add(new Card27Stratagem());				//27
 
 		cardPool.add(new Card08Bloodbath());				//08
 		cardPool.add(new Card09Double());					//09

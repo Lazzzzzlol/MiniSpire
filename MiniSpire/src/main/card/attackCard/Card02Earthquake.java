@@ -10,12 +10,10 @@ public class Card02Earthquake extends AttackCard{
 	String info = "Deal 3 damage for 3 times. ";
 	String rarity = "normal";
 	int cost = 1;
+	int baseDamage = 3;
 	
 	@Override
-	public void onPlay(Player player, Enemy enemy) {
-		
-		int baseDamage = 3;
-		
+	public void onPlay(Player player, Enemy enemy) {		
 		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
 		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
 		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
@@ -24,5 +22,10 @@ public class Card02Earthquake extends AttackCard{
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public int getBaseDamage(){
+		return baseDamage;
 	}
 }

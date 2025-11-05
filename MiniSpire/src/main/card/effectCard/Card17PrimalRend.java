@@ -6,6 +6,7 @@ import main.player.Player;
 public class Card17PrimalRend extends EffectCard{
 	
 	String name = "Primal Rend";
+	String rarity = "epic";
 	int cost = 3;
 	
 	@Override

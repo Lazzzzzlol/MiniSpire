@@ -6,6 +6,7 @@ import main.player.Player;
 public class Card14Interject extends EffectCard{
 	
 	String name = "Interject";
+	String rarity = "rare";
 	int cost = 1;
 	
 	@Override

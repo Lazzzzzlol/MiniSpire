@@ -8,6 +8,7 @@ public class Card07Ruination extends AttackCard{
 	
 	String name = "Ruination";
 	String info = "Deal 25 damage; If it finally deals more than 25 damage, deal 25 damage again, only once. ";
+	String rarity = "legendary";
 	int cost = 3;
 	
 	@Override

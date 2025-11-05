@@ -8,6 +8,7 @@ public class Card03Upheaval extends AttackCard{
     
 	String name = "Upheaval";
 	String info = "Deal increasing damage from 6 each time played. ";
+	String rarity = "rare";
 	int cost = 1;
 
 	private int timesUsed = 0;

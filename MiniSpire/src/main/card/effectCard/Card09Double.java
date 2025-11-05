@@ -6,6 +6,7 @@ import main.player.Player;
 public class Card09Double extends EffectCard{
 	
 	String name = "Double";
+	String rarity = "normal";
 	int cost = 1;
 	
 	@Override

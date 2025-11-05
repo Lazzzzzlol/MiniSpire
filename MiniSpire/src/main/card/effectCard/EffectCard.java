@@ -10,6 +10,7 @@ public class EffectCard implements Card{
 	private String name = "Generic Effect Card";
 	private int cost = 1;
 	private String type = "Effect";
+	private String rarity = "normal";
 	
 	public void onUse(Player player, Enemy enemy) {};
 	

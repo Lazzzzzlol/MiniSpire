@@ -10,6 +10,7 @@ public class AttackCard implements Card{
 	private String name = "Generic Attack Card";
 	private int cost = 1;
 	private String type = "Attack";
+	private String rarity = "normal";
 	
 	public void onPlay(Player player, Enemy enemy) {};
 

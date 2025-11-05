@@ -8,6 +8,7 @@ public class PassiveCard implements Card{
 	private String name = "Generic Passive Card";
 	private int cost = 0;
 	private String type = "Passive";
+	private String rarity = "normal";
 	
 	public void onDiscard() {};
 	
@@ -31,4 +32,7 @@ public class PassiveCard implements Card{
 		return type;
 	}
 
+	public String getRarity(){
+		return rarity;
+	}
 }

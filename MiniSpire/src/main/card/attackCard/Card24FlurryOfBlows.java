@@ -7,7 +7,7 @@ import main.player.Player;
 public class Card24FlurryOfBlows extends AttackCard{
 	
 	String name = "Flurry of Blows";
-	String info = " ";
+	String info = "Deal 4 damage, draw 1 card. During this fight, when Effect Card is used, gain a Flurry of Blows to hand. ";
 	int cost = 0;
 	
 	@Override

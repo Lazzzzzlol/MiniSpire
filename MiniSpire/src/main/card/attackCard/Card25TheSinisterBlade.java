@@ -7,7 +7,7 @@ import main.player.Player;
 public class Card25TheSinisterBlade extends AttackCard{
 	
 	String name = "The Sinister Blade";
-	String info = " ";
+	String info = "Deal 6 damage, draw 1 card. If Attack Card is drawn, gain 2 cost. ";
 	int cost = 1;
 	
 	@Override

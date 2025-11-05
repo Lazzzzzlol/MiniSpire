@@ -4,7 +4,7 @@ public class Card22DeathBrand extends PassiveCard{
 	
 	Boolean canPlay = false;
 	String name = "Death Brand";
-	String rarity = "normal";
+	String rarity = "special";
 	int cost = 0;
 	
 	@Override

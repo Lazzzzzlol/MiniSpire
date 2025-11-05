@@ -2,6 +2,7 @@ package main.resourceFactory;
 
 import java.util.ArrayList;
 
+import main.Main;
 import main.card.Card;
 import main.card.attackCard.Card00Strike;
 import main.card.attackCard.Card01Onslaught;
@@ -15,7 +16,7 @@ import main.card.attackCard.Card23Ragnarok;
 import main.card.attackCard.Card24FlurryOfBlows;
 import main.card.attackCard.Card25TheSinisterBlade;
 import main.card.attackCard.Card26Stratagem;
-
+import main.card.attackCard.Card27InnerRelease;
 import main.card.effectCard.Card08Bloodbath;
 import main.card.effectCard.Card09Double;
 import main.card.effectCard.Card10Comeuppance;
@@ -46,41 +47,48 @@ public class CardFactory implements ResourceFactory {
 	}
 
 	private ArrayList<Card> cardPool;
+	private int normalCardNo = 7;
+	private int rareCardNo = 10;
+	private int epicCardNo = 7;
+	private int legendaryCardNo = 3;
+	//private int specialCardNo = 1;
 
 	public CardFactory(){
 
 		cardPool = new ArrayList<>();
 
-		cardPool.add(new Card00Strike());					//00
-		cardPool.add(new Card01Onslaught());				//01
-		cardPool.add(new Card02Earthquake());				//02
-		cardPool.add(new Card03Upheaval());					//03
-		cardPool.add(new Card04AbdomenTear());				//04
-		cardPool.add(new Card05DecesiveStrike());			//05
-		cardPool.add(new Card06LifeDrain());				//06
-		cardPool.add(new Card07Ruination());				//07
-		cardPool.add(new Card23Ragnarok()); 				//23
-		cardPool.add(new Card24FlurryOfBlows());			//24
-		cardPool.add(new Card25TheSinisterBlade());			//25
-		cardPool.add(new Card26Stratagem());				//26
-		cardPool.add(new Card27Stratagem());				//27
+		cardPool.add(new Card00Strike());					//00	normal
+		cardPool.add(new Card01Onslaught());				//01	normal
+		cardPool.add(new Card02Earthquake());				//02	normal
+		cardPool.add(new Card03Upheaval());					//03	rare
+		cardPool.add(new Card04AbdomenTear());				//04	normal
+		cardPool.add(new Card05DecesiveStrike());			//05	rare
+		cardPool.add(new Card06LifeDrain());				//06	rare
+		cardPool.add(new Card07Ruination());				//07	legendary
 
-		cardPool.add(new Card08Bloodbath());				//08
-		cardPool.add(new Card09Double());					//09
-		cardPool.add(new Card10Comeuppance());				//10
-		cardPool.add(new Card11Rage());						//11
-		cardPool.add(new Card12Rampart());					//12
-		cardPool.add(new Card13Equilibrium());				//13
-		cardPool.add(new Card14Interject());				//14
-		cardPool.add(new Card15Esuna());					//15
-		cardPool.add(new Card16Holmgang());					//16
-		cardPool.add(new Card17PrimalRend());				//17
-		cardPool.add(new Card18PrayForFavor());				//18
+		cardPool.add(new Card08Bloodbath());				//08	normal
+		cardPool.add(new Card09Double());					//09	normal
+		cardPool.add(new Card10Comeuppance());				//10	rare
+		cardPool.add(new Card11Rage());						//11	rare
+		cardPool.add(new Card12Rampart());					//12	rare
+		cardPool.add(new Card13Equilibrium());				//13	rare
+		cardPool.add(new Card14Interject());				//14	rare
+		cardPool.add(new Card15Esuna());					//15	rare
+		cardPool.add(new Card16Holmgang());					//16	epic
+		cardPool.add(new Card17PrimalRend());				//17	epic
+		cardPool.add(new Card18PrayForFavor());				//18	legendary
 
-		cardPool.add(new Card19RecoveryStone());			//19
-		cardPool.add(new Card20OldRadiantLifegem());		//20
-		cardPool.add(new Card21BlessingOfTheErdtree());		//21
-		cardPool.add(new Card22DeathBrand());				//22
+		cardPool.add(new Card19RecoveryStone());			//19	normal
+		cardPool.add(new Card20OldRadiantLifegem());		//20	rare
+		cardPool.add(new Card21BlessingOfTheErdtree());		//21	epic
+		cardPool.add(new Card22DeathBrand());				//22	special
+
+		//v1.1 new card
+		cardPool.add(new Card23Ragnarok()); 				//23	epic
+		cardPool.add(new Card24FlurryOfBlows());			//24	legendary
+		cardPool.add(new Card25TheSinisterBlade());			//25	epic
+		cardPool.add(new Card26Stratagem());				//26	epic
+		cardPool.add(new Card27InnerRelease());				//27	epic
 	}
 	
 	@Override
@@ -123,6 +131,150 @@ public class CardFactory implements ResourceFactory {
 			if (c instanceof main.card.attackCard.Card03Upheaval) {
 				((main.card.attackCard.Card03Upheaval) c).resetBattle();
 			}
+		}
+	}
+
+	public Card getRandomCard(){
+
+		int randNum = Main.random.nextInt(10) + 1;
+		switch (randNum) {
+			case 1:
+			case 2:
+			case 3:
+			case 4:
+				return getRandomNormalCard();
+
+			case 5:
+			case 6:
+			case 7:
+				return getRandomRareCard();
+			
+			case 8:
+			case 9:
+				return getRandomEpicCard();
+
+			case 10:
+				return getRandomLegendaryCard();
+		
+			default:
+				return getRandomNormalCard();
+		}
+	}
+
+	private Card getRandomLegendaryCard() {
+
+		int randNum = Main.random.nextInt(legendaryCardNo) + 1;
+		switch (randNum) {
+			case 1:
+				return cardPool.get(7);
+
+			case 2:
+				return cardPool.get(24);
+
+			case 3:
+				return cardPool.get(18);
+		
+			default:
+				return cardPool.get(7);
+		}
+	}
+
+	private Card getRandomEpicCard() {
+		
+		int randNum = Main.random.nextInt(epicCardNo) + 1;
+		switch (randNum) {
+			case 1:
+				return cardPool.get(16);
+				
+			case 2:
+				return cardPool.get(17);
+
+			case 3:
+				return cardPool.get(21);
+
+			case 4:
+				return cardPool.get(23);
+
+			case 5:
+				return cardPool.get(25);
+
+			case 6:
+				return cardPool.get(26);
+
+			case 7:
+				return cardPool.get(27);
+		
+			default:
+				return cardPool.get(16);
+		}
+	}
+
+	private Card getRandomRareCard() {
+
+		int randNum = Main.random.nextInt(rareCardNo) + 1;
+		switch (randNum) {
+			case 1:
+				return cardPool.get(3);
+
+			case 2:
+				return cardPool.get(5);
+
+			case 3:
+				return cardPool.get(6);
+			
+			case 4:
+				return cardPool.get(10);
+
+			case 5:
+				return cardPool.get(11);
+
+			case 6:
+				return cardPool.get(12);
+
+			case 7:
+				return cardPool.get(13);
+
+			case 8:
+				return cardPool.get(14);
+
+			case 9:
+				return cardPool.get(15);
+
+			case 10:
+				return cardPool.get(20);
+		
+			default:
+				return cardPool.get(3);
+		}
+	}
+
+	private Card getRandomNormalCard() {
+		
+		int randNum = Main.random.nextInt(normalCardNo) + 1;
+		switch (randNum) {
+			case 1:
+				return cardPool.get(0);
+		
+			case 2:
+				return cardPool.get(1);
+
+			case 3:
+				return cardPool.get(2);
+
+			case 4:
+				return cardPool.get(4);
+
+			case 5:
+				return cardPool.get(8);
+
+			case 6:
+				return cardPool.get(9);
+
+			case 7:
+				return cardPool.get(19);
+
+			default :
+			return cardPool.get(0);
 		}
 	}
 }

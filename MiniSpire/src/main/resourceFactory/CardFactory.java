@@ -28,7 +28,7 @@ import main.card.effectCard.Card15Esuna;
 import main.card.effectCard.Card16Holmgang;
 import main.card.effectCard.Card17PrimalRend;
 import main.card.effectCard.Card18PrayForFavor;
-
+import main.card.effectCard.Card28Tremble;
 import main.card.passiveCard.Card19RecoveryStone;
 import main.card.passiveCard.Card20OldRadiantLifegem;
 import main.card.passiveCard.Card21BlessingOfTheErdtree;
@@ -47,7 +47,7 @@ public class CardFactory implements ResourceFactory {
 	}
 
 	private ArrayList<Card> cardPool;
-	private int normalCardNo = 7;
+	private int normalCardNo = 8;
 	private int rareCardNo = 10;
 	private int epicCardNo = 7;
 	private int legendaryCardNo = 3;
@@ -89,6 +89,8 @@ public class CardFactory implements ResourceFactory {
 		cardPool.add(new Card25TheSinisterBlade());			//25	epic
 		cardPool.add(new Card26Stratagem());				//26	epic
 		cardPool.add(new Card27InnerRelease());				//27	epic
+
+		cardPool.add(new Card28Tremble());					//28 	normal
 	}
 	
 	@Override
@@ -272,6 +274,9 @@ public class CardFactory implements ResourceFactory {
 
 			case 7:
 				return cardPool.get(19);
+
+			case 8:
+				return cardPool.get(28);
 
 			default :
 			return cardPool.get(0);

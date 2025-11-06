@@ -27,6 +27,7 @@ public class DamageProcessor {
         
         int finalDamage = calculateDamageOnly(baseDamage, attacker, target);
         boolean hasBloodLeeching = hasBloodLeeching(attacker);
+        boolean hasReflective = hasReflective(target);
         
         if (finalDamage > 0) {
             if (target instanceof Enemy) {
@@ -43,11 +44,19 @@ public class DamageProcessor {
                 ((Enemy) attacker).addHp(finalDamage);
             }
         }
+
+        if (hasReflective && finalDamage > 0 && attacker != null) {
+            if (attacker instanceof Player) {
+                ((Player) attacker).deductHp(finalDamage);
+            } else if (attacker instanceof Enemy) {
+                ((Enemy) attacker).deductHp(finalDamage);
+            }
+        }
     }
     
     private static int calculateDamageOnly(int baseDamage, Object attacker, Object target) {
         
-        if (isInvincible(target)) {
+        if (hasInvincible(target)) {
             return 0;
         }
         
@@ -92,9 +101,14 @@ public class DamageProcessor {
         return attackerBuffs.stream().anyMatch(buff -> "BloodLeeching".equals(buff.getName()));
     }
     
-    private static boolean isInvincible(Object target) {
+    private static boolean hasInvincible(Object target) {
         List<Buff> buffs = getBuffList(target);
         return buffs.stream().anyMatch(buff -> "Invincible".equals(buff.getName()));
+    }
+
+    private static boolean hasReflective(Object target) {
+        List<Buff> buffs = getBuffList(target);
+        return buffs.stream().anyMatch(buff -> "Reflective".equals(buff.getName()));
     }
     
     private static List<Buff> getBuffList(Object obj) {

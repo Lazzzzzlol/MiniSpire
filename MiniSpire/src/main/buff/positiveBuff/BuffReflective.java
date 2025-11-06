@@ -2,12 +2,12 @@ package main.buff.positiveBuff;
 
 import main.buff.Buff;
 
-public class BuffReflection implements Buff{
+public class BuffReflective implements Buff{
 
-	String name = "Reflection";
+	String name = "Reflective";
 	int duration = 0;
 	
-	public BuffReflection(int duration) {
+	public BuffReflective(int duration) {
 		this.duration = duration;
 	}
 	

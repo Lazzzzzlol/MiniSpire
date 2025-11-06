@@ -147,6 +147,19 @@ public class Player {
 		return maxHp;
 	}
 	
+	public void changeMaxHp(int delta) {
+		this.maxHp += delta;
+		if (this.maxHp < 1)
+			this.maxHp = 1;
+		if (this.hp > this.maxHp)
+			this.hp = this.maxHp;
+		if (delta >= 0) {
+			System.out.println(" >> Max HP increased by " + delta + ".");
+		} else {
+			System.out.println(" >> Max HP decreased by " + (-delta) + ".");
+		}
+	}
+	
 	public void addHp(int heal) {
 		
 		this.hp += heal;
@@ -176,6 +189,19 @@ public class Player {
 	public int getMaxActionPoints() {
 		return maxActionPoints;
 	}
+	
+	public void changeMaxActionPoints(int delta) {
+		this.maxActionPoints += delta;
+		if (this.maxActionPoints < 0)
+			this.maxActionPoints = 0;
+		if (this.actionPoints > this.maxActionPoints)
+			this.actionPoints = this.maxActionPoints;
+		if (delta >= 0) {
+			System.out.println(" >> Max action points increased by " + delta + ".");
+		} else {
+			System.out.println(" >> Max action points decreased by " + (-delta) + ".");
+		}
+	}
 
 	public void addGold(int gold) {
 		this.gold += gold;
@@ -190,6 +216,17 @@ public class Player {
 	
 	public int getTotalGold() {
 		return totalGold;
+	}
+	
+	public void changeDrawCardNumPerTurn(int delta) {
+		this.drawCardNumPerTurn += delta;
+		if (this.drawCardNumPerTurn < 1)
+			this.drawCardNumPerTurn = 1;
+		if (delta >= 0) {
+			System.out.println(" >> Cards drawn per turn increased by " + delta + ".");
+		} else {
+			System.out.println(" >> Cards drawn per turn decreased by " + (-delta) + ".");
+		}
 	}
 	
 	public void addBuff(Buff buff, int duration) {

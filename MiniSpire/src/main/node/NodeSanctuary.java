@@ -1,5 +1,7 @@
 package main.node;
 
+import java.util.concurrent.TimeUnit;
+
 import main.Main;
 import main.Util;
 import main.game.Game;
@@ -26,15 +28,17 @@ public class NodeSanctuary extends Node {
 		Player player = Player.getInstance();
 		if (!hasHealed) {
 			int heal = (int)Math.floor(player.getMaxHp() * 0.3);
+			Main.executor.schedule(() -> {
 			player.addHp(heal);
 			hasHealed = true;
+			}, 1, TimeUnit.SECONDS);
 		}
 	}
 
 	@Override
 	public void onDraw() {
 		System.out.println(Main.longLine);
-		Util.printBlankLines(1);
+		Util.printBlankLines(3);
 		System.out.println(" [Sanctuary] You feel restored. Choose a path:");
 		System.out.println("   c 1) Play Safe     : +20 Max HP, heal 20 HP");
 		System.out.println("   c 2) Play Strategy : +1 draw per turn, +1 max action point");
@@ -54,25 +58,26 @@ public class NodeSanctuary extends Node {
 		Player player = Player.getInstance();
 		switch (parts[1]) {
 			case "1":
+				System.out.println(" >> Chosen: Play Safe.");
 				player.changeMaxHp(20);
 				player.addHp(20);
-				System.out.println(" >> Chosen: Play Safe.");
 				break;
 			case "2":
+				System.out.println(" >> Chosen: Play Strategy.");
 				player.changeDrawCardNumPerTurn(1);
 				player.changeMaxActionPoints(1);
-				System.out.println(" >> Chosen: Play Strategy.");
 				break;
 			case "3":
+				System.out.println(" >> Chosen: Play Risk.");
 				player.changeMaxHp(-15);
 				player.changeMaxActionPoints(2);
-				System.out.println(" >> Chosen: Play Risk.");
 				break;
 			default:
 				return;
 		}
 		hasChosen = true;
 		Game.getInstance().setIsEndTurn(true);
+		Game.getInstance().advanceToNextNode();
 	}
 
 	@Override

@@ -188,7 +188,8 @@ public class NodeBattle extends Node {
 		System.out.println(" >> Choose a reward card:");
 		System.out.println( " >> 1-" + rewardCard1.getName() + "(" + rewardCard1.getCost() + "), " + 
 								"2-" + rewardCard2.getName() + "(" + rewardCard2.getCost() + "), " + 
-								"3-" + rewardCard3.getName() + "(" + rewardCard3.getCost() + ")");
+								"3-" + rewardCard3.getName() + "(" + rewardCard3.getCost() + "), " +
+								"4- Move on");
 		System.out.println(Main.longLine);
 
 		System.out.print("Action >> ");
@@ -205,8 +206,8 @@ public class NodeBattle extends Node {
 		
 		try {
 			int choice = Integer.parseInt(parts[1]);
-			if (choice < 1 || choice > 3) {
-				System.out.println("Please enter a number between 1 and 3.");
+			if (choice < 1 || choice > 4) {
+				System.out.println("Please enter a number between 1 and 4.");
 			} else {
 
 			Card chosenCard = rewardCard1;
@@ -223,13 +224,18 @@ public class NodeBattle extends Node {
 					chosenCard = rewardCard3;
 					break;
 
+				case 4:
+					chosenCard = null;
+					break;
+
 				default:
 					chosenCard = rewardCard1;
 					break;
 				}
-				Player.getInstance().addCardToDeck(chosenCard);
-				System.out.println(" >> Added " + chosenCard.getName() + " to your deck!");
-				
+				if (chosenCard != null){
+					Player.getInstance().addCardToDeck(chosenCard);
+					System.out.println(" >> Added " + chosenCard.getName() + " to your deck!");
+				}
 				completeBattleNode();
 			}
 		} catch (NumberFormatException e) {

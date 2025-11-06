@@ -70,6 +70,7 @@ public class DamageProcessor {
     }
     
     private static int calculateDamageOnly(int baseDamage, Object attacker, Object target, boolean isReflective) {
+        
         if (hasInvincible(target)) {
             return 0;
         }
@@ -107,6 +108,7 @@ public class DamageProcessor {
     }
     
     private static boolean hasBloodLeeching(Object attacker) {
+        
         if (attacker == null) {
             return false;
         }
@@ -116,16 +118,19 @@ public class DamageProcessor {
     }
     
     private static boolean hasInvincible(Object target) {
+        
         List<Buff> buffs = getBuffList(target);
         return buffs.stream().anyMatch(buff -> "Invincible".equals(buff.getName()));
     }
 
     private static boolean hasReflective(Object target) {
+        
         List<Buff> buffs = getBuffList(target);
         return buffs.stream().anyMatch(buff -> "Reflective".equals(buff.getName()));
     }
     
     private static List<Buff> getBuffList(Object obj) {
+        
         if (obj instanceof Player) {
             return ((Player) obj).getBuffList();
         } else if (obj instanceof Enemy) {

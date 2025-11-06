@@ -97,7 +97,7 @@ public class NodeBattle extends Node {
 				break;
 				
 			case "i":
-				Card card = player.getHandCardList().get(Integer.parseInt(parts[1]));
+				Card card = player.getHandCardList().get(Integer.parseInt(parts[1]) - 1);
 				System.out.println(" >> " + card.getInfo());
 
 			default:
@@ -117,7 +117,7 @@ public class NodeBattle extends Node {
 		String[] parts = input.split(" ");
 		if (parts.length != 2) return false;
 		
-		if (parts[0].equals("p")) {
+		if (parts[0].equals("p") || parts[0].equals("i")) {
 			try {
 				int cardIndex = Integer.parseInt(parts[1]);
 				Player player = Player.getInstance();

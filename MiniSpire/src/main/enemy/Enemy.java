@@ -14,12 +14,14 @@ public class Enemy {
 	private int initialHp;
 	protected int movementCounter = 0;
 	protected ArrayList<Buff> buffList;
+	private boolean hasSpecialContainer;
 	
 	public Enemy(String name, int hp) {
 		this.hp = hp;
 		this.initialHp = hp;
 		this.name = name;
 		this.buffList = new ArrayList<Buff>();
+		this.hasSpecialContainer = false;
 	}
 	
 	public void onMove() {};
@@ -89,6 +91,14 @@ public class Enemy {
 	public ArrayList<Buff> getBuffList() {
 		return buffList;
 	}
+
+	public boolean getHasSpecialContainer(){
+		return hasSpecialContainer;
+	}
+
+	public String getSpecialContainerString(){
+		return "[]";
+    }
 
 	public String getBuffListString() {
 		

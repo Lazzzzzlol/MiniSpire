@@ -9,9 +9,11 @@ import main.player.Player;
 public class LostDancer extends Enemy{
 
     private ArrayList<String> markList;
+    private boolean hasSpecialContainer = true;
 
     public LostDancer() {
         super("Lost Dancer", 70 + Main.random.nextInt(11));
+        markList = new ArrayList<>();
     }
 
     public void onMove() {
@@ -78,6 +80,23 @@ public class LostDancer extends Enemy{
     public void flourish(){
         int markCount = markList.size();
         for (int i = 0; i <= markCount; i++)
-            Player.getInstance().deductHp(4);
+            Player.getInstance().deductHp(3 + Main.random.nextInt(2));
+        markList.clear();
+    }
+
+    @Override
+    public boolean getHasSpecialContainer(){
+		return this.hasSpecialContainer;
+	}
+
+    @Override
+    public String getSpecialContainerString(){
+
+        String result = "[Marks: ";
+        for (String mark : markList)
+            result += mark + " ";
+        result += "]";
+
+        return result;
     }
 }

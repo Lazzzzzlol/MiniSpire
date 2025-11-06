@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import main.enemy.Enemy;
+import main.enemy.normalEnemy.LostDancer;
 import main.enemy.normalEnemy.Zombie;
 
 public class EnemyFactory implements ResourceFactory {
@@ -17,6 +18,8 @@ public class EnemyFactory implements ResourceFactory {
 	}
 	
 	static Map<String, Enemy> pool = new HashMap<String, Enemy>();
+
+
 	
 	@Override
 	public void init() {
@@ -27,7 +30,7 @@ public class EnemyFactory implements ResourceFactory {
 		
 		switch (enemyType) {
 		case "normal":
-			return new Zombie();
+			return new LostDancer();
 			
 		default:
 			return new Zombie();

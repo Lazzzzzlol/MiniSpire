@@ -61,6 +61,9 @@ public class NodeBattle extends Node {
 		
 		String enemyInfo = "-  " + enemy.getName() + " HP: " + enemy.getHp() + "  -";
 		String enemyBuffList = enemy.getBuffListString();
+		String enemySpecialContainer = "";
+		if (enemy.getHasSpecialContainer())
+			enemySpecialContainer = enemy.getSpecialContainerString();
 		
 		for (int i = 0; i < Util.getCenterAlignSpaceNum(enemyInfo, Main.longLine.length()); i++) 
 			System.out.print(" ");
@@ -68,6 +71,11 @@ public class NodeBattle extends Node {
 		for (int i = 0; i < Util.getCenterAlignSpaceNum(enemyBuffList, Main.longLine.length()); i++) 
 			System.out.print(" ");
 		System.out.println(enemyBuffList);
+		if (!enemySpecialContainer.equals("")){
+			for (int i = 0; i < Util.getCenterAlignSpaceNum(enemySpecialContainer, Main.longLine.length()); i++) 
+				System.out.print(" ");
+			System.out.println(enemySpecialContainer);
+		}
 		
 		Util.printBlankLines(3);
 		

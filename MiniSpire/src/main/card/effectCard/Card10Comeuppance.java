@@ -6,7 +6,7 @@ import main.player.Player;
 public class Card10Comeuppance extends EffectCard{
 	
 	String name = "Comeuppance";
-	String info = "Apply 2 round Strengthened to self. ";
+	String info = "Apply 1 round Reflection to self. ";
 	String rarity = "rare";
 	int cost = 1;
 	

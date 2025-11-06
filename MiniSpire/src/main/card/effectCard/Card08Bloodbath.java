@@ -7,7 +7,7 @@ import main.player.Player;
 public class Card08Bloodbath extends EffectCard{
 	
 	String name = "Bloodbath";
-	String info = "Apply 1 round BloodLeetching to self. ";
+	String info = "Apply 1 round BloodLeeching to self. ";
 	String rarity = "normal";
 	int cost = 0;
 	

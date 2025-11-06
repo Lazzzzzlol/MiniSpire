@@ -1,13 +1,13 @@
-package main.buff.positiveBuff;
+package main.buff.debuff;
 
 import main.buff.Buff;
 
-public class BuffBlessed implements Buff{
-
-	String name = "Blessed";
-	int duration = 0;
+public class BuffMuted implements Buff {
 	
-	public BuffBlessed(int duration) {
+	String name = "Muted";
+	int duration = 0;
+
+	public BuffMuted(int duration) {
 		this.duration = duration;
 	}
 	
@@ -30,7 +30,7 @@ public class BuffBlessed implements Buff{
 	public String getName() {
 		return this.name;
 	}
-	
+
 	@Override
 	public void extendDuration(int duration) {
 		this.duration += duration;

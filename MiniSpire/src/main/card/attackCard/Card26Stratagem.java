@@ -1,6 +1,8 @@
 package main.card.attackCard;
 
 import main.buff.DamageProcessor;
+import main.buff.debuff.BuffVulnerable;
+import main.buff.oneRoundBuff.BuffStratagem;
 import main.enemy.Enemy;
 import main.player.Player;
 
@@ -14,7 +16,9 @@ public class Card26Stratagem extends AttackCard{
 	
 	@Override
 	public void onPlay(Player player, Enemy enemy) {
-
+		player.addBuff(new BuffStratagem(1), 1);
+		enemy.addBuff(new BuffVulnerable(1), 1);
+		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
 	}
 	
 	@Override

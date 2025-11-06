@@ -1,6 +1,7 @@
 package main.card.attackCard;
 
 import main.buff.DamageProcessor;
+import main.buff.oneFightBuff.BuffGainFlurryOfBlows;
 import main.enemy.Enemy;
 import main.player.Player;
 
@@ -14,6 +15,7 @@ public class Card24FlurryOfBlows extends AttackCard{
 	
 	@Override
 	public void onPlay(Player player, Enemy enemy) {
+		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
 
 	}
 	

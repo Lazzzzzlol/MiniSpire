@@ -8,6 +8,7 @@ public class Card23Ragnarok extends AttackCard{
 	
 	String name = "Ragnarok";
 	String info = "Deal 2 damage; Then deal double of damage actually dealt last step; Repeat last step; Repeat last step. ";
+	String rarity = "epic";
 	int cost = 3;
 	int currentDamage = 2;
 	int hits = 4;

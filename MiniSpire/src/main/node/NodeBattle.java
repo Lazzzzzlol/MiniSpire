@@ -19,14 +19,18 @@ public class NodeBattle extends Node {
 	private Enemy enemy;
 
 	private boolean isWin;
-	private ArrayList<Card> rewardCardList;
+	private Card rewardCard1;
+	private Card rewardCard2;
+	private Card rewardCard3;
 	
 	public NodeBattle(String enemyType) {
 		super("Battle");
 		this.enemyType = enemyType;
 		enemy = setEnemy(enemyType);
 		isWin = false;
-		rewardCardList = new ArrayList<>();
+		rewardCard1 = CardFactory.getInstance().getRandomCard();
+		rewardCard2 = CardFactory.getInstance().getRandomCard();
+		rewardCard3 = CardFactory.getInstance().getRandomCard();
 		// reset per-battle state on all cards (Upheaval and any future cards that need it)
 		CardFactory.getInstance().resetCardsForNewBattle();
 	}
@@ -69,7 +73,7 @@ public class NodeBattle extends Node {
 		Util.printBlankLines(3);
 		
 		System.out.println(" [Status:   HP: " + player.getHp() + "/" + player.getMaxHp() + 
-				"   Action points: " + player.getActionPoints() + "/" + player.getMaxActionPoints() + "   ]");
+				"   Action points: " + player.getActionPoints() + "/" + player.getMaxActionPoints() + "]");
 		System.out.println(" [Buff: " + player.getBuffListString() + "]");
 		System.out.println();
 		System.out.println(" [Card: " + player.getHandCardListString() + "]");
@@ -81,6 +85,11 @@ public class NodeBattle extends Node {
 	
 	@Override
 	public void onInput(String input) {
+
+		if (isWin) {
+			onWinInput(input);
+			return;
+		}
 		
 		Player player = Player.getInstance();
 		String[] parts = input.split(" ");
@@ -130,6 +139,9 @@ public class NodeBattle extends Node {
 				return false;
 			}
 		}
+
+		if (parts[0].equals("c"))
+			return true;
 		
 		if (input.equals("end turn"))
 			return true;
@@ -165,9 +177,6 @@ public class NodeBattle extends Node {
 		// 计算并添加得分
 		ScoreCalculator scoreCalculator = ScoreCalculator.getInstance();
 		int gainedScore = scoreCalculator.calculateBattleScore(enemy, enemyType);
-		Card rewardCard1 = CardFactory.getInstance().getRandomCard();
-		Card rewardCard2 = CardFactory.getInstance().getRandomCard();
-		Card rewardCard3 = CardFactory.getInstance().getRandomCard();
 
 		Util.printBlankLines(3);
 		System.out.println(Main.longLine);
@@ -183,11 +192,56 @@ public class NodeBattle extends Node {
 								"3-" + rewardCard3.getName() + "(" + rewardCard3.getCost() + ")");
 		System.out.println(Main.longLine);
 
-		System.out.print(" Action >>");
+		System.out.print("Action >> ");
+	}
 
+	private void onWinInput(String input) {
+
+		String[] parts = input.split(" ");
+		
+		if (parts.length < 2 || !parts[0].equals("c")) {
+			System.out.println("Invalid command format. Use 'c [1-3]' to choose a card.");
+			return;
+		}
+		
+		try {
+			int choice = Integer.parseInt(parts[1]);
+			if (choice < 1 || choice > 3) {
+				System.out.println("Please enter a number between 1 and 3.");
+			} else {
+
+			Card chosenCard = rewardCard1;
+			switch (choice) {
+				case 1:
+					chosenCard = rewardCard1;
+					break;
+
+				case 2:
+					chosenCard = rewardCard2;
+					break;
+
+				case 3:
+					chosenCard = rewardCard3;
+					break;
+
+				default:
+					chosenCard = rewardCard1;
+					break;
+				}
+				Player.getInstance().addCardToDeck(chosenCard);
+				System.out.println(" >> Added " + chosenCard.getName() + " to your deck!");
+				
+				completeBattleNode();
+			}
+		} catch (NumberFormatException e) {
+			System.out.println("Please enter a valid number.");
+		}
+	}
+
+	private void completeBattleNode() {
+		Game.getInstance().advanceToNextNode();
 	}
 	
-	//这边set可能打错了，可能是get
 	private Enemy setEnemy(String enemyType) {
 		return EnemyFactory.getRandomEnemy(enemyType);
 	}
@@ -202,9 +256,5 @@ public class NodeBattle extends Node {
 
 	public boolean getIsWin(){
 		return isWin;
-	}
-
-	public ArrayList<Card> getRewardCardList(){
-		return rewardCardList;
 	}
 }

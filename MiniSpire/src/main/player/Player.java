@@ -240,6 +240,10 @@ public class Player {
 		buffList.add(buff);
 		System.out.println(" >> Gained buff: " + buff.getName());
 	}
+
+	public void addCardToDeck(Card card){
+		drawCardList.add(card);
+	}
 	
 	public ArrayList<Buff> getBuffList() {
 		return buffList;

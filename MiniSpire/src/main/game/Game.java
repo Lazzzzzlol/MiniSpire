@@ -155,9 +155,9 @@ public class Game {
 		return isEndTurn;
 	}
 	
-	/*public void advanceToNextNode() {
+	public void advanceToNextNode() {
 		nodeHistory.add(currentNode);
 		nodeIndex += 1;
 		currentNode = null;
-	}*/
+	}
 }

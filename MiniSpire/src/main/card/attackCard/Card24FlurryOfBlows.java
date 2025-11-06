@@ -8,6 +8,7 @@ public class Card24FlurryOfBlows extends AttackCard{
 	
 	String name = "Flurry of Blows";
 	String info = "Deal 4 damage, draw 1 card. During this fight, when Effect Card is used, gain a Flurry of Blows to hand. ";
+	String rarity = "legendary";
 	int cost = 0;
 	int baseDamage = 4;
 	

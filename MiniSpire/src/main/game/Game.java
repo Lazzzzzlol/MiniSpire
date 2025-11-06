@@ -80,11 +80,17 @@ public class Game {
 	}
 	
 	public void onDraw() {
-		
+		// If currentNode is null we have advanced to the next node
+		// but haven't decided/generated it yet (advanceToNextNode sets
+		// currentNode = null). In that case skip drawing now to avoid
+		// a NullPointerException; the next update() will set the node.
+		if (currentNode == null)
+			return;
+
 		if (!hasDrawnNodeInfo)
 			drawNodeInfo(currentNode);
 		drawNodeContent(currentNode);
-		
+        
 	}
 	
 	public void onInput(String input) {
@@ -159,5 +165,8 @@ public class Game {
 		nodeHistory.add(currentNode);
 		nodeIndex += 1;
 		currentNode = null;
+		// Reset node-info-drawn flag so the next node's header will be shown
+		// when it is decided and first drawn.
+		hasDrawnNodeInfo = false;
 	}
 }

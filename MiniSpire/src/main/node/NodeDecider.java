@@ -22,13 +22,10 @@ public class NodeDecider {
 				return new NodeBattle("normal");
 				
 			case 2:
-				System.out.println("Generating node 2");
 				switch (Main.random.nextInt(2)) {
 					case 0:
-						System.out.println("Generating battle");
 						return new NodeBattle("normal");
 					case 1:
-						System.out.println("Generating sanctuary");
 						return new NodeSanctuary();
 				}
 				

@@ -11,6 +11,7 @@ public class Zombie extends Enemy {
 	
 	public Zombie() {
 		super("Zombie", 30 + Main.random.nextInt(11));
+		//super("Zombie", 1);
 	}
 	
 	public void onMove() {

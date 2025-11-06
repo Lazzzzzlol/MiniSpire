@@ -3,6 +3,7 @@ package main.game;
 import main.Main;
 import main.Util;
 import main.node.Node;
+import main.node.NodeBattle;
 import main.node.NodeDecider;
 import main.player.Player;
 import main.resourceFactory.CardFactory;
@@ -67,7 +68,7 @@ public class Game {
 		
 		if (currentNode == null){
 			currentNode = nodeDecider.decideNode(nodeIndex, nodeHistory, eliteEncounterCount);
-			System.out.println("now no node, gening");
+
 		}
 		
 		onStartTurn();
@@ -171,6 +172,7 @@ public class Game {
 		hasDrawnNodeInfo = false;
 
 		currentNode = nodeDecider.decideNode(nodeIndex, nodeHistory, eliteEncounterCount);
-		onStartTurn();
+		if (currentNode.getClass() == NodeBattle.class)
+			onUpdate();
 	}
 }

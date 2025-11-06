@@ -31,14 +31,14 @@ public class NodeSanctuary extends Node {
 			Main.executor.schedule(() -> {
 			player.addHp(heal);
 			hasHealed = true;
-			}, 1, TimeUnit.SECONDS);
+			}, 1500, TimeUnit.MILLISECONDS);
 		}
 	}
 
 	@Override
 	public void onDraw() {
 		System.out.println(Main.longLine);
-		Util.printBlankLines(3);
+		Util.printBlankLines(1);
 		System.out.println(" [Sanctuary] You feel restored. Choose a path:");
 		System.out.println("   c 1) Play Safe     : +20 Max HP, heal 20 HP");
 		System.out.println("   c 2) Play Strategy : +1 draw per turn, +1 max action point");
@@ -76,7 +76,6 @@ public class NodeSanctuary extends Node {
 				return;
 		}
 		hasChosen = true;
-		Game.getInstance().setIsEndTurn(true);
 		Game.getInstance().advanceToNextNode();
 	}
 

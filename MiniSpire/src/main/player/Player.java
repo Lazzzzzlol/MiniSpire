@@ -166,9 +166,9 @@ public class Player {
 		if (this.hp > this.maxHp)
 			this.hp = this.maxHp;
 		
-		Main.executor.schedule(() -> {
+		//Main.executor.schedule(() -> {
 			System.out.println(" >> Healed " + heal + " HP.");
-		}, 1, TimeUnit.SECONDS);
+		//}, 1, TimeUnit.SECONDS);
 	}
 	
 	public void deductHp(int damage) {
@@ -249,8 +249,13 @@ public class Player {
 		return buffList;
 	}
 
-	public  ArrayList<Card> getHandCardList() {
+	public ArrayList<Card> getHandCardList() {
 		return handCardList;
+	}
+
+	public void clearHandCards(){
+		discardCardList.addAll(handCardList);
+		handCardList.clear();
 	}
 	
 	public String getBuffListString() {

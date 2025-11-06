@@ -245,7 +245,7 @@ public class NodeBattle extends Node {
 
 	private void completeBattleNode() {
 		isWin = false;
-		System.out.println("Completing battle node, advancing to next node...");
+		Player.getInstance().clearHandCards();
 		Game.getInstance().advanceToNextNode();
 	}
 	

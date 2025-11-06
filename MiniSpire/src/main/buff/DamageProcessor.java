@@ -48,6 +48,10 @@ public class DamageProcessor {
                     ((Player) target).deductHp(finalDamage);
                 }
             }
+            
+            if (hasReflective && finalDamage > 0 && attacker != null) {
+                processDamage(finalDamage, target, attacker, true);
+            }
 
             if (hasBloodLeeching && finalDamage > 0 && attacker != null) {
                 if (attacker instanceof Player) {
@@ -55,10 +59,6 @@ public class DamageProcessor {
                 } else if (attacker instanceof Enemy) {
                     ((Enemy) attacker).addHp(finalDamage);
                 }
-            }
-
-            if (hasReflective && finalDamage > 0 && attacker != null) {
-                processDamage(finalDamage, target, attacker, true);
             }
             
         } finally {

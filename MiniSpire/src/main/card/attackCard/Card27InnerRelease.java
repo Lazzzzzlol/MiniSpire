@@ -9,7 +9,7 @@ import main.player.Player;
 public class Card27InnerRelease extends AttackCard{
 	
 	String name = "Strike";
-	String info = "Apply 2 round Strengthen, 2 round Tough to self, then deal 10 damage. If the card is never used in this round, cost change to 0 ";
+	String info = "Apply 2 round Strengthen, 2 round Tough to self, then deal 10 damage. If the card is never used in this round, cost change to 0. ";
 	String rarity = "normal";
 	int cost = 0;
     int baseDamage = 10;
@@ -25,5 +25,15 @@ public class Card27InnerRelease extends AttackCard{
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public String getInfo(){
+		return info;
+	}
+
+	@Override
+	public int getBaseDamage(){
+		return baseDamage;
 	}
 }

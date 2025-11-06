@@ -8,6 +8,7 @@ public class AttackCard implements Card{
 
 	private Boolean canPlay = true;
 	private String name = "Generic Attack Card";
+	private String info = "info";
 	private int cost = 1;
 	private String type = "Attack";
 	private String rarity = "normal";
@@ -23,6 +24,11 @@ public class AttackCard implements Card{
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public String getInfo(){
+		return info;
 	}
 
 	@Override

@@ -6,6 +6,7 @@ public class PassiveCard implements Card{
 
 	private Boolean canPlay = false;
 	private String name = "Generic Passive Card";
+	private String info = "Info";
 	private int cost = 0;
 	private String type = "Passive";
 	private String rarity = "normal";
@@ -20,6 +21,11 @@ public class PassiveCard implements Card{
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public String getInfo(){
+		return info;
 	}
 
 	@Override

@@ -43,6 +43,11 @@ public class Card03Upheaval extends AttackCard{
 	}
 
 	@Override
+	public String getInfo(){
+		return info;
+	}
+
+	@Override
 	public int getBaseDamage(){
 		return baseDamage;
 	}

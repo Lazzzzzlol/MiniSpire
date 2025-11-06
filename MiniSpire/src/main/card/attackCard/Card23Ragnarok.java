@@ -31,6 +31,11 @@ public class Card23Ragnarok extends AttackCard{
 	}
 
 	@Override
+	public String getInfo(){
+		return info;
+	}
+
+	@Override
 	public int getBaseDamage(){
 		return currentDamage;
 	}

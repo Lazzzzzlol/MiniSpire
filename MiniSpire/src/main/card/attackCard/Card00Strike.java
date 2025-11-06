@@ -23,6 +23,11 @@ public class Card00Strike extends AttackCard{
 	}
 
 	@Override
+	public String getInfo(){
+		return info;
+	}
+
+	@Override
 	public int getBaseDamage(){
 		return baseDamage;
 	}

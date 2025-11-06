@@ -8,6 +8,7 @@ public class EffectCard implements Card{
 
 	private Boolean canPlay = true;
 	private String name = "Generic Effect Card";
+	private String info = "info";
 	private int cost = 1;
 	private String type = "Effect";
 	private String rarity = "normal";
@@ -22,6 +23,11 @@ public class EffectCard implements Card{
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public String getInfo(){
+		return info;
 	}
 
 	@Override

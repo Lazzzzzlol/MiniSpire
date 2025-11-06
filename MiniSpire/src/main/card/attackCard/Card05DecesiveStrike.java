@@ -27,6 +27,11 @@ public class Card05DecesiveStrike extends AttackCard{
 	}
 	
 	@Override
+	public String getInfo(){
+		return info;
+	}
+
+	@Override
 	public int getCost() {
 		return cost;
 	}

@@ -82,6 +82,7 @@ public class NodeBattle extends Node {
 	@Override
 	public void onInput(String input) {
 		
+		Player player = Player.getInstance();
 		String[] parts = input.split(" ");
 		
 		switch (parts[0]) {
@@ -95,6 +96,10 @@ public class NodeBattle extends Node {
 					}, 2, TimeUnit.SECONDS);
 				break;
 				
+			case "i":
+				Card card = player.getHandCardList().get(Integer.parseInt(parts[1]));
+				System.out.println(" >> " + card.getInfo());
+
 			default:
 				break;
 		}
@@ -160,18 +165,26 @@ public class NodeBattle extends Node {
 		// 计算并添加得分
 		ScoreCalculator scoreCalculator = ScoreCalculator.getInstance();
 		int gainedScore = scoreCalculator.calculateBattleScore(enemy, enemyType);
+		Card rewardCard1 = CardFactory.getInstance().getRandomCard();
+		Card rewardCard2 = CardFactory.getInstance().getRandomCard();
+		Card rewardCard3 = CardFactory.getInstance().getRandomCard();
 
-			Util.printBlankLines(3);
-			System.out.println(Main.longLine);
+		Util.printBlankLines(3);
+		System.out.println(Main.longLine);
 
-			System.out.println(" >> You defeated " + enemy.getName() + "!");
-			Player.getInstance().addGold(gainedGold);
-			scoreCalculator.addScore(gainedScore);
+		System.out.println(" >> You defeated " + enemy.getName() + "!");
+		Player.getInstance().addGold(gainedGold);
+		scoreCalculator.addScore(gainedScore);
 
-			System.out.println();
-			System.out.println(" >> Choose a reward card:");
+		System.out.println();
+		System.out.println(" >> Choose a reward card:");
+		System.out.println( " >> 1-" + rewardCard1.getName() + "(" + rewardCard1.getCost() + "), " + 
+								"2-" + rewardCard2.getName() + "(" + rewardCard2.getCost() + "), " + 
+								"3-" + rewardCard3.getName() + "(" + rewardCard3.getCost() + ")");
+		System.out.println(Main.longLine);
 
-			System.out.println(Main.longLine);
+		System.out.print(" Action >>");
+
 	}
 	
 	//这边set可能打错了，可能是get

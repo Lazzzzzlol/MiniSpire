@@ -27,6 +27,11 @@ public class Card01Onslaught extends AttackCard{
 	}
 
 	@Override
+	public String getInfo(){
+		return info;
+	}
+
+	@Override
 	public int getBaseDamage(){
 		return baseDamage;
 	}

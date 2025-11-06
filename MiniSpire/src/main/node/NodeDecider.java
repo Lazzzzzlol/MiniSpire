@@ -22,18 +22,21 @@ public class NodeDecider {
 				return new NodeBattle("normal");
 				
 			case 2:
+				System.out.println("Generating node 2");
 				switch (Main.random.nextInt(2)) {
 					case 0:
+						System.out.println("Generating battle");
 						return new NodeBattle("normal");
 					case 1:
-						return new NodeShop();
+						System.out.println("Generating sanctuary");
+						return new NodeSanctuary();
 				}
 				
 			case 3:
-				if (nodeHistory.get(1).getClass() == NodeShop.class)
+				if (nodeHistory.get(1).getClass() == NodeSanctuary.class)
 					return new NodeBattle("normal");
 				else
-					return new NodeShop();
+					return new NodeSanctuary();
 				
 			case 4:
 				return new NodeShop();

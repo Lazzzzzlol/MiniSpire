@@ -49,6 +49,9 @@ public class Main {
 			game.onDraw();
 			
 			//读取操作
+			if (game.getCurrentNode() == null)
+				continue;
+
 	        while (!game.getIsEndTurn()) {
 	        	
 		        userInput = scanner.nextLine();

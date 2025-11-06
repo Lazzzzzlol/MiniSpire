@@ -65,11 +65,14 @@ public class Game {
 	
 	public void onUpdate() {
 		
-		if (currentNode == null)
+		if (currentNode == null){
 			currentNode = nodeDecider.decideNode(nodeIndex, nodeHistory, eliteEncounterCount);
+			System.out.println("now no node, gening");
+		}
 		
-		onStartTurn();
 		currentNode.onUpdate();
+		onStartTurn();
+		//currentNode.onUpdate();
 		
 		if (player.getHp() <= 0)
 			isGameOver = true;
@@ -80,10 +83,7 @@ public class Game {
 	}
 	
 	public void onDraw() {
-		// If currentNode is null we have advanced to the next node
-		// but haven't decided/generated it yet (advanceToNextNode sets
-		// currentNode = null). In that case skip drawing now to avoid
-		// a NullPointerException; the next update() will set the node.
+
 		if (currentNode == null)
 			return;
 
@@ -160,13 +160,17 @@ public class Game {
 	public Boolean getIsEndTurn() {
 		return isEndTurn;
 	}
+
+	public Node getCurrentNode(){
+		return currentNode;
+	}
 	
 	public void advanceToNextNode() {
+		System.out.println("Advancing from node " + nodeIndex + " to " + (nodeIndex + 1));
 		nodeHistory.add(currentNode);
 		nodeIndex += 1;
-		currentNode = null;
-		// Reset node-info-drawn flag so the next node's header will be shown
-		// when it is decided and first drawn.
+		currentNode = nodeDecider.decideNode(nodeIndex, nodeHistory, eliteEncounterCount);
 		hasDrawnNodeInfo = false;
+		System.out.println("Node advanced, currentNode is now: " + currentNode);
 	}
 }

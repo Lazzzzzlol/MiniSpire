@@ -1,6 +1,5 @@
 package main.node;
 
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import main.Main;
@@ -239,6 +238,8 @@ public class NodeBattle extends Node {
 	}
 
 	private void completeBattleNode() {
+		isWin = false;
+		System.out.println("Completing battle node, advancing to next node...");
 		Game.getInstance().advanceToNextNode();
 	}
 	

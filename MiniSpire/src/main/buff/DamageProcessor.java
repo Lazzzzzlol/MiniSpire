@@ -7,55 +7,69 @@ import java.util.List;
 
 public class DamageProcessor {
     
+    private static final ThreadLocal<Boolean> isReflectiveDamage = ThreadLocal.withInitial(() -> false);
+    
     public static void applyDamageToEnemy(int baseDamage, Enemy target) {
-        processDamage(baseDamage, Player.getInstance(), target);
+        processDamage(baseDamage, Player.getInstance(), target, false);
     }
     
     public static void applyDamageToPlayer(int baseDamage, Player target) {
-        processDamage(baseDamage, null, target);
+        processDamage(baseDamage, null, target, false);
     }
 
     public static int calculateDamageToEnemy(int baseDamage, Enemy target) {
-        return calculateDamageOnly(baseDamage, Player.getInstance(), target);
+        return calculateDamageOnly(baseDamage, Player.getInstance(), target, false);
     }
     
     public static int calculateDamageToPlayer(int baseDamage, Player target) {
-        return calculateDamageOnly(baseDamage, null, target);
+        return calculateDamageOnly(baseDamage, null, target, false);
     }
 
-    private static void processDamage(int baseDamage, Object attacker, Object target) {
-        
-        int finalDamage = calculateDamageOnly(baseDamage, attacker, target);
-        boolean hasBloodLeeching = hasBloodLeeching(attacker);
-        boolean hasReflective = hasReflective(target);
-        
-        if (finalDamage > 0) {
-            if (target instanceof Enemy) {
-                ((Enemy) target).deductHp(finalDamage);
-            } else if (target instanceof Player) {
-                ((Player) target).deductHp(finalDamage);
-            }
-        }
+    private static void processDamage(int baseDamage, Object attacker, Object target, boolean isReflective) {
 
-        if (hasBloodLeeching && finalDamage > 0 && attacker != null) {
-            if (attacker instanceof Player) {
-                ((Player) attacker).addHp(finalDamage);
-            } else if (attacker instanceof Enemy) {
-                ((Enemy) attacker).addHp(finalDamage);
-            }
+        if (isReflective && isReflectiveDamage.get()) {
+            return;
         }
+        
+        try {
 
-        if (hasReflective && finalDamage > 0 && attacker != null) {
-            if (attacker instanceof Player) {
-                ((Player) attacker).deductHp(finalDamage);
-            } else if (attacker instanceof Enemy) {
-                ((Enemy) attacker).deductHp(finalDamage);
+            if (isReflective) {
+                isReflectiveDamage.set(true);
+            }
+            
+            int finalDamage = calculateDamageOnly(baseDamage, attacker, target, isReflective);
+            boolean hasBloodLeeching = hasBloodLeeching(attacker);
+            boolean hasReflective = hasReflective(target) && !isReflective;
+            
+            if (finalDamage > 0) {
+                if (target instanceof Enemy) {
+                    ((Enemy) target).deductHp(finalDamage);
+                } else if (target instanceof Player) {
+                    ((Player) target).deductHp(finalDamage);
+                }
+            }
+
+            if (hasBloodLeeching && finalDamage > 0 && attacker != null) {
+                if (attacker instanceof Player) {
+                    ((Player) attacker).addHp(finalDamage);
+                } else if (attacker instanceof Enemy) {
+                    ((Enemy) attacker).addHp(finalDamage);
+                }
+            }
+
+            if (hasReflective && finalDamage > 0 && attacker != null) {
+                processDamage(finalDamage, target, attacker, true);
+            }
+            
+        } finally {
+
+            if (isReflective) {
+                isReflectiveDamage.set(false);
             }
         }
     }
     
-    private static int calculateDamageOnly(int baseDamage, Object attacker, Object target) {
-        
+    private static int calculateDamageOnly(int baseDamage, Object attacker, Object target, boolean isReflective) {
         if (hasInvincible(target)) {
             return 0;
         }

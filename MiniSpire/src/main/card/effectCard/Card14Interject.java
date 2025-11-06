@@ -1,5 +1,6 @@
 package main.card.effectCard;
 
+import main.buff.debuff.BuffMuted;
 import main.enemy.Enemy;
 import main.player.Player;
 
@@ -12,7 +13,7 @@ public class Card14Interject extends EffectCard{
 	
 	@Override
 	public void onUse(Player player, Enemy enemy) {
-		
+		enemy.addBuff(new BuffMuted(1), 1);
 	}
 
 	@Override

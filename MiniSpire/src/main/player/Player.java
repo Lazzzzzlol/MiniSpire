@@ -68,7 +68,7 @@ public class Player {
 		drawHandCards(drawCardNumPerTurn);
 	}
 	
-	private void drawHandCards(int num) {
+	public void drawHandCards(int num) {
 		
 		if (drawCardList.size() < num) {
 			

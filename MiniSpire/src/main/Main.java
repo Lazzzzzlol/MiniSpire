@@ -63,7 +63,7 @@ public class Main {
 		        game.onInput(userInput);
 		
 		        Util.printBlankLines(3);
-		        if (!userInput.equals("e"))
+		        if (!userInput.equals("end turn"))
 		        	game.onDraw();
 		        else
 		        	game.setIsEndTurn(true);

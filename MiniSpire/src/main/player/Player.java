@@ -2,6 +2,10 @@ package main.player;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
 import main.Main;
@@ -217,6 +221,12 @@ public class Player {
 	public int getTotalGold() {
 		return totalGold;
 	}
+
+	public void lostGold(int cost) {
+		this.gold -= cost;
+		System.out.println(" >> Lost " + gold + " gold.");
+		System.out.println((" >> Current gold: " + this.gold));
+	}
 	
 	public void changeDrawCardNumPerTurn(int delta) {
 		this.drawCardNumPerTurn += delta;
@@ -240,10 +250,6 @@ public class Player {
 		buffList.add(buff);
 		System.out.println(" >> Gained buff: " + buff.getName());
 	}
-
-	public void addCardToDeck(Card card){
-		drawCardList.add(card);
-	}
 	
 	public ArrayList<Buff> getBuffList() {
 		return buffList;
@@ -252,7 +258,7 @@ public class Player {
 	public ArrayList<Card> getHandCardList() {
 		return handCardList;
 	}
-
+	
 	public void clearHandCards(){
 		discardCardList.addAll(handCardList);
 		handCardList.clear();
@@ -283,5 +289,105 @@ public class Player {
 				"(" + handCardList.get(handCardList.size() - 1).getCost() + ")");
 		
 		return result;
+	}
+
+	public ArrayList<Card> getPlayerDeck() {
+		return drawCardList;
+	}
+
+	public void showDeck() {
+		int cardNum = drawCardList.size();
+
+		//sort
+		Map<Integer, List<Card>> costBuckets = new TreeMap<>();
+
+		for (int cost = 0; cost <= 4; cost++) {
+			costBuckets.put(cost, new ArrayList<>());
+		}
+		for (Card card : drawCardList) {
+			int cost = card.getCost();
+			if (costBuckets.containsKey(cost)) {
+				costBuckets.get(cost).add(card);
+			}else{
+				costBuckets.get(4).add(card);
+			}
+		}
+
+		for (List<Card> bucket : costBuckets.values()) {
+			bucket.sort((card1, card2) -> card1.getName().compareTo(card2.getName()));
+		}
+
+		//layout
+		System.out.println(Main.longLine);
+		System.out.println(" Your Deck (" + cardNum + " cards) :");
+		System.out.println(Main.longLine);
+		
+		int index = 1;
+		for (Map.Entry<Integer, List<Card>> entry : costBuckets.entrySet()) {
+			int cost = entry.getKey();
+			List<Card> bucket = entry.getValue();
+        
+            System.out.println(" [" + cost + " Cost Cards]");
+            
+            for (Card card : bucket) {
+				
+                System.out.println("   " + index++ + ") " + " [" + card.getRarity() + "] <" + card.getCost() + "> "+ card.getName() + "  -" + card.getInfo() );
+            }
+            System.out.println();
+        }
+
+		System.out.println(Main.longLine);
+	}
+	public Map<Integer, Card> showDeckWithIndex() {
+		int cardNum = drawCardList.size();
+		Map<Integer, Card> indexToCardMap = new HashMap<>();
+		
+		//sort
+		Map<Integer, List<Card>> costBuckets = new TreeMap<>();
+
+		for (int cost = 0; cost <= 4; cost++) {
+			costBuckets.put(cost, new ArrayList<>());
+		}
+		for (Card card : drawCardList) {
+			int cost = card.getCost();
+			if (costBuckets.containsKey(cost)) {
+				costBuckets.get(cost).add(card);
+			} else {
+				costBuckets.get(4).add(card);
+			}
+		}
+
+		for (List<Card> bucket : costBuckets.values()) {
+			bucket.sort((card1, card2) -> card1.getName().compareTo(card2.getName()));
+		}
+
+		//layout
+		System.out.println(Main.longLine);
+		System.out.println(" Your Deck (" + cardNum + " cards) :");
+		System.out.println(Main.longLine);
+
+		int index = 1;
+		for (Map.Entry<Integer, List<Card>> entry : costBuckets.entrySet()) {
+			int cost = entry.getKey();
+			List<Card> bucket = entry.getValue();
+			
+			if (!bucket.isEmpty()) {
+				System.out.println(" [" + cost + " Cost Cards]");
+				
+				for (Card card : bucket) {
+					indexToCardMap.put(index, card);
+					System.out.println("   " + index + ") " + " [" + card.getRarity() + "] <" + card.getCost() + "> "+ card.getName() + "  -" + card.getInfo());
+					index++;
+				}
+				System.out.println();
+			}
+		}
+
+		System.out.println(Main.longLine);
+		return indexToCardMap;
+	}
+
+	public void addCardToDeck(Card card) {
+		this.drawCardList.add(card);
 	}
 }

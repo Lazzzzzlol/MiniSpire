@@ -1,8 +1,5 @@
 package main.resourceFactory;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import main.Main;
 import main.enemy.Enemy;
 import main.enemy.normalEnemy.LostDancer;

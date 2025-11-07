@@ -10,7 +10,7 @@ public class Card00Strike extends AttackCard{
 	String info = "Deal 8 damage. ";
 	String rarity = "normal";
 	int cost = 1;
-	int baseDamage = 8;
+	int baseDamage = 80;
 	
 	@Override
 	public void onPlay(Player player, Enemy enemy) {

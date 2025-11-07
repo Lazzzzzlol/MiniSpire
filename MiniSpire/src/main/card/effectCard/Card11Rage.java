@@ -18,6 +18,11 @@ public class Card11Rage extends EffectCard{
 	}
 	
 	@Override
+	public String getInfo(){
+		return info;
+	}
+	
+	@Override
 	public String getName() {
 		return name;
 	}

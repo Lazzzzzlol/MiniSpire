@@ -1,7 +1,9 @@
 package main.buff;
 
+import main.Main;
 import main.player.Player;
 import main.enemy.Enemy;
+import main.buff.positiveBuff.BuffSteelsoul;
 
 import java.util.List;
 
@@ -37,9 +39,24 @@ public class DamageProcessor {
                 isReflectiveDamage.set(true);
             }
             
+            // Check Misty (50% chance to avoid damage)
+            if (hasMisty(target) && Main.random.nextDouble() < 0.5) {
+                return;
+            }
+            
             int finalDamage = calculateDamageOnly(baseDamage, attacker, target, isReflective);
             boolean hasBloodLeeching = hasBloodLeeching(attacker);
             boolean hasReflective = hasReflective(target) && !isReflective;
+            boolean hasSteelsoul = hasSteelsoul(target);
+            
+            // Handle Steelsoul - absorb damage instead of dealing it
+            if (hasSteelsoul && finalDamage > 0) {
+                BuffSteelsoul steelsoul = getSteelsoul(target);
+                if (steelsoul != null) {
+                    steelsoul.addAbsorbedDamage(finalDamage);
+                    return; // Damage absorbed, don't deal it
+                }
+            }
             
             if (finalDamage > 0) {
                 if (target instanceof Enemy) {
@@ -82,10 +99,15 @@ public class DamageProcessor {
             for (Buff buff : attackerBuffs) {
                 switch (buff.getName()) {
                     case "Strengthened":
+                    case "Strength":
                         damageMultiplier += 0.25f;
                         break;
                     case "Weakened":
+                    case "Weaken":
                         damageMultiplier -= 0.25f;
+                        break;
+                    case "Indomitable":
+                        damageMultiplier *= 2.0f;
                         break;
                 }
             }
@@ -99,6 +121,9 @@ public class DamageProcessor {
                     break;
                 case "Tough":
                     damageMultiplier -= 0.25f;
+                    break;
+                case "Enshroud":
+                    damageMultiplier += 0.5f;
                     break;
             }
         }
@@ -127,6 +152,26 @@ public class DamageProcessor {
         
         List<Buff> buffs = getBuffList(target);
         return buffs.stream().anyMatch(buff -> "Reflective".equals(buff.getName()));
+    }
+    
+    private static boolean hasMisty(Object target) {
+        List<Buff> buffs = getBuffList(target);
+        return buffs.stream().anyMatch(buff -> "Misty".equals(buff.getName()));
+    }
+    
+    private static boolean hasSteelsoul(Object target) {
+        List<Buff> buffs = getBuffList(target);
+        return buffs.stream().anyMatch(buff -> "Steelsoul".equals(buff.getName()));
+    }
+    
+    private static BuffSteelsoul getSteelsoul(Object target) {
+        List<Buff> buffs = getBuffList(target);
+        for (Buff buff : buffs) {
+            if (buff instanceof BuffSteelsoul) {
+                return (BuffSteelsoul) buff;
+            }
+        }
+        return null;
     }
     
     private static List<Buff> getBuffList(Object obj) {

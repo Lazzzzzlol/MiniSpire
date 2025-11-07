@@ -32,7 +32,28 @@ public class Enemy {
 	    
 	    while (it.hasNext()) {
 	        Buff buff = it.next();
+	        
+	        // Handle Steelsoul - return absorbed damage when removed
+	        if (buff.getName().equals("Steelsoul") && buff.getDuration() == 1) {
+	        	main.buff.positiveBuff.BuffSteelsoul steelsoul = (main.buff.positiveBuff.BuffSteelsoul) buff;
+	        	int absorbedDamage = steelsoul.getAbsorbedDamage();
+	        	if (absorbedDamage > 0) {
+	        		System.out.println(" >> Steelsoul: Returning " + absorbedDamage + " absorbed damage!");
+	        		deductHp(absorbedDamage);
+	        		steelsoul.resetAbsorbedDamage();
+	        	}
+	        }
+	        
 	        buff.onEndTurn();
+	        
+	        // Handle Recovering - heal equal to remaining duration
+	        if (buff.getName().equals("Recovering")) {
+	        	int duration = buff.getDuration();
+	        	if (duration > 0) {
+	        		addHp(duration);
+	        	}
+	        }
+	        
 	        if (buff.getDuration() == 0) {
 	            it.remove();
 	        }
@@ -60,7 +81,42 @@ public class Enemy {
 	
 	public void deductHp(int damage) {
 		
+		// Check for Steadfast - if damage > 15, gain Invincible next turn
+		for (Buff buff : buffList) {
+			if (buff.getName().equals("Steadfast") && damage > 15) {
+				// Remove Steadfast and add Invincible for next turn
+				buffList.remove(buff);
+				addBuff(new main.buff.positiveBuff.BuffInvincible(1), 1);
+				System.out.println(" >> Steadfast: Damage exceeded 15! Gained Invincible for next turn!");
+				break;
+			}
+		}
+		
 		this.hp -= damage;
+		
+		// Check for Resurrection
+		if (this.hp <= 0) {
+			main.buff.oneFightBuff.BuffResurrection resBuff = null;
+			for (Buff buff : buffList) {
+				if (buff instanceof main.buff.oneFightBuff.BuffResurrection) {
+					main.buff.oneFightBuff.BuffResurrection res = (main.buff.oneFightBuff.BuffResurrection) buff;
+					if (!res.isUsed()) {
+						resBuff = res;
+						break;
+					}
+				}
+			}
+			
+			if (resBuff != null) {
+				// Resurrect
+				resBuff.setUsed(true);
+				buffList.remove(resBuff);
+				this.hp = this.initialHp;
+				System.out.println(" >> " + this.name + " resurrects with full HP!");
+				return;
+			}
+		}
+		
 		if (this.hp < 0)
 			this.hp = 0;
 		

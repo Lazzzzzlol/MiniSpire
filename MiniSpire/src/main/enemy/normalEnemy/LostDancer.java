@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import main.Main;
 import main.enemy.Enemy;
-import main.player.Player;
 
 public class LostDancer extends Enemy{
 
@@ -58,29 +57,33 @@ public class LostDancer extends Enemy{
     }
     
     public void reverseCascade(){
-        Player.getInstance().deductHp(3 + Main.random.nextInt(2));
-        markList.add("Rose");
+        main.buff.DamageProcessor.applyDamageToPlayer(3 + Main.random.nextInt(2), main.player.Player.getInstance());
+        if (!markList.contains("Rose"))
+            markList.add("Rose");
     }
 
     public void risingWindmill(){
-        Player.getInstance().deductHp(3 + Main.random.nextInt(3));
-        markList.add("Leaf");
+        main.buff.DamageProcessor.applyDamageToPlayer(3 + Main.random.nextInt(3), main.player.Player.getInstance());
+        if (!markList.contains("Leaf"))
+            markList.add("Leaf");
     }
 
     public void bladeShower(){
-        Player.getInstance().deductHp(3 + Main.random.nextInt(4));
-        markList.add("Crown");
+        main.buff.DamageProcessor.applyDamageToPlayer(3 + Main.random.nextInt(4), main.player.Player.getInstance());
+        if (!markList.contains("Crown"))
+            markList.add("Crown");
     }
 
     public void fountainFall(){
-        Player.getInstance().deductHp(3 + Main.random.nextInt(5));
-        markList.add("Bird");
+        main.buff.DamageProcessor.applyDamageToPlayer(3 + Main.random.nextInt(5), main.player.Player.getInstance());
+        if (!markList.contains("Bird"))
+            markList.add("Bird");
     }
 
     public void flourish(){
         int markCount = markList.size();
         for (int i = 0; i <= markCount; i++)
-            Player.getInstance().deductHp(3 + Main.random.nextInt(2));
+            main.buff.DamageProcessor.applyDamageToPlayer(3 + Main.random.nextInt(2), main.player.Player.getInstance());
         markList.clear();
     }
 

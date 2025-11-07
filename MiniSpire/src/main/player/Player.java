@@ -138,8 +138,20 @@ public class Player {
 		handCardList.clear();
 		
 		if (buffList != null) {
-			for (Buff buff : buffList)
+			for (Buff buff : buffList) {
 				buff.onEndTurn();
+				
+				// Handle Recovering - heal equal to remaining duration
+				if (buff.getName().equals("Recovering")) {
+					int duration = buff.getDuration();
+					if (duration > 0) {
+						addHp(duration);
+					}
+				}
+				
+				// Handle Enshroud - reduce duration when healing
+				// (This is handled in addHp, but we check here too)
+			}
 	        buffList.removeIf(buff -> buff.getDuration() <= 0);
 	    }
 	}
@@ -167,6 +179,32 @@ public class Player {
 	
 	public void addHp(int heal) {
 		
+		// Check for Lost - prevent healing
+		boolean hasLost = false;
+		for (Buff buff : buffList) {
+			if (buff.getName().equals("Lost")) {
+				hasLost = true;
+				break;
+			}
+		}
+		
+		if (hasLost) {
+			System.out.println(" >> Lost: Cannot heal!");
+			return;
+		}
+		
+		// Reduce Enshroud duration when healing (1 turn per heal point, but at least 1)
+		for (Buff buff : buffList) {
+			if (buff.getName().equals("Enshroud") && heal > 0) {
+				int reduction = Math.max(1, heal);
+				buff.extendDuration(-reduction);
+				if (buff.getDuration() <= 0) {
+					System.out.println(" >> Enshroud removed by healing!");
+				}
+				break;
+			}
+		}
+		
 		this.hp += heal;
 		if (this.hp > this.maxHp)
 			this.hp = this.maxHp;
@@ -177,6 +215,26 @@ public class Player {
 	}
 	
 	public void deductHp(int damage) {
+		
+		// Check for Blessed - prevent fatal damage once
+		boolean hasBlessed = false;
+		main.buff.oneFightBuff.BuffBlessed blessedBuff = null;
+		for (Buff buff : buffList) {
+			if (buff instanceof main.buff.oneFightBuff.BuffBlessed) {
+				hasBlessed = true;
+				blessedBuff = (main.buff.oneFightBuff.BuffBlessed) buff;
+				break;
+			}
+		}
+		
+		if (hasBlessed && this.hp - damage <= 0 && blessedBuff != null) {
+			// Prevent death, heal to half max HP, gain 1 turn Invincible
+			this.hp = this.maxHp / 2;
+			buffList.remove(blessedBuff);
+			addBuff(new main.buff.positiveBuff.BuffInvincible(1), 1);
+			System.out.println(" >> Blessed: Fatal damage prevented! Healed to " + this.hp + " HP and gained Invincible!");
+			return;
+		}
 		
 		this.hp -= damage;
 		if (this.hp < 0)

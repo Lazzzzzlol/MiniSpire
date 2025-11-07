@@ -6,12 +6,15 @@ import main.Main;
 import main.buff.debuff.BuffWeakened;
 import main.buff.positiveBuff.BuffBloodLeeching;
 import main.buff.positiveBuff.BuffStrengthened;
+import main.buff.oneFightBuff.BuffResurrection;
+import main.buff.DamageProcessor;
 
 public class Zombie extends Enemy {
 	
 	public Zombie() {
-		super("Zombie", 30 + Main.random.nextInt(11));
-		//super("Zombie", 1);
+		super("Zombie", 25 + Main.random.nextInt(11));
+		// Initial Resurrection
+		addBuff(new BuffResurrection(1), 1);
 	}
 	
 	public void onMove() {
@@ -44,30 +47,28 @@ public class Zombie extends Enemy {
 	}
 	
 	private void scratch() {
-		Player.getInstance().deductHp(5 + Main.random.nextInt(3));
+		DamageProcessor.applyDamageToPlayer(5 + Main.random.nextInt(3), Player.getInstance());
 	}
 
 	private void corruption() {
 		
 		switch(Main.random.nextInt(3)) {
 			case 0:
-				addBuff(new BuffBloodLeeching(1), 1);
-				System.out.println(buffList);
+				addBuff(new BuffBloodLeeching(1), 2);
 				break;
 				
 			case 1:
 				addBuff(new BuffStrengthened(1), 1);
-				System.out.println(buffList);
 				break;
 				
 			case 2:
-				Player.getInstance().addBuff(new BuffWeakened(1), 1);
+				Player.getInstance().addBuff(new BuffWeakened(1), 2);
 				break;
 		}
 		
 	}
 	
 	private void strongScratch() {
-		Player.getInstance().deductHp(7 + Main.random.nextInt(3));
+		DamageProcessor.applyDamageToPlayer(7 + Main.random.nextInt(3), Player.getInstance());
 	}
 }

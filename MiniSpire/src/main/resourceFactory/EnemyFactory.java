@@ -3,6 +3,7 @@ package main.resourceFactory;
 import java.util.HashMap;
 import java.util.Map;
 
+import main.Main;
 import main.enemy.Enemy;
 import main.enemy.normalEnemy.LostDancer;
 import main.enemy.normalEnemy.Zombie;
@@ -17,20 +18,28 @@ public class EnemyFactory implements ResourceFactory {
 		return instance;
 	}
 	
-	static Map<String, Enemy> pool = new HashMap<String, Enemy>();
-
-
+	
 	
 	@Override
 	public void init() {
-		
+
 	}
 	
 	public static Enemy getRandomEnemy(String enemyType) {
 		
 		switch (enemyType) {
 		case "normal":
-			return new LostDancer();
+
+			switch (Main.random.nextInt(2)) {
+				case 0:
+					return new Zombie();
+				
+				case 1:
+					return new LostDancer();
+			
+				default:
+					break;
+			}
 			
 		default:
 			return new Zombie();

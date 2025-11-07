@@ -82,6 +82,7 @@ public class NodeSanctuary extends Node {
 	@Override
 	public boolean isValidInput(String input) {
 		if (input == null) return false;
+		if (input.equals("e")) return true;
 		String[] parts = input.split(" ");
 		if (parts.length != 2) return false;
 		if (!parts[0].equals("c")) return false;

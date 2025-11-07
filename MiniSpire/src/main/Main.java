@@ -55,7 +55,7 @@ public class Main {
 		        userInput = scanner.nextLine();
 		        
 		        while (!game.isValidInput(userInput)) {
-		            System.out.println(" Invalid input. Format: <action> <target>. (e.g. 'p 1')");
+		            System.out.println(" Invalid input. | Play card - p 1 | Get info - i 1 | End turn - e |");
 		            System.out.print("Action >> ");
 		            userInput = scanner.nextLine();
 		        }
@@ -63,7 +63,7 @@ public class Main {
 		        game.onInput(userInput);
 		
 		        Util.printBlankLines(3);
-		        if (!userInput.equals("end turn"))
+		        if (!userInput.equals("e"))
 		        	game.onDraw();
 		        else
 		        	game.setIsEndTurn(true);

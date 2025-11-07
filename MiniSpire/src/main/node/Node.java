@@ -19,6 +19,7 @@ public class Node {
 
 	public boolean isValidInput(String input) {
         if (input == null) return false;
+		if (input.equals("e")) return true;
         String[] parts = input.split(" ");
         return (parts.length == 2);
     }

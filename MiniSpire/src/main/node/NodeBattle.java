@@ -120,7 +120,7 @@ public class NodeBattle extends Node {
 				break;
 		}
 		
-		if (input.equals("end turn")) {
+		if (input.equals("e")) {
 			Game.getInstance().setIsEndTurn(true);
 			onEndTurn();
 		}
@@ -130,6 +130,7 @@ public class NodeBattle extends Node {
 	public boolean isValidInput(String input) {
 		
 		if (input == null) return false;
+		if (input.equals("e")) return true;
 		String[] parts = input.split(" ");
 		if (parts.length != 2) return false;
 		
@@ -150,7 +151,7 @@ public class NodeBattle extends Node {
 		if (parts[0].equals("c"))
 			return true;
 		
-		if (input.equals("end turn"))
+		if (input.equals("e"))
 			return true;
 		
 		return false;
@@ -197,7 +198,7 @@ public class NodeBattle extends Node {
 		System.out.println( " >> 1-" + rewardCard1.getName() + "(" + rewardCard1.getCost() + "), " + 
 								"2-" + rewardCard2.getName() + "(" + rewardCard2.getCost() + "), " + 
 								"3-" + rewardCard3.getName() + "(" + rewardCard3.getCost() + "), " +
-								"4- Move on");
+								"4-Move on");
 		System.out.println(Main.longLine);
 
 		System.out.print("Action >> ");
@@ -207,40 +208,54 @@ public class NodeBattle extends Node {
 
 		String[] parts = input.split(" ");
 		
-		if (parts.length < 2 || !parts[0].equals("c")) {
-			System.out.println("Invalid command format. Use 'c [1-3]' to choose a card.");
+		if (parts.length < 2) {
+			System.out.println(" Invalid input. | Choose card or action - c 1 | Get info - i 1 |\nAction >> ");
 			return;
 		}
 		
 		try {
 			int choice = Integer.parseInt(parts[1]);
-			if (choice < 1 || choice > 4) {
-				System.out.println("Please enter a number between 1 and 4.");
-			} else {
-
-			Card chosenCard = rewardCard1;
-			switch (choice) {
-				case 1:
-					chosenCard = rewardCard1;
-					break;
-
-				case 2:
-					chosenCard = rewardCard2;
-					break;
-
-				case 3:
-					chosenCard = rewardCard3;
-					break;
-
-				case 4:
-					chosenCard = null;
-					break;
-
-				default:
-					chosenCard = rewardCard1;
-					break;
+			if (choice < 1 || choice > 4 || (parts[0].equals("i") && choice == 4)) {
+				System.out.println(" Invalid choice.\nAction >> ");
+				return;
+			}
+			
+			if (parts[0].equals("i")) {
+				Card cardToShow = null;
+				switch (choice) {
+					case 1:
+						cardToShow = rewardCard1;
+						break;
+					case 2:
+						cardToShow = rewardCard2;
+						break;
+					case 3:
+						cardToShow = rewardCard3;
+						break;
 				}
-				if (chosenCard != null){
+				if (cardToShow != null) {
+					System.out.println(" >> " + cardToShow.getInfo() + "\nAction >> ");
+				}
+				return;
+			}
+			
+			if (parts[0].equals("c")) {
+				Card chosenCard = null;
+				switch (choice) {
+					case 1:
+						chosenCard = rewardCard1;
+						break;
+					case 2:
+						chosenCard = rewardCard2;
+						break;
+					case 3:
+						chosenCard = rewardCard3;
+						break;
+					case 4:
+						chosenCard = null;
+						break;
+				}
+				if (chosenCard != null) {
 					Player.getInstance().addCardToDeck(chosenCard);
 					System.out.println(" >> Added " + chosenCard.getName() + " to your deck!");
 				}

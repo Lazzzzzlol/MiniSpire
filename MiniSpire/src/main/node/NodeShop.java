@@ -48,7 +48,7 @@ public class NodeShop extends Node {
 	}
 	@Override
 	public void onStartTurn() {
-		player.addGold(999);
+
 	}
 
 	@Override

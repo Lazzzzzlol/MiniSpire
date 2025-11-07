@@ -120,7 +120,7 @@ public class NodeBattle extends Node {
 				break;
 		}
 		
-		if (input.equals("end turn")) {
+		if (input.equals("e")) {
 			Game.getInstance().setIsEndTurn(true);
 			onEndTurn();
 		}
@@ -130,6 +130,7 @@ public class NodeBattle extends Node {
 	public boolean isValidInput(String input) {
 		
 		if (input == null) return false;
+		if (input.equals("e")) return true;
 		String[] parts = input.split(" ");
 		if (parts.length != 2) return false;
 		
@@ -150,7 +151,7 @@ public class NodeBattle extends Node {
 		if (parts[0].equals("c"))
 			return true;
 		
-		if (input.equals("end turn"))
+		if (input.equals("e"))
 			return true;
 		
 		return false;
@@ -197,7 +198,7 @@ public class NodeBattle extends Node {
 		System.out.println( " >> 1-" + rewardCard1.getName() + "(" + rewardCard1.getCost() + "), " + 
 								"2-" + rewardCard2.getName() + "(" + rewardCard2.getCost() + "), " + 
 								"3-" + rewardCard3.getName() + "(" + rewardCard3.getCost() + "), " +
-								"4- Move on");
+								"4-Move on");
 		System.out.println(Main.longLine);
 
 		System.out.print("Action >> ");

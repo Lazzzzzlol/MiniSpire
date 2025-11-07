@@ -82,6 +82,7 @@ public class Player {
 			
 			Collections.shuffle(discardCardList);
 			drawCardList.addAll(discardCardList);
+			discardCardList.clear();
 			
 			for (int i = 0; i < needToDrawNum; i++) {
 				handCardList.add(drawCardList.get(0));

@@ -1,5 +1,7 @@
 package main.card.passiveCard;
 
+import main.player.Player;
+
 public class Card22DeathBrand extends PassiveCard{
 	
 	Boolean canPlay = false;
@@ -10,7 +12,8 @@ public class Card22DeathBrand extends PassiveCard{
 	
 	@Override
 	public void onDiscard() {
-		
+		Player player = Player.getInstance();
+		player.deductHp(4);
 	}
 
 	@Override

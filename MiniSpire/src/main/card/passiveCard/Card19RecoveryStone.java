@@ -1,5 +1,8 @@
 package main.card.passiveCard;
 
+import main.buff.HealProcessor;
+import main.player.Player;
+
 public class Card19RecoveryStone extends PassiveCard{
 	
 	Boolean canPlay = false;
@@ -10,7 +13,11 @@ public class Card19RecoveryStone extends PassiveCard{
 	
 	@Override
 	public void onDiscard() {
-		
+
+		Player player = Player.getInstance();
+
+		int processedHeal = HealProcessor.processHealValue(player.getBuffList(), 6);
+		player.addHp(processedHeal);
 	}
 
 	@Override

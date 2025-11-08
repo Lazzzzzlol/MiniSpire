@@ -9,6 +9,7 @@ import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
 import main.Main;
+import main.TextDisplay;
 import main.buff.Buff;
 import main.card.Card;
 import main.card.attackCard.AttackCard;
@@ -225,7 +226,7 @@ public class Player {
 
 	public void lostGold(int cost) {
 		this.gold -= cost;
-		System.out.println(" >> Lost " + gold + " gold.");
+		System.out.println(" >> Lost " + cost + " gold.");
 		System.out.println((" >> Current gold: " + this.gold));
 	}
 	
@@ -331,8 +332,7 @@ public class Player {
             System.out.println(" [" + cost + " Cost Cards]");
             
             for (Card card : bucket) {
-				
-                System.out.println("   " + index++ + ") " + " [" + card.getRarity() + "] <" + card.getCost() + "> "+ card.getName() + "  -" + card.getInfo() );
+				TextDisplay.printLineWithDelay("   " + index++ + ") " + " [" + card.getRarity() + "] <" + card.getCost() + "> "+ card.getName() + "  -" + card.getInfo() , 50);
             }
             System.out.println();
         }
@@ -377,7 +377,7 @@ public class Player {
 				
 				for (Card card : bucket) {
 					indexToCardMap.put(index, card);
-					System.out.println("   " + index + ") " + " [" + card.getRarity() + "] <" + card.getCost() + "> "+ card.getName() + "  -" + card.getInfo());
+					TextDisplay.printLineWithDelay("   " + index++ + ") " + " [" + card.getRarity() + "] <" + card.getCost() + "> "+ card.getName() + "  -" + card.getInfo() , 50);
 					index++;
 				}
 				System.out.println();

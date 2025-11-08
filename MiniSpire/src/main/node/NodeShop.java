@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import main.Main;
+import main.TextDisplay;
 import main.Util;
 import main.card.Card;
 import main.game.Game;
@@ -57,8 +58,8 @@ public class NodeShop extends Node {
 		Util.printBlankLines(1);
 		if (!Welcoming){
 			Welcoming = true;
-			System.out.println(" [" + name + "] In this land of chaos, you suddenly see bright lights flickering in the distance...");
-			System.out.println(" [Merchant] Ah, traveler! Care for some supplies? All this could be yours... for the right price.");
+			TextDisplay.printCharWithDelay(" [" + name + "] In this land of chaos, you suddenly see bright lights flickering in the distance...", 10);
+			TextDisplay.printCharWithDelay(" [Merchant] Ah, traveler! Care for some supplies? All this could be yours... for the right price.", 30);
 		}
 		drawCommonView();
 	}
@@ -86,12 +87,15 @@ public class NodeShop extends Node {
 			}else if (parts[0].equals("b")){
 				switch (parts[1]) {
 					case "1":
+						System.out.println(" >> Chosen: Buy the leftmost card.");
 						buyCard(1);
 						break;
 					case "2":
+						System.out.println(" >> Chosen: Buy the middle card.");
 						buyCard(2);
 						break;
 					case "3":
+						System.out.println(" >> Chosen: Buy the rightmost card.");
 						buyCard(3);
 						break;
 				}
@@ -151,17 +155,23 @@ public class NodeShop extends Node {
 	}
 
 	private void displayAvailableCards() {
-		System.out.println(" Cards on sale:");
+		TextDisplay.printLineWithDelay(" Cards on sale:", 200);
 		for (int i = 0; i < availableCards.length; i++) {
 			if (availableCards[i] == null) {
-				System.out.println("   " + (i + 1) + ") [SOLD OUT]");
+				TextDisplay.printLineWithDelay("   " + (i + 1) + ") [" + "\u001B[33mSOLD OUT\u001B[0m" + "]", 200);
 			} else {
 				Card card = availableCards[i];
-				System.out.println("   " + (i + 1) + ") " + " [" + card.getRarity() + "] <" + card.getCost() + "> "+ card.getName() + "  -" + card.getInfo() );
+				System.out.println("   " + (i + 1) + ") [" + card.getRarity() + "] <" + card.getCost() + "> "+ card.getName() + "  -" + card.getInfo());
 				if (isTripleCards){
 					System.out.println("   Cost: 0");
 				}else{
 					System.out.println("   Cost: " + getCardCost(card));
+				}
+
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
 			}
 			System.out.println();
@@ -171,13 +181,13 @@ public class NodeShop extends Node {
 	private int getCardCost(Card card) {
 		String rarity = card.getRarity();
 		switch (rarity) {
-			case "normal":
+			case "\u001B[37mNORMAL\u001B[0m":
 				return 30;
-			case "rare":
+			case "\u001B[94mRARE\u001B[0m":
 				return 60;
-			case "epic":
+			case "\u001B[95mEPIC\u001B[0m":
 				return 90;
-			case "legendary":
+			case "\u001B[93mLEGENDARY\u001B[0m":
 				return 120;
 			default:
 				return 30;
@@ -279,7 +289,6 @@ public class NodeShop extends Node {
 		
 		generateRandomCards();
 		System.out.println(" >> Shop refreshed! Cost: " + currentRefreshCost + " gold.");
-		displayAvailableCards();
 		
 		currentRefreshCost += REFRESH_COST_INCREASE;
 		
@@ -292,13 +301,15 @@ public class NodeShop extends Node {
 
 	private void drawCommonView() {
 		displayAvailableCards();
-		System.out.println("   b 1) Buy card 1    : The cards lay quietly on the merchant's wooden table, bathed in a tempting luster...");
-		System.out.println("   b 2) Buy card 2    : The cards lay quietly on the merchant's wooden table, bathed in a tempting luster...");
-		System.out.println("   b 3) Buy card 3    : The cards lay quietly on the merchant's wooden table, bathed in a tempting luster...");
-		System.out.println("   r 1)   Refresh!    : Give the slot machine a spin! It can refresh the merchant's stock. If you're lucky, you might win it all for free!");
-		System.out.println("   r 2)    Remove!    : Feeling overloaded? Here's your one-time chance to destroy a card from your deck.");
-		System.out.println("   c 1)     Check!    : Check your deck. Think carefully before you decide.");
-		System.out.println("   l 1)      Leave    : Gook luck on you...");
+		
+		TextDisplay.printLineWithDelay("   b 1) Buy card 1    : The cards lay quietly on the merchant's wooden table, bathed in a tempting luster...", 150);
+		TextDisplay.printLineWithDelay("   b 2) Buy card 2    : The cards lay quietly on the merchant's wooden table, bathed in a tempting luster...", 150);
+		TextDisplay.printLineWithDelay("   b 3) Buy card 3    : The cards lay quietly on the merchant's wooden table, bathed in a tempting luster...", 150);
+		TextDisplay.printLineWithDelay("   r 1)   Refresh!    : Give the slot machine a spin! It can refresh the merchant's stock. If you're lucky, you might win it all for free!", 150);
+		TextDisplay.printLineWithDelay("   r 2)    Remove!    : Feeling overloaded? Here's your one-time chance to destroy a card from your deck.", 150);
+		TextDisplay.printLineWithDelay("   c 1)     Check!    : Check your deck. Think carefully before you decide.", 150);
+		TextDisplay.printLineWithDelay("   l 1)      Leave    : Good luck on you...", 150);
+
 		System.out.println(Main.longLine);
 		System.out.println("Your gold sack: " + player.getGold());
 		System.out.print("Action >> ");

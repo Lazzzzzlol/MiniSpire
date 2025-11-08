@@ -1,11 +1,13 @@
 package main.node;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import main.Main;
 import main.ScoreCalculator;
 import main.Util;
 import main.card.Card;
+import main.card.passiveCard.PassiveCard;
 import main.enemy.Enemy;
 import main.game.Game;
 import main.player.Player;
@@ -168,7 +170,12 @@ public class NodeBattle extends Node {
 	public void onEndTurn() {
 		
 		Player player = Player.getInstance();
+		List<Card> handCardList = player.getHandCardList();
 		
+		for (Card card : handCardList)
+			if (!card.getCanPlay())
+				((PassiveCard)card).onDiscard();
+				
 		enemy.onMove();
 		enemy.onEndTurn();
 		player.onEndTurn();

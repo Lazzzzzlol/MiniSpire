@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import main.Main;
 import main.buff.positiveBuff.BuffStrengthened;
+import main.buff.positiveBuff.BuffTough;
 import main.buff.debuff.BuffLost;
 import main.buff.oneFightBuff.BuffMisty;
 import main.buff.positiveBuff.BuffRecovering;
@@ -87,7 +88,7 @@ public class PhantomBard extends Enemy {
 	}
 
 	private void radiantFinale() {
-		addBuff(new BuffRecovering(3), 3);
+		addBuff(new BuffTough(2), 2);
 		if (cycleDamage > 22) {
 			grantRegenNextBattleVoice = true;
 		}

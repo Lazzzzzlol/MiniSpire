@@ -14,8 +14,8 @@ public class Card13Equilibrium extends EffectCard {
 	
 	@Override
 	public void onUse(Player player, Enemy enemy) {
-		int processedHeal = HealProcessor.processHealValue(Player.getInstance().getBuffList(), 10);
-		player.addHp(processedHeal);
+		int finalHeal = HealProcessor.calculateHeal(Player.getInstance().getBuffList(), 10);
+		player.addHp(finalHeal);
 		player.addBuff(new BuffRecovering(5), 5);
 	}
 	

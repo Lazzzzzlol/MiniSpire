@@ -14,9 +14,9 @@ public class Card12Rampart extends EffectCard{
 	
 	@Override
 	public void onUse(Player player, Enemy enemy) {
-		int processedHeal = HealProcessor.processHealValue(Player.getInstance().getBuffList(), 5);
+		int finalHeal = HealProcessor.calculateHeal(Player.getInstance().getBuffList(), 5);
 		player.addBuff(new BuffTough(2), 2);
-		player.addHp(processedHeal);
+		player.addHp(finalHeal);
 	}
 	
 	@Override

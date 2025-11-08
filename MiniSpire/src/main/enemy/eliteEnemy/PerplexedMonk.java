@@ -58,6 +58,7 @@ public class PerplexedMonk extends Enemy {
 	}
 
 	private void leapingOpo() {
+		System.out.println(" >> Leaping Opo!");
 		int dmg = 9 + Main.random.nextInt(3); // 9-11
 		if (haveOpoStance) dmg += 5;
 		DamageProcessor.applyDamageToPlayer(dmg, Player.getInstance());
@@ -65,6 +66,7 @@ public class PerplexedMonk extends Enemy {
 	}
 
 	private void risingRaptor() {
+		System.out.println(" >> Rising Raptor!");
 		int dmg = 12 + Main.random.nextInt(3); // 12-14
 		DamageProcessor.applyDamageToPlayer(dmg, Player.getInstance());
 		chakras.add("Raptor");
@@ -73,6 +75,7 @@ public class PerplexedMonk extends Enemy {
 	}
 
 	private void pouncingCoeurl() {
+		System.out.println(" >> Poucing Coeurl!");
 		int dmg = 11 + Main.random.nextInt(3); // 11-13
 		DamageProcessor.applyDamageToPlayer(dmg, Player.getInstance());
 		chakras.add("Coeurl");

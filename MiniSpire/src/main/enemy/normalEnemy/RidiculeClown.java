@@ -13,6 +13,7 @@ import main.buff.DamageProcessor;
 public class RidiculeClown extends Enemy {
 
 	private Integer lastSurpriseDamage = null;
+	private int dmg = 0;
 
 	public RidiculeClown() {
 		super("Ridicule Clown", 45 + Main.random.nextInt(11));
@@ -20,6 +21,7 @@ public class RidiculeClown extends Enemy {
 
 	@Override
 	public void onMove() {
+		dmg = 1 + Main.random.nextInt(10); // 1-10
 		switch (movementCounter) {
 			case 0:
 				System.out.println(" >> " + this.getName() + " uses Surprise Box!");
@@ -57,12 +59,12 @@ public class RidiculeClown extends Enemy {
 	}
 
 	private void surpriseBox() {
-		int dmg = 1 + Main.random.nextInt(10); // 1-10
+		
 		if (lastSurpriseDamage != null && lastSurpriseDamage == dmg) {
 			dmg *= 2;
 		}
 		DamageProcessor.applyDamageToPlayer(dmg, Player.getInstance());
-		lastSurpriseDamage = dmg / ((lastSurpriseDamage != null && lastSurpriseDamage == dmg/2) ? 2 : 1);
+		lastSurpriseDamage = dmg ;
 	}
 
 	private void smashHit() {

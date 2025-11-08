@@ -28,11 +28,12 @@ public class EnemyFactory implements ResourceFactory {
 	}
 	
 	public static Enemy getRandomEnemy(String enemyType) {
-		
-		switch (enemyType) {
+		return new PerplexedMonk();
+		/*switch (enemyType) {
 		case "normal":
 
-			switch (Main.random.nextInt(4)) {
+			return new RidiculeClown();
+			/*switch (Main.random.nextInt(4)) {
 				case 0:
 					return new Zombie();
 				
@@ -80,6 +81,6 @@ public class EnemyFactory implements ResourceFactory {
 			
 		default:
 			return new Zombie();
-		}
+		}*/
 	}
 }

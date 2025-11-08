@@ -8,7 +8,7 @@ import main.player.Player;
 
 public class Card27InnerRelease extends AttackCard{
 	
-	String name = "Strike";
+	String name = "Inner Release";
 	String info = "Apply 2 round Strengthen, 2 round Tough to self, then deal 10 damage. If the card is never used in this round, cost change to 0. ";
 	String rarity = "normal";
 	int cost = 0;

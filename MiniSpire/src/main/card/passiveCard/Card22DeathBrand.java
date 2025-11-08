@@ -1,5 +1,6 @@
 package main.card.passiveCard;
 
+import main.buff.DamageProcessor;
 import main.player.Player;
 
 public class Card22DeathBrand extends PassiveCard{
@@ -12,8 +13,9 @@ public class Card22DeathBrand extends PassiveCard{
 	
 	@Override
 	public void onDiscard() {
+		int baseDamage = 4;
 		Player player = Player.getInstance();
-		player.deductHp(4);
+		DamageProcessor.applyDamageToPlayer(baseDamage, player);
 	}
 
 	@Override

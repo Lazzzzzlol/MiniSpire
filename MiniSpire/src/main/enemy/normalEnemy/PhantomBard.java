@@ -88,7 +88,7 @@ public class PhantomBard extends Enemy {
 
 	private void radiantFinale() {
 		addBuff(new BuffRecovering(3), 3);
-		if (cycleDamage > 25) {
+		if (cycleDamage > 22) {
 			grantRegenNextBattleVoice = true;
 		}
 	}

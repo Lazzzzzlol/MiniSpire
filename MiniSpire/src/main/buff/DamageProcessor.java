@@ -117,7 +117,7 @@ public class DamageProcessor {
         switch (Main.random.nextInt(2)) {
             case 0:
                 Main.executor.schedule(() -> {
-                    System.out.println( " >> The damage is ignored because of Misty!");
+                    System.out.println( " >> The damage is ignored (Due to Misty).xiu");
                 }, 1, TimeUnit.MILLISECONDS);
                 return 0.0f;
         

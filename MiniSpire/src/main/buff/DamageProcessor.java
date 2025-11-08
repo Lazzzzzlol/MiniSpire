@@ -56,10 +56,11 @@ public class DamageProcessor {
             }
 
             if (hasBloodLeeching && finalDamage > 0 && attacker != null) {
+                int processedHeal = HealProcessor.processHealValue(Player.getInstance().getBuffList(), finalDamage);
                 if (attacker instanceof Player) {
-                    ((Player) attacker).addHp(finalDamage);
+                    ((Player) attacker).addHp(processedHeal);
                 } else if (attacker instanceof Enemy) {
-                    ((Enemy) attacker).addHp(finalDamage);
+                    ((Enemy) attacker).addHp(processedHeal);
                 }
             }
             

@@ -167,6 +167,11 @@ public class Player {
 	}
 	
 	public void addHp(int heal) {
+
+		if (heal == 0){
+			System.out.println(" >> Healed 0 HP (Due to lost).");
+			return;
+		}
 		
 		this.hp += heal;
 		if (this.hp > this.maxHp)

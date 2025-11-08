@@ -1,5 +1,6 @@
 package main.card.effectCard;
 
+import main.buff.HealProcessor;
 import main.buff.positiveBuff.BuffTough;
 import main.enemy.Enemy;
 import main.player.Player;
@@ -13,8 +14,9 @@ public class Card12Rampart extends EffectCard{
 	
 	@Override
 	public void onUse(Player player, Enemy enemy) {
+		int processedHeal = HealProcessor.processHealValue(Player.getInstance().getBuffList(), 5);
 		player.addBuff(new BuffTough(2), 2);
-		player.addHp(5);
+		player.addHp(processedHeal);
 	}
 	
 	@Override

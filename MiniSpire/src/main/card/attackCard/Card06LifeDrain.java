@@ -1,6 +1,7 @@
 package main.card.attackCard;
 
 import main.buff.DamageProcessor;
+import main.buff.HealProcessor;
 import main.enemy.Enemy;
 import main.player.Player;
 
@@ -10,7 +11,7 @@ public class Card06LifeDrain extends AttackCard{
 	String info = "Deal 6 damage; This attack has BloodLeeching. ";
 	String rarity = "rare";
 	int cost = 2;
-	int baseDamage = 12;
+	int baseDamage = 6;
 	
 	@Override
 	public void onPlay(Player player, Enemy enemy) {
@@ -19,7 +20,8 @@ public class Card06LifeDrain extends AttackCard{
 		int finalDamage = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
 		
 		if (finalDamage > 0 && !hasBloodLeechingEffect(player)) {
-        	player.addHp(finalDamage);
+			int processedHeal = HealProcessor.processHealValue(Player.getInstance().getBuffList(), finalDamage);
+        	player.addHp(processedHeal);
     	}
 	}
 

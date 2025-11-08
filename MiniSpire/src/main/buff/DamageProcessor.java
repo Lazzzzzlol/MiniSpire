@@ -3,6 +3,7 @@ package main.buff;
 import main.player.Player;
 import main.Main;
 import main.enemy.Enemy;
+import main.enemy.eliteEnemy.Watcher;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -46,6 +47,10 @@ public class DamageProcessor {
             if (finalDamage > 0) {
                 if (target instanceof Enemy) {
                     ((Enemy) target).deductHp(finalDamage);
+
+                    if (((Enemy) target).getBuffList().stream().anyMatch(buff -> "Steadfast".equals(buff.getName())));
+                        ((Watcher) target).addGettedDamageCounter(finalDamage);
+
                 } else if (target instanceof Player) {
                     ((Player) target).deductHp(finalDamage);
                 }
@@ -75,6 +80,7 @@ public class DamageProcessor {
     private static int calculateDamageOnly(int baseDamage, Object attacker, Object target, boolean isReflective) {
         
         if (hasInvincible(target)) {
+            System.out.println(" >> Dealed 0 damage (Due to Invincible).");
             return 0;
         }
 

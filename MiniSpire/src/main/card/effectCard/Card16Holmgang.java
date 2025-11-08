@@ -5,24 +5,16 @@ import main.enemy.Enemy;
 import main.player.Player;
 
 public class Card16Holmgang extends EffectCard{
-	
-	String name = "Holmgang";
-	String info = "Apply 1 round Invincible to self. ";
-	String rarity = "epic";
-	int cost = 2;
-	
-	@Override
-	public void onUse(Player player, Enemy enemy) {
-		player.addBuff(new BuffInvincible(1), 1);
-	}
+    
+    public Card16Holmgang() {
+        this.name = "Holmgang";
+        this.info = "Apply 1 round Invincible to self.";
+        this.rarity = "epic";
+        this.cost = 2;
+    }
 
-	@Override
-	public String getInfo(){
-		return info;
-	}
-	
-	@Override
-	public String getName() {
-		return name;
-	}
+    @Override
+    public void onUse(Player player, Enemy enemy) {
+        player.addBuff(new BuffInvincible(1), 1);
+    }
 }

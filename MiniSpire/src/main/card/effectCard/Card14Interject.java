@@ -5,24 +5,16 @@ import main.enemy.Enemy;
 import main.player.Player;
 
 public class Card14Interject extends EffectCard{
-	
-	String name = "Interject";
-	String info = "Makes enemy fail to apply any buff to any target in next round. ";
-	String rarity = "rare";
-	int cost = 1;
-	
-	@Override
-	public void onUse(Player player, Enemy enemy) {
-		enemy.addBuff(new BuffMuted(1), 1);
-	}
+    
+    public Card14Interject() {
+        this.name = "Interject";
+        this.info = "Makes enemy fail to apply any buff to any target in next round.";
+        this.rarity = "rare";
+        this.cost = 1;
+    }
 
-	@Override
-	public String getInfo(){
-		return info;
-	}
-	
-	@Override
-	public String getName() {
-		return name;
-	}
+    @Override
+    public void onUse(Player player, Enemy enemy) {
+        enemy.addBuff(new BuffMuted(1), 1);
+    }
 }

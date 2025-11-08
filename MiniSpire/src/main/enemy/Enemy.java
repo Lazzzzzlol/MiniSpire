@@ -15,7 +15,7 @@ public class Enemy {
 	protected int movementCounter = 0;
 	protected ArrayList<Buff> buffList;
 	private boolean hasSpecialContainer;
-	private boolean isDied;
+	protected boolean isDied;
 	
 	public Enemy(String name, int hp) {
 		this.hp = hp;

@@ -1,35 +1,18 @@
 package main.card.passiveCard;
 
-import main.buff.HealProcessor;
-import main.buff.positiveBuff.BuffRecovering;
-import main.player.Player;
+import main.*; //use to trigger warning, delete it after fill onUse()
 
 public class Card20OldRadiantLifegem extends PassiveCard{
-	
-	Boolean canPlay = false;
-	String name = "Old Radiant Lifegem";
-	String info = "When discarded, heal 12 hp and apply 3 round Recovering to self;";
-	String rarity = "rare";
-	int cost = 0;
-	
-	@Override
-	public void onDiscard() {
+    
+    public Card20OldRadiantLifegem() {
+        this.name = "Old Radiant Lifegem";
+        this.info = "When discarded, heal 12 hp and apply 3 round Recovery to seld.";
+        this.rarity = "rare";
+        this.cost = 0;
+    }
 
-		Player player = Player.getInstance();
-
-		int finalHeal = HealProcessor.calculateHeal(player.getBuffList(), 12);
-		player.addHp(finalHeal);
-
-		player.addBuff(new BuffRecovering(3), 3);
-	}
-
-	@Override
-	public String getInfo(){
-		return info;
-	}
-	
-	@Override
-	public String getName() {
-		return name;
-	}
+    @Override
+    public void onDiscard() {
+        //need to fill
+    }
 }

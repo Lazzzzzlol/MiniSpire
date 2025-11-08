@@ -5,24 +5,16 @@ import main.enemy.Enemy;
 import main.player.Player;
 
 public class Card08Bloodbath extends EffectCard{
-	
-	String name = "Bloodbath";
-	String info = "Apply 1 round BloodLeeching to self. ";
-	String rarity = "normal";
-	int cost = 0;
-	
-	@Override
-	public void onUse(Player player, Enemy enemy) {
-		player.addBuff(new BuffBloodLeeching(1), 1);
-	}
+    
+    public Card08Bloodbath() {
+        this.name = "Bloodbath";
+        this.info = "Apply 1 round BloodLeeching to self.";
+        this.rarity = "normal";
+        this.cost = 0;
+    }
 
-	@Override
-	public String getInfo(){
-		return info;
-	}
-	
-	@Override
-	public String getName() {
-		return name;
-	}
+    @Override
+    public void onUse(Player player, Enemy enemy) {
+        player.addBuff(new BuffBloodLeeching(1), 1);
+    }
 }

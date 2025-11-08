@@ -5,25 +5,16 @@ import main.enemy.Enemy;
 import main.player.Player;
 
 public class Card11Rage extends EffectCard{
-	
-	String name = "Rage";
-	String info = "Apply 2 round Strengthened to self; Draw 1 card. ";
-	String rarity = "rare";
-	int cost = 1;
-	
-	@Override
-	public void onUse(Player player, Enemy enemy) {
-		player.addBuff(new BuffStrengthened(2), 2);
+    
+    public Card11Rage() {
+        this.name = "Rage";
+        this.info = "Apply 2 round Strengthened to self; Draw 1 card.";
+        this.rarity = "rare";
+        this.cost = 1;
+    }
 
-	}
-	
-	@Override
-	public String getInfo(){
-		return info;
-	}
-	
-	@Override
-	public String getName() {
-		return name;
-	}
+    @Override
+    public void onUse(Player player, Enemy enemy) {
+        player.addBuff(new BuffStrengthened(2), 2);
+    }
 }

@@ -2,26 +2,19 @@ package main.card.effectCard;
 
 import main.enemy.Enemy;
 import main.player.Player;
+import main.*; //use to trigger warning, delete it after fill onUse()
 
 public class Card28Tremble extends EffectCard{
-	
-	String name = "Tremble";
-	String info = "Draw 1 card. ";
-	String rarity = "normal";
-	int cost = 0;
-	
-	@Override
-	public void onUse(Player player, Enemy enemy) {
-		
-	}
+    
+    public Card28Tremble() {
+        this.name = "Tremble";
+        this.info = "Draw 1 card.";
+        this.rarity = "normal";
+        this.cost = 0;
+    }
 
-	@Override
-	public String getInfo(){
-		return info;
-	}
-	
-	@Override
-	public String getName() {
-		return name;
-	}
+    @Override
+    public void onUse(Player player, Enemy enemy) {
+        //need to fill
+    }
 }

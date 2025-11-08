@@ -6,33 +6,20 @@ import main.buff.oneRoundBuff.BuffStratagem;
 import main.enemy.Enemy;
 import main.player.Player;
 
-public class Card26Stratagem extends AttackCard{
-	
-	String name = "Stratagem";
-	String info = "During this round, when damage is dealt, gain 1 cost, draw 1 card. Apply 1 round of Vulnerable; Deal 8 damage. ";
-	String rarity = "epic";
-	int cost = 3;
-	int baseDamage = 8;
-	
-	@Override
-	public void onPlay(Player player, Enemy enemy) {
-		player.addBuff(new BuffStratagem(1), 1);
+public class Card26Stratagem extends AttackCard {
+    
+    public Card26Stratagem() {
+        this.name = "Stratagem";
+        this.info = "During this round, when damage is dealt, gain 1 cost, draw 1 card. Apply 1 round of Vulnerable; Deal 8 damage.";
+        this.cost = 3;
+        this.rarity = "epic";
+        this.baseDamage = 8;
+    }
+
+    @Override
+    public void onPlay(Player player, Enemy enemy) {
+        player.addBuff(new BuffStratagem(1), 1);
 		enemy.addBuff(new BuffVulnerable(1), 1);
 		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
-	}
-	
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public String getInfo(){
-		return info;
-	}
-
-	@Override
-	public int getBaseDamage(){
-		return baseDamage;
-	}
+    }
 }

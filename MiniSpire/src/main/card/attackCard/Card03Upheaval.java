@@ -4,27 +4,27 @@ import main.buff.DamageProcessor;
 import main.enemy.Enemy;
 import main.player.Player;
 
-public class Card03Upheaval extends AttackCard{
+public class Card03Upheaval extends AttackCard {
     
-	String name = "Upheaval";
-	String info = "Deal increasing damage from 6 each time played. ";
-	String rarity = "rare";
-	int cost = 1;
-	int baseDamage = 6;
+    public Card03Upheaval() {
+        this.name = "Upheaval";
+        this.info = "Deal increasing damage from 6 each time played.";
+        this.cost = 1;
+        this.rarity = "rare";
+        this.baseDamage = 6;
+    }
+    
+    private int timesUsed = 0;
 
-	private int timesUsed = 0;
-
-	@Override
-	public void onPlay(Player player, Enemy enemy) {
-
-		int baseDamage = calculateDamage(6);
+    @Override
+    public void onPlay(Player player, Enemy enemy) {
+        int baseDamage = calculateDamage(6);
 
 		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
 
 		timesUsed++;
-	}
-
-	private int calculateDamage(int base) {
+    }
+    private int calculateDamage(int base) {
 
 		if (timesUsed == 0) return base;
 
@@ -35,20 +35,5 @@ public class Card03Upheaval extends AttackCard{
 
 	public void resetBattle() {
 		timesUsed = 0;
-	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public String getInfo(){
-		return info;
-	}
-
-	@Override
-	public int getBaseDamage(){
-		return baseDamage;
 	}
 }

@@ -4,33 +4,21 @@ import main.buff.DamageProcessor;
 import main.enemy.Enemy;
 import main.player.Player;
 
-public class Card02Earthquake extends AttackCard{
-	
-	String name = "Earthquake";
-	String info = "Deal 3 damage for 3 times. ";
-	String rarity = "normal";
-	int cost = 1;
-	int baseDamage = 3;
-	
-	@Override
-	public void onPlay(Player player, Enemy enemy) {		
+public class Card02Earthquake extends AttackCard {
+    
+    public Card02Earthquake() {
+        this.name = "Earthquake";
+        this.info = "Deal 3 damage for 3 times.";
+        this.cost = 1;
+        this.rarity = "normal";
+        this.baseDamage = 3;
+    }
+    
+    @Override
+    public void onPlay(Player player, Enemy enemy) {
+        DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
 		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
 		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
-		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
-	}
-	
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public String getInfo(){
-		return info;
-	}
-
-	@Override
-	public int getBaseDamage(){
-		return baseDamage;
-	}
+    }
+    
 }

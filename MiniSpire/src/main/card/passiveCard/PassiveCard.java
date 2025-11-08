@@ -1,45 +1,20 @@
 package main.card.passiveCard;
 
 import main.card.Card;
+import main.enemy.Enemy;
+import main.player.Player;
 
-public class PassiveCard implements Card{
-
-	private Boolean canPlay = false;
-	private String name = "Generic Passive Card";
-	private String info = "Info";
-	private int cost = 0;
-	private String type = "Passive";
-	private String rarity = "normal";
-	
-	public void onDiscard() {};
-	
-	@Override
-	public Boolean getCanPlay() {
-		return canPlay;
-	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public String getInfo(){
-		return info;
-	}
-
-	@Override
-	public int getCost() {
-		return cost;
-	}
-
-	@Override
-	public String getType() {
-		return type;
-	}
-
-	@Override
-	public String getRarity(){
-		return rarity;
-	}
+public abstract class PassiveCard extends Card {
+    
+    public PassiveCard() {
+        this.type = "Passive";
+        this.canPlay = false;
+        this.cost = 0;
+    }
+    
+    public void onPlay(Player player, Enemy enemy) {
+        System.out.println("Passive cards cannot be played directly.");
+    }
+    
+    public abstract void onDiscard();
 }

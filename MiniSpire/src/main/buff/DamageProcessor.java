@@ -48,9 +48,10 @@ public class DamageProcessor {
                 if (target instanceof Enemy) {
                     ((Enemy) target).deductHp(finalDamage);
 
-                    if (((Enemy) target).getBuffList().stream().anyMatch(buff -> "Steadfast".equals(buff.getName()) &&
-                        ((Enemy) target).getIsDied() == false));
-                        ((Watcher) target).addGettedDamageCounter(finalDamage);
+                    Main.executor.schedule(() -> {
+                        if (((Enemy) target).getBuffList().stream().anyMatch(buff -> "Steadfast".equals(buff.getName())));
+                            ((Watcher) target).addGettedDamageCounter(finalDamage);
+                    }, 1, TimeUnit.SECONDS);
 
                 } else if (target instanceof Player) {
                     ((Player) target).deductHp(finalDamage);

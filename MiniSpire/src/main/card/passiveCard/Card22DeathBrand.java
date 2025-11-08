@@ -1,30 +1,18 @@
 package main.card.passiveCard;
 
-import main.buff.DamageProcessor;
-import main.player.Player;
+import main.*; //use to trigger warning, delete it after fill onUse()
 
 public class Card22DeathBrand extends PassiveCard{
-	
-	Boolean canPlay = false;
-	String name = "Death Brand";
-	String info = "When discarded, take 4 damage. ";
-	String rarity = "special";
-	int cost = 0;
-	
-	@Override
-	public void onDiscard() {
-		int baseDamage = 4;
-		Player player = Player.getInstance();
-		DamageProcessor.applyDamageToPlayer(baseDamage, player);
-	}
+    
+    public Card22DeathBrand() {
+        this.name = "Death Brand";
+        this.info = "When discarded, take 4 damage.";
+        this.rarity = "special";
+        this.cost = 0;
+    }
 
-	@Override
-	public String getInfo(){
-		return info;
-	}
-	
-	@Override
-	public String getName() {
-		return name;
-	}
+    @Override
+    public void onDiscard() {
+        //need to fill
+    }
 }

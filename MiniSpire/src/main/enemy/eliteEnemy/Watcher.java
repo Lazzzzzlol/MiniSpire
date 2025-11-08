@@ -85,7 +85,8 @@ public class Watcher extends Enemy{
 
 		if (gettedDamagerCounter >= 15){
 			gettedDamagerCounter = 0;
-			addBuff(new BuffInvincible(1), 1);
+			if (!isDied)
+				addBuff(new BuffInvincible(1), 1);
 		}
 	}
 }

@@ -45,8 +45,8 @@ public class Player {
 	
 	public Player() {
 		
-		this.hp = 70;
-		this.maxHp = 70;
+		this.hp = 7000;
+		this.maxHp = 7000;
 		this.actionPoints = 3;
 		this.maxActionPoints = 3;
 		this.gold = 0;

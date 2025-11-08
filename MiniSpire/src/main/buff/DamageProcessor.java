@@ -1,9 +1,11 @@
 package main.buff;
 
 import main.player.Player;
+import main.Main;
 import main.enemy.Enemy;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class DamageProcessor {
     
@@ -74,7 +76,7 @@ public class DamageProcessor {
         if (hasInvincible(target)) {
             return 0;
         }
-        
+
         float damageMultiplier = 1.0f;
 
         if (attacker != null) {
@@ -100,11 +102,30 @@ public class DamageProcessor {
                 case "Tough":
                     damageMultiplier -= 0.25f;
                     break;
+                case "Misty":
+                    damageMultiplier = mistyDamageDecider();
             }
         }
         
         damageMultiplier = Math.max(damageMultiplier, 0);
         return Math.round(baseDamage * damageMultiplier);
+    }
+
+    private static float mistyDamageDecider() {
+
+        switch (Main.random.nextInt(2)) {
+            case 0:
+                Main.executor.schedule(() -> {
+                    System.out.println( " >> The damage is ignored because of Misty!");
+                }, 1, TimeUnit.MILLISECONDS);
+                return 0.0f;
+        
+            case 1:
+                return 1.0f;
+
+            default:
+                return 1.0f;
+        }
     }
     
     private static boolean hasBloodLeeching(Object attacker) {

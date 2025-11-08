@@ -2,6 +2,9 @@ package main.enemy.normalEnemy;
 
 import main.enemy.Enemy;
 import main.player.Player;
+
+import java.util.concurrent.TimeUnit;
+
 import main.Main;
 import main.buff.positiveBuff.BuffStrengthened;
 import main.buff.debuff.BuffLost;
@@ -16,7 +19,9 @@ public class PhantomBard extends Enemy {
 
 	public PhantomBard() {
 		super("Phantom Bard", 25 + Main.random.nextInt(11));
-		addBuff(new BuffMisty(1), 1);
+		Main.executor.schedule(() -> {
+			addBuff(new BuffMisty(1), 1);
+		}, 1, TimeUnit.SECONDS);
 	}
 
 	@Override
@@ -82,7 +87,7 @@ public class PhantomBard extends Enemy {
 	}
 
 	private void radiantFinale() {
-		// no direct damage; set up next Battle Voice buff if threshold met
+		addBuff(new BuffRecovering(3), 3);
 		if (cycleDamage > 25) {
 			grantRegenNextBattleVoice = true;
 		}

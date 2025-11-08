@@ -15,6 +15,7 @@ public class Enemy {
 	protected int movementCounter = 0;
 	protected ArrayList<Buff> buffList;
 	private boolean hasSpecialContainer;
+	private boolean isDied;
 	
 	public Enemy(String name, int hp) {
 		this.hp = hp;
@@ -22,6 +23,7 @@ public class Enemy {
 		this.name = name;
 		this.buffList = new ArrayList<Buff>();
 		this.hasSpecialContainer = false;
+		this.isDied = false;
 	}
 	
 	public void onMove() {};
@@ -66,6 +68,8 @@ public class Enemy {
 		
 		Main.executor.schedule(() -> {
 			System.out.println(" >> " + this.name + " takes " + damage + " damage.");
+			if (this.hp == 0)
+				onDie();
 		}, 1, TimeUnit.SECONDS);
 	}
 	
@@ -78,6 +82,10 @@ public class Enemy {
 		Main.executor.schedule(() -> {
 			System.out.println(" >> " + this.name + " heals " + heal + " HP.");
 		}, 1, TimeUnit.SECONDS);
+	}
+
+	public void onDie(){
+		this.isDied = true;
 	}
 	
 	public int getInitialHp() {
@@ -111,5 +119,9 @@ public class Enemy {
 		result += buffList.get(buffList.size() - 1).getName() + "(" + buffList.get(buffList.size() - 1).getDuration() + ")";
 		
 		return "[Buff: " + result + "]";
+	}
+
+	public Boolean getIsDied(){
+		return isDied;
 	}
 }

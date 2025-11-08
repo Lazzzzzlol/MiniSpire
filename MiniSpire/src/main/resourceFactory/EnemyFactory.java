@@ -28,59 +28,58 @@ public class EnemyFactory implements ResourceFactory {
 	}
 	
 	public static Enemy getRandomEnemy(String enemyType) {
-		return new PerplexedMonk();
-		/*switch (enemyType) {
-		case "normal":
+		//return new RidiculeClown();
+		switch (enemyType) {
+			case "normal":
 
-			return new RidiculeClown();
-			/*switch (Main.random.nextInt(4)) {
-				case 0:
-					return new Zombie();
+				switch (Main.random.nextInt(4)) {
+					case 0:
+						return new Zombie();
+					
+					case 1:
+						return new LostDancer();
+
+					case 2:
+						return new PhantomBard();
+
+					case 3:
+						return new RidiculeClown();
 				
-				case 1:
-					return new LostDancer();
+					default:
+						return new LostDancer();
+				}
 
-				case 2:
-					return new PhantomBard();
+			case "elite":
 
-				case 3:
-					return new RidiculeClown();
-			
-				default:
-					return new LostDancer();
-			}
+				switch (Main.random.nextInt(3)) {
+					case 0:
+						return new Watcher();
+				
+					case 1:
+						return new MakoFighter();
 
-		case "elite":
+					case 2:
+						return new PerplexedMonk();
 
-			switch (Main.random.nextInt(3)) {
-				case 0:
-					return new Watcher();
-			
-				case 1:
-					return new MakoFighter();
+					default:
+						return new Watcher();
+				}
 
-				case 2:
-					return new PerplexedMonk();
+			case "boss":
 
-				default:
-					return new Watcher();
-			}
+				switch (Main.random.nextInt(2)) {
+					case 0:
+						return new Thanalous();
+				
+					case 1:
+						return new IndomitableWill();
 
-		case "boss":
-
-			switch (Main.random.nextInt(2)) {
-				case 0:
-					return new Thanalous();
-			
-				case 1:
-					return new IndomitableWill();
-
-				default:
-					return new Thanalous();
-			}
-			
-		default:
-			return new Zombie();
-		}*/
+					default:
+						return new Thanalous();
+				}
+				
+			default:
+				return new Zombie();
+		}
 	}
 }

@@ -106,7 +106,7 @@ public class NodeBattle extends Node {
 			case "p":
 				playcard(Integer.parseInt(parts[1]));
 
-				if (enemy.getHp() <= 0)
+				if (enemy.getIsDied())
 					Main.executor.schedule(() -> {
 						onWin();
 					}, 2, TimeUnit.SECONDS);

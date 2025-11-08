@@ -68,7 +68,7 @@ public class Enemy {
 		
 		Main.executor.schedule(() -> {
 			System.out.println(" >> " + this.name + " takes " + damage + " damage.");
-			if (this.hp == 0)
+			if (this.hp <= 0)
 				onDie();
 		}, 1, TimeUnit.SECONDS);
 	}
@@ -85,6 +85,7 @@ public class Enemy {
 	}
 
 	public void onDie(){
+		System.out.println("died");
 		this.isDied = true;
 	}
 	

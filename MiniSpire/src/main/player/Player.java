@@ -106,9 +106,12 @@ public class Player {
 			System.out.println(" >> Unplayable card type.");
 			return;
 		}
-		
-		if (cardToPlay.getCost() <= actionPoints) {
-			actionPoints -= cardToPlay.getCost();
+
+		int cardCost = cardToPlay.getCost();
+
+		if (cardCost <= actionPoints) {
+
+			changeCurrentActionPoint(-cardCost);
 			
 			switch (cardToPlay.getType()) {
 			
@@ -128,9 +131,14 @@ public class Player {
 			}
 			handCardList.remove(cardIndex - 1);
 			discardCardList.add(cardToPlay);
+			
 		} else {
 			System.out.println(" >> Not enough action points to play this card.");
 		}
+	}
+
+	public void changeCurrentActionPoint(int delta) {
+		actionPoints += delta;
 	}
 	
 	public void onEndTurn() {

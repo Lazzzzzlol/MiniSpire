@@ -1,8 +1,12 @@
 package main.card.effectCard;
 
+import java.util.ArrayList;
+
 import main.enemy.Enemy;
 import main.player.Player;
-import main.*; //use to trigger warning, delete it after fill onUse()
+import main.buff.DamageProcessor;
+import main.card.Card;
+import main.card.attackCard.AttackCard;
 
 public class Card17PrimalRend extends EffectCard{
     
@@ -15,6 +19,17 @@ public class Card17PrimalRend extends EffectCard{
 
     @Override
     public void onUse(Player player, Enemy enemy) {
-        //need to fill
+
+        int baseDamage = 0;
+
+        ArrayList<Card> handCards = player.getHandCardList();
+        for (Card card : handCards) {
+            if (card.getType().equals("attack")) {
+                AttackCard attackCard = (AttackCard) card;
+                baseDamage += attackCard.getBaseDamage();
+            }
+        }
+
+        DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
     }
 }

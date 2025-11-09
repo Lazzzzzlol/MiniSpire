@@ -372,6 +372,7 @@ public class Player {
 
 		System.out.println(Main.longLine);
 	}
+
 	public Map<Integer, Card> showDeckWithIndex() {
 		int cardNum = drawCardList.size();
 		Map<Integer, Card> indexToCardMap = new HashMap<>();

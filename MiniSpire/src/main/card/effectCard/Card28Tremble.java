@@ -2,7 +2,6 @@ package main.card.effectCard;
 
 import main.enemy.Enemy;
 import main.player.Player;
-import main.*; //use to trigger warning, delete it after fill onUse()
 
 public class Card28Tremble extends EffectCard{
     

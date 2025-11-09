@@ -3,6 +3,7 @@ package main.card.effectCard;
 import main.buff.debuff.BuffMuted;
 import main.enemy.Enemy;
 import main.player.Player;
+import main.*; //use to trigger warning, delete it after fill onUse()
 
 public class Card14Interject extends EffectCard{
     

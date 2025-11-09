@@ -62,7 +62,9 @@ public class Main {
 	        	
 		        game.onInput(userInput);
 		
-		        Util.printBlankLines(3);
+		        Main.executor.schedule(() -> {
+					Util.printBlankLines(3);
+				} , 10, TimeUnit.MILLISECONDS);
 		        if (!userInput.equals("e"))
 		        	game.onDraw();
 		        else

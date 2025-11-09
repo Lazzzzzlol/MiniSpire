@@ -67,7 +67,7 @@ public class Enemy {
 			this.hp = 0;
 		
 		Main.executor.schedule(() -> {
-			System.out.println(" >> " + this.name + " takes " + damage + " damage.");
+			// System.out.println(" >> " + this.name + " takes " + damage + " damage.");
 			if (this.hp <= 0)
 				onDie();
 		}, 1, TimeUnit.SECONDS);

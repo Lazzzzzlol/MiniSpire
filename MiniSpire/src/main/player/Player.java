@@ -11,9 +11,8 @@ import java.util.concurrent.TimeUnit;
 import main.Main;
 import main.TextDisplay;
 import main.buff.Buff;
+import main.buff.PlayCardProcessor;
 import main.card.Card;
-import main.card.attackCard.AttackCard;
-import main.card.effectCard.EffectCard;
 import main.enemy.Enemy;
 import main.game.Game;
 import main.resourceFactory.CardFactory;
@@ -74,10 +73,20 @@ public class Player {
 	}
 	
 	public void drawHandCards(int num) {
+		internalDrawHandCards(num);
+	}
+
+	public List<Card> drawHandCardsWithDetails(int num) {
+		return internalDrawHandCards(num);
+	}
+
+	private List<Card> internalDrawHandCards(int num) {
+		List<Card> drawnCards = new ArrayList<>();
 		
 		if (drawCardList.size() < num) {
-			
 			int needToDrawNum = num - drawCardList.size();
+			
+			drawnCards.addAll(drawCardList);
 			handCardList.addAll(drawCardList);
 			drawCardList.clear();
 			
@@ -85,17 +94,33 @@ public class Player {
 			drawCardList.addAll(discardCardList);
 			discardCardList.clear();
 			
-			for (int i = 0; i < needToDrawNum; i++) {
-				handCardList.add(drawCardList.get(0));
-				drawCardList.remove(0);
+			for (int i = 0; i < needToDrawNum && !drawCardList.isEmpty(); i++) {
+				Card card = drawCardList.remove(0);
+				drawnCards.add(card);
+				handCardList.add(card);
 			}
 		} else {
 			for (int i = 0; i < num; i++) {
-				handCardList.add(drawCardList.get(0));
-				drawCardList.remove(0);
+				Card card = drawCardList.remove(0);
+				drawnCards.add(card);
+				handCardList.add(card);
 			}
 		}
+
+		if (!drawnCards.isEmpty()) {
+			StringBuilder log = new StringBuilder(" >> Drawed ");
+			for (int i = 0; i < drawnCards.size(); i++) {
+				if (i > 0) {
+					log.append(", ");
+				}
+				log.append(drawnCards.get(i).getName());
+			}
+			Main.executor.schedule(() -> {
+				System.out.println(log.toString());
+			}, 2, TimeUnit.SECONDS);
+		}
 		
+		return drawnCards;
 	}
 	
 	public void playCard(int cardIndex, Enemy enemy) {
@@ -113,22 +138,8 @@ public class Player {
 
 			changeCurrentActionPoint(-cardCost);
 			
-			switch (cardToPlay.getType()) {
-			
-				case "Attack":
-					((AttackCard)cardToPlay).onPlay(this, enemy);
-					System.out.println(" >> Played card: " + cardToPlay.getName());
-					break;
-			
-				case "Effect":
-					((EffectCard)cardToPlay).onUse(this, enemy);
-					System.out.println(" >> Played card: " + cardToPlay.getName());
-					break;
-					
-				default:
-					System.out.println(" >> Unknown or unplayable card type.");
-					break;
-			}
+			PlayCardProcessor.processCardPlay(this, cardToPlay, enemy);
+
 			handCardList.remove(cardIndex - 1);
 			discardCardList.add(cardToPlay);
 			
@@ -139,6 +150,15 @@ public class Player {
 
 	public void changeCurrentActionPoint(int delta) {
 		actionPoints += delta;
+		Main.executor.schedule(() -> {
+			if (delta > 0) {
+				System.out.println(" >> Action point +" + delta);
+			} else if (delta < 0) {
+				System.out.println(" >> Action point " + delta);
+			} else if (delta == 0) {
+				System.out.println(" >> Action point -0");
+			}
+		}, 5, TimeUnit.MILLISECONDS);
 	}
 	
 	public void onEndTurn() {
@@ -168,16 +188,16 @@ public class Player {
 		if (this.hp > this.maxHp)
 			this.hp = this.maxHp;
 		if (delta >= 0) {
-			System.out.println(" >> Max HP increased by " + delta + ".");
+			System.out.println(" >> Max HP increased by " + delta);
 		} else {
-			System.out.println(" >> Max HP decreased by " + (-delta) + ".");
+			System.out.println(" >> Max HP decreased by " + (-delta));
 		}
 	}
 	
 	public void addHp(int heal) {
 
 		if (heal == 0){
-			System.out.println(" >> Healed 0 HP (Due to lost).");
+			System.out.println(" >> Healed 0 HP (Lost)");
 			return;
 		}
 		
@@ -196,9 +216,9 @@ public class Player {
 		if (this.hp < 0)
 			Game.getInstance().setIsGameOver(true);
 		
-		Main.executor.schedule(() -> {
+		/* Main.executor.schedule(() -> {
 			System.out.println(" >> Took " + damage + " damage.");
-		}, 1, TimeUnit.SECONDS);
+		}, 1, TimeUnit.SECONDS); */
 	}
 	
 	public int getActionPoints() {

@@ -1,6 +1,9 @@
 package main.card.attackCard;
 
+import java.util.List;
+
 import main.buff.DamageProcessor;
+import main.card.Card;
 import main.enemy.Enemy;
 import main.player.Player;
 
@@ -17,5 +20,14 @@ public class Card25TheSinisterBlade extends AttackCard {
     @Override
     public void onPlay(Player player, Enemy enemy) {
         DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
+
+        List<Card> drawnCards = player.drawHandCardsWithDetails(1);
+        int attackCardCount = drawnCards.stream()
+                .filter(card -> "Attack".equals(card.getType()))
+                .mapToInt(card -> 1)
+                .sum();
+        if (attackCardCount > 0) {
+            player.changeCurrentActionPoint(2);
+        }
     }
 }

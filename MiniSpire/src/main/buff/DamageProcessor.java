@@ -43,18 +43,37 @@ public class DamageProcessor {
             int finalDamage = calculateDamageOnly(baseDamage, attacker, target, isReflective);
             boolean hasBloodLeeching = hasBloodLeeching(attacker);
             boolean hasReflective = hasReflective(target) && !isReflective;
+            boolean hasStratagem = hasStratagem(attacker);
             
             if (finalDamage > 0) {
+
+                String damageDisplay = getDamageDisplay(baseDamage, finalDamage);
+
                 if (target instanceof Enemy) {
                     ((Enemy) target).deductHp(finalDamage);
 
                     Main.executor.schedule(() -> {
+                        System.out.println(" >> " + ((Enemy) target).getName() + " takes " + damageDisplay + " damage");
+
                         if (((Enemy) target).getBuffList().stream().anyMatch(buff -> "Steadfast".equals(buff.getName())));
                             ((Watcher) target).addGettedDamageCounter(finalDamage);
                     }, 1, TimeUnit.SECONDS);
 
                 } else if (target instanceof Player) {
                     ((Player) target).deductHp(finalDamage);
+                    Main.executor.schedule(() -> {
+                        System.out.println(" >> " + "Took " + damageDisplay + " damage");
+                    }, 1, TimeUnit.SECONDS);
+                }
+            } else {
+                if (target instanceof Enemy) {
+                    Main.executor.schedule(() -> {
+                        System.out.println(" >> " + ((Enemy) target).getName() + " takes 0 damage");
+                    }, 1, TimeUnit.SECONDS);
+                } else if (target instanceof Player) {
+                    Main.executor.schedule(() -> {
+                        System.out.println(" >> Took 0 damage");
+                    }, 1, TimeUnit.SECONDS);
                 }
             }
             
@@ -70,6 +89,13 @@ public class DamageProcessor {
                     ((Enemy) attacker).addHp(finalHeal);
                 }
             }
+
+            if (hasStratagem && finalDamage > 0 && attacker != null) {
+                if (attacker instanceof Player) {
+                    ((Player) attacker).changeCurrentActionPoint(1);
+                    ((Player) attacker).drawHandCards(1);
+                }
+            }
             
         } finally {
 
@@ -81,10 +107,7 @@ public class DamageProcessor {
     
     private static int calculateDamageOnly(int baseDamage, Object attacker, Object target, boolean isReflective) {
         
-        if (hasInvincible(target)) {
-            System.out.println(" >> Dealed 0 damage (Due to Invincible).");
-            return 0;
-        }
+        if (hasInvincible(target)) return 0;
 
         float damageMultiplier = 1.0f;
 
@@ -139,9 +162,7 @@ public class DamageProcessor {
     
     private static boolean hasBloodLeeching(Object attacker) {
         
-        if (attacker == null) {
-            return false;
-        }
+        if (attacker == null) return false;
         
         List<Buff> attackerBuffs = getBuffList(attacker);
         return attackerBuffs.stream().anyMatch(buff -> "BloodLeeching".equals(buff.getName()));
@@ -158,6 +179,12 @@ public class DamageProcessor {
         List<Buff> buffs = getBuffList(target);
         return buffs.stream().anyMatch(buff -> "Reflective".equals(buff.getName()));
     }
+
+    private static boolean hasStratagem(Object target) {
+        
+        List<Buff> buffs = getBuffList(target);
+        return buffs.stream().anyMatch(buff -> "Stratagem".equals(buff.getName()));
+    }
     
     private static List<Buff> getBuffList(Object obj) {
         
@@ -167,5 +194,15 @@ public class DamageProcessor {
             return ((Enemy) obj).getBuffList();
         }
         return java.util.Collections.emptyList();
+    }
+
+    private static String getDamageDisplay(int baseDamage, int finalDamage) {
+        if (finalDamage == baseDamage) {
+            return String.valueOf(finalDamage);
+        } else if (finalDamage > baseDamage) {
+            return finalDamage + "(+" + (finalDamage - baseDamage) + ")";
+        } else {
+            return finalDamage + "(-" + (baseDamage - finalDamage) + ")";
+        }
     }
 }

@@ -120,7 +120,7 @@ public class NodeShop extends Node {
 		if (input == null) return false;
 		if (input.equals("e")) return true;
 		String[] parts = input.split(" ");
-		if (parts.length == 0) return false;
+		if (parts.length != 2) return false;
 		
 		String command = parts[0].toLowerCase();
 		return command.equals("b") || command.equals("r") || command.equals("c") || command.equals("l");

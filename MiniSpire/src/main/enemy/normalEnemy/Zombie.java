@@ -2,8 +2,12 @@ package main.enemy.normalEnemy;
 
 import main.enemy.Enemy;
 import main.player.Player;
+
+import java.util.concurrent.TimeUnit;
+
 import main.Main;
 import main.buff.debuff.BuffWeakened;
+import main.buff.oneFightBuff.BuffResurrection;
 import main.buff.positiveBuff.BuffBloodLeeching;
 import main.buff.positiveBuff.BuffStrengthened;
 
@@ -11,7 +15,9 @@ public class Zombie extends Enemy {
 	
 	public Zombie() {
 		super("Zombie", 30 + Main.random.nextInt(11));
-		//super("Zombie", 1);
+		Main.executor.schedule(() -> {
+			addBuff(new BuffResurrection(1), 1);
+		}, 1, TimeUnit.SECONDS);
 	}
 	
 	public void onMove() {

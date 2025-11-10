@@ -2,6 +2,9 @@ package main.enemy.bossEnemy;
 
 import main.enemy.Enemy;
 import main.player.Player;
+
+import java.util.concurrent.TimeUnit;
+
 import main.Main;
 import main.buff.oneFightBuff.BuffResurrection;
 import main.buff.oneFightBuff.BuffIndomitable;
@@ -9,6 +12,7 @@ import main.buff.positiveBuff.BuffStrengthened;
 import main.buff.positiveBuff.BuffTough;
 import main.buff.positiveBuff.BuffSteelsoul;
 import main.buff.debuff.BuffWeakened;
+import main.buff.Buff;
 import main.buff.debuff.BuffMuted;
 
 public class IndomitableWill extends Enemy {
@@ -19,14 +23,21 @@ public class IndomitableWill extends Enemy {
 
 	public IndomitableWill() {
 		super("Indomitable Will", 250);
-		addBuff(new BuffResurrection(1), 1);
+		Main.executor.schedule(() -> {
+			addBuff(new BuffResurrection(1), 1);
+		}, 1, TimeUnit.SECONDS);
 	}
 
 	@Override
 	public void onMove() {
 		// transition when Resurrection is gone
 		boolean hasRes = false;
-		for (main.buff.Buff b : this.getBuffList()) if (b.getName().equals("Resurrection")) { hasRes = true; break; }
+		for (Buff b : this.getBuffList()) 
+			if (b.getName().equals("Resurrection")) { 
+				hasRes = true; 
+				break; 
+			}
+
 		if (phase == 1 && !hasRes) {
 			phase = 2;
 			addBuff(new BuffIndomitable(999), 999);

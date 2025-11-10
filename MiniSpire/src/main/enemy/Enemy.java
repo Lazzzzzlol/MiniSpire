@@ -49,7 +49,6 @@ public class Enemy {
 				return;
 			}
 				
-		
 		buffList.add(buff);
 		Main.executor.schedule(() -> {
 			System.out.println(" >> " + this.name + " gains buff " + buff.getName());
@@ -85,8 +84,21 @@ public class Enemy {
 	}
 
 	public void onDie(){
+
 		System.out.println("died");
-		this.isDied = true;
+		boolean hasResurrection = buffList.stream()
+                .anyMatch(buff -> "Resurrection".equals(buff.getName()));
+
+		if (!hasResurrection) {
+			this.isDied = true;
+			return;
+		}
+
+		buffList.removeIf(buff -> "Resurrection".equals(buff.getName()));
+		Main.executor.schedule(() -> {
+			System.out.println(" >> " + this.name + " resurrected! ");
+		}, 1, TimeUnit.MILLISECONDS);
+		hp = initialHp;
 	}
 	
 	public int getInitialHp() {

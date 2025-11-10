@@ -201,6 +201,14 @@ public class NodeBattle extends Node {
 
 		isWin = true;
 
+		Main.executor.schedule(() -> {
+			onWinDraw();
+		}, 500, TimeUnit.MILLISECONDS);
+
+	}
+
+	private void onWinDraw(){
+
 		int gainedGold;
 		gainedGold = 70 + Main.random.nextInt(16);
 		if (enemyType.equals("elite"))
@@ -209,6 +217,7 @@ public class NodeBattle extends Node {
 		// 计算并添加得分
 		ScoreCalculator scoreCalculator = ScoreCalculator.getInstance();
 		int gainedScore = scoreCalculator.calculateBattleScore(enemy, enemyType);
+
 
 		Util.printBlankLines(3);
 		System.out.println(Main.longLine);

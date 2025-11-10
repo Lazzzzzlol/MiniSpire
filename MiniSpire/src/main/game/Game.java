@@ -126,7 +126,7 @@ public class Game {
 		
 		Main.executor.schedule(() -> {
 			node.onDraw();
-		}, 2, TimeUnit.SECONDS);
+		}, 2500, TimeUnit.MILLISECONDS);
 	}
 	
 	public void setIsGameOver(Boolean isGameOver) {

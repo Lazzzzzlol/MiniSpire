@@ -136,6 +136,9 @@ public class DamageProcessor {
                     break;
                 case "Misty":
                     damageMultiplier = mistyDamageDecider();
+                    break;
+                case "Enshroud":
+                    damageMultiplier += 0.5f;
             }
         }
         

@@ -45,9 +45,24 @@ public class DamageProcessor {
             boolean hasReflective = hasReflective(target) && !isReflective;
             boolean hasStratagem = hasStratagem(attacker);
             
+            // 处理 Steelsoul 等可以吸收伤害的 buff
+            if (finalDamage > 0) {
+                List<Buff> targetBuffs = getBuffList(target);
+                for (Buff buff : targetBuffs) {
+                    int processedDamage = buff.onReceiveDamage(finalDamage);
+                    if (processedDamage == 0) {
+                        // 伤害被完全吸收（如 Steelsoul）
+                        finalDamage = 0;
+                        break;
+                    }
+                    finalDamage = processedDamage; // 更新伤害（如果有其他 buff 修改伤害）
+                }
+            }
+            
             if (finalDamage > 0) {
 
                 String damageDisplay = getDamageDisplay(baseDamage, finalDamage);
+                final int damageForWatcher = finalDamage; // 用于 lambda 表达式的 final 变量
 
                 if (target instanceof Enemy) {
                     ((Enemy) target).deductHp(finalDamage);
@@ -56,7 +71,7 @@ public class DamageProcessor {
                         System.out.println(" >> " + ((Enemy) target).getName() + " takes " + damageDisplay + " damage");
 
                         if (((Enemy) target).getBuffList().stream().anyMatch(buff -> "Steadfast".equals(buff.getName())));
-                            ((Watcher) target).addGettedDamageCounter(finalDamage);
+                            ((Watcher) target).addGettedDamageCounter(damageForWatcher);
                     }, 1, TimeUnit.SECONDS);
 
                 } else if (target instanceof Player) {

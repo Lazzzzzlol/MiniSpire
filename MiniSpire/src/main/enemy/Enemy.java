@@ -51,6 +51,17 @@ public class Enemy {
 	    
 	    while (it.hasNext()) {
 	        Buff buff = it.next();
+	        
+	        // 检查 Steelsoul，在移除前返还伤害
+	        if ("Steelsoul".equals(buff.getName()) && buff.getDuration() == 1) {
+	            // 即将失去 Steelsoul，需要返还伤害给玩家
+	            main.buff.positiveBuff.BuffSteelsoul steelsoul = (main.buff.positiveBuff.BuffSteelsoul) buff;
+	            int damageToReturn = steelsoul.returnAbsorbedDamage();
+	            if (damageToReturn > 0) {
+	                main.buff.DamageProcessor.applyDamageToPlayer(damageToReturn, main.player.Player.getInstance());
+	            }
+	        }
+	        
 	        buff.onEndTurn();
 	        if (buff.getDuration() == 0) {
 	            it.remove();

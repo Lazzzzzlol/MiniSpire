@@ -12,7 +12,6 @@ public class PerplexedMonk extends Enemy {
 
 	private HashSet<String> chakras = new HashSet<>(); // Opo, Raptor, Coeurl
 	private boolean haveOpoStance = false; // 魔猿身形
-	private int stepInCycle = 0; // 0..2 attacks, 3 ready, 4 blitz
 
 	public PerplexedMonk() {
 		super("Perplexed Monk", 130 + Main.random.nextInt(21));
@@ -20,27 +19,27 @@ public class PerplexedMonk extends Enemy {
 
 	@Override
 	public void onMove() {
-		switch (stepInCycle) {
+		switch (movementCounter) {
 			case 0:
 			case 1:
 			case 2:
 				System.out.println(" >> " + this.getName() + " uses Form Shift!");
 				formShiftAttack();
-				stepInCycle++;
+				movementCounter++;
 				break;
 			case 3:
 				System.out.println(" >> " + this.getName() + " prepares Masterful Blitz!");
-				stepInCycle++;
+				movementCounter++;
 				break;
 			case 4:
 				System.out.println(" >> " + this.getName() + " uses Masterful Blitz!");
 				masterfulBlitz();
-				stepInCycle = 0;
+				movementCounter = 0;
 				chakras.clear();
 				haveOpoStance = false;
 				break;
 			default:
-				stepInCycle = 0;
+				movementCounter = 0;
 		}
 	}
 

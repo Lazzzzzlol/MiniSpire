@@ -6,6 +6,8 @@ import java.util.concurrent.TimeUnit;
 
 import main.Main;
 import main.buff.Buff;
+import main.buff.HealProcessor;
+import main.player.Player;
 
 public class Enemy {
 	
@@ -26,9 +28,25 @@ public class Enemy {
 		this.isDied = false;
 	}
 	
-	public void onMove() {};
+	public void onMove() {
+		
+	};
 
 	public void onEndTurn() {
+
+		boolean hasRecovering = buffList.stream()
+				.anyMatch(buff -> "Recovering".equals(buff.getName()));
+
+		if (hasRecovering) {
+			Buff recoveringBuff = null;
+			for (Buff buff : buffList) {
+				if (buff.getName().equals("Recovering")) {
+					recoveringBuff = buff;
+					break;
+				}
+        	}
+			addHp(HealProcessor.calculateHeal(buffList, recoveringBuff.getDuration()));
+		}
 		
 	    Iterator<Buff> it = buffList.iterator();
 	    

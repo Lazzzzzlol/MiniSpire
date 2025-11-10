@@ -47,7 +47,23 @@ public class NodeBattle extends Node {
 	
 	@Override
 	public void onStartTurn() {
-		Player.getInstance().onStartTurn();
+
+		Player player = Player.getInstance();
+		player.onStartTurn();
+
+		/*boolean playerHasRecovering = player.getBuffList().stream()
+                .anyMatch(buff -> "Recovering".equals(buff.getName()));
+
+		if (playerHasRecovering) {
+			Buff recoveringBuff = null;
+			for (Buff buff : player.getBuffList()) {
+				if (buff.getName().equals("Recovering")) {
+					recoveringBuff = buff;
+					break;
+				}
+        	}
+			player.addHp(HealProcessor.calculateHeal(player.getBuffList(), recoveringBuff.getDuration()));
+		}*/
 	}
 	
 	@Override

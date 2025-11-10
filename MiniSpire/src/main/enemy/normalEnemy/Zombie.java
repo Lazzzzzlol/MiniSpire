@@ -57,17 +57,15 @@ public class Zombie extends Enemy {
 		
 		switch(Main.random.nextInt(3)) {
 			case 0:
-				addBuff(new BuffBloodLeeching(1), 1);
-				System.out.println(buffList);
+				addBuff(new BuffBloodLeeching(2), 2);
 				break;
 				
 			case 1:
-				addBuff(new BuffStrengthened(1), 1);
-				System.out.println(buffList);
+				addBuff(new BuffStrengthened(2), 2);
 				break;
 				
 			case 2:
-				Player.getInstance().addBuff(new BuffWeakened(1), 1);
+				Player.getInstance().addBuff(new BuffWeakened(2), 2);
 				break;
 		}
 		

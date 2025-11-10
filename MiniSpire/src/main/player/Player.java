@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 import main.Main;
 import main.TextDisplay;
 import main.buff.Buff;
+import main.buff.HealProcessor;
 import main.buff.PlayCardProcessor;
 import main.card.Card;
 import main.enemy.Enemy;
@@ -162,6 +163,20 @@ public class Player {
 	}
 	
 	public void onEndTurn() {
+
+		boolean playerHasRecovering = buffList.stream()
+                .anyMatch(buff -> "Recovering".equals(buff.getName()));
+
+		if (playerHasRecovering) {
+			Buff recoveringBuff = null;
+			for (Buff buff : buffList) {
+				if (buff.getName().equals("Recovering")) {
+					recoveringBuff = buff;
+					break;
+				}
+        	}
+			addHp(HealProcessor.calculateHeal(buffList, recoveringBuff.getDuration()));
+		}
 		
 		discardCardList.addAll(handCardList);
 		handCardList.clear();

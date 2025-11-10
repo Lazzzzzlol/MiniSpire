@@ -2,6 +2,10 @@ package main.enemy.bossEnemy;
 
 import main.enemy.Enemy;
 import main.player.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import main.Main;
 import main.buff.debuff.BuffEnshroud;
 import main.buff.positiveBuff.BuffRecovering;
@@ -17,9 +21,17 @@ public class Thanalous extends Enemy {
 	private boolean initiated = false;
 	private int declarationCount = 0;
 	private boolean forceNextBloodLeeching = false;
+	private List<String> declarations = new ArrayList<>(); 
 
 	public Thanalous() {
 		super("Thanalous", 450);
+
+		declarations.add("The lotus shall bloom again, no deny accepted...");
+		declarations.add("Connecting the cycle of life, death, and rebirth...");
+		declarations.add("Beauty, spirituality, and eternity...");
+		declarations.add("Beholding the lush beauty of a hundred flowers...");
+		declarations.add("Emerging from the mud yet unsoiled...");
+		declarations.add("Washed by clear ripples yet unadorned...");
 	}
 
 	@Override
@@ -50,7 +62,7 @@ public class Thanalous extends Enemy {
 		switch (movementCounter) {
 			case 0:
 				if (!initiated) {
-					System.out.println(" >> Initiate: Go home, this is not your place.");
+					System.out.println(" >> Thanalous: Go home, this is not your place.");
 					initiated = true;
 					movementCounter++;
 					break;
@@ -145,7 +157,7 @@ public class Thanalous extends Enemy {
 	}
 
 	private void declaration() {
-		System.out.println(" >> Declaration: ...");
+		System.out.println(" >> Thanalous: " + declarations.get(Main.random.nextInt(declarations.size())));
 		declarationCount++;
 	}
 }

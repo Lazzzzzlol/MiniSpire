@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import main.Main;
+import main.buff.Buff;
 import main.buff.oneFightBuff.BuffResurrection;
 import main.buff.oneFightBuff.BuffIndomitable;
 import main.buff.positiveBuff.BuffStrengthened;
@@ -259,8 +260,8 @@ public class IndomitableWill extends Enemy {
 		int damage = 23;
 
 		// Temporarily remove Tough and Reflective from player
-		java.util.ArrayList<main.buff.Buff> tempBuffs = new java.util.ArrayList<>();
-		java.util.ArrayList<main.buff.Buff> playerBuffs = Player.getInstance().getBuffList();
+		ArrayList<Buff> tempBuffs = new ArrayList<>();
+		ArrayList<Buff> playerBuffs = Player.getInstance().getBuffList();
 
 		for (main.buff.Buff buff : playerBuffs) {
 			if (buff.getName().equals("Tough") || buff.getName().equals("Reflective")) {

@@ -36,18 +36,7 @@ public class Thanalous extends Enemy {
 
 	@Override
 	public void onMove() {
-		// phase transition check
-		if (phase == 1 && this.getHp() < 150 && !forceNextBloodLeeching) {
-			System.out.println(" >> " + this.getName() + " enrages and prepares to leech!");
-			forceNextBloodLeeching = true;
-		}
-
-		if (forceNextBloodLeeching) {
-			System.out.println(" >> " + this.getName() + " gains overwhelming leech!");
-			addBuff(new BuffBloodLeeching(10), 10);
-			forceNextBloodLeeching = false;
-			phase = 2;
-			movementCounter = 0;
+		if (handlePhaseTransition()) {
 			return;
 		}
 
@@ -61,55 +50,28 @@ public class Thanalous extends Enemy {
 	private void executePhaseOne() {
 		switch (movementCounter) {
 			case 0:
-				if (!initiated) {
-					System.out.println(" >> Thanalous: Go home, this is not your place.");
-					initiated = true;
-					movementCounter++;
-					break;
-				}
-				// fallthrough if already initiated
-				movementCounter++;
+				openingSequence();
 				break;
 			case 1:
-				System.out.println(" >> Spread!");
-				Player.getInstance().addBuff(new BuffEnshroud(5), 5);
-				addBuff(new BuffRecovering(5), 5);
-				movementCounter++;
+				spread();
 				break;
 			case 2:
-				System.out.println(" >> Growth!");
-				Player.getInstance().addBuff(new main.buff.positiveBuff.BuffStrengthened(1), 1);
-				addBuff(new BuffStrengthened(3), 3);
-				movementCounter++;
+				growth();
 				break;
 			case 3:
-				System.out.println(" >> Gibbet!");
-				int dmgG = 13 + Main.random.nextInt(5); // 13-17
-				DamageProcessor.applyDamageToPlayer(dmgG, Player.getInstance());
-				// extend Shrouded by 1 if player has it
-				Player.getInstance().addBuff(new BuffEnshroud(1), 1);
-				movementCounter++;
+				gibbet();
 				break;
 			case 4:
-				System.out.println(" >> Gallows!");
-				addBuff(new BuffBloodLeeching(2), 2);
-				movementCounter++;
+				gallows();
 				break;
 			case 5:
-				System.out.println(" >> Guillotine!");
-				int dmgQ = 35;
-				DamageProcessor.applyDamageToPlayer(dmgQ, Player.getInstance());
-				// if actually >35, apply Weakened 2 (we treat as fixed 35 here)
-				movementCounter++;
+				guillotine();
 				break;
 			case 6:
-				System.out.println(" >> Filled!");
-				Player.getInstance().addBuff(new BuffLost(2), 2);
-				movementCounter++;
+				filled();
 				break;
 			case 7:
-				declaration();
-				movementCounter = 1; // loop back to spread
+				loopingDeclarationPhaseOne();
 				break;
 			default:
 				movementCounter = 1;
@@ -123,37 +85,124 @@ public class Thanalous extends Enemy {
 				movementCounter++;
 				break;
 			case 1:
-				System.out.println(" >> Devour!");
-				int bonus = 1 + Main.random.nextInt(2); // +1 or +2 per declaration
-				int dmg = 20 + Main.random.nextInt(4) + declarationCount * bonus; // 20-23 base + scaling
-				DamageProcessor.applyDamageToPlayer(dmg, Player.getInstance());
-				movementCounter++;
+				devour();
 				break;
 			case 2:
-				System.out.println(" >> Feast!");
-				Player.getInstance().addBuff(new BuffLost(2), 2);
-				movementCounter++;
+				feast();
 				break;
 			case 3:
-				System.out.println(" >> Gluttony!");
-				addBuff(new BuffEnshroud(2), 2);
-				movementCounter++;
+				gluttony();
 				break;
 			case 4:
-				System.out.println(" >> Confusion!");
-				addBuff(new main.buff.positiveBuff.BuffInvincible(2), 2);
-				// 2 turns random positive buff and 2 turns negative buff (simplified as one each)
-				addBuff(new BuffStrengthened(2), 2);
-				Player.getInstance().addBuff(new BuffWeakened(2), 2);
-				movementCounter++;
-				break;
-			case 5:
-				declaration();
+				confusion();
 				movementCounter = 0;
 				break;
 			default:
 				movementCounter = 0;
 		}
+	}
+
+	private boolean handlePhaseTransition() {
+		if (phase == 1 && this.getHp() < 150 && !forceNextBloodLeeching) {
+			System.out.println(" >> Thanalous: You will regret this...");
+			forceNextBloodLeeching = true;
+		}
+
+		if (forceNextBloodLeeching) {
+			gainOverwhelmingLeech();
+			return true;
+		}
+		return false;
+	}
+
+	private void openingSequence() {
+		if (!initiated) {
+			System.out.println(" >> Thanalous: Go home, this is not your place.");
+			initiated = true;
+		}
+		movementCounter++;
+	}
+
+	private void spread() {
+		System.out.println(" >> Spread!");
+		Player.getInstance().addBuff(new BuffEnshroud(5), 5);
+		addBuff(new BuffRecovering(5), 5);
+		movementCounter++;
+	}
+
+	private void growth() {
+		System.out.println(" >> Growth!");
+		Player.getInstance().addBuff(new main.buff.positiveBuff.BuffStrengthened(1), 1);
+		addBuff(new BuffStrengthened(3), 3);
+		movementCounter++;
+	}
+
+	private void gibbet() {
+		System.out.println(" >> Gibbet!");
+		int damage = 13 + Main.random.nextInt(5); // 13-17
+		DamageProcessor.applyDamageToPlayer(damage, Player.getInstance());
+		Player.getInstance().addBuff(new BuffEnshroud(1), 1);
+		movementCounter++;
+	}
+
+	private void gallows() {
+		System.out.println(" >> Gallows!");
+		addBuff(new BuffBloodLeeching(2), 2);
+		movementCounter++;
+	}
+
+	private void guillotine() {
+		System.out.println(" >> Guillotine!");
+		int damage = 35;
+		DamageProcessor.applyDamageToPlayer(damage, Player.getInstance());
+		movementCounter++;
+	}
+
+	private void filled() {
+		System.out.println(" >> Filled!");
+		Player.getInstance().addBuff(new BuffLost(2), 2);
+		movementCounter++;
+	}
+
+	private void loopingDeclarationPhaseOne() {
+		declaration();
+		movementCounter = 1;
+	}
+
+	private void devour() {
+		System.out.println(" >> Devour!");
+		int bonus = 1 + Main.random.nextInt(2);
+		int damage = 20 + Main.random.nextInt(4) + declarationCount * bonus;
+		DamageProcessor.applyDamageToPlayer(damage, Player.getInstance());
+		movementCounter++;
+	}
+
+	private void feast() {
+		System.out.println(" >> Feast!");
+		Player.getInstance().addBuff(new BuffLost(2), 2);
+		movementCounter++;
+	}
+
+	private void gluttony() {
+		System.out.println(" >> Gluttony!");
+		addBuff(new BuffEnshroud(2), 2);
+		movementCounter++;
+	}
+
+	private void confusion() {
+		System.out.println(" >> Confusion!");
+		addBuff(new main.buff.positiveBuff.BuffInvincible(2), 2);
+		addBuff(new BuffStrengthened(2), 2);
+		Player.getInstance().addBuff(new BuffWeakened(2), 2);
+		movementCounter++;
+	}
+
+	private void gainOverwhelmingLeech() {
+		System.out.println(" >> " + this.getName() + " gains overwhelming leech!");
+		addBuff(new BuffBloodLeeching(10), 10);
+		forceNextBloodLeeching = false;
+		phase = 2;
+		movementCounter = 0;
 	}
 
 	private void declaration() {

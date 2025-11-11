@@ -154,6 +154,7 @@ public class DamageProcessor {
                     break;
                 case "Enshroud":
                     damageMultiplier += 0.5f;
+                    break;
             }
         }
         

@@ -13,7 +13,7 @@ public class BuffEnshroud implements Buff{
 	
 	@Override
 	public void onEndTurn() {
-		this.duration -= 0;
+		this.duration -= 1;
 	}
 	
 	@Override

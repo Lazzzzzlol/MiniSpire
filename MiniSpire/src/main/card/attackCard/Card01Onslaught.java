@@ -12,7 +12,7 @@ public class Card01Onslaught extends AttackCard {
         this.info = "Deal 6 damage; Apply 1 round Weakened.";
         this.cost = 1;
         this.rarity = "normal";
-        this.baseDamage = 6;
+        this.baseDamage = 400;
     }
     
     @Override

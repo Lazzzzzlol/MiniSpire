@@ -28,7 +28,7 @@ public class EnemyFactory implements ResourceFactory {
 	}
 	
 	public static Enemy getRandomEnemy(String enemyType) {
-		return new MakoFighter();
+		return new Thanalous();
 		/*switch (enemyType) {
 			case "normal":
 

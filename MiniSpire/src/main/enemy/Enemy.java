@@ -17,6 +17,7 @@ public class Enemy {
 	protected ArrayList<Buff> buffList;
 	private boolean hasSpecialContainer;
 	protected boolean isDied;
+	private int steelsoulAbsorbedDamage = 0; // 钢魂吸收的伤害
 	
 	public Enemy(String name, int hp) {
 		this.hp = hp;
@@ -53,6 +54,15 @@ public class Enemy {
 	        Buff buff = it.next();
 	        buff.onEndTurn();
 	        if (buff.getDuration() == 0) {
+	        	// 如果 Steelsoul 消失，返还所有吸收的伤害
+	        	if ("Steelsoul".equals(buff.getName()) && steelsoulAbsorbedDamage > 0) {
+	        		int damageToReturn = steelsoulAbsorbedDamage;
+	        		steelsoulAbsorbedDamage = 0;
+	        		deductHp(damageToReturn);
+	        		Main.executor.schedule(() -> {
+	        			System.out.println(" >> " + this.name + " returns " + damageToReturn + " absorbed damage from Steelsoul!");
+	        		}, 1, TimeUnit.SECONDS);
+	        	}
 	            it.remove();
 	        }
 	    }
@@ -153,5 +163,19 @@ public class Enemy {
 
 	public Boolean getIsDied(){
 		return isDied;
+	}
+	
+	/**
+	 * 吸收伤害（用于 Steelsoul）
+	 */
+	public void absorbDamageWithSteelsoul(int damage) {
+		this.steelsoulAbsorbedDamage += damage;
+	}
+	
+	/**
+	 * 获取当前吸收的伤害
+	 */
+	public int getSteelsoulAbsorbedDamage() {
+		return steelsoulAbsorbedDamage;
 	}
 }

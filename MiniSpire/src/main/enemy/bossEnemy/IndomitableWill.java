@@ -205,7 +205,27 @@ public class IndomitableWill extends Enemy {
 	}
 
 	private void stalwartSoul() {
-		addBuff(new BuffSteelsoul(2), 2);
+		// 根据当前回合玩家剩余的行动点，在下一回合扣除相应点数
+		int playerActionPoints = Player.getInstance().getActionPoints();
+		
+		// 检查是否已有 Steelsoul buff
+		BuffSteelsoul existingSteelsoul = null;
+		for (Buff buff : buffList) {
+			if (buff instanceof BuffSteelsoul) {
+				existingSteelsoul = (BuffSteelsoul) buff;
+				break;
+			}
+		}
+		
+		if (existingSteelsoul != null) {
+			// 如果已存在，更新需要扣除的行动点数并延长持续时间
+			existingSteelsoul.setActionPointsToDeduct(playerActionPoints);
+			existingSteelsoul.extendDuration(2);
+		} else {
+			// 如果不存在，创建新的
+			BuffSteelsoul steelsoul = new BuffSteelsoul(2, playerActionPoints);
+			addBuff(steelsoul, 2);
+		}
 	}
 
 	private void depressed() {

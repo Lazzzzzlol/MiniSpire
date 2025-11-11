@@ -51,6 +51,25 @@ public class NodeBattle extends Node {
 		Player player = Player.getInstance();
 		player.onStartTurn();
 
+		// 检查敌人是否有 Steelsoul buff，如果有则扣除玩家行动点
+		if (enemy != null) {
+			for (main.buff.Buff buff : enemy.getBuffList()) {
+				if ("Steelsoul".equals(buff.getName()) && buff instanceof main.buff.positiveBuff.BuffSteelsoul) {
+					main.buff.positiveBuff.BuffSteelsoul steelsoul = (main.buff.positiveBuff.BuffSteelsoul) buff;
+					int actionPointsToDeduct = steelsoul.getActionPointsToDeduct();
+					if (actionPointsToDeduct > 0) {
+						player.changeCurrentActionPoint(-actionPointsToDeduct);
+						Main.executor.schedule(() -> {
+							System.out.println(" >> Steelsoul deducts " + actionPointsToDeduct + " action points!");
+						}, 1, TimeUnit.SECONDS);
+						// 扣除后重置，避免重复扣除
+						steelsoul.setActionPointsToDeduct(0);
+					}
+					break; // 只处理第一个 Steelsoul buff
+				}
+			}
+		}
+
 		/*boolean playerHasRecovering = player.getBuffList().stream()
                 .anyMatch(buff -> "Recovering".equals(buff.getName()));
 

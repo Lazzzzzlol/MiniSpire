@@ -50,14 +50,30 @@ public class DamageProcessor {
                 String damageDisplay = getDamageDisplay(baseDamage, finalDamage);
 
                 if (target instanceof Enemy) {
-                    ((Enemy) target).deductHp(finalDamage);
-
-                    Main.executor.schedule(() -> {
-                        System.out.println(" >> " + ((Enemy) target).getName() + " takes " + damageDisplay + " damage");
-
-                        if (((Enemy) target).getBuffList().stream().anyMatch(buff -> "Steadfast".equals(buff.getName())));
-                            ((Watcher) target).addGettedDamageCounter(finalDamage);
-                    }, 1, TimeUnit.SECONDS);
+                    Enemy enemy = (Enemy) target;
+                    
+                    // 检查是否有 Steelsoul buff
+                    boolean hasSteelsoul = hasSteelsoul(enemy);
+                    
+                    if (hasSteelsoul) {
+                        // 有 Steelsoul：吸收伤害
+                        enemy.absorbDamageWithSteelsoul(finalDamage);
+                        Main.executor.schedule(() -> {
+                            System.out.println(" >> " + enemy.getName() + " absorbs " + damageDisplay + " damage (Steelsoul)");
+                            if (enemy.getBuffList().stream().anyMatch(buff -> "Steadfast".equals(buff.getName()))) {
+                                ((Watcher) enemy).addGettedDamageCounter(finalDamage);
+                            }
+                        }, 1, TimeUnit.SECONDS);
+                    } else {
+                        // 没有 Steelsoul：正常扣除 HP
+                        enemy.deductHp(finalDamage);
+                        Main.executor.schedule(() -> {
+                            System.out.println(" >> " + enemy.getName() + " takes " + damageDisplay + " damage");
+                            if (enemy.getBuffList().stream().anyMatch(buff -> "Steadfast".equals(buff.getName()))) {
+                                ((Watcher) enemy).addGettedDamageCounter(finalDamage);
+                            }
+                        }, 1, TimeUnit.SECONDS);
+                    }
 
                 } else if (target instanceof Player) {
                     ((Player) target).deductHp(finalDamage);
@@ -185,6 +201,14 @@ public class DamageProcessor {
         
         List<Buff> buffs = getBuffList(target);
         return buffs.stream().anyMatch(buff -> "Stratagem".equals(buff.getName()));
+    }
+    
+    /**
+     * 检查敌人是否有 Steelsoul buff
+     */
+    private static boolean hasSteelsoul(Enemy enemy) {
+        return enemy.getBuffList().stream()
+            .anyMatch(buff -> "Steelsoul".equals(buff.getName()));
     }
     
     private static List<Buff> getBuffList(Object obj) {

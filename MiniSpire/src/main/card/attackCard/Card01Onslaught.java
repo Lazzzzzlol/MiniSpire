@@ -12,12 +12,12 @@ public class Card01Onslaught extends AttackCard {
         this.info = "Deal 6 damage; Apply 1 round Weakened.";
         this.cost = 1;
         this.rarity = "normal";
-        this.baseDamage = 400;
+        this.baseDamage = 6;
     }
     
     @Override
     public void onPlay(Player player, Enemy enemy) {
-        DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
+        DamageProcessor.applyDamageToEnemy(baseDamage, Player.getInstance(), enemy);
 		
 		enemy.addBuff(new BuffWeakened(1), 1);
     }

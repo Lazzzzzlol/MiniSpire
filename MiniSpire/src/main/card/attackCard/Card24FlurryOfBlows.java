@@ -17,7 +17,7 @@ public class Card24FlurryOfBlows extends AttackCard {
 
     @Override
     public void onPlay(Player player, Enemy enemy) {
-        DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
+        DamageProcessor.applyDamageToEnemy(baseDamage, Player.getInstance(), enemy);
         player.drawHandCards(1);
         player.addBuff(new BuffGainFlurryOfBlows(1), 1);
     }

@@ -8,7 +8,7 @@ public class Card09Double extends EffectCard{
     
     public Card09Double() {
         this.name = "Double";
-        this.info = "Next attack card will effect twice.";
+        this.info = "Next attack card will affect twice (If that card leads to a kill already, then this effect will remain).";
         this.rarity = "normal";
         this.cost = 1;
     }

@@ -23,7 +23,7 @@ public class PerplexedMonk extends Enemy {
 			case 0:
 			case 1:
 			case 2:
-				System.out.println(" >> " + this.getName() + " uses Form Shift!");
+				System.out.println("\n >> " + this.getName() + " uses Form Shift!");
 				formShiftAttack();
 				movementCounter++;
 				break;
@@ -32,7 +32,7 @@ public class PerplexedMonk extends Enemy {
 				movementCounter++;
 				break;
 			case 4:
-				System.out.println(" >> " + this.getName() + " uses Masterful Blitz!");
+				System.out.println("\n >> " + this.getName() + " uses Masterful Blitz!");
 				masterfulBlitz();
 				movementCounter = 0;
 				chakras.clear();

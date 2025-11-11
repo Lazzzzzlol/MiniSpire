@@ -20,7 +20,7 @@ public class Card03Upheaval extends AttackCard {
     public void onPlay(Player player, Enemy enemy) {
         int baseDamage = calculateDamage(6);
 
-		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
+		DamageProcessor.applyDamageToEnemy(baseDamage, Player.getInstance(), enemy);
 
 		timesUsed++;
     }

@@ -18,8 +18,8 @@ public class Card06LifeDrain extends AttackCard {
 
     @Override
     public void onPlay(Player player, Enemy enemy) {
-        DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
-		int finalDamage = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
+        DamageProcessor.applyDamageToEnemy(baseDamage, Player.getInstance(), enemy);
+		int finalDamage = DamageProcessor.calculateDamageToEnemy(baseDamage, Player.getInstance(), enemy);
 		
 		if (finalDamage > 0 && !hasBloodLeechingEffect(player)) {
         	HealProcessor.applyHeal(player, finalDamage);

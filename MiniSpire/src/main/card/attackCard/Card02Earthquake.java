@@ -16,9 +16,9 @@ public class Card02Earthquake extends AttackCard {
     
     @Override
     public void onPlay(Player player, Enemy enemy) {
-        DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
-		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
-		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
+        DamageProcessor.applyDamageToEnemy(baseDamage, Player.getInstance(), enemy);
+		DamageProcessor.applyDamageToEnemy(baseDamage, Player.getInstance(), enemy);
+		DamageProcessor.applyDamageToEnemy(baseDamage, Player.getInstance(), enemy);
     }
     
 }

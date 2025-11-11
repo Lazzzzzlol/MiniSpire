@@ -1,10 +1,14 @@
 package main.enemy;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import main.Main;
+import main.Util;
 import main.buff.Buff;
 import main.processor.HealProcessor;
 
@@ -81,7 +85,7 @@ public class Enemy {
 		buffList.add(buff);
 		Main.executor.schedule(() -> {
 			System.out.println(" >> " + this.name + " obtains buff " + buff.getName());
-		}, 1, TimeUnit.SECONDS);
+		}, 1001, TimeUnit.MILLISECONDS);
 	}
 	
 	public int getHp() {
@@ -114,7 +118,16 @@ public class Enemy {
 
 	public void onDie(){
 
-		System.out.println("dies");
+		Main.executor.schedule(() -> {
+			List<String> messages = Arrays.asList(
+				"dies", "is defeated", "falls", "meets the end", 
+				"breathes the last", "is gone", "perishes"
+			);
+			Random random = new Random();
+			String action = messages.get(random.nextInt(messages.size()));
+			System.out.println(" >> " + this.name + " " + action);
+		}, 1, TimeUnit.SECONDS);
+
 		boolean hasResurrection = buffList.stream()
                 .anyMatch(buff -> "Resurrection".equals(buff.getName()));
 
@@ -125,8 +138,8 @@ public class Enemy {
 
 		buffList.removeIf(buff -> "Resurrection".equals(buff.getName()));
 		Main.executor.schedule(() -> {
-			System.out.println(" >> " + this.name + " resurrected! ");
-		}, 1, TimeUnit.MILLISECONDS);
+			System.out.println("\n >> " + this.name + " resurrected!");
+		}, 1, TimeUnit.SECONDS);
 		hp = initialHp;
 	}
 	

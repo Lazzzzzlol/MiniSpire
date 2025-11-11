@@ -30,6 +30,6 @@ public class Card17PrimalRend extends EffectCard {
             }
         }
 
-        DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
+        DamageProcessor.applyDamageToEnemy(baseDamage, Player.getInstance(), enemy);
 	}
 }

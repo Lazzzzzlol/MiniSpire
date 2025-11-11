@@ -19,22 +19,22 @@ public class MakoFighter extends Enemy {
 	public void onMove() {
 		switch (movementCounter) {
 			case 0:
-				System.out.println(" >> " + this.getName() + " uses Mako SharkO!");
+				System.out.println("\n >> " + this.getName() + " uses Mako SharkO!");
 				makoSharko();
 				movementCounter++;
 				break;
 			case 1:
-				System.out.println(" >> " + this.getName() + " uses Killer Wail 5.1!");
+				System.out.println("\n >> " + this.getName() + " uses Killer Wail 5.1!");
 				killerWail();
 				movementCounter++;
 				break;
 			case 2:
-				System.out.println(" >> " + this.getName() + " uses Triple Tornado!");
+				System.out.println("\n >> " + this.getName() + " uses Triple Tornado!");
 				tripleTornado();
 				movementCounter++;
 				break;
 			case 3:
-				System.out.println(" >> " + this.getName() + " uses Dive!");
+				System.out.println("\n >> " + this.getName() + " uses Dive!");
 				dive();
 				movementCounter = 0;
 				break;

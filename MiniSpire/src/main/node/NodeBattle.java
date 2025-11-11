@@ -114,13 +114,13 @@ public class NodeBattle extends Node {
 			System.out.println(enemySpecialContainer);
 		}
 		
-		Util.printBlankLines(3);
+		Util.printBlankLines(1);
 		
 		System.out.println(" [Status:   HP: " + player.getHp() + "/" + player.getMaxHp() + 
 				"   Action points: " + player.getActionPoints() + "/" + player.getMaxActionPoints() + "]");
 		System.out.println(" [Buff: " + player.getBuffListString() + "]");
 		System.out.println();
-		System.out.println(" [Card: " + player.getHandCardListString() + "]");
+		System.out.println(" [Card: " + player.getHandCardListString() + "]\n");
 		
 		System.out.println(Main.longLine);
 		
@@ -143,10 +143,12 @@ public class NodeBattle extends Node {
 			case "p":
 				playcard(Integer.parseInt(parts[1]));
 
+				int delay = 3000;
+
 				Main.executor.schedule(() -> {
 					if (enemy.getIsDied())
 						onWin();
-				}, 2, TimeUnit.SECONDS);
+				}, delay, TimeUnit.MILLISECONDS);
 
 				break;
 				
@@ -244,10 +246,10 @@ public class NodeBattle extends Node {
 		int gainedScore = scoreCalculator.calculateBattleScore(enemy, enemyType);
 
 
-		Util.printBlankLines(3);
+		// Util.printBlankLines(3);
 		System.out.println(Main.longLine);
 
-		System.out.println(" >> You defeated " + enemy.getName() + "!");
+		System.out.println("\n >> You defeated " + enemy.getName() + "!");
 		Player.getInstance().addGold(gainedGold);
 		scoreCalculator.addScore(gainedScore);
 
@@ -257,6 +259,7 @@ public class NodeBattle extends Node {
 							"2) [" + rewardCard2.getRarity() + "] <" + rewardCard2.getCost() + "> " + rewardCard2.getName() + ",  " + 
 							"3) [" + rewardCard3.getRarity() + "] <" + rewardCard3.getCost() + "> " + rewardCard3.getName());
 		System.out.println(" >> 4) Move on");
+		Util.printBlankLines(1);
 		System.out.println(Main.longLine);
 
 		System.out.print("Action >> ");

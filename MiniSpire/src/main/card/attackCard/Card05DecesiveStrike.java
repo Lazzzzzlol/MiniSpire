@@ -18,7 +18,7 @@ public class Card05DecesiveStrike extends AttackCard {
 
     @Override
     public void onPlay(Player player, Enemy enemy) {
-        DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
+        DamageProcessor.applyDamageToEnemy(baseDamage, Player.getInstance(), enemy);
 
 		enemy.addBuff(new BuffVulnerable(1), 1);
     }

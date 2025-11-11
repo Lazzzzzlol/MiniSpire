@@ -17,7 +17,7 @@ public class Card04AbdomenTear extends AttackCard {
 
     @Override
     public void onPlay(Player player, Enemy enemy) {
-        DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
+        DamageProcessor.applyDamageToEnemy(baseDamage, Player.getInstance(), enemy);
 
 		int baseSelfDamage = 3;
 		DamageProcessor.applyDamageToPlayer(baseSelfDamage, null, player);

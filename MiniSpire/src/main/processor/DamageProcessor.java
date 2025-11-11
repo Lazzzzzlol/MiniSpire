@@ -13,16 +13,16 @@ public class DamageProcessor {
     
     private static final ThreadLocal<Boolean> isReflectiveDamage = ThreadLocal.withInitial(() -> false);
     
-    public static void applyDamageToEnemy(int baseDamage, Enemy target) {
-        processDamage(baseDamage, Player.getInstance(), target, false);
+    public static void applyDamageToEnemy(int baseDamage, Player attacker, Enemy target) {
+        processDamage(baseDamage, attacker, target, false);
     }
     
     public static void applyDamageToPlayer(int baseDamage, Enemy attacker, Player target) {
         processDamage(baseDamage, attacker, target, false);
     }
 
-    public static int calculateDamageToEnemy(int baseDamage, Enemy target) {
-        return calculateDamageOnly(baseDamage, Player.getInstance(), target, false);
+    public static int calculateDamageToEnemy(int baseDamage, Player attacker, Enemy target) {
+        return calculateDamageOnly(baseDamage, attacker, target, false);
     }
     
     public static int calculateDamageToPlayer(int baseDamage, Enemy attacker, Player target) {
@@ -80,7 +80,10 @@ public class DamageProcessor {
         boolean attackMistied = false;
         boolean attackAbsorbed = false;
 
-        if (hasInvincible && !hasIgnore) return 0;
+        if (hasInvincible && !hasIgnore) {
+            scheduleDamageMessage(target, "The attack fails (Invincible)", 1);
+            return 0;
+        }
 
         if (attacker != null) {
             List<Buff> attackerBuffs = getBuffList(attacker);
@@ -198,7 +201,7 @@ public class DamageProcessor {
     private static void scheduleDamageMessage(Object target, String message, int delaySeconds) {
 
         Main.executor.schedule(() -> {
-            System.out.println(" >> " + message);
+            System.out.println("\n >> " + message);
         }, delaySeconds, TimeUnit.SECONDS);
     }
     

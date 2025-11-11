@@ -29,27 +29,27 @@ public class Watcher extends Enemy{
 	public void onMove() {
 		switch (movementCounter) {
 			case 0:
-				System.out.println(" >> " + this.getName() + " uses Blunt Hit!");
+				System.out.println("\n >> " + this.getName() + " uses Blunt Hit!");
 				bluntHit();
 				movementCounter++;
 				break;
 			case 1:
-				System.out.println(" >> " + this.getName() + " uses Stab Hit!");
+				System.out.println("\n >> " + this.getName() + " uses Stab Hit!");
 				stabHit();
 				movementCounter++;
 				break;
 			case 2:
-				System.out.println(" >> " + this.getName() + " uses Slash Hit!");
+				System.out.println("\n >> " + this.getName() + " uses Slash Hit!");
 				slashHit();
 				movementCounter++;
 				break;
 			case 3:
-				System.out.println(" >> " + this.getName() + " uses Ruminate I!");
+				System.out.println("\n >> " + this.getName() + " uses Ruminate I!");
 				ruminateI();
 				movementCounter++;
 				break;
 			case 4:
-				System.out.println(" >> " + this.getName() + " uses Ruminate II!");
+				System.out.println("\n >> " + this.getName() + " uses Ruminate II!");
 				ruminateII();
 				movementCounter = 0;
 				break;

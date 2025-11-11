@@ -109,7 +109,7 @@ public class Player {
 		}
 
 		if (!drawnCards.isEmpty()) {
-			StringBuilder log = new StringBuilder(" >> Drawed ");
+			StringBuilder log = new StringBuilder(" >> Drawed card: ");
 			for (int i = 0; i < drawnCards.size(); i++) {
 				if (i > 0) {
 					log.append(", ");
@@ -159,7 +159,7 @@ public class Player {
 			} else if (delta == 0) {
 				System.out.println(" >> Action point -0");
 			}
-		}, 5, TimeUnit.MILLISECONDS);
+		}, 0, TimeUnit.MILLISECONDS);
 	}
 	
 	public void onEndTurn() {
@@ -226,7 +226,7 @@ public class Player {
 			this.hp = this.maxHp;
 		
 		//Main.executor.schedule(() -> {
-			System.out.println(" >> Heals " + heal + " HP.");
+			System.out.println(" >> Heals " + heal + " HP");
 		//}, 1, TimeUnit.SECONDS);
 	}
 	
@@ -237,7 +237,7 @@ public class Player {
 			Game.getInstance().setIsGameOver(true);
 		
 		Main.executor.schedule(() -> {
-			System.out.println(" >> Took " + damage + " damage.");
+			// System.out.println(" >> Took " + damage + " damage.");
 		}, 1, TimeUnit.SECONDS);
 	}
 	
@@ -256,9 +256,9 @@ public class Player {
 		if (this.actionPoints > this.maxActionPoints)
 			this.actionPoints = this.maxActionPoints;
 		if (delta >= 0) {
-			System.out.println(" >> Max action points increases by " + delta + ".");
+			System.out.println(" >> Max action points increases by " + delta);
 		} else {
-			System.out.println(" >> Max action points decreases by " + (-delta) + ".");
+			System.out.println(" >> Max action points decreases by " + (-delta));
 		}
 	}
 
@@ -288,9 +288,9 @@ public class Player {
 		if (this.drawCardNumPerTurn < 1)
 			this.drawCardNumPerTurn = 1;
 		if (delta >= 0) {
-			System.out.println(" >> Cards drawn per turn increases by " + delta + ".");
+			System.out.println(" >> Cards drawn per turn increases by " + delta);
 		} else {
-			System.out.println(" >> Cards drawn per turn decreases by " + (-delta) + ".");
+			System.out.println(" >> Cards drawn per turn decreases by " + (-delta));
 		}
 	}
 	
@@ -303,7 +303,9 @@ public class Player {
 			}
 				
 		buffList.add(buff);
-		System.out.println(" >> Obtained buff: " + buff.getName());
+		Main.executor.schedule(() -> {
+			System.out.println(" >> Obtained buff: " + buff.getName());
+		}, 1, TimeUnit.SECONDS);
 	}
 	
 	public ArrayList<Buff> getBuffList() {

@@ -45,7 +45,7 @@ public class Main {
 	        	break;
 			
 			//绘制画面
-			Util.printBlankLines(3);
+			// Util.printBlankLines(3);
 			game.onDraw();
 			
 			//读取操作

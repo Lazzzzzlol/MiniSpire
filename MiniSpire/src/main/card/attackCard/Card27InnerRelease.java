@@ -21,6 +21,6 @@ public class Card27InnerRelease extends AttackCard {
         this.cost = 2;
         player.addBuff(new BuffStrengthened(2), 2);
         player.addBuff(new BuffTough(2), 2);
-		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
+		DamageProcessor.applyDamageToEnemy(baseDamage, Player.getInstance(), enemy);
     }
 }

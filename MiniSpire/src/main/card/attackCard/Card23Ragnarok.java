@@ -20,8 +20,8 @@ public class Card23Ragnarok extends AttackCard {
     @Override
     public void onPlay(Player player, Enemy enemy) {
         for (int i = 0; i < hits; i++) {
-			int finalDamage = DamageProcessor.calculateDamageToEnemy(currentDamage, enemy);
-			DamageProcessor.applyDamageToEnemy(currentDamage, enemy);
+			int finalDamage = DamageProcessor.calculateDamageToEnemy(currentDamage, Player.getInstance(), enemy);
+			DamageProcessor.applyDamageToEnemy(currentDamage, Player.getInstance(), enemy);
 			
 			if (i < hits - 1) {
 				currentDamage = 2 * finalDamage;

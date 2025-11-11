@@ -105,43 +105,43 @@ public class IndomitableWill extends Enemy {
 	private void phase1Move() {
 		switch (movementCounter) {
 			case 0:
-				System.out.println(" >> " + this.getName() + " uses Unleash!");
+				System.out.println("\n >> " + this.getName() + " uses Unleash!");
 				unleash();
 				movementCounter++;
 				break;
 
 			case 1:
-				System.out.println(" >> " + this.getName() + " uses Torcleaver!");
+				System.out.println("\n >> " + this.getName() + " uses Torcleaver!");
 				torcleaver();
 				movementCounter++;
 				break;
 
 			case 2:
-				System.out.println(" >> " + this.getName() + " uses Delirium!");
+				System.out.println("\n >> " + this.getName() + " uses Delirium!");
 				delirium();
 				movementCounter++;
 				break;
 
 			case 3:
-				System.out.println(" >> " + this.getName() + " uses Reject!");
+				System.out.println("\n >> " + this.getName() + " uses Reject!");
 				reject();
 				movementCounter++;
 				break;
 
 			case 4:
-				System.out.println(" >> " + this.getName() + " uses Stalwart Soul!");
+				System.out.println("\n >> " + this.getName() + " uses Stalwart Soul!");
 				stalwartSoul();
 				movementCounter++;
 				break;
 
 			case 5:
-				System.out.println(" >> " + this.getName() + " uses Depressed!");
+				System.out.println("\n >> " + this.getName() + " uses Depressed!");
 				depressed();
 				movementCounter++;
 				break;
 
 			case 6:
-				System.out.println(" >> " + this.getName() + " uses Dark Missionary!");
+				System.out.println("\n >> " + this.getName() + " uses Dark Missionary!");
 				darkMissionary();
 				movementCounter = 0;
 				break;
@@ -161,12 +161,12 @@ public class IndomitableWill extends Enemy {
 		if (comboCompleted) {
 			switch (movementCounter % 2) {
 				case 0:
-					System.out.println(" >> " + this.getName() + " uses Depressed!");
+					System.out.println("\n >> " + this.getName() + " uses Depressed!");
 					depressed();
 					movementCounter++;
 					break;
 				case 1:
-					System.out.println(" >> " + this.getName() + " uses Dark Missionary!");
+					System.out.println("\n >> " + this.getName() + " uses Dark Missionary!");
 					darkMissionary();
 					movementCounter++;
 					break;
@@ -175,28 +175,28 @@ public class IndomitableWill extends Enemy {
 		}
 		
 		if (!desperateRoarDone) {
-			System.out.println(" >> " + this.getName() + " uses Desperate Roar!");
+			System.out.println("\n >> " + this.getName() + " uses Desperate Roar!");
 			desperateRoar();
 			desperateRoarDone = true;
 			return;
 		}
 
 		if (desperateRoarDone && !scarletDeliriumDone) {
-			System.out.println(" >> " + this.getName() + " uses Scarlet Delirium!");
+			System.out.println("\n >> " + this.getName() + " uses Scarlet Delirium!");
 			scarletDelirium();
 			scarletDeliriumDone = true;
 			return;
 		}
 
 		if (scarletDeliriumDone && !impalementDone) {
-			System.out.println(" >> " + this.getName() + " uses Impalement!");
+			System.out.println("\n >> " + this.getName() + " uses Impalement!");
 			impalement();
 			impalementDone = true;
 			return;
 		}
 
 		if (impalementDone) {
-			System.out.println(" >> " + this.getName() + " uses Disesteem!");
+			System.out.println("\n >> " + this.getName() + " uses Disesteem!");
 			disesteem();
 			comboCompleted = true; // 连招完成，进入常规循环
 			desperateRoarDone = false;
@@ -212,12 +212,12 @@ public class IndomitableWill extends Enemy {
 		// Fallback: 安全机制，使用常规循环
 		switch (movementCounter % 2) {
 			case 0:
-				System.out.println(" >> " + this.getName() + " uses Depressed!");
+				System.out.println("\n >> " + this.getName() + " uses Depressed!");
 				depressed();
 				movementCounter++;
 				break;
 			case 1:
-				System.out.println(" >> " + this.getName() + " uses Dark Missionary!");
+				System.out.println("\n >> " + this.getName() + " uses Dark Missionary!");
 				darkMissionary();
 				movementCounter++;
 				break;
@@ -312,7 +312,7 @@ public class IndomitableWill extends Enemy {
 		
 		int hpBefore = this.getHp();
 		int hpLoss = 15 + Main.random.nextInt(6);
-		deductHp(hpLoss);
+		DamageProcessor.applyDamageToEnemy(hpLoss, null, this);
 		int hpAfter = this.getHp();
 		
 		desperateRoarSucceeded = (hpBefore > hpAfter);
@@ -325,7 +325,7 @@ public class IndomitableWill extends Enemy {
 	private void scarletDelirium() {
 		// Fallback: 如果 Desperate Roar 失败，使用 Dark Mind
 		if (!desperateRoarSucceeded) {
-			System.out.println(" >> " + this.getName() + " uses Dark Mind!");
+			System.out.println("\n >> " + this.getName() + " uses Dark Mind!");
 			addBuff(new BuffTough(5), 5);
 			return;
 		}

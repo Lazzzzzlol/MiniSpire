@@ -25,32 +25,32 @@ public class RidiculeClown extends Enemy {
 		dmg = 1 + Main.random.nextInt(10); // 1-10
 		switch (movementCounter) {
 			case 0:
-				System.out.println(" >> " + this.getName() + " uses Surprise Box!");
+				System.out.println("\n >> " + this.getName() + " uses Surprise Box!");
 				surpriseBox();
 				movementCounter++;
 				break;
 			case 1:
-				System.out.println(" >> " + this.getName() + " uses Smash Hit!");
+				System.out.println("\n >> " + this.getName() + " uses Smash Hit!");
 				smashHit();
 				movementCounter++;
 				break;
 			case 2:
-				System.out.println(" >> " + this.getName() + " uses Surprise Box!");
+				System.out.println("\n >> " + this.getName() + " uses Surprise Box!");
 				surpriseBox();
 				movementCounter++;
 				break;
 			case 3:
-				System.out.println(" >> " + this.getName() + " uses Halftime!");
+				System.out.println("\n >> " + this.getName() + " uses Halftime!");
 				halftime();
 				movementCounter++;
 				break;
 			case 4:
-				System.out.println(" >> " + this.getName() + " uses Surprise Box!");
+				System.out.println("\n >> " + this.getName() + " uses Surprise Box!");
 				surpriseBox();
 				movementCounter++;
 				break;
 			case 5:
-				System.out.println(" >> " + this.getName() + " uses Perfect Ending!");
+				System.out.println("\n >> " + this.getName() + " uses Perfect Ending!");
 				perfectEnding();
 				movementCounter = 0;
 				break;
@@ -69,19 +69,19 @@ public class RidiculeClown extends Enemy {
 	}
 
 	private void smashHit() {
-		// random positive buff for 1 turn
+		// random positive buff for 3 turn
 		switch (Main.random.nextInt(4)) {
 			case 0:
-				addBuff(new BuffStrengthened(1), 1);
+				addBuff(new BuffStrengthened(3), 3);
 				break;
 			case 1:
-				addBuff(new BuffInvincible(1), 1);
+				addBuff(new BuffInvincible(3), 3);
 				break;
 			case 2:
-				addBuff(new BuffReflective(1), 1);
+				addBuff(new BuffReflective(3),  3);
 				break;
 			default:
-				addBuff(new BuffTough(1), 1);
+				addBuff(new BuffTough(3), 3);
 		}
 	}
 
@@ -93,13 +93,13 @@ public class RidiculeClown extends Enemy {
 	private void perfectEnding() {
 		int roll = 1 + Main.random.nextInt(20);
 		if (roll == 1) {
-			this.deductHp(500);
+			DamageProcessor.applyDamageToEnemy(500, null, this);
 			return;
 		}
 		if (roll >= 2 && roll <= 10) {
 			int dmg = 1 + Main.random.nextInt(15);
-			this.deductHp(dmg);
-			Player.getInstance().deductHp(dmg);
+			DamageProcessor.applyDamageToEnemy(dmg, null, this);
+			DamageProcessor.applyDamageToPlayer(dmg, this, Player.getInstance());
 			return;
 		}
 		if (roll >= 11 && roll <= 19) {
@@ -110,7 +110,7 @@ public class RidiculeClown extends Enemy {
 		}
 		// 20
 		int dmg = 10 + Main.random.nextInt(41); // 10-50
-		Player.getInstance().deductHp(dmg);
+		DamageProcessor.applyDamageToPlayer(dmg, this, Player.getInstance());
 	}
 }
 

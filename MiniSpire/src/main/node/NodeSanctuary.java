@@ -42,9 +42,10 @@ public class NodeSanctuary extends Node {
 		System.out.println(Main.longLine);
 		Util.printBlankLines(1);
 		TextDisplay.printCharWithDelay(" [Sanctuary] You feel restored. Choose a path:", 10);
-		TextDisplay.printLineWithDelay("   c 1) Play Safe     : +20 Max HP, heal 20 HP", 150);
+		TextDisplay.printLineWithDelay("   c 1) Play Safe     : +20 Max HP, heal 35 HP", 150);
 		TextDisplay.printLineWithDelay("   c 2) Play Strategy : +1 draw per turn, +1 max action point", 150);
 		TextDisplay.printLineWithDelay("   c 3) Play Risk     : -15 Max HP, +2 max action points", 150);
+		Util.printBlankLines(1);
 		System.out.println(Main.longLine);
 		System.out.print("Action >> ");
 	}
@@ -62,7 +63,7 @@ public class NodeSanctuary extends Node {
 			case "1":
 				TextDisplay.printCharWithDelay(" >> Chosen: Play Safe.", 30);
 				player.changeMaxHp(20);
-				HealProcessor.applyHeal(player, 20);
+				HealProcessor.applyHeal(player, 35);
 				break;
 			case "2":
 				TextDisplay.printCharWithDelay(" >> Chosen: Play Strategy.", 30);

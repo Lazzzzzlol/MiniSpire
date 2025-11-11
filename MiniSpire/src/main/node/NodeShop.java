@@ -312,6 +312,7 @@ public class NodeShop extends Node {
 		TextDisplay.printLineWithDelay("   r 2)    Remove!    : Feeling overloaded? Here's your one-time chance to destroy a card from your deck.", 150);
 		TextDisplay.printLineWithDelay("   c 1)     Check!    : Check your deck. Think carefully before you decide.", 150);
 		TextDisplay.printLineWithDelay("   l 1)      Leave    : Good luck on you...", 150);
+		Util.printBlankLines(1);
 
 		System.out.println(Main.longLine);
 		System.out.println("Your gold sack: " + player.getGold());

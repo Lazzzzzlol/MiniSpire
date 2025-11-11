@@ -2,6 +2,7 @@ package main.enemy.normalEnemy;
 
 import main.enemy.Enemy;
 import main.player.Player;
+import main.processor.DamageProcessor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -25,19 +26,19 @@ public class Zombie extends Enemy {
 		switch (movementCounter) {
 		
 			case 0:
-				System.out.println(" >> " + this.getName() + " uses Scratch!");
+				System.out.println("\n >> " + this.getName() + " uses Scratch!");
 				scratch();
 				movementCounter++;
 				break;
 				
 			case 1:
-				System.out.println(" >> " + this.getName() + " uses Corruption!");
+				System.out.println("\n >> " + this.getName() + " uses Corruption!");
 				corruption();
 				movementCounter++;
 				break;
 				
 			case 2:
-				System.out.println(" >> " + this.getName() + " uses Strong Scratch!");
+				System.out.println("\n >> " + this.getName() + " uses Strong Scratch!");
 				strongScratch();
 				movementCounter = 0;
 				break;
@@ -50,7 +51,7 @@ public class Zombie extends Enemy {
 	}
 	
 	private void scratch() {
-		Player.getInstance().deductHp(5 + Main.random.nextInt(3));
+		DamageProcessor.applyDamageToPlayer(5 + Main.random.nextInt(3), this, Player.getInstance());
 	}
 
 	private void corruption() {
@@ -72,6 +73,6 @@ public class Zombie extends Enemy {
 	}
 	
 	private void strongScratch() {
-		Player.getInstance().deductHp(7 + Main.random.nextInt(3));
+		DamageProcessor.applyDamageToPlayer(7 + Main.random.nextInt(3), this, Player.getInstance());
 	}
 }

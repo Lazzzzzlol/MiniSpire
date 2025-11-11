@@ -4,7 +4,7 @@ import main.buff.Buff;
 
 public class BuffStrengthened implements Buff {
 
-	String name = "Strength";
+	String name = "Strengthened";
 	int duration = 0;
 	
 	public BuffStrengthened(int duration) {

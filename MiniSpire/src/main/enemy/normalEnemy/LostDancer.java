@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import main.Main;
 import main.enemy.Enemy;
 import main.player.Player;
+import main.processor.DamageProcessor;
 
 public class LostDancer extends Enemy{
 
@@ -21,31 +22,31 @@ public class LostDancer extends Enemy{
 		switch (movementCounter) {
 		
 			case 0:
-				System.out.println(" >> " + this.getName() + " uses Reverse Cascade!");
+				System.out.println("\n >> " + this.getName() + " uses Reverse Cascade!");
 				reverseCascade();
 				movementCounter++;
 				break;
 				
 			case 1:
-				System.out.println(" >> " + this.getName() + " uses Rising Windmill!");
+				System.out.println("\n >> " + this.getName() + " uses Rising Windmill!");
 				risingWindmill();
 				movementCounter++;
 				break;
 				
 			case 2:
-				System.out.println(" >> " + this.getName() + " uses Bladeshower!");
+				System.out.println("\n >> " + this.getName() + " uses Bladeshower!");
 				bladeShower();
 				movementCounter++;
 				break;
 
             case 3:
-				System.out.println(" >> " + this.getName() + " uses Foutainfall!");
+				System.out.println("\n >> " + this.getName() + " uses Foutainfall!");
 				fountainFall();
 				movementCounter++;
 				break;
 
             case 4:
-				System.out.println(" >> " + this.getName() + " uses Flourish!");
+				System.out.println("\n >> " + this.getName() + " uses Flourish!");
 				flourish();
 				movementCounter = 0;
 				break;
@@ -58,29 +59,29 @@ public class LostDancer extends Enemy{
     }
     
     public void reverseCascade(){
-        Player.getInstance().deductHp(3 + Main.random.nextInt(2));
+        DamageProcessor.applyDamageToPlayer(3 + Main.random.nextInt(2), this, Player.getInstance());
         markList.add("Rose");
     }
 
     public void risingWindmill(){
-        Player.getInstance().deductHp(3 + Main.random.nextInt(3));
+        DamageProcessor.applyDamageToPlayer(3 + Main.random.nextInt(3), this, Player.getInstance());
         markList.add("Leaf");
     }
 
     public void bladeShower(){
-        Player.getInstance().deductHp(3 + Main.random.nextInt(4));
+        DamageProcessor.applyDamageToPlayer(3 + Main.random.nextInt(4), this, Player.getInstance());
         markList.add("Crown");
     }
 
     public void fountainFall(){
-        Player.getInstance().deductHp(3 + Main.random.nextInt(5));
+        DamageProcessor.applyDamageToPlayer(3 + Main.random.nextInt(5), this, Player.getInstance());
         markList.add("Bird");
     }
 
     public void flourish(){
         int markCount = markList.size();
         for (int i = 0; i <= markCount; i++)
-            Player.getInstance().deductHp(3 + Main.random.nextInt(2));
+            DamageProcessor.applyDamageToPlayer(3 + Main.random.nextInt(2), this, Player.getInstance());
         markList.clear();
     }
 

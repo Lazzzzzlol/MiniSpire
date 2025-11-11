@@ -29,27 +29,27 @@ public class PhantomBard extends Enemy {
 	public void onMove() {
 		switch (movementCounter) {
 			case 0:
-				System.out.println(" >> " + this.getName() + " uses Battle Voice!");
+				System.out.println("\n >> " + this.getName() + " uses Battle Voice!");
 				battleVoice();
 				movementCounter++;
 				break;
 			case 1:
-				System.out.println(" >> " + this.getName() + " uses Ladonsbite!");
+				System.out.println("\n >> " + this.getName() + " uses Ladonsbite!");
 				ladonsbite();
 				movementCounter++;
 				break;
 			case 2:
-				System.out.println(" >> " + this.getName() + " uses Heartbreak Shot!");
+				System.out.println("\n >> " + this.getName() + " uses Heartbreak Shot!");
 				heartbreakShot();
 				movementCounter++;
 				break;
 			case 3:
-				System.out.println(" >> " + this.getName() + " uses Shadowbite!");
+				System.out.println("\n >> " + this.getName() + " uses Shadowbite!");
 				shadowbite();
 				movementCounter++;
 				break;
 			case 4:
-				System.out.println(" >> " + this.getName() + " uses Radiant Finale!");
+				System.out.println("\n >> " + this.getName() + " uses Radiant Finale!");
 				radiantFinale();
 				movementCounter = 0;
 				cycleDamage = 0;

@@ -20,6 +20,6 @@ public class Card26Stratagem extends AttackCard {
     public void onPlay(Player player, Enemy enemy) {
         player.addBuff(new BuffStratagem(1), 1);
 		enemy.addBuff(new BuffVulnerable(1), 1);
-		DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
+		DamageProcessor.applyDamageToEnemy(baseDamage, Player.getInstance(), enemy);
     }
 }

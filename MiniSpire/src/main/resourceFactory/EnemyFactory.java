@@ -28,8 +28,13 @@ public class EnemyFactory implements ResourceFactory {
 	}
 	
 	public static Enemy getRandomEnemy(String enemyType) {
+<<<<<<< Updated upstream
 		return new Thanalous();
 		/*switch (enemyType) {
+=======
+		// return new IndomitableWill();
+		switch (enemyType) {
+>>>>>>> Stashed changes
 			case "normal":
 
 				switch (Main.random.nextInt(4)) {
@@ -80,6 +85,6 @@ public class EnemyFactory implements ResourceFactory {
 				
 			default:
 				return new Zombie();
-		}*/
+		}
 	}
 }

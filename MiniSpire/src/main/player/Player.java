@@ -182,8 +182,8 @@ public class Player {
 		handCardList.clear();
 		
 		if (buffList != null) {
-			for (Buff buff : buffList)
-				buff.onEndTurn();
+			// for (Buff buff : buffList)
+			// 	buff.onEndTurn();
 	        buffList.removeIf(buff -> buff.getDuration() <= 0);
 	    }
 	}

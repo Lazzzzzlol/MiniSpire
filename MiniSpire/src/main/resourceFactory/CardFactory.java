@@ -119,7 +119,6 @@ public class CardFactory implements ResourceFactory {
 	
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
 		
 	}
 

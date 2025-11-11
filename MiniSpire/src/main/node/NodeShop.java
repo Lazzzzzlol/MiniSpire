@@ -180,14 +180,17 @@ public class NodeShop extends Node {
 
 	private int getCardCost(Card card) {
 		String rarity = card.getRarity();
-		switch (rarity) {
-			case "\u001B[37mNORMAL\u001B[0m":
+    
+		String origRarity = rarity.replaceAll("\u001B\\[[;\\d]*m", "");
+		
+		switch (origRarity) {
+			case "NORMAL":
 				return 30;
-			case "\u001B[94mRARE\u001B[0m":
-				return 60;
-			case "\u001B[95mEPIC\u001B[0m":
-				return 90;
-			case "\u001B[93mLEGENDARY\u001B[0m":
+			case "RARE":
+				return 50;
+			case "EPIC":
+				return 80;
+			case "LEGENDARY":
 				return 120;
 			default:
 				return 30;

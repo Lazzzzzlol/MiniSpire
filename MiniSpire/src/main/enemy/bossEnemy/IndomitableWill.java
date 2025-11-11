@@ -4,12 +4,14 @@ import main.enemy.Enemy;
 import main.player.Player;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import main.Main;
 import main.buff.Buff;
 import main.buff.oneFightBuff.BuffResurrection;
+import main.buff.oneFightBuff.BuffIgnore;
 import main.buff.oneFightBuff.BuffIndomitable;
 import main.buff.positiveBuff.BuffStrengthened;
 import main.buff.positiveBuff.BuffTough;
@@ -360,14 +362,23 @@ public class IndomitableWill extends Enemy {
 	}
 
 	private void disesteem() {
-		// Fallback: 如果 Impalement 失败，使用 Depressed
+
 		if (!impalementSucceeded) {
 			depressed();
 			return;
 		}
 
-		// 无视防御造成 23 点伤害
+		addBuff(new BuffIgnore(1), 1);
 		DamageProcessor.applyDamageToPlayerIgnoreDefensive(23, Player.getInstance());
+
+		Iterator<Buff> iterator = buffList.iterator();
+		while (iterator.hasNext()) {
+			Buff buff = iterator.next();
+			if ("ignore".equals(buff.getName())) {
+				iterator.remove();
+				break;
+			}
+		}
 	}
 }
 

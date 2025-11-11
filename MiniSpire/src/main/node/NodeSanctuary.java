@@ -3,6 +3,7 @@ package main.node;
 import java.util.concurrent.TimeUnit;
 
 import main.Main;
+import main.TextDisplay;
 import main.Util;
 import main.game.Game;
 import main.player.Player;
@@ -39,10 +40,10 @@ public class NodeSanctuary extends Node {
 	public void onDraw() {
 		System.out.println(Main.longLine);
 		Util.printBlankLines(1);
-		System.out.println(" [Sanctuary] You feel restored. Choose a path:");
-		System.out.println("   c 1) Play Safe     : +20 Max HP, heal 20 HP");
-		System.out.println("   c 2) Play Strategy : +1 draw per turn, +1 max action point");
-		System.out.println("   c 3) Play Risk     : -15 Max HP, +2 max action points");
+		TextDisplay.printCharWithDelay(" [Sanctuary] You feel restored. Choose a path:", 10);
+		TextDisplay.printLineWithDelay("   c 1) Play Safe     : +20 Max HP, heal 20 HP", 150);
+		TextDisplay.printLineWithDelay("   c 2) Play Strategy : +1 draw per turn, +1 max action point", 150);
+		TextDisplay.printLineWithDelay("   c 3) Play Risk     : -15 Max HP, +2 max action points", 150);
 		System.out.println(Main.longLine);
 		System.out.print("Action >> ");
 	}
@@ -58,17 +59,17 @@ public class NodeSanctuary extends Node {
 		Player player = Player.getInstance();
 		switch (parts[1]) {
 			case "1":
-				System.out.println(" >> Chosen: Play Safe.");
+				TextDisplay.printCharWithDelay(" >> Chosen: Play Safe.", 30);
 				player.changeMaxHp(20);
 				player.addHp(20);
 				break;
 			case "2":
-				System.out.println(" >> Chosen: Play Strategy.");
+				TextDisplay.printCharWithDelay(" >> Chosen: Play Strategy.", 30);
 				player.changeDrawCardNumPerTurn(1);
 				player.changeMaxActionPoints(1);
 				break;
 			case "3":
-				System.out.println(" >> Chosen: Play Risk.");
+				TextDisplay.printCharWithDelay(" >> Chosen: Play Risk.", 30);
 				player.changeMaxHp(-15);
 				player.changeMaxActionPoints(2);
 				break;

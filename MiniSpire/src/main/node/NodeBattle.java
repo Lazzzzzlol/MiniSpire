@@ -200,6 +200,7 @@ public class NodeBattle extends Node {
 	public void onWin(){
 
 		isWin = true;
+		Player.getInstance().onWin();
 
 		Main.executor.schedule(() -> {
 			onWinDraw();

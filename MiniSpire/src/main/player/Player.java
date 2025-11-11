@@ -186,6 +186,13 @@ public class Player {
 	    }
 	}
 
+	public void onWin(){
+		drawCardList.addAll(discardCardList);
+		discardCardList.clear();
+		drawCardList.addAll(handCardList);
+		handCardList.clear();
+	}
+
 	public int getHp() {
 		return hp;
 	}
@@ -425,7 +432,6 @@ public class Player {
 				for (Card card : bucket) {
 					indexToCardMap.put(index, card);
 					TextDisplay.printLineWithDelay("   " + index++ + ") " + " [" + card.getRarity() + "] <" + card.getCost() + "> "+ card.getName() + "  -" + card.getInfo() , 50);
-					index++;
 				}
 				System.out.println();
 			}

@@ -233,8 +233,11 @@ public class IndomitableWill extends Enemy {
 	}
 
 	private void torcleaver() {
-		// 只有实际造成伤害时才施加 Weakened
-		int actualDamage = DamageProcessor.applyDamageToPlayer(20, Player.getInstance());
+		// Gives Weakened only when damage is dealt successfully
+		int damage = 20;
+		DamageProcessor.applyDamageToPlayer(damage, this, Player.getInstance());
+
+		int actualDamage = DamageProcessor.calculateDamageToPlayer(damage, this, Player.getInstance());
 		if (actualDamage > 0) {
 			Player.getInstance().addBuff(new BuffWeakened(2), 2);
 		}
@@ -242,8 +245,8 @@ public class IndomitableWill extends Enemy {
 
 	private void delirium() {
 		int damage = 10 + deliriumDamageBonus;
-		int actualDamage = DamageProcessor.calculateDamageToPlayer(damage, Player.getInstance());
-		DamageProcessor.applyDamageToPlayer(damage, Player.getInstance());
+		int actualDamage = DamageProcessor.calculateDamageToPlayer(damage, this, Player.getInstance());
+		DamageProcessor.applyDamageToPlayer(damage, this, Player.getInstance());
 
 		lastDeliriumHit = (actualDamage > 0);
 
@@ -264,7 +267,7 @@ public class IndomitableWill extends Enemy {
 		// 如果 Delirium 未命中，重新使用并 +10 伤害；否则施加 Muted
 		if (!lastDeliriumHit) {
 			deliriumDamageBonus += 10;
-			System.out.println(" >> Reject: Delirium failed! Using again with +10 bonus!");
+			System.out.println(" >> Reject: Delirium failed!? Using again with +10 bonus!");
 			delirium();
 			deliriumDamageBonus -= 10;
 		} else {
@@ -329,7 +332,7 @@ public class IndomitableWill extends Enemy {
 
 		int playerHpBefore = Player.getInstance().getHp();
 		int damage = 16 + Main.random.nextInt(2);
-		DamageProcessor.applyDamageToPlayer(damage, Player.getInstance());
+		DamageProcessor.applyDamageToPlayer(damage, this, Player.getInstance());
 		int playerHpAfter = Player.getInstance().getHp();
 		
 		scarletDeliriumSucceeded = (playerHpBefore > playerHpAfter);
@@ -345,13 +348,13 @@ public class IndomitableWill extends Enemy {
 		}
 		
 		if (!scarletDeliriumSucceeded) {
-			System.out.println(" >> :... ..?");
+			System.out.println(" >> : ... ..?");
 			return;
 		}
 
 		int playerHpBefore = Player.getInstance().getHp();
 		int damage = 9 + Main.random.nextInt(3);
-		DamageProcessor.applyDamageToPlayer(damage, Player.getInstance());
+		DamageProcessor.applyDamageToPlayer(damage, this, Player.getInstance());
 		int playerHpAfter = Player.getInstance().getHp();
 		
 		impalementSucceeded = (playerHpBefore > playerHpAfter);
@@ -369,7 +372,7 @@ public class IndomitableWill extends Enemy {
 		}
 
 		addBuff(new BuffIgnore(1), 1);
-		DamageProcessor.applyDamageToPlayerIgnoreDefensive(23, Player.getInstance());
+		DamageProcessor.applyDamageToPlayer(23, this, Player.getInstance());
 
 		Iterator<Buff> iterator = buffList.iterator();
 		while (iterator.hasNext()) {

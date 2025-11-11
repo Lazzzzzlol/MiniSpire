@@ -236,9 +236,9 @@ public class Player {
 		if (this.hp < 0)
 			Game.getInstance().setIsGameOver(true);
 		
-		/* Main.executor.schedule(() -> {
+		Main.executor.schedule(() -> {
 			System.out.println(" >> Took " + damage + " damage.");
-		}, 1, TimeUnit.SECONDS); */
+		}, 1, TimeUnit.SECONDS);
 	}
 	
 	public int getActionPoints() {

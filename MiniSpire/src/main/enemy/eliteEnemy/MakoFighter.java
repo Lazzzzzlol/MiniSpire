@@ -44,7 +44,7 @@ public class MakoFighter extends Enemy {
 	}
 
 	private void makoSharko() {
-		DamageProcessor.applyDamageToPlayer(15, Player.getInstance());
+		DamageProcessor.applyDamageToPlayer(15, this, Player.getInstance());
 	}
 
 	private void killerWail() {
@@ -53,9 +53,9 @@ public class MakoFighter extends Enemy {
 	}
 
 	private void tripleTornado() {
-		DamageProcessor.applyDamageToPlayer(4, Player.getInstance());
-		DamageProcessor.applyDamageToPlayer(5, Player.getInstance());
-		DamageProcessor.applyDamageToPlayer(6, Player.getInstance());
+		DamageProcessor.applyDamageToPlayer(4, this, Player.getInstance());
+		DamageProcessor.applyDamageToPlayer(5, this, Player.getInstance());
+		DamageProcessor.applyDamageToPlayer(6, this, Player.getInstance());
 	}
 
 	private void dive() {

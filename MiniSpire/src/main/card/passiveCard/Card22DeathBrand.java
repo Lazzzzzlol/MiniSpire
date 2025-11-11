@@ -16,7 +16,8 @@ public class Card22DeathBrand extends PassiveCard{
     public void onDiscard() {
 
         int baseDamage = 4;
+        
 		Player player = Player.getInstance();
-		DamageProcessor.applyDamageToPlayer(baseDamage, player);
+		DamageProcessor.applyDamageToPlayer(baseDamage, null, player);
 	}
 }

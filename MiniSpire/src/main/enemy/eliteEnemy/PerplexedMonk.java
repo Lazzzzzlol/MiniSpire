@@ -60,14 +60,14 @@ public class PerplexedMonk extends Enemy {
 		System.out.println(" >> Leaping Opo!");
 		int dmg = 9 + Main.random.nextInt(3); // 9-11
 		if (haveOpoStance) dmg += 5;
-		DamageProcessor.applyDamageToPlayer(dmg, Player.getInstance());
+		DamageProcessor.applyDamageToPlayer(dmg, this, Player.getInstance());
 		chakras.add("Opo");
 	}
 
 	private void risingRaptor() {
 		System.out.println(" >> Rising Raptor!");
 		int dmg = 12 + Main.random.nextInt(3); // 12-14
-		DamageProcessor.applyDamageToPlayer(dmg, Player.getInstance());
+		DamageProcessor.applyDamageToPlayer(dmg, this, Player.getInstance());
 		chakras.add("Raptor");
 		// if damage dealt successfully, gain Endure 2 (忍耐)
 		addBuff(new BuffTough(2), 2);
@@ -76,7 +76,7 @@ public class PerplexedMonk extends Enemy {
 	private void pouncingCoeurl() {
 		System.out.println(" >> Poucing Coeurl!");
 		int dmg = 11 + Main.random.nextInt(3); // 11-13
-		DamageProcessor.applyDamageToPlayer(dmg, Player.getInstance());
+		DamageProcessor.applyDamageToPlayer(dmg, this, Player.getInstance());
 		chakras.add("Coeurl");
 		// if damage dealt successfully, gain 魔猿身形 标记
 		haveOpoStance = true;
@@ -87,16 +87,16 @@ public class PerplexedMonk extends Enemy {
 		if (types <= 0) return;
 		if (types == 1) {
 			System.out.println(" >> Tornado Kick!");
-		DamageProcessor.applyDamageToPlayer(20, Player.getInstance());
+		DamageProcessor.applyDamageToPlayer(20, this, Player.getInstance());
 			return;
 		}
 		if (types == 2) {
 			System.out.println(" >> Phantom Rush!");
-		DamageProcessor.applyDamageToPlayer(30, Player.getInstance());
+		DamageProcessor.applyDamageToPlayer(30, this, Player.getInstance());
 			return;
 		}
 		System.out.println(" >> Fires Reply!");
-		DamageProcessor.applyDamageToPlayer(50, Player.getInstance());
+		DamageProcessor.applyDamageToPlayer(50, this, Player.getInstance());
 	}
 }
 

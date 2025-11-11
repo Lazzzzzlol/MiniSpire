@@ -148,7 +148,7 @@ public class Thanalous extends Enemy {
 	private void gibbet() {
 		System.out.println(" >> Gibbet!");
 		int damage = 13 + Main.random.nextInt(5); // 13-17
-		DamageProcessor.applyDamageToPlayer(damage, Player.getInstance());
+		DamageProcessor.applyDamageToPlayer(damage, this, Player.getInstance());
 		Player.getInstance().addBuff(new BuffEnshroud(1), 1);
 		movementCounter++;
 	}
@@ -162,7 +162,7 @@ public class Thanalous extends Enemy {
 	private void guillotine() {
 		System.out.println(" >> Guillotine!");
 		int damage = 35;
-		DamageProcessor.applyDamageToPlayer(damage, Player.getInstance());
+		DamageProcessor.applyDamageToPlayer(damage, this, Player.getInstance());
 		movementCounter++;
 	}
 
@@ -181,7 +181,7 @@ public class Thanalous extends Enemy {
 		System.out.println(" >> Devour!");
 		int bonus = 1 + Main.random.nextInt(2);
 		int damage = 20 + Main.random.nextInt(4) + declarationCount * bonus;
-		DamageProcessor.applyDamageToPlayer(damage, Player.getInstance());
+		DamageProcessor.applyDamageToPlayer(damage, this, Player.getInstance());
 		movementCounter++;
 	}
 

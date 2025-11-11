@@ -17,44 +17,16 @@ public class DamageProcessor {
         processDamage(baseDamage, Player.getInstance(), target, false);
     }
     
-    public static int applyDamageToPlayer(int baseDamage, Player target) {
-        int actualDamage = calculateDamageOnly(baseDamage, null, target, false);
-        processDamage(baseDamage, null, target, false);
-        return actualDamage;
-    }
-    
-    /**
-     * 对玩家造成伤害，无视防御（Tough、Reflective、Invincible）
-     */
-    public static void applyDamageToPlayerIgnoreDefensive(int baseDamage, Player target) {
-        // 临时移除防御性 Buff
-        java.util.ArrayList<Buff> tempBuffs = new java.util.ArrayList<>();
-        java.util.List<Buff> playerBuffs = target.getBuffList();
-        
-        for (Buff buff : playerBuffs) {
-            if (buff.getName().equals("Tough") || buff.getName().equals("Reflective") || buff.getName().equals("Invincible")) {
-                tempBuffs.add(buff);
-            }
-        }
-        
-        playerBuffs.removeAll(tempBuffs);
-        
-        // 直接扣除 HP（不经过 DamageProcessor 的减伤计算）
-        target.deductHp(baseDamage);
-        Main.executor.schedule(() -> {
-            System.out.println(" >> " + "Took " + baseDamage + " damage");
-        }, 1, TimeUnit.SECONDS);
-        
-        // 恢复 Buff
-        playerBuffs.addAll(tempBuffs);
+    public static void applyDamageToPlayer(int baseDamage, Enemy attacker, Player target) {
+        processDamage(baseDamage, attacker, target, false);
     }
 
     public static int calculateDamageToEnemy(int baseDamage, Enemy target) {
         return calculateDamageOnly(baseDamage, Player.getInstance(), target, false);
     }
     
-    public static int calculateDamageToPlayer(int baseDamage, Player target) {
-        return calculateDamageOnly(baseDamage, null, target, false);
+    public static int calculateDamageToPlayer(int baseDamage, Enemy attacker, Player target) {
+        return calculateDamageOnly(baseDamage, attacker, target, false);
     }
 
     private static void processDamage(int baseDamage, Object attacker, Object target, boolean isReflective) {
@@ -70,71 +42,23 @@ public class DamageProcessor {
             }
             
             int finalDamage = calculateDamageOnly(baseDamage, attacker, target, isReflective);
-            boolean hasBloodLeeching = hasBloodLeeching(attacker);
-            boolean hasReflective = hasReflective(target) && !isReflective;
-            boolean hasStratagem = hasStratagem(attacker);
-            
+
             if (finalDamage > 0) {
+                applyDamageEffect(baseDamage, finalDamage, attacker, target);
+            } else applyZeroDamageEffect(target);
 
-                String damageDisplay = getDamageDisplay(baseDamage, finalDamage);
-
-                if (target instanceof Enemy) {
-                    Enemy enemy = (Enemy) target;
-                    
-                    // 检查是否有 Steelsoul buff
-                    boolean hasSteelsoul = hasSteelsoul(enemy);
-                    
-                    if (hasSteelsoul) {
-                        // 有 Steelsoul：吸收伤害
-                        enemy.absorbDamageWithSteelsoul(finalDamage);
-                        Main.executor.schedule(() -> {
-                            System.out.println(" >> " + enemy.getName() + " absorbs " + damageDisplay + " damage (Steelsoul)");
-                            if (enemy.getBuffList().stream().anyMatch(buff -> "Steadfast".equals(buff.getName()))) {
-                                ((Watcher) enemy).addGettedDamageCounter(finalDamage);
-                            }
-                        }, 1, TimeUnit.SECONDS);
-                    } else {
-                        // 没有 Steelsoul：正常扣除 HP
-                        enemy.deductHp(finalDamage);
-                        Main.executor.schedule(() -> {
-                            System.out.println(" >> " + enemy.getName() + " takes " + damageDisplay + " damage");
-                            if (enemy.getBuffList().stream().anyMatch(buff -> "Steadfast".equals(buff.getName()))) {
-                                ((Watcher) enemy).addGettedDamageCounter(finalDamage);
-                            }
-                        }, 1, TimeUnit.SECONDS);
-                    }
-
-                } else if (target instanceof Player) {
-                    ((Player) target).deductHp(finalDamage);
-                    Main.executor.schedule(() -> {
-                        System.out.println(" >> " + "Took " + damageDisplay + " damage");
-                    }, 1, TimeUnit.SECONDS);
-                }
-            } else {
-                if (target instanceof Enemy) {
-                    Main.executor.schedule(() -> {
-                        System.out.println(" >> " + ((Enemy) target).getName() + " takes 0 damage");
-                    }, 1, TimeUnit.SECONDS);
-                } else if (target instanceof Player) {
-                    Main.executor.schedule(() -> {
-                        System.out.println(" >> Took 0 damage");
-                    }, 1, TimeUnit.SECONDS);
-                }
-            }
-            
-            if (hasReflective && finalDamage > 0 && attacker != null) {
+            if (hasReflective(target) && !isReflective && finalDamage > 0 && attacker != null) {
                 processDamage(finalDamage, target, attacker, true);
             }
 
-            if (hasBloodLeeching && finalDamage > 0 && attacker != null) {
+            if (hasBloodLeeching(attacker) && finalDamage > 0 && attacker != null) {
                 HealProcessor.applyHeal(attacker, finalDamage);
             }
 
-            if (hasStratagem && finalDamage > 0 && attacker != null) {
-                if (attacker instanceof Player) {
-                    ((Player) attacker).changeCurrentActionPoint(1);
-                    ((Player) attacker).drawHandCards(1);
-                }
+            if (hasStratagem(attacker) && finalDamage > 0 && attacker != null && attacker instanceof Player) {
+                Player playerAttacker = (Player) attacker;
+                playerAttacker.changeCurrentActionPoint(1);
+                playerAttacker.drawHandCards(1);
             }
             
         } finally {
@@ -142,117 +66,191 @@ public class DamageProcessor {
             if (isReflective) {
                 isReflectiveDamage.set(false);
             }
+
         }
     }
     
     private static int calculateDamageOnly(int baseDamage, Object attacker, Object target, boolean isReflective) {
-        
-        if (hasInvincible(target)) return 0;
 
+        if (hasInvincible(target)) return 0;
+        
         float damageMultiplier = 1.0f;
+        boolean attackFailed = false;
+        boolean attackAbsorbed = false;
 
         if (attacker != null) {
             List<Buff> attackerBuffs = getBuffList(attacker);
             for (Buff buff : attackerBuffs) {
                 switch (buff.getName()) {
+
                     case "Strengthened":
                         damageMultiplier += 0.3f;
                         break;
                     case "Weakened":
                         damageMultiplier -= 0.3f;
                         break;
+
                     case "Indomitable":
-                        if (attacker instanceof Enemy) {
-                            damageMultiplier *= 2.0f;
-                        }
+                        damageMultiplier *= 2.0f;
                         break;
+
                 }
             }
         }
-        
+
         List<Buff> targetBuffs = getBuffList(target);
         for (Buff buff : targetBuffs) {
             switch (buff.getName()) {
+
                 case "Vulnerable":
                     damageMultiplier += 0.3f;
                     break;
                 case "Tough":
                     damageMultiplier -= 0.3f;
                     break;
-                case "Misty":
-                    damageMultiplier = mistyDamageDecider();
-                    break;
+                    
                 case "Enshroud":
                     damageMultiplier += 0.5f;
+                    break;
+
+                case "Misty":
+                    if (Main.random.nextInt(2) == 0) {
+                        attackFailed = true;
+                        damageMultiplier = 0.0f;
+                    }
+                    break;
+                case "Steelsoul":
+                    attackAbsorbed = true;
+                    break;
+
             }
         }
-        
+
         damageMultiplier = Math.max(damageMultiplier, 0);
-        return Math.round(baseDamage * damageMultiplier);
-    }
-
-    private static float mistyDamageDecider() {
-
-        switch (Main.random.nextInt(2)) {
-            case 0:
-                Main.executor.schedule(() -> {
-                    System.out.println( " >> The attack fails (Misty)");
-                }, 1, TimeUnit.MILLISECONDS);
-                return 0.0f;
+        int calculatedDamage = Math.round(baseDamage * damageMultiplier);
         
-            case 1:
-                return 1.0f;
-
-            default:
-                return 1.0f;
+        if (attackFailed) {
+            scheduleDamageMessage(target, "The attack fails (Misty)", 1);
+            return 0;
         }
+        
+        if (attackAbsorbed && target instanceof Enemy) {
+            Enemy enemy = (Enemy) target;
+            enemy.absorbDamageWithSteelsoul(calculatedDamage);
+            String message = getTargetName(target) + " absorbs " + 
+                           getDamageDisplay(baseDamage, calculatedDamage) + " damage (Steelsoul)";
+            scheduleDamageMessage(target, message, 1);
+            
+            if (hasSteadfast(target)) {
+                ((Watcher) target).addGettedDamageCounter(calculatedDamage);
+            }
+            return 0;
+        }
+        
+        return calculatedDamage;
+    }
+    
+    private static void applyDamageEffect(int baseDamage, int finalDamage, Object attacker, Object target) {
+
+        String damageDisplay = getDamageDisplay(baseDamage, finalDamage);
+        String message;
+        
+        if (target instanceof Enemy) {
+
+            Enemy enemy = (Enemy) target;
+            enemy.deductHp(finalDamage);
+            message = getTargetName(target) + " takes " + damageDisplay + " damage";
+            
+            if (hasSteadfast(target)) {
+                ((Watcher) target).addGettedDamageCounter(finalDamage);
+            }
+
+        } else if (target instanceof Player) {
+
+            ((Player) target).deductHp(finalDamage);
+            message = "Took " + damageDisplay + " damage";
+
+        } else {
+            return;
+        }
+        
+        scheduleDamageMessage(target, message, 1);
+    }
+    
+    private static void applyZeroDamageEffect(Object target) {
+        
+        String message;
+
+        if (target instanceof Enemy) {
+            message = getTargetName(target) + " takes 0 damage";
+        } else {
+            message = "Took 0 damage";
+        }
+
+        scheduleDamageMessage(target, message, 1);
+    }
+    
+    private static void scheduleDamageMessage(Object target, String message, int delaySeconds) {
+
+        Main.executor.schedule(() -> {
+            System.out.println(" >> " + message);
+        }, delaySeconds, TimeUnit.SECONDS);
+    }
+    
+    private static String getTargetName(Object target) {
+
+        if (target instanceof Enemy) {
+            return ((Enemy) target).getName();
+        }
+        return "";
     }
     
     private static boolean hasBloodLeeching(Object attacker) {
-        
+
         if (attacker == null) return false;
-        
-        List<Buff> attackerBuffs = getBuffList(attacker);
-        return attackerBuffs.stream().anyMatch(buff -> "BloodLeeching".equals(buff.getName()));
+        List<Buff> buffs = getBuffList(attacker);
+        return buffs.stream().anyMatch(buff -> "BloodLeeching".equals(buff.getName()));
     }
     
     private static boolean hasInvincible(Object target) {
-        
+
         List<Buff> buffs = getBuffList(target);
         return buffs.stream().anyMatch(buff -> "Invincible".equals(buff.getName()));
     }
 
     private static boolean hasReflective(Object target) {
-        
+
         List<Buff> buffs = getBuffList(target);
         return buffs.stream().anyMatch(buff -> "Reflective".equals(buff.getName()));
     }
 
     private static boolean hasStratagem(Object target) {
-        
+
         List<Buff> buffs = getBuffList(target);
         return buffs.stream().anyMatch(buff -> "Stratagem".equals(buff.getName()));
     }
     
-    /**
-     * 检查敌人是否有 Steelsoul buff
-     */
-    private static boolean hasSteelsoul(Enemy enemy) {
-        return enemy.getBuffList().stream()
-            .anyMatch(buff -> "Steelsoul".equals(buff.getName()));
+    private static boolean hasSteadfast(Object target) {
+
+        if (!(target instanceof Enemy)) return false;
+
+        List<Buff> buffs = getBuffList(target);
+        return buffs.stream().anyMatch(buff -> "Steadfast".equals(buff.getName()));
     }
     
     private static List<Buff> getBuffList(Object obj) {
-        
+
         if (obj instanceof Player) {
             return ((Player) obj).getBuffList();
         } else if (obj instanceof Enemy) {
             return ((Enemy) obj).getBuffList();
         }
+
         return java.util.Collections.emptyList();
     }
 
     private static String getDamageDisplay(int baseDamage, int finalDamage) {
+        
         if (finalDamage == baseDamage) {
             return String.valueOf(finalDamage);
         } else if (finalDamage > baseDamage) {

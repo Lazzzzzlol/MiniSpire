@@ -69,20 +69,20 @@ public class PhantomBard extends Enemy {
 
 	private void ladonsbite() {
 		int dmg = 7 + Main.random.nextInt(3); // 7-9
-		DamageProcessor.applyDamageToPlayer(dmg, Player.getInstance());
+		DamageProcessor.applyDamageToPlayer(dmg, this, Player.getInstance());
 		cycleDamage += dmg;
 	}
 
 	private void heartbreakShot() {
 		int dmg = 4;
-		DamageProcessor.applyDamageToPlayer(dmg, Player.getInstance());
+		DamageProcessor.applyDamageToPlayer(dmg, this, Player.getInstance());
 		Player.getInstance().addBuff(new BuffLost(1), 1);
 		cycleDamage += dmg;
 	}
 
 	private void shadowbite() {
 		int dmg = 6 + Main.random.nextInt(3); // 6-8
-		DamageProcessor.applyDamageToPlayer(dmg, Player.getInstance());
+		DamageProcessor.applyDamageToPlayer(dmg, this, Player.getInstance());
 		Player.getInstance().addBuff(new main.buff.debuff.BuffWeakened(2), 2);
 		cycleDamage += dmg;
 	}

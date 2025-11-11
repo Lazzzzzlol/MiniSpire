@@ -20,6 +20,6 @@ public class Card04AbdomenTear extends AttackCard {
         DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
 
 		int baseSelfDamage = 3;
-		DamageProcessor.applyDamageToPlayer(baseSelfDamage, player);
+		DamageProcessor.applyDamageToPlayer(baseSelfDamage, null, player);
     }
 }

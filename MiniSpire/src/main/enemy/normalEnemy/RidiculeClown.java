@@ -64,7 +64,7 @@ public class RidiculeClown extends Enemy {
 		if (lastSurpriseDamage != null && lastSurpriseDamage == dmg) {
 			dmg *= 2;
 		}
-		DamageProcessor.applyDamageToPlayer(dmg, Player.getInstance());
+		DamageProcessor.applyDamageToPlayer(dmg, this, Player.getInstance());
 		lastSurpriseDamage = dmg ;
 	}
 

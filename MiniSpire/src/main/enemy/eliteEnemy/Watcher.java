@@ -59,17 +59,17 @@ public class Watcher extends Enemy{
 	}
 
 	private void bluntHit() {
-		DamageProcessor.applyDamageToPlayer(6, Player.getInstance());
+		DamageProcessor.applyDamageToPlayer(6, this, Player.getInstance());
 		Player.getInstance().addBuff(new BuffWeakened(2), 2);
 	}
 
 	private void stabHit() {
-		DamageProcessor.applyDamageToPlayer(6, Player.getInstance());
+		DamageProcessor.applyDamageToPlayer(6, this, Player.getInstance());
 		Player.getInstance().addBuff(new BuffVulnerable(2), 2);
 	}
 
 	private void slashHit() {
-		DamageProcessor.applyDamageToPlayer(12 + Main.random.nextInt(4), Player.getInstance()); // 12-15
+		DamageProcessor.applyDamageToPlayer(12 + Main.random.nextInt(4), this, Player.getInstance()); // 12-15
 		Player.getInstance().addBuff(new BuffLost(2), 2);
 	}
 

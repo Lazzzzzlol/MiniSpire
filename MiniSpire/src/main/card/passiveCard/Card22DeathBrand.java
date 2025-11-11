@@ -1,6 +1,7 @@
 package main.card.passiveCard;
 
-import main.*; //use to trigger warning, delete it after fill onUse()
+import main.buff.DamageProcessor;
+import main.player.Player;
 
 public class Card22DeathBrand extends PassiveCard{
     
@@ -13,6 +14,9 @@ public class Card22DeathBrand extends PassiveCard{
 
     @Override
     public void onDiscard() {
-        //need to fill
-    }
+
+        int baseDamage = 4;
+		Player player = Player.getInstance();
+		DamageProcessor.applyDamageToPlayer(baseDamage, player);
+	}
 }

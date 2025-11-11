@@ -1,6 +1,8 @@
 package main.card.passiveCard;
 
-import main.*; //use to trigger warning, delete it after fill onUse()
+import main.buff.HealProcessor;
+import main.buff.positiveBuff.BuffRecovering;
+import main.player.Player;
 
 public class Card20OldRadiantLifegem extends PassiveCard{
     
@@ -13,6 +15,12 @@ public class Card20OldRadiantLifegem extends PassiveCard{
 
     @Override
     public void onDiscard() {
-        //need to fill
+
+        Player player = Player.getInstance();
+
+		int finalHeal = HealProcessor.calculateHeal(player.getBuffList(), 12);
+		player.addHp(finalHeal);
+
+		player.addBuff(new BuffRecovering(3), 3);
     }
 }

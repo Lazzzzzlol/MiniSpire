@@ -1,7 +1,7 @@
 package main.card.passiveCard;
 
 import main.player.Player;
-import main.*; //use to trigger warning, delete it after fill onUse()
+import main.buff.HealProcessor;
 
 public class Card19RecoveryStone extends PassiveCard{
     
@@ -14,6 +14,10 @@ public class Card19RecoveryStone extends PassiveCard{
 
     @Override
     public void onDiscard() {
-        //need to fill
+        
+        Player player = Player.getInstance();
+
+		int finalHeal = HealProcessor.calculateHeal(player.getBuffList(), 6);
+		player.addHp(finalHeal);
     }
 }

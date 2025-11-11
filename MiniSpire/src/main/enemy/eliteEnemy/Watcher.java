@@ -17,8 +17,8 @@ public class Watcher extends Enemy{
 	private int gettedDamagerCounter;
 	
 	public Watcher() {
-		gettedDamagerCounter = 0;
 		super("Watcher", 90 + Main.random.nextInt(31));
+		gettedDamagerCounter = 0;
 		Main.executor.schedule(() -> {
 			addBuff(new BuffSteadfast(1), 1);
 		}, 1, TimeUnit.SECONDS);

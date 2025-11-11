@@ -65,7 +65,7 @@ public class PlayCardProcessor {
         Card flurryCard = CardFactory.getInstance().createCard(24);
         player.getHandCardList().add(flurryCard);
         Main.executor.schedule(() -> {
-            System.out.println(" >> Drawed [Flurry of Blows]");
+            System.out.println(" >> Drawed " + flurryCard.getName());
         }, 1, TimeUnit.SECONDS);
     }
 }

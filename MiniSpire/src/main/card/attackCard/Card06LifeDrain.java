@@ -11,7 +11,7 @@ public class Card06LifeDrain extends AttackCard {
         this.name = "Life Drain";
         this.info = "Deal 6 damage; This attack has BloodLeeching.";
         this.cost = 2;
-        this.rarity = "rare";
+        this.rarity = "normal";
         this.baseDamage = 12;
     }
     

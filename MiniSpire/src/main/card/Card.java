@@ -49,11 +49,11 @@ public abstract class Card {
             case "normal":
                 return "\u001B[37mNORMAL\u001B[0m";
             case "rare":
-                return "\u001B[94mRARE\u001B[0m";
+                return "\u001B[34mRARE\u001B[0m";
             case "epic":
-                return "\u001B[95mEPIC\u001B[0m";
+                return "\u001B[35mEPIC\u001B[0m";
             case "legendary":
-                return "\u001B[93mLEGENDARY\u001B[0m";
+                return "\u001B[33mLEGENDARY\u001B[0m";
             default:
                 return this.rarity;
         }

@@ -33,6 +33,6 @@ public class BuffStratagem implements Buff{
 	
 	@Override
 	public void extendDuration(int duration) {
-		this.duration += duration;
+		this.duration += 0;
 	}
 }

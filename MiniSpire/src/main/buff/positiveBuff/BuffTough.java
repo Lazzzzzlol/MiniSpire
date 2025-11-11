@@ -2,7 +2,7 @@ package main.buff.positiveBuff;
 
 import main.buff.Buff;
 
-public class BuffTough implements Buff{
+public class BuffTough implements Buff {
 
 	String name = "Tough";
 	int duration = 0;

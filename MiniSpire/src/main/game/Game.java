@@ -4,6 +4,7 @@ import main.Main;
 import main.Util;
 import main.node.Node;
 import main.node.NodeBattle;
+import main.node.NodeBoss;
 import main.node.NodeDecider;
 import main.player.Player;
 import main.resourceFactory.CardFactory;
@@ -115,7 +116,7 @@ public class Game {
 		Main.executor.schedule(() -> {
 			for (int i = 0; i < spaceNum2 ; i++)
 				System.out.print(" ");
-			System.out.println(node.getName());
+			System.out.println(nodeIndex == 12 ? "Boss Battle" : node.getName());
 			System.out.println(Main.longLine);
 		}, 1, TimeUnit.SECONDS);
 		
@@ -172,7 +173,7 @@ public class Game {
 		hasDrawnNodeInfo = false;
 
 		currentNode = nodeDecider.decideNode(nodeIndex, nodeHistory, eliteEncounterCount);
-		if (currentNode.getClass() == NodeBattle.class)
+		if (currentNode.getClass() == NodeBattle.class || currentNode.getClass() == NodeBoss.class)
 			onUpdate();
 	}
 }

@@ -16,8 +16,8 @@ import main.resourceFactory.CardFactory;
 
 public class NodeBattle extends Node {
 	
-	private String enemyType;
-	private Enemy enemy;
+	protected String enemyType;
+	protected Enemy enemy;
 
 	private boolean isWin;
 	private Card rewardCard1;

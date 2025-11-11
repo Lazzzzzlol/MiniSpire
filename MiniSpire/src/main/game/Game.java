@@ -104,7 +104,7 @@ public class Game {
 	private void drawNodeInfo(Node node) {
 		
 		int spaceNum1 = Util.getCenterAlignSpaceNum((String)("Node " + nodeIndex), Main.longLine.length());
-		int spaceNum2 = Util.getCenterAlignSpaceNum(node.getName(), Main.longLine.length());
+		int spaceNum2 = Util.getCenterAlignSpaceNum(nodeIndex == 12 ? "Boss Battle" : node.getName(), Main.longLine.length());
 		
 		System.out.println(Main.longLine);
 		

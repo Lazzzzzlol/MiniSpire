@@ -15,6 +15,6 @@ public class Card16Holmgang extends EffectCard{
 
     @Override
     public void onUse(Player player, Enemy enemy) {
-        player.addBuff(new BuffInvincible(1), 1);
+        player.addBuff(new BuffInvincible(3), 3);
     }
 }

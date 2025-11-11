@@ -98,7 +98,7 @@ public class CardFactory implements ResourceFactory {
 		cardPool.add(new Card23Ragnarok()); 				//23	epic
 		cardPool.add(new Card24FlurryOfBlows());			//24	rare
 		cardPool.add(new Card25TheSinisterBlade());			//25	epic
-		cardPool.add(new Card26Stratagem());				//26	epic
+		cardPool.add(new Card26Stratagem());				//26	legendary
 		cardPool.add(new Card27InnerRelease());				//27	rare
 
 		cardPool.add(new Card28Tremble());					//28 	normal

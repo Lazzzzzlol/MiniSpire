@@ -8,8 +8,8 @@ public class Card16Holmgang extends EffectCard{
     
     public Card16Holmgang() {
         this.name = "Holmgang";
-        this.info = "Apply 1 round Invincible to self.";
-        this.rarity = "epic";
+        this.info = "Apply 3 round Invincible to self.";
+        this.rarity = "legendary";
         this.cost = 2;
     }
 

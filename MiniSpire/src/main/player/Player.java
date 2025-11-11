@@ -305,7 +305,7 @@ public class Player {
 		buffList.add(buff);
 		Main.executor.schedule(() -> {
 			System.out.println(" >> Obtained buff: " + buff.getName());
-		}, 1, TimeUnit.SECONDS);
+		}, 1, TimeUnit.MILLISECONDS);
 	}
 	
 	public ArrayList<Buff> getBuffList() {

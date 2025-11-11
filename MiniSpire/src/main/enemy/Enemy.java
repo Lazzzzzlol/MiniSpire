@@ -68,7 +68,7 @@ public class Enemy {
 				
 		buffList.add(buff);
 		Main.executor.schedule(() -> {
-			System.out.println(" >> " + this.name + " gains buff " + buff.getName());
+			System.out.println(" >> " + this.name + " obtains buff " + buff.getName());
 		}, 1, TimeUnit.SECONDS);
 	}
 	
@@ -96,13 +96,13 @@ public class Enemy {
 			this.hp = initialHp;
 		
 		Main.executor.schedule(() -> {
-			System.out.println(" >> " + this.name + " heals " + heal + " HP.");
+			System.out.println(" >> " + this.name + " heals " + heal + " HP ");
 		}, 1, TimeUnit.SECONDS);
 	}
 
 	public void onDie(){
 
-		System.out.println("died");
+		System.out.println("dies");
 		boolean hasResurrection = buffList.stream()
                 .anyMatch(buff -> "Resurrection".equals(buff.getName()));
 

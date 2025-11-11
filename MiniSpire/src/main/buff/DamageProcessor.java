@@ -149,7 +149,7 @@ public class DamageProcessor {
         switch (Main.random.nextInt(2)) {
             case 0:
                 Main.executor.schedule(() -> {
-                    System.out.println( " >> The attack is failed (Misty)");
+                    System.out.println( " >> The attack fails (Misty)");
                 }, 1, TimeUnit.MILLISECONDS);
                 return 0.0f;
         

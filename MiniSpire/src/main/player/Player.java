@@ -201,16 +201,16 @@ public class Player {
 		if (this.hp > this.maxHp)
 			this.hp = this.maxHp;
 		if (delta >= 0) {
-			System.out.println(" >> Max HP increased by " + delta);
+			System.out.println(" >> Max HP increases by " + delta);
 		} else {
-			System.out.println(" >> Max HP decreased by " + (-delta));
+			System.out.println(" >> Max HP decreases by " + (-delta));
 		}
 	}
 	
 	public void addHp(int heal) {
 
 		if (heal == 0){
-			System.out.println(" >> Healed 0 HP (Lost)");
+			System.out.println(" >> Heals 0 HP (Lost)");
 			return;
 		}
 		
@@ -219,7 +219,7 @@ public class Player {
 			this.hp = this.maxHp;
 		
 		//Main.executor.schedule(() -> {
-			System.out.println(" >> Healed " + heal + " HP.");
+			System.out.println(" >> Heals " + heal + " HP.");
 		//}, 1, TimeUnit.SECONDS);
 	}
 	
@@ -249,9 +249,9 @@ public class Player {
 		if (this.actionPoints > this.maxActionPoints)
 			this.actionPoints = this.maxActionPoints;
 		if (delta >= 0) {
-			System.out.println(" >> Max action points increased by " + delta + ".");
+			System.out.println(" >> Max action points increases by " + delta + ".");
 		} else {
-			System.out.println(" >> Max action points decreased by " + (-delta) + ".");
+			System.out.println(" >> Max action points decreases by " + (-delta) + ".");
 		}
 	}
 
@@ -281,9 +281,9 @@ public class Player {
 		if (this.drawCardNumPerTurn < 1)
 			this.drawCardNumPerTurn = 1;
 		if (delta >= 0) {
-			System.out.println(" >> Cards drawn per turn increased by " + delta + ".");
+			System.out.println(" >> Cards drawn per turn increases by " + delta + ".");
 		} else {
-			System.out.println(" >> Cards drawn per turn decreased by " + (-delta) + ".");
+			System.out.println(" >> Cards drawn per turn decreases by " + (-delta) + ".");
 		}
 	}
 	
@@ -296,7 +296,7 @@ public class Player {
 			}
 				
 		buffList.add(buff);
-		System.out.println(" >> Gained buff: " + buff.getName());
+		System.out.println(" >> Obtained buff: " + buff.getName());
 	}
 	
 	public ArrayList<Buff> getBuffList() {

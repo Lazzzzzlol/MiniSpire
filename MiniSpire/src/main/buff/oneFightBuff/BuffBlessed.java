@@ -7,7 +7,7 @@ public class BuffBlessed implements Buff{
 	String name = "Blessed";
 	int duration = 0;
 	
-	public BuffBlessed(int duration) {
+	public BuffBlessed(int  duration) {
 		this.duration = duration;
 	}
 	

@@ -175,35 +175,15 @@ public class Player {
 					break;
 				}
         	}
-			addHp(HealProcessor.calculateHeal(buffList, recoveringBuff.getDuration()));
+			HealProcessor.applyHeal(this, recoveringBuff.getDuration());
 		}
 		
 		discardCardList.addAll(handCardList);
 		handCardList.clear();
 		
 		if (buffList != null) {
-			for (Buff buff : buffList) {
-				if ("Steelsoul".equals(buff.getName()) && buff.getDuration() == 1) {
-
-					main.buff.positiveBuff.BuffSteelsoul steelsoul = (main.buff.positiveBuff.BuffSteelsoul) buff;
-					int damageToReturn = steelsoul.returnAbsorbedDamage();
-					if (damageToReturn > 0) {
-
-						main.game.Game game = main.game.Game.getInstance();
-						main.node.Node currentNode = game.getCurrentNode();
-						if (currentNode instanceof main.node.NodeBattle) {
-							main.node.NodeBattle battleNode = (main.node.NodeBattle) currentNode;
-							main.enemy.Enemy enemy = battleNode.getEnemy();
-							if (enemy != null && !enemy.getIsDied()) {
-								main.buff.DamageProcessor.applyDamageToEnemy(damageToReturn, enemy);
-							}
-						}
-					}
-				}
-			}
-			
-			for (Buff buff : buffList)
-				buff.onEndTurn();
+			// for (Buff buff : buffList)
+			// 	buff.onEndTurn();
 	        buffList.removeIf(buff -> buff.getDuration() <= 0);
 	    }
 	}

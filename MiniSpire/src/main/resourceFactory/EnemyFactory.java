@@ -28,7 +28,9 @@ public class EnemyFactory implements ResourceFactory {
 	}
 	
 	public static Enemy getRandomEnemy(String enemyType) {
-		//return new Thanalous();
+		return new Thanalous();
+		/*switch (enemyType) {
+		// return new IndomitableWill();
 		switch (enemyType) {
 			case "normal":
 
@@ -80,6 +82,6 @@ public class EnemyFactory implements ResourceFactory {
 				
 			default:
 				return new Zombie();
-		}
+		}*/
 	}
 }

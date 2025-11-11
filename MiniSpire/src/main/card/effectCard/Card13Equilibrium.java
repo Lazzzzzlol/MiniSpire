@@ -1,5 +1,6 @@
 package main.card.effectCard;
 
+import main.buff.HealProcessor;
 import main.buff.positiveBuff.BuffRecovering;
 import main.enemy.Enemy;
 import main.player.Player;
@@ -15,7 +16,7 @@ public class Card13Equilibrium extends EffectCard{
 
     @Override
     public void onUse(Player player, Enemy enemy) {
-        player.addHp(10);
+        HealProcessor.applyHeal(player, 10);
 		player.addBuff(new BuffRecovering(5), 5);
     }
 }

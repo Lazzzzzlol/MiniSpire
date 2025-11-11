@@ -62,7 +62,7 @@ public class NodeBattle extends Node {
 					break;
 				}
         	}
-			player.addHp(HealProcessor.calculateHeal(player.getBuffList(), recoveringBuff.getDuration()));
+			HealProcessor.applyHeal(player, recoveringBuff.getDuration());
 		}*/
 	}
 	
@@ -311,10 +311,6 @@ public class NodeBattle extends Node {
 	
 	public String getEnemyType() {
 		return enemyType;
-	}
-	
-	public Enemy getEnemy() {
-		return enemy;
 	}
 
 	public void setIsWin(boolean isWin){

@@ -14,6 +14,6 @@ public class Card28Tremble extends EffectCard{
 
     @Override
     public void onUse(Player player, Enemy enemy) {
-        player.drawHandCards(1);
+        player.drawHandCards(1, null);
     }
 }

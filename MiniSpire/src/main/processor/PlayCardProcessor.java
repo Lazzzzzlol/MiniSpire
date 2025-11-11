@@ -3,7 +3,6 @@ package main.processor;
 import main.player.Player;
 import main.resourceFactory.CardFactory;
 import main.Main;
-import main.Util;
 import main.card.Card;
 import main.card.attackCard.AttackCard;
 import main.card.effectCard.EffectCard;
@@ -81,7 +80,7 @@ public class PlayCardProcessor {
         player.getHandCardList().add(flurryCard);
         Main.executor.schedule(() -> {
             System.out.println(" >> Drawed card: " + flurryCard.getName());
-        }, 1, TimeUnit.SECONDS);
+        }, 1001, TimeUnit.MILLISECONDS);
 
     }
 }

@@ -10,7 +10,7 @@ public class Card26Stratagem extends AttackCard {
     
     public Card26Stratagem() {
         this.name = "Stratagem";
-        this.info = "During this round, when damage is dealt, gain 1 cost, draw 1 card. Apply 1 round of Vulnerable; Deal 8 damage.";
+        this.info = "During this round, when damage is dealt, draw 1 card, gain 1 cost. Apply 1 round of Vulnerable; Deal 8 damage.";
         this.cost = 3;
         this.rarity = "legendary";
         this.baseDamage = 8;

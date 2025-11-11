@@ -17,6 +17,6 @@ public class Card12Rampart extends EffectCard{
     @Override
     public void onUse(Player player, Enemy enemy) {
         player.addBuff(new BuffTough(2), 2);
-		HealProcessor.applyHeal(player, 5);
+		HealProcessor.applyHeal(player, 5, null);
     }
 }

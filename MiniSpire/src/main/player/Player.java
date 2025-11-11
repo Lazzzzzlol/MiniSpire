@@ -70,18 +70,20 @@ public class Player {
 	
 	public void onStartTurn() {
 		this.actionPoints = this.maxActionPoints;
-		drawHandCards(drawCardNumPerTurn);
+		drawHandCards(drawCardNumPerTurn, 2000);
 	}
 	
-	public void drawHandCards(int num) {
-		internalDrawHandCards(num);
+	public void drawHandCards(int num, Integer time) {
+		if (time == null) time = 1001;
+		internalDrawHandCards(num, time);
 	}
 
-	public List<Card> drawHandCardsWithDetails(int num) {
-		return internalDrawHandCards(num);
+	public List<Card> drawHandCardsWithDetails(int num, Integer time) {
+		if (time == null) time = 1001;
+		return internalDrawHandCards(num, time);
 	}
 
-	private List<Card> internalDrawHandCards(int num) {
+	private List<Card> internalDrawHandCards(int num, int time) {
 		List<Card> drawnCards = new ArrayList<>();
 		
 		if (drawCardList.size() < num) {
@@ -118,7 +120,7 @@ public class Player {
 			}
 			Main.executor.schedule(() -> {
 				System.out.println(log.toString());
-			}, 2, TimeUnit.SECONDS);
+			}, time, TimeUnit.MILLISECONDS);
 		}
 		
 		return drawnCards;
@@ -153,7 +155,9 @@ public class Player {
 		actionPoints += delta;
 		Main.executor.schedule(() -> {
 			if (delta > 0) {
-				System.out.println(" >> Action point +" + delta);
+				Main.executor.schedule(() -> {
+					System.out.println(" >> Action point +" + delta);
+				}, 1002, TimeUnit.MILLISECONDS);
 			} else if (delta < 0) {
 				System.out.println(" >> Action point " + delta);
 			} else if (delta == 0) {
@@ -175,7 +179,7 @@ public class Player {
 					break;
 				}
         	}
-			HealProcessor.applyHeal(this, recoveringBuff.getDuration());
+			HealProcessor.applyHeal(this, recoveringBuff.getDuration(), null);
 		}
 		
 		discardCardList.addAll(handCardList);
@@ -214,10 +218,14 @@ public class Player {
 		}
 	}
 	
-	public void addHp(int heal) {
+	public void addHp(int heal, Integer time) {
+
+		if (time == null) time = 1001;
 
 		if (heal == 0){
-			System.out.println(" >> Heals 0 HP (Lost)");
+			Main.executor.schedule(() -> {
+				System.out.println(" >> Healed 0 HP (Lost)");
+			}, time, TimeUnit.MILLISECONDS);
 			return;
 		}
 		
@@ -225,9 +233,9 @@ public class Player {
 		if (this.hp > this.maxHp)
 			this.hp = this.maxHp;
 		
-		//Main.executor.schedule(() -> {
-			System.out.println(" >> Heals " + heal + " HP");
-		//}, 1, TimeUnit.SECONDS);
+		Main.executor.schedule(() -> {
+			System.out.println(" >> Healed " + heal + " HP");
+		}, time, TimeUnit.MILLISECONDS);
 	}
 	
 	public void deductHp(int damage) {

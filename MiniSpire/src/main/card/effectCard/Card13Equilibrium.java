@@ -9,14 +9,14 @@ public class Card13Equilibrium extends EffectCard{
     
     public Card13Equilibrium() {
         this.name = "Equilibrium";
-        this.info = "Heal 10 hp; Apply 5 round Recovering to self.";
+        this.info = "Apply 5 round Recovering to self; Heal 10 hp. ";
         this.rarity = "rare";
         this.cost = 1;
     }
 
     @Override
     public void onUse(Player player, Enemy enemy) {
-        HealProcessor.applyHeal(player, 10);
 		player.addBuff(new BuffRecovering(5), 5);
+        HealProcessor.applyHeal(player, 10, null);
     }
 }

@@ -31,7 +31,7 @@ public class NodeSanctuary extends Node {
 		if (!hasHealed) {
 			int heal = (int)Math.floor(player.getMaxHp() * 0.3);
 			Main.executor.schedule(() -> {
-			HealProcessor.applyHeal(player, heal);
+			HealProcessor.applyHeal(player, heal, null);
 			hasHealed = true;
 			}, 1500, TimeUnit.MILLISECONDS);
 		}
@@ -63,7 +63,7 @@ public class NodeSanctuary extends Node {
 			case "1":
 				TextDisplay.printCharWithDelay(" >> Chosen: Play Safe.", 30);
 				player.changeMaxHp(20);
-				HealProcessor.applyHeal(player, 35);
+				HealProcessor.applyHeal(player, 35, null);
 				break;
 			case "2":
 				TextDisplay.printCharWithDelay(" >> Chosen: Play Strategy.", 30);

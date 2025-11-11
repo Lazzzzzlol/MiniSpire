@@ -52,13 +52,13 @@ public class DamageProcessor {
             }
 
             if (hasBloodLeeching(attacker) && finalDamage > 0 && attacker != null) {
-                HealProcessor.applyHeal(attacker, finalDamage);
+                HealProcessor.applyHeal(attacker, finalDamage, null);
             }
 
             if (hasStratagem(attacker) && finalDamage > 0 && attacker != null && attacker instanceof Player) {
                 Player playerAttacker = (Player) attacker;
                 playerAttacker.changeCurrentActionPoint(1);
-                playerAttacker.drawHandCards(1);
+                playerAttacker.drawHandCards(1, null);
             }
             
         } finally {
@@ -201,7 +201,7 @@ public class DamageProcessor {
     private static void scheduleDamageMessage(Object target, String message, int delaySeconds) {
 
         Main.executor.schedule(() -> {
-            System.out.println("\n >> " + message);
+            System.out.println(" >> " + message);
         }, delaySeconds, TimeUnit.SECONDS);
     }
     

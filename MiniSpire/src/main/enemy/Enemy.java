@@ -8,7 +8,6 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import main.Main;
-import main.Util;
 import main.buff.Buff;
 import main.processor.HealProcessor;
 
@@ -51,7 +50,7 @@ public class Enemy {
 					break;
 				}
         	}
-			HealProcessor.applyHeal(this, recoveringBuff.getDuration());
+			HealProcessor.applyHeal(this, recoveringBuff.getDuration(), null);
 		}
 		
 	    Iterator<Buff> it = buffList.iterator();

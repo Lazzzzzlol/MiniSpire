@@ -74,11 +74,11 @@ public class Watcher extends Enemy{
 	}
 
 	private void ruminateI() {
-		HealProcessor.applyHeal(this, 4 + Main.random.nextInt(3)); // 4-6
+		HealProcessor.applyHeal(this, 4 + Main.random.nextInt(3), null); // 4-6
 	}
 
 	private void ruminateII() {
-		HealProcessor.applyHeal(this, 6 + Main.random.nextInt(3)); // 6-8
+		HealProcessor.applyHeal(this, 6 + Main.random.nextInt(3), null); // 6-8
 	}
 
 	public void addGettedDamageCounter(int damage){

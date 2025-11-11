@@ -104,8 +104,8 @@ public class RidiculeClown extends Enemy {
 		}
 		if (roll >= 11 && roll <= 19) {
 			int heal = 1 + Main.random.nextInt(15);
-			HealProcessor.applyHeal(this, heal);
-			HealProcessor.applyHeal(Player.getInstance(), heal);
+			HealProcessor.applyHeal(this, heal, null);
+			HealProcessor.applyHeal(Player.getInstance(), heal, null);
 			return;
 		}
 		// 20

@@ -21,7 +21,7 @@ public class Card25TheSinisterBlade extends AttackCard {
     public void onPlay(Player player, Enemy enemy) {
         DamageProcessor.applyDamageToEnemy(baseDamage, Player.getInstance(), enemy);
 
-        List<Card> drawnCards = player.drawHandCardsWithDetails(1);
+        List<Card> drawnCards = player.drawHandCardsWithDetails(1, null);
         int attackCardCount = drawnCards.stream()
                 .filter(card -> "Attack".equals(card.getType()))
                 .mapToInt(card -> 1)

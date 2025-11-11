@@ -11,7 +11,7 @@ public class Card05DecesiveStrike extends AttackCard {
         this.name = "Decisive Strike";
         this.info = "Deal 15 damage; Apply 1 round Vulnerable.";
         this.cost = 2;
-        this.rarity = "rare";
+        this.rarity = "normal";
         this.baseDamage = 15;
     }
     

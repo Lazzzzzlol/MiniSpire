@@ -37,8 +37,6 @@ import main.card.passiveCard.Card20OldRadiantLifegem;
 import main.card.passiveCard.Card21BlessingOfTheErdtree;
 import main.card.passiveCard.Card22DeathBrand;
 
-
-
 public class CardFactory implements ResourceFactory {
 	
 	private static CardFactory instance = null;
@@ -50,23 +48,33 @@ public class CardFactory implements ResourceFactory {
 	}
 
 	private ArrayList<Card> cardPool;
-	private int normalCardNo = 8;
-	private int rareCardNo = 10;
-	private int epicCardNo = 7;
-	private int legendaryCardNo = 3;
-	//private int specialCardNo = 1;
+
+	private ArrayList<Card> normalCards;
+	private ArrayList<Card> rareCards;
+	private ArrayList<Card> epicCards;
+	private ArrayList<Card> legendaryCards;
+
+	private static final double NORMAL_RATE = 0.35;
+	private static final double RARE_RATE = 0.3;
+	private static final double EPIC_RATE = 0.225;
+	private static final double LEGENDARY_RATE = 0.125;
 
 	public CardFactory(){
 
 		cardPool = new ArrayList<>();
+
+		normalCards = new ArrayList<>();
+		rareCards = new ArrayList<>();
+		epicCards = new ArrayList<>();
+		legendaryCards = new ArrayList<>();
 
 		cardPool.add(new Card00Strike());					//00	normal
 		cardPool.add(new Card01Onslaught());				//01	normal
 		cardPool.add(new Card02Earthquake());				//02	normal
 		cardPool.add(new Card03Upheaval());					//03	rare
 		cardPool.add(new Card04AbdomenTear());				//04	normal
-		cardPool.add(new Card05DecesiveStrike());			//05	rare
-		cardPool.add(new Card06LifeDrain());				//06	rare
+		cardPool.add(new Card05DecesiveStrike());			//05	normal
+		cardPool.add(new Card06LifeDrain());				//06	normal
 		cardPool.add(new Card07Ruination());				//07	legendary
 
 		cardPool.add(new Card08Bloodbath());				//08	normal
@@ -88,12 +96,25 @@ public class CardFactory implements ResourceFactory {
 
 		//v1.1 new card
 		cardPool.add(new Card23Ragnarok()); 				//23	epic
-		cardPool.add(new Card24FlurryOfBlows());			//24	legendary
+		cardPool.add(new Card24FlurryOfBlows());			//24	rare
 		cardPool.add(new Card25TheSinisterBlade());			//25	epic
 		cardPool.add(new Card26Stratagem());				//26	epic
-		cardPool.add(new Card27InnerRelease());				//27	epic
+		cardPool.add(new Card27InnerRelease());				//27	rare
 
 		cardPool.add(new Card28Tremble());					//28 	normal
+
+		for (Card card : cardPool) {
+			String rarity = card.getRarity().toLowerCase().replace("\u001B[0m", "");
+			if (rarity.contains("normal")) {
+				normalCards.add(card);
+			} else if (rarity.contains("rare")) {
+				rareCards.add(card);
+			} else if (rarity.contains("epic")) {
+				epicCards.add(card);
+			} else if (rarity.contains("legendary")) {
+				legendaryCards.add(card);
+			}
+		}
 	}
 	
 	@Override
@@ -124,11 +145,11 @@ public class CardFactory implements ResourceFactory {
 		drawCardList.add(cardPool.get(19));
 
 		// Test: 
-		/* drawCardList.add(cardPool.get(23));
-		drawCardList.add(cardPool.get(23));
-		drawCardList.add(cardPool.get(23));
-		drawCardList.add(cardPool.get(23));
-		drawCardList.add(cardPool.get(23));
+		/* drawCardList.add(cardPool.get(24));
+		drawCardList.add(cardPool.get(24));
+		drawCardList.add(cardPool.get(24));
+		drawCardList.add(cardPool.get(24));
+		drawCardList.add(cardPool.get(24));
 		drawCardList.add(cardPool.get(9));
 		drawCardList.add(cardPool.get(9));
 		drawCardList.add(cardPool.get(9)); */
@@ -151,7 +172,7 @@ public class CardFactory implements ResourceFactory {
 
 	public Card getRandomCard(){
 
-		int randNum = Main.random.nextInt(10) + 1;
+		/* int randNum = Main.random.nextInt(10) + 1;
 		switch (randNum) {
 			case 1:
 			case 2:
@@ -173,12 +194,24 @@ public class CardFactory implements ResourceFactory {
 		
 			default:
 				return getRandomNormalCard();
+		} */
+
+		double randNum = Main.random.nextDouble();
+	
+		if (randNum < NORMAL_RATE) {
+			return getRandomNormalCard();
+		} else if (randNum < NORMAL_RATE + RARE_RATE) {
+			return getRandomRareCard();
+		} else if (randNum < NORMAL_RATE + RARE_RATE + EPIC_RATE) {
+			return getRandomEpicCard();
+		} else {
+			return getRandomLegendaryCard();
 		}
 	}
 
 	private Card getRandomLegendaryCard() {
 
-		int randNum = Main.random.nextInt(legendaryCardNo) + 1;
+		/* int randNum = Main.random.nextInt(legendaryCardNo) + 1;
 		switch (randNum) {
 			case 1:
 				return cardPool.get(7);
@@ -191,12 +224,18 @@ public class CardFactory implements ResourceFactory {
 		
 			default:
 				return cardPool.get(7);
+		} */
+
+		if (legendaryCards.isEmpty()) {
+			return getRandomNormalCard();
 		}
+		int randNum = Main.random.nextInt(legendaryCards.size());
+		return legendaryCards.get(randNum);
 	}
 
 	private Card getRandomEpicCard() {
 		
-		int randNum = Main.random.nextInt(epicCardNo) + 1;
+		/* int randNum = Main.random.nextInt(epicCardNo) + 1;
 		switch (randNum) {
 			case 1:
 				return cardPool.get(16);
@@ -221,12 +260,18 @@ public class CardFactory implements ResourceFactory {
 		
 			default:
 				return cardPool.get(16);
+		} */
+
+		if (epicCards.isEmpty()) {
+			return getRandomNormalCard();
 		}
+		int randNum = Main.random.nextInt(epicCards.size());
+		return epicCards.get(randNum);
 	}
 
 	private Card getRandomRareCard() {
 
-		int randNum = Main.random.nextInt(rareCardNo) + 1;
+		/* int randNum = Main.random.nextInt(rareCardNo) + 1;
 		switch (randNum) {
 			case 1:
 				return cardPool.get(3);
@@ -260,12 +305,18 @@ public class CardFactory implements ResourceFactory {
 		
 			default:
 				return cardPool.get(3);
+		} */
+
+		if (rareCards.isEmpty()) {
+			return getRandomNormalCard();
 		}
+		int randNum = Main.random.nextInt(rareCards.size());
+		return rareCards.get(randNum);
 	}
 
 	private Card getRandomNormalCard() {
 		
-		int randNum = Main.random.nextInt(normalCardNo) + 1;
+		/* int randNum = Main.random.nextInt(normalCardNo) + 1;
 		switch (randNum) {
 			case 1:
 				return cardPool.get(0);
@@ -293,6 +344,12 @@ public class CardFactory implements ResourceFactory {
 
 			default :
 			return cardPool.get(0);
+		} */
+
+		if (normalCards.isEmpty()) {
+			return cardPool.get(0);
 		}
+		int randNum = Main.random.nextInt(normalCards.size());
+		return normalCards.get(randNum);
 	}
 }

@@ -8,7 +8,7 @@ import main.buff.DamageProcessor;
 import main.card.Card;
 import main.card.attackCard.AttackCard;
 
-public class Card17PrimalRend extends EffectCard{
+public class Card17PrimalRend extends EffectCard {
     
     public Card17PrimalRend() {
         this.name = "Primal Rend";
@@ -31,5 +31,5 @@ public class Card17PrimalRend extends EffectCard{
         }
 
         DamageProcessor.applyDamageToEnemy(baseDamage, enemy);
-    }
+	}
 }

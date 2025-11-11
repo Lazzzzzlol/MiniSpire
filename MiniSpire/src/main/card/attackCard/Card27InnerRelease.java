@@ -12,7 +12,7 @@ public class Card27InnerRelease extends AttackCard {
         this.name = "Inner Release";
         this.info = "Apply 2 round Strengthen, 2 round Tough to self, then deal 10 damage. If the card is never used in this round, cost change to 0.";
         this.cost = 0;
-        this.rarity = "epic";
+        this.rarity = "rare";
         this.baseDamage = 10;
     }
 

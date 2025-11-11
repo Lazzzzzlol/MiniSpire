@@ -33,6 +33,6 @@ public class BuffIndomitable implements Buff{
 	
 	@Override
 	public void extendDuration(int duration) {
-		this.duration += duration;
+		this.duration += 0;
 	}
 }

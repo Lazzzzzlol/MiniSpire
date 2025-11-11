@@ -1,4 +1,4 @@
-package main.buff;
+package main.processor;
 
 import main.player.Player;
 import main.resourceFactory.CardFactory;

@@ -1,6 +1,6 @@
 package main.card.attackCard;
 
-import main.buff.DamageProcessor;
+import main.processor.DamageProcessor;
 import main.buff.debuff.BuffVulnerable;
 import main.buff.oneRoundBuff.BuffStratagem;
 import main.enemy.Enemy;

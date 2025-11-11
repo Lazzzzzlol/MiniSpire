@@ -1,6 +1,6 @@
 package main.card.effectCard;
 
-import main.buff.HealProcessor;
+import main.processor.HealProcessor;
 import main.buff.positiveBuff.BuffRecovering;
 import main.enemy.Enemy;
 import main.player.Player;

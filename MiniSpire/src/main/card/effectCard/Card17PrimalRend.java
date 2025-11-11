@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import main.enemy.Enemy;
 import main.player.Player;
-import main.buff.DamageProcessor;
+import main.processor.DamageProcessor;
 import main.card.Card;
 import main.card.attackCard.AttackCard;
 

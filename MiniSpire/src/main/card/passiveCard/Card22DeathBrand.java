@@ -1,6 +1,6 @@
 package main.card.passiveCard;
 
-import main.buff.DamageProcessor;
+import main.processor.DamageProcessor;
 import main.player.Player;
 
 public class Card22DeathBrand extends PassiveCard{

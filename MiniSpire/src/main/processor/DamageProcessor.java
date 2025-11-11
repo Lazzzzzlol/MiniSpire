@@ -1,9 +1,10 @@
-package main.buff;
+package main.processor;
 
 import main.player.Player;
 import main.Main;
 import main.enemy.Enemy;
 import main.enemy.eliteEnemy.Watcher;
+import main.buff.Buff;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;

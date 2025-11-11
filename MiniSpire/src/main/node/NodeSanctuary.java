@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 import main.Main;
 import main.TextDisplay;
 import main.Util;
-import main.buff.HealProcessor;
+import main.processor.HealProcessor;
 import main.game.Game;
 import main.player.Player;
 

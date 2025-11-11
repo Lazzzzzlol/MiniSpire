@@ -10,8 +10,8 @@ import main.buff.debuff.BuffVulnerable;
 import main.buff.debuff.BuffLost;
 import main.buff.oneFightBuff.BuffSteadfast;
 import main.buff.positiveBuff.BuffInvincible;
-import main.buff.DamageProcessor;
-import main.buff.HealProcessor;
+import main.processor.DamageProcessor;
+import main.processor.HealProcessor;
 
 public class Watcher extends Enemy{
 

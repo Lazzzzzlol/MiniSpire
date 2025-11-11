@@ -8,8 +8,8 @@ import main.buff.positiveBuff.BuffStrengthened;
 import main.buff.positiveBuff.BuffInvincible;
 import main.buff.positiveBuff.BuffReflective;
 import main.buff.positiveBuff.BuffTough;
-import main.buff.DamageProcessor;
-import main.buff.HealProcessor;
+import main.processor.DamageProcessor;
+import main.processor.HealProcessor;
 
 public class RidiculeClown extends Enemy {
 

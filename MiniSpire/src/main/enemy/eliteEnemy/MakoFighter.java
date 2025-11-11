@@ -7,7 +7,7 @@ import main.buff.debuff.BuffWeakened;
 import main.buff.debuff.BuffVulnerable;
 import main.buff.positiveBuff.BuffInvincible;
 import main.buff.positiveBuff.BuffRecovering;
-import main.buff.DamageProcessor;
+import main.processor.DamageProcessor;
 
 public class MakoFighter extends Enemy {
 

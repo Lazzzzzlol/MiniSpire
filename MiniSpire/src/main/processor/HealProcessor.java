@@ -1,8 +1,9 @@
-package main.buff;
+package main.processor;
 
 import java.util.List;
 import main.player.Player;
 import main.enemy.Enemy;
+import main.buff.Buff;
 
 public class HealProcessor {
     

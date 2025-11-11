@@ -1,7 +1,7 @@
 package main.card.passiveCard;
 
 import main.player.Player;
-import main.buff.HealProcessor;
+import main.processor.HealProcessor;
 
 public class Card19RecoveryStone extends PassiveCard{
     

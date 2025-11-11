@@ -1,6 +1,6 @@
 package main.card.passiveCard;
 
-import main.buff.HealProcessor;
+import main.processor.HealProcessor;
 import main.buff.positiveBuff.BuffRecovering;
 import main.player.Player;
 

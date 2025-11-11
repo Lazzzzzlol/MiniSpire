@@ -1,7 +1,7 @@
 package main.card.attackCard;
 
-import main.buff.DamageProcessor;
-import main.buff.HealProcessor;
+import main.processor.DamageProcessor;
+import main.processor.HealProcessor;
 import main.enemy.Enemy;
 import main.player.Player;
 

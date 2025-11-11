@@ -6,7 +6,7 @@ import main.enemy.Enemy;
 import main.player.Player;
 import main.Main;
 import main.buff.positiveBuff.BuffTough;
-import main.buff.DamageProcessor;
+import main.processor.DamageProcessor;
 
 public class PerplexedMonk extends Enemy {
 

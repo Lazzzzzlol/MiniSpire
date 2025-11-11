@@ -2,7 +2,7 @@ package main.card.attackCard;
 
 import java.util.List;
 
-import main.buff.DamageProcessor;
+import main.processor.DamageProcessor;
 import main.card.Card;
 import main.enemy.Enemy;
 import main.player.Player;

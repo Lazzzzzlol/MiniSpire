@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import main.Main;
 import main.buff.Buff;
-import main.buff.HealProcessor;
+import main.processor.HealProcessor;
 
 public class Enemy {
 	

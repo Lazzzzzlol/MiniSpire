@@ -11,7 +11,7 @@ import main.buff.positiveBuff.BuffTough;
 import main.buff.debuff.BuffLost;
 import main.buff.oneFightBuff.BuffMisty;
 import main.buff.positiveBuff.BuffRecovering;
-import main.buff.DamageProcessor;
+import main.processor.DamageProcessor;
 
 public class PhantomBard extends Enemy {
 

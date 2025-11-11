@@ -15,7 +15,7 @@ import main.buff.positiveBuff.BuffStrengthened;
 import main.buff.positiveBuff.BuffTough;
 import main.buff.positiveBuff.BuffSteelsoul;
 import main.buff.debuff.BuffWeakened;
-import main.buff.DamageProcessor;
+import main.processor.DamageProcessor;
 import main.buff.debuff.BuffMuted;
 import main.buff.debuff.BuffVulnerable;
 

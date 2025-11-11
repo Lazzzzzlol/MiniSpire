@@ -169,7 +169,7 @@ public class Game {
 	public void advanceToNextNode() {
 
 		nodeHistory.add(currentNode);
-		nodeIndex = 12;
+		nodeIndex += 1;
 		hasDrawnNodeInfo = false;
 
 		currentNode = nodeDecider.decideNode(nodeIndex, nodeHistory, eliteEncounterCount);

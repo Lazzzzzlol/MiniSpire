@@ -332,9 +332,9 @@ public class Player {
 		
 		String result = "";
 		for (int i = 0; i < handCardList.size() - 1; i++)
-			result += ((i + 1) + "-" + handCardList.get(i).getName() + "(" + handCardList.get(i).getCost() + "),  ");
-		result += (handCardList.size() + "-" + handCardList.get(handCardList.size() - 1).getName() + 
-				"(" + handCardList.get(handCardList.size() - 1).getCost() + ")");
+			result += ((i + 1) + ") <" + handCardList.get(i).getCost() + "> " + handCardList.get(i).getName() + ",  ");
+		result += (handCardList.size() + ") <" + handCardList.get(handCardList.size() - 1).getCost() + "> " + 
+				handCardList.get(handCardList.size() - 1).getName());
 		
 		return result;
 	}

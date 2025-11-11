@@ -228,10 +228,10 @@ public class NodeBattle extends Node {
 
 		System.out.println();
 		System.out.println(" >> Choose a reward card:");
-		System.out.println( " >> 1-" + rewardCard1.getName() + "(" + rewardCard1.getCost() + "), " + 
-								"2-" + rewardCard2.getName() + "(" + rewardCard2.getCost() + "), " + 
-								"3-" + rewardCard3.getName() + "(" + rewardCard3.getCost() + "), " +
-								"4-Move on");
+		System.out.println( " >> 1) [" + rewardCard1.getRarity() + "] <" + rewardCard1.getCost() + "> " + rewardCard1.getName() + ",  " + 
+							"2) [" + rewardCard2.getRarity() + "] <" + rewardCard2.getCost() + "> " + rewardCard2.getName() + ",  " + 
+							"3) [" + rewardCard3.getRarity() + "] <" + rewardCard3.getCost() + "> " + rewardCard3.getName() + ",  " +
+							"4) Move on");
 		System.out.println(Main.longLine);
 
 		System.out.print("Action >> ");

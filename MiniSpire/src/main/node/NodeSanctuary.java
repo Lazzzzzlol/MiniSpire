@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import main.Main;
 import main.TextDisplay;
 import main.Util;
+import main.buff.HealProcessor;
 import main.game.Game;
 import main.player.Player;
 
@@ -30,7 +31,7 @@ public class NodeSanctuary extends Node {
 		if (!hasHealed) {
 			int heal = (int)Math.floor(player.getMaxHp() * 0.3);
 			Main.executor.schedule(() -> {
-			player.addHp(heal);
+			HealProcessor.applyHeal(player, heal);
 			hasHealed = true;
 			}, 1500, TimeUnit.MILLISECONDS);
 		}
@@ -61,7 +62,7 @@ public class NodeSanctuary extends Node {
 			case "1":
 				TextDisplay.printCharWithDelay(" >> Chosen: Play Safe.", 30);
 				player.changeMaxHp(20);
-				player.addHp(20);
+				HealProcessor.applyHeal(player, 20);
 				break;
 			case "2":
 				TextDisplay.printCharWithDelay(" >> Chosen: Play Strategy.", 30);

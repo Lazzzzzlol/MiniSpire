@@ -44,7 +44,7 @@ public class Enemy {
 					break;
 				}
         	}
-			addHp(HealProcessor.calculateHeal(buffList, recoveringBuff.getDuration()));
+			HealProcessor.applyHeal(this, recoveringBuff.getDuration());
 		}
 		
 	    Iterator<Buff> it = buffList.iterator();

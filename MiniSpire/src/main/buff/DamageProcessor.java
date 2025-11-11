@@ -82,12 +82,7 @@ public class DamageProcessor {
             }
 
             if (hasBloodLeeching && finalDamage > 0 && attacker != null) {
-                int finalHeal = HealProcessor.calculateHeal(Player.getInstance().getBuffList(), finalDamage);
-                if (attacker instanceof Player) {
-                    ((Player) attacker).addHp(finalHeal);
-                } else if (attacker instanceof Enemy) {
-                    ((Enemy) attacker).addHp(finalHeal);
-                }
+                HealProcessor.applyHeal(attacker, finalDamage);
             }
 
             if (hasStratagem && finalDamage > 0 && attacker != null) {

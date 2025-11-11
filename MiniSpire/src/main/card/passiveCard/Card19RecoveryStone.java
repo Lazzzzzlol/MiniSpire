@@ -17,7 +17,6 @@ public class Card19RecoveryStone extends PassiveCard{
         
         Player player = Player.getInstance();
 
-		int finalHeal = HealProcessor.calculateHeal(player.getBuffList(), 6);
-		player.addHp(finalHeal);
+		HealProcessor.applyHeal(player, 6);
     }
 }

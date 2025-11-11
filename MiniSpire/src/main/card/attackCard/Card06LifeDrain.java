@@ -1,6 +1,7 @@
 package main.card.attackCard;
 
 import main.buff.DamageProcessor;
+import main.buff.HealProcessor;
 import main.enemy.Enemy;
 import main.player.Player;
 
@@ -21,7 +22,7 @@ public class Card06LifeDrain extends AttackCard {
 		int finalDamage = DamageProcessor.calculateDamageToEnemy(baseDamage, enemy);
 		
 		if (finalDamage > 0 && !hasBloodLeechingEffect(player)) {
-        	player.addHp(finalDamage);
+        	HealProcessor.applyHeal(player, finalDamage);
     	}
     }
 

@@ -62,7 +62,7 @@ public class NodeBattle extends Node {
 					break;
 				}
         	}
-			player.addHp(HealProcessor.calculateHeal(player.getBuffList(), recoveringBuff.getDuration()));
+			HealProcessor.applyHeal(player, recoveringBuff.getDuration());
 		}*/
 	}
 	

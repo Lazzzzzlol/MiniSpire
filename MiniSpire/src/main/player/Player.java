@@ -175,7 +175,7 @@ public class Player {
 					break;
 				}
         	}
-			addHp(HealProcessor.calculateHeal(buffList, recoveringBuff.getDuration()));
+			HealProcessor.applyHeal(this, recoveringBuff.getDuration());
 		}
 		
 		discardCardList.addAll(handCardList);

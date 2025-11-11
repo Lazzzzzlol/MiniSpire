@@ -1,6 +1,8 @@
 package main.buff;
 
 import java.util.List;
+import main.player.Player;
+import main.enemy.Enemy;
 
 public class HealProcessor {
     
@@ -12,6 +14,18 @@ public class HealProcessor {
         if (hasLost)
             return 0;
         return value;
+    }
+    
+    public static void applyHeal(Object target, int heal) {
+        if (target instanceof Player) {
+            Player player = (Player) target;
+            int finalHeal = calculateHeal(player.getBuffList(), heal);
+            player.addHp(finalHeal);
+        } else if (target instanceof Enemy) {
+            Enemy enemy = (Enemy) target;
+            int finalHeal = calculateHeal(enemy.getBuffList(), heal);
+            enemy.addHp(finalHeal);
+        }
     }
 
     private static void processEnshroud(List<Buff> buffList) {

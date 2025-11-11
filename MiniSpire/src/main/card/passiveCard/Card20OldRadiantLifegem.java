@@ -18,8 +18,7 @@ public class Card20OldRadiantLifegem extends PassiveCard{
 
         Player player = Player.getInstance();
 
-		int finalHeal = HealProcessor.calculateHeal(player.getBuffList(), 12);
-		player.addHp(finalHeal);
+		HealProcessor.applyHeal(player, 12);
 
 		player.addBuff(new BuffRecovering(3), 3);
     }

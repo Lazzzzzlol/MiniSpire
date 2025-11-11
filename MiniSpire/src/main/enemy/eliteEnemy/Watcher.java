@@ -11,6 +11,7 @@ import main.buff.debuff.BuffLost;
 import main.buff.oneFightBuff.BuffSteadfast;
 import main.buff.positiveBuff.BuffInvincible;
 import main.buff.DamageProcessor;
+import main.buff.HealProcessor;
 
 public class Watcher extends Enemy{
 
@@ -73,11 +74,11 @@ public class Watcher extends Enemy{
 	}
 
 	private void ruminateI() {
-		this.addHp(4 + Main.random.nextInt(3)); // 4-6
+		HealProcessor.applyHeal(this, 4 + Main.random.nextInt(3)); // 4-6
 	}
 
 	private void ruminateII() {
-		this.addHp(6 + Main.random.nextInt(3)); // 6-8
+		HealProcessor.applyHeal(this, 6 + Main.random.nextInt(3)); // 6-8
 	}
 
 	public void addGettedDamageCounter(int damage){

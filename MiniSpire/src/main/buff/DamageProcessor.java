@@ -111,10 +111,10 @@ public class DamageProcessor {
             for (Buff buff : attackerBuffs) {
                 switch (buff.getName()) {
                     case "Strengthened":
-                        damageMultiplier += 0.25f;
+                        damageMultiplier += 0.3f;
                         break;
                     case "Weakened":
-                        damageMultiplier -= 0.25f;
+                        damageMultiplier -= 0.3f;
                         break;
                     case "Indomitable":
                         damageMultiplier *= 2.0f;
@@ -127,10 +127,10 @@ public class DamageProcessor {
         for (Buff buff : targetBuffs) {
             switch (buff.getName()) {
                 case "Vulnerable":
-                    damageMultiplier += 0.25f;
+                    damageMultiplier += 0.3f;
                     break;
                 case "Tough":
-                    damageMultiplier -= 0.25f;
+                    damageMultiplier -= 0.3f;
                     break;
                 case "Misty":
                     damageMultiplier = mistyDamageDecider();
@@ -149,7 +149,7 @@ public class DamageProcessor {
         switch (Main.random.nextInt(2)) {
             case 0:
                 Main.executor.schedule(() -> {
-                    System.out.println( " >> The damage is ignored (Due to Misty).xiu");
+                    System.out.println( " >> The damage is ignored (Misty)");
                 }, 1, TimeUnit.MILLISECONDS);
                 return 0.0f;
         

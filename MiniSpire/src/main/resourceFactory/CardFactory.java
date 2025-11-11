@@ -204,9 +204,9 @@ public class CardFactory implements ResourceFactory {
 			return getRandomRareCard();
 		} else if (randNum < NORMAL_RATE + RARE_RATE + EPIC_RATE) {
 			return getRandomEpicCard();
-		} else {
+		} else if (randNum < NORMAL_RATE + RARE_RATE + EPIC_RATE + LEGENDARY_RATE) {
 			return getRandomLegendaryCard();
-		}
+		} else return getRandomNormalCard();
 	}
 
 	private Card getRandomLegendaryCard() {

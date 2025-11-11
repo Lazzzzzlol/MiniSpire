@@ -210,6 +210,11 @@ public class NodeBattle extends Node {
 		for (Card card : handCardList)
 			if (!card.getCanPlay())
 				((PassiveCard)card).onDiscard();
+		
+		if (enemy.getHp() <= 0 || enemy.getIsDied()) {
+			onWin();
+			return;
+		}
 				
 		enemy.onMove();
 		enemy.onEndTurn();

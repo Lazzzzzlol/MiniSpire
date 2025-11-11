@@ -36,6 +36,10 @@ public class Thanalous extends Enemy {
 
 	@Override
 	public void onMove() {
+		if (this.getHp() <= 0 || isDied) {
+			return;
+		}
+		
 		if (handlePhaseTransition()) {
 			return;
 		}
@@ -103,6 +107,10 @@ public class Thanalous extends Enemy {
 	}
 
 	private boolean handlePhaseTransition() {
+		if (this.getHp() <= 0 || isDied) {
+			return false;
+		}
+		
 		if (phase == 1 && this.getHp() < 150 && !forceNextBloodLeeching) {
 			System.out.println(" >> Thanalous: You will regret this...");
 			forceNextBloodLeeching = true;

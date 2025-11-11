@@ -16,8 +16,36 @@ public class DamageProcessor {
         processDamage(baseDamage, Player.getInstance(), target, false);
     }
     
-    public static void applyDamageToPlayer(int baseDamage, Player target) {
+    public static int applyDamageToPlayer(int baseDamage, Player target) {
+        int actualDamage = calculateDamageOnly(baseDamage, null, target, false);
         processDamage(baseDamage, null, target, false);
+        return actualDamage;
+    }
+    
+    /**
+     * 对玩家造成伤害，无视防御（Tough、Reflective、Invincible）
+     */
+    public static void applyDamageToPlayerIgnoreDefensive(int baseDamage, Player target) {
+        // 临时移除防御性 Buff
+        java.util.ArrayList<Buff> tempBuffs = new java.util.ArrayList<>();
+        java.util.List<Buff> playerBuffs = target.getBuffList();
+        
+        for (Buff buff : playerBuffs) {
+            if (buff.getName().equals("Tough") || buff.getName().equals("Reflective") || buff.getName().equals("Invincible")) {
+                tempBuffs.add(buff);
+            }
+        }
+        
+        playerBuffs.removeAll(tempBuffs);
+        
+        // 直接扣除 HP（不经过 DamageProcessor 的减伤计算）
+        target.deductHp(baseDamage);
+        Main.executor.schedule(() -> {
+            System.out.println(" >> " + "Took " + baseDamage + " damage");
+        }, 1, TimeUnit.SECONDS);
+        
+        // 恢复 Buff
+        playerBuffs.addAll(tempBuffs);
     }
 
     public static int calculateDamageToEnemy(int baseDamage, Enemy target) {
@@ -133,7 +161,9 @@ public class DamageProcessor {
                         damageMultiplier -= 0.3f;
                         break;
                     case "Indomitable":
-                        damageMultiplier *= 2.0f;
+                        if (attacker instanceof Enemy) {
+                            damageMultiplier *= 2.0f;
+                        }
                         break;
                 }
             }

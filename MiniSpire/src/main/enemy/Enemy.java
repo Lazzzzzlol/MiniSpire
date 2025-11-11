@@ -29,7 +29,9 @@ public class Enemy {
 	}
 	
 	public void onMove() {
-		
+		if (this.getHp() <= 0 || isDied) {
+			return;
+		}
 	};
 
 	public void onEndTurn() {

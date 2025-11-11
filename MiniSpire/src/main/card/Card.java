@@ -47,13 +47,13 @@ public abstract class Card {
     public String getRarity(){
         switch (this.rarity.toLowerCase()) {
             case "normal":
-                return "\u001B[37mNORMAL\u001B[0m";
+                return "\u001B[34mNORMAL\u001B[0m";
             case "rare":
-                return "\u001B[34mRARE\u001B[0m";
+                return "\u001B[35mRARE\u001B[0m";
             case "epic":
-                return "\u001B[35mEPIC\u001B[0m";
+                return "\u001B[33mEPIC\u001B[0m";
             case "legendary":
-                return "\u001B[33mLEGENDARY\u001B[0m";
+                return "\u001B[31mLEGENDARY\u001B[0m";
             default:
                 return this.rarity;
         }

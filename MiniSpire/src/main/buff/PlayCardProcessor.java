@@ -39,7 +39,7 @@ public class PlayCardProcessor {
         if (hasBuff(player, "Double")) {
             Main.executor.schedule(() -> {
                 attackCard.onPlay(player, enemy);
-                System.out.println(" >> Played card: " + card.getName() + " (doubled)");
+                System.out.println(" >> Played card: " + card.getName() + " (Double)");
 
                 player.getBuffList().removeIf(buff -> "Double".equals(buff.getName()));
             }, 1, TimeUnit.SECONDS);

@@ -47,7 +47,7 @@ public class DamageProcessor {
                 applyDamageEffect(baseDamage, finalDamage, attacker, target);
             } else applyZeroDamageEffect(target);
 
-            if (hasReflective(target) && !isReflective && finalDamage > 0 && attacker != null) {
+            if (hasReflective(target) && !isReflective && finalDamage > 0 && attacker != null && !hasIgnore(attacker)) {
                 processDamage(finalDamage, target, attacker, true);
             }
 
@@ -72,11 +72,15 @@ public class DamageProcessor {
     
     private static int calculateDamageOnly(int baseDamage, Object attacker, Object target, boolean isReflective) {
 
-        if (hasInvincible(target)) return 0;
-        
         float damageMultiplier = 1.0f;
-        boolean attackFailed = false;
+
+        boolean hasInvincible = hasInvincible(target);
+        boolean hasIgnore = hasIgnore(attacker);
+
+        boolean attackMistied = false;
         boolean attackAbsorbed = false;
+
+        if (hasInvincible && !hasIgnore) return 0;
 
         if (attacker != null) {
             List<Buff> attackerBuffs = getBuffList(attacker);
@@ -106,7 +110,7 @@ public class DamageProcessor {
                     damageMultiplier += 0.3f;
                     break;
                 case "Tough":
-                    damageMultiplier -= 0.3f;
+                    if (!hasIgnore) damageMultiplier -= 0.3f;
                     break;
                     
                 case "Enshroud":
@@ -115,10 +119,11 @@ public class DamageProcessor {
 
                 case "Misty":
                     if (Main.random.nextInt(2) == 0) {
-                        attackFailed = true;
+                        attackMistied = true;
                         damageMultiplier = 0.0f;
                     }
                     break;
+
                 case "Steelsoul":
                     attackAbsorbed = true;
                     break;
@@ -129,7 +134,7 @@ public class DamageProcessor {
         damageMultiplier = Math.max(damageMultiplier, 0);
         int calculatedDamage = Math.round(baseDamage * damageMultiplier);
         
-        if (attackFailed) {
+        if (attackMistied) {
             scheduleDamageMessage(target, "The attack fails (Misty)", 1);
             return 0;
         }
@@ -237,6 +242,13 @@ public class DamageProcessor {
         List<Buff> buffs = getBuffList(target);
         return buffs.stream().anyMatch(buff -> "Steadfast".equals(buff.getName()));
     }
+
+    private static boolean hasIgnore(Object attacker) {
+
+        if (attacker == null) return false;
+        List<Buff> buffs = getBuffList(attacker);
+        return buffs.stream().anyMatch(buff -> "Ignore".equals(buff.getName()));
+    }
     
     private static List<Buff> getBuffList(Object obj) {
 
@@ -250,7 +262,7 @@ public class DamageProcessor {
     }
 
     private static String getDamageDisplay(int baseDamage, int finalDamage) {
-        
+
         if (finalDamage == baseDamage) {
             return String.valueOf(finalDamage);
         } else if (finalDamage > baseDamage) {

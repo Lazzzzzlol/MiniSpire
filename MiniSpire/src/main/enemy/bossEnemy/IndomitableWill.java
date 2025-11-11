@@ -19,7 +19,7 @@ import main.buff.DamageProcessor;
 import main.buff.debuff.BuffMuted;
 import main.buff.debuff.BuffVulnerable;
 
-public class IndomitableWill extends Enemy {
+public class IndomitableWill extends Enemy { 
 
 	private boolean phase2 = false;
 	private int deliriumDamageBonus = 0;
@@ -27,7 +27,7 @@ public class IndomitableWill extends Enemy {
 	private boolean desperateRoarDone = false;
 	private boolean scarletDeliriumDone =false;
 	private boolean impalementDone = false;
-	private List<String> scriptures = new ArrayList<>();	//给暗黑布道用的经文
+	private List<String> scriptures = new ArrayList<>();
 
 	public IndomitableWill() {
 		super("Indomitable Will", 250);

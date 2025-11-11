@@ -12,8 +12,4 @@ public interface Buff {
 	void extendDuration(int duration);
 	int getDuration();
 	String getName();
-	
-	default int onReceiveDamage(int damage) {
-		return damage; // Default: no modification
-	}
 }

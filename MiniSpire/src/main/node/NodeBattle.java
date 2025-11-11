@@ -312,10 +312,6 @@ public class NodeBattle extends Node {
 	public String getEnemyType() {
 		return enemyType;
 	}
-	
-	public Enemy getEnemy() {
-		return enemy;
-	}
 
 	public void setIsWin(boolean isWin){
 		this.isWin = isWin;

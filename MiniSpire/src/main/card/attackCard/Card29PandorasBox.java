@@ -33,11 +33,11 @@ public class Card29PandorasBox extends AttackCard {
         } else if (randomValue < 45) {
             effectType = 1; // 15%: 13~66 Heal
         } else if (randomValue < 60) {
-            effectType = 2; // 15%: 333 round Vulnerable
+            effectType = 2; // 15%: 33 round Vulnerable
         } else if (randomValue < 75) {
-            effectType = 3; // 15%: 666 round Weakened
+            effectType = 3; // 15%: 66 round Weakened
         } else if (randomValue < 90) {
-            effectType = 4; // 15%: 999 round Strengthened and Tough
+            effectType = 4; // 15%: 99 round Strengthened and Tough
         } else if (randomValue < 95) {
             effectType = 5; // 5%: 66 Damage
         } else {

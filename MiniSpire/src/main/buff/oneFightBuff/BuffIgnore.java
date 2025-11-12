@@ -1,38 +1,14 @@
 package main.buff.oneFightBuff;
 
-import main.buff.Buff;
+public class BuffIgnore extends OneFightBuff{
 
-public class BuffIgnore implements Buff{
-    
-    String name = "Ignore";
-	int duration = 0;
-	
 	public BuffIgnore(int duration) {
-		this.duration = duration;
-	}
-	
-	@Override
-	public void onEndTurn() {
-		this.duration -= 0;
-	}
-	
-	@Override
-	public void setDuration(int duration) {
-		this.duration = duration;
-	}
-
-	@Override
-	public int getDuration() {
-		return this.duration;
-	}
-
-	@Override
-	public String getName() {
-		return this.name;
-	}
-	
-	@Override
-	public void extendDuration(int duration) {
-		this.duration += 0;
-	}
+        this.name = "Ignore";
+        this.duration = duration;
+    }
+    
+    @Override
+    public void onEndTurn() {
+        this.duration -= 0;
+    }
 }

@@ -24,7 +24,7 @@ public class Card17PrimalRend extends EffectCard {
 
         ArrayList<Card> handCards = player.getHandCardList();
         for (Card card : handCards) {
-            if (card.getType().equals("attack")) {
+            if (card.getType().equals("Attack")) {
                 AttackCard attackCard = (AttackCard) card;
                 baseDamage += attackCard.getBaseDamage();
             }

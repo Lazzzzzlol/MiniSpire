@@ -1,15 +1,29 @@
 package main.buff;
 
-public interface Buff {
-	
-	int duration = 0;
-	String name = "";
-
-	//void onUpdate();
-	void onEndTurn();
-
-	void setDuration(int duration);
-	void extendDuration(int duration);
-	int getDuration();
-	String getName();
+public abstract class Buff {
+    protected int duration;
+    protected String name;
+    protected String type;
+    
+    public abstract void onEndTurn();
+    
+    public void setDuration(int d) {
+        duration = d;
+    }
+    
+    public void extendDuration(int d) {
+        duration += d;
+    }
+    
+    public int getDuration() {
+        return duration;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public String getType() {
+        return type;
+    }
 }

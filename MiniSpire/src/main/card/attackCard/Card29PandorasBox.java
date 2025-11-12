@@ -39,14 +39,14 @@ public class Card29PandorasBox extends AttackCard {
         } else if (randomValue < 90) {
             effectType = 4; // 15%: 999 round Strengthened and Tough
         } else if (randomValue < 95) {
-            effectType = 5; // 5%: 666 Damage
+            effectType = 5; // 5%: 66 Damage
         } else {
-            effectType = 6; // 5%: 666 Heal
+            effectType = 6; // 5%: 66 Heal
         }
         
         switch (effectType) {
             case 0:
-                int damage1 = Main.random.nextInt(54) + 13; // 13-66
+                int damage1 = Main.random.nextInt(54) + baseDamage; // 13-66
                 DamageProcessor.applyDamageToEnemy(damage1, player, enemy);
                 Main.executor.schedule(() -> {
                     System.out.println(" >> Box: *screams* ");
@@ -54,7 +54,7 @@ public class Card29PandorasBox extends AttackCard {
                 break;
                 
             case 1:
-                int heal1 = Main.random.nextInt(54) + 13; // 13-66
+                int heal1 = Main.random.nextInt(54) + baseDamage; // 13-66
                 HealProcessor.applyHeal(enemy, heal1, null);
                 Main.executor.schedule(() -> {
                     System.out.println(" >> Box: *puffs* ");
@@ -84,14 +84,14 @@ public class Card29PandorasBox extends AttackCard {
                 break;
                 
             case 5:
-                DamageProcessor.applyDamageToEnemy(666, player, enemy);
+                DamageProcessor.applyDamageToEnemy(66, player, enemy);
                 Main.executor.schedule(() -> {
                     System.out.println(" >> Box: *opens* ");
                 }, 1, TimeUnit.MILLISECONDS);
                 break;
                 
             case 6:
-                HealProcessor.applyHeal(enemy, 666, null);
+                HealProcessor.applyHeal(enemy, 66, null);
                 Main.executor.schedule(() -> {
                     System.out.println(" >> Box: *giggles* ");
                 }, 1, TimeUnit.MILLISECONDS);

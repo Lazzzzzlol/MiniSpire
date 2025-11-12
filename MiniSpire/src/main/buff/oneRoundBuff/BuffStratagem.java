@@ -6,9 +6,4 @@ public class BuffStratagem extends OneRoundBuff {
         this.name = "Stratagem";
         this.duration = duration;
     }
-    
-    @Override
-    public void onEndTurn() {
-        this.duration -= 1;
-    }
 }

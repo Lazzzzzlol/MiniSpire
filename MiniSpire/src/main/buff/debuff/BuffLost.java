@@ -6,9 +6,4 @@ public class BuffLost extends Debuff {
         this.name = "Lost";
         this.duration = duration;
     }
-    
-    @Override
-    public void onEndTurn() {
-        this.duration -= 1;
-    }
 }

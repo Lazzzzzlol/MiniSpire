@@ -6,9 +6,4 @@ public class BuffMuted extends Debuff {
         this.name = "Muted";
         this.duration = duration;
     }
-    
-    @Override
-    public void onEndTurn() {
-        this.duration -= 1;
-    }
 }

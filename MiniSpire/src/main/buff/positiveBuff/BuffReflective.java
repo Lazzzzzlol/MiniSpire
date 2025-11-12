@@ -6,9 +6,4 @@ public class BuffReflective extends PositiveBuff {
         this.name = "Reflective";
         this.duration = duration;
     }
-    
-    @Override
-    public void onEndTurn() {
-        this.duration -= 1;
-    }
 }

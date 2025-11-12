@@ -6,9 +6,4 @@ public class BuffVulnerable extends Debuff {
         this.name = "Vulnerable";
         this.duration = duration;
     }
-    
-    @Override
-    public void onEndTurn() {
-        this.duration -= 1;
-    }
 }

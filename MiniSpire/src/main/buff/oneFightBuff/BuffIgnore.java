@@ -6,9 +6,4 @@ public class BuffIgnore extends OneFightBuff{
         this.name = "Ignore";
         this.duration = duration;
     }
-    
-    @Override
-    public void onEndTurn() {
-        this.duration -= 0;
-    }
 }

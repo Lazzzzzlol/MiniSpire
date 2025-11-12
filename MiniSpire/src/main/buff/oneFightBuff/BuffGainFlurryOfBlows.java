@@ -6,9 +6,4 @@ public class BuffGainFlurryOfBlows extends OneFightBuff {
         this.name = "GainFlurryOfBlows";
         this.duration = duration;
     }
-    
-    @Override
-    public void onEndTurn() {
-        this.duration -= 0;
-    }
 }

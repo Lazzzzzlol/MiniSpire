@@ -6,9 +6,4 @@ public class BuffStrengthened extends PositiveBuff {
         this.name = "Strength";
         this.duration = duration;
     }
-    
-    @Override
-    public void onEndTurn() {
-        this.duration -= 1;
-    }
 }

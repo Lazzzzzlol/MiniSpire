@@ -21,9 +21,4 @@ public class BuffSteelsoul extends PositiveBuff {
 	public void setActionPointsToDeduct(int actionPointsToDeduct) {
 		this.actionPointsToDeduct = actionPointsToDeduct;
 	}
-
-    @Override
-    public void onEndTurn() {
-        this.duration -= 1;
-    }
 }

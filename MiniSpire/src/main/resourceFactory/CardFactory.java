@@ -20,6 +20,7 @@ import main.card.attackCard.Card24FlurryOfBlows;
 import main.card.attackCard.Card25TheSinisterBlade;
 import main.card.attackCard.Card26Stratagem;
 import main.card.attackCard.Card27InnerRelease;
+import main.card.attackCard.Card29PandorasBox;
 
 import main.card.effectCard.Card08Bloodbath;
 import main.card.effectCard.Card09Double;
@@ -105,6 +106,9 @@ public class CardFactory implements ResourceFactory {
 
 		cardPool.add(new Card28Tremble());					//28 	normal
 
+		// v1.1.1
+		cardPool.add(new Card29PandorasBox());				//29	epic
+
 		for (Card card : cardPool) {
 			String rarity = card.getRarity().toLowerCase().replace("\u001B[0m", "");
 			if (rarity.contains("normal")) {
@@ -146,14 +150,14 @@ public class CardFactory implements ResourceFactory {
 		drawCardList.add(cardPool.get(19));
 
 		// Test: 
-		drawCardList.add(cardPool.get(17));
-		drawCardList.add(cardPool.get(17));
-		drawCardList.add(cardPool.get(17));
-		drawCardList.add(cardPool.get(17));
-		drawCardList.add(cardPool.get(7));
-		drawCardList.add(cardPool.get(7));
-		drawCardList.add(cardPool.get(7));
-		drawCardList.add(cardPool.get(7));
+		drawCardList.add(cardPool.get(29));
+		drawCardList.add(cardPool.get(29));
+		drawCardList.add(cardPool.get(29));
+		drawCardList.add(cardPool.get(29));
+		drawCardList.add(cardPool.get(29));
+		drawCardList.add(cardPool.get(29));
+		drawCardList.add(cardPool.get(29));
+		drawCardList.add(cardPool.get(29));
 		drawCardList.add(cardPool.get(24));
 		drawCardList.add(cardPool.get(24));
 		drawCardList.add(cardPool.get(9));

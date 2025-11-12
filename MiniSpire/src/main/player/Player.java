@@ -191,10 +191,13 @@ public class Player {
 	}
 
 	public void onWin(){
+
 		drawCardList.addAll(discardCardList);
 		discardCardList.clear();
 		drawCardList.addAll(handCardList);
 		handCardList.clear();
+
+		buffList.clear();
 	}
 
 	public int getHp() {

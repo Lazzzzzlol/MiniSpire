@@ -16,7 +16,7 @@ public class Card29PandorasBox extends AttackCard {
     
     public Card29PandorasBox() {
         this.name = "Pandora's Box";
-        this.info = "Do 1 random action of belows, towards the enemy: Deal 13~66 damage; Heal 13~66; Apply 333 round of Vulnerable; Apply 666 round of Weakened; Apply 999 round of Strengthened and Tough; Deal 66 damage; Heal 66.";
+        this.info = "Do 1 random action of belows, towards the enemy: Deal 13~66 damage; Heal 13~66; Apply 33 round of Vulnerable; Apply 66 round of Weakened; Apply 99 round of Strengthened and Tough; Deal 66 damage; Heal 66.";
         this.cost = 1;
         this.rarity = "epic";
         this.baseDamage = 13;
@@ -62,22 +62,22 @@ public class Card29PandorasBox extends AttackCard {
                 break;
                 
             case 2:
-                enemy.addBuff(new BuffVulnerable(333), 333);
+                enemy.addBuff(new BuffVulnerable(33), 33);
                 Main.executor.schedule(() -> {
                     System.out.println(" >> Box: *mumbles* ");
                 }, 1, TimeUnit.MILLISECONDS);
                 break;
                 
             case 3:
-                enemy.addBuff(new BuffWeakened(666), 666);
+                enemy.addBuff(new BuffWeakened(66), 66);
                 Main.executor.schedule(() -> {
                     System.out.println(" >> Box: *wriggles* ");
                 }, 1, TimeUnit.MILLISECONDS);
                 break;
                 
             case 4:
-                enemy.addBuff(new BuffStrengthened(999), 999);
-                enemy.addBuff(new BuffTough(999), 999);
+                enemy.addBuff(new BuffStrengthened(99), 99);
+                enemy.addBuff(new BuffTough(99), 99);
                 Main.executor.schedule(() -> {
                     System.out.println(" >> Box: *smirks* "); 
                 }, 1, TimeUnit.MILLISECONDS);

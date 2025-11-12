@@ -1,6 +1,8 @@
 package main.resourceFactory;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import main.Main;
 
@@ -54,10 +56,10 @@ public class CardFactory implements ResourceFactory {
 	private ArrayList<Card> epicCards;
 	private ArrayList<Card> legendaryCards;
 
-	private static final double NORMAL_RATE = 0.35;
+	private static final double NORMAL_RATE = 0.38;
 	private static final double RARE_RATE = 0.3;
-	private static final double EPIC_RATE = 0.225;
-	private static final double LEGENDARY_RATE = 0.125;
+	private static final double EPIC_RATE = 0.2;
+	private static final double LEGENDARY_RATE = 0.12;
 
 	public CardFactory(){
 
@@ -171,6 +173,37 @@ public class CardFactory implements ResourceFactory {
 				((main.card.attackCard.Card03Upheaval) c).resetBattle();
 			}
 		}
+	}
+
+	public Card getRandomCardWithRarityFallback(Set<String> excludedNames, Card duplicateCard) {
+
+		if (duplicateCard == null) {
+			return getRandomCard();
+		}
+		
+		String duplicateRarity = duplicateCard.getRarity();
+		List<Card> availableCards = new ArrayList<>();
+    
+		for (Card card : cardPool) {
+			if (card.getRarity().equals(duplicateRarity) && !excludedNames.contains(card.getName())) {
+				availableCards.add(card);
+			}
+		}
+		
+		if (availableCards.isEmpty()) {
+			for (Card card : cardPool) {
+				if (card.getRarity().equals(duplicateRarity)) {
+					availableCards.add(card);
+				}
+			}
+		}
+		
+		if (availableCards.isEmpty()) {
+			return getRandomCard();
+		}
+		
+		return availableCards.get(Main.random.nextInt(availableCards.size()));
+
 	}
 
 	public Card getRandomCard(){

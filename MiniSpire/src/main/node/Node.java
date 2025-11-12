@@ -21,6 +21,6 @@ public class Node {
         if (input == null) return false;
 		if (input.equals("e")) return true;
         String[] parts = input.split(" ");
-        return (parts.length >= 1);
+        return (parts.length >= 1 && parts.length <= 2);
     }
 }

@@ -1,6 +1,8 @@
 package main.node;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import main.Main;
@@ -29,9 +31,27 @@ public class NodeBattle extends Node {
 		this.enemyType = enemyType;
 		enemy = setEnemy(enemyType);
 		isWin = false;
+
+		Set<String> excludedNames = new HashSet<>();
+    
 		rewardCard1 = CardFactory.getInstance().getRandomCard();
-		rewardCard2 = CardFactory.getInstance().getRandomCard();
-		rewardCard3 = CardFactory.getInstance().getRandomCard();
+		excludedNames.add(rewardCard1.getName());
+		
+		Card tempCard2 = CardFactory.getInstance().getRandomCard();
+		if (excludedNames.contains(tempCard2.getName())) {
+			rewardCard2 = CardFactory.getInstance().getRandomCardWithRarityFallback(excludedNames, tempCard2);
+		} else {
+			rewardCard2 = tempCard2;
+		}
+		excludedNames.add(rewardCard2.getName());
+		
+		Card tempCard3 = CardFactory.getInstance().getRandomCard();
+		if (excludedNames.contains(tempCard3.getName())) {
+			rewardCard3 = CardFactory.getInstance().getRandomCardWithRarityFallback(excludedNames, tempCard3);
+		} else {
+			rewardCard3 = tempCard3;
+		}
+
 		// reset per-battle state on all cards (Upheaval and any future cards that need it)
 		CardFactory.getInstance().resetCardsForNewBattle();
 	}
@@ -280,14 +300,12 @@ public class NodeBattle extends Node {
 		System.out.println(" >> Choose a reward card:");
 		System.out.println();
 
-		System.out.println("   c 1) <" + rewardCard1.getCost() + "> [" + rewardCard1.getRarity() + "] " + rewardCard1.getName());
-		System.out.println("        " + rewardCard1.getInfo());
-		
-		System.out.println("   c 2) <" + rewardCard2.getCost() + "> [" + rewardCard2.getRarity() + "] " + rewardCard2.getName());
-		System.out.println("        " + rewardCard2.getInfo());
-		
-		System.out.println("   c 3) <" + rewardCard3.getCost() + "> [" + rewardCard3.getRarity() + "] " + rewardCard3.getName());
-		System.out.println("        " + rewardCard3.getInfo());
+		Card[] rewardCards = {rewardCard1, rewardCard2, rewardCard3};
+		for (int i = 0; i < rewardCards.length; i++) {
+			Card card = rewardCards[i];
+			System.out.println("   c " + (i + 1) + ") <" + card.getCost() + "> [" + card.getRarity() + "] " + card.getName());
+			System.out.println("        " + card.getInfo());
+		}
 
 		System.out.println("   c 4) Move on");
 		Util.printBlankLines(1);

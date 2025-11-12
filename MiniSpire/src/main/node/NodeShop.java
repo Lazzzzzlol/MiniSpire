@@ -1,6 +1,7 @@
 package main.node;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -147,12 +148,29 @@ public class NodeShop extends Node {
 
 	private void generateRandomCards() {
 		isTripleCards = false;
+
 		for (int i = 0; i < availableCards.length; i++) {
 			availableCards[i] = null;
 		}
-		for (int i = 0; i < availableCards.length; i++) {
-			Card card = cf.getRandomCard();
-			availableCards[i] = card;
+		
+		Set<String> excludedNames = new HashSet<>();
+		
+		availableCards[0] = cf.getRandomCard();
+		excludedNames.add(availableCards[0].getName());
+		
+		Card tempCard2 = cf.getRandomCard();
+		if (excludedNames.contains(tempCard2.getName())) {
+			availableCards[1] = cf.getRandomCardWithRarityFallback(excludedNames, tempCard2);
+		} else {
+			availableCards[1] = tempCard2;
+		}
+		excludedNames.add(availableCards[1].getName());
+		
+		Card tempCard3 = cf.getRandomCard();
+		if (excludedNames.contains(tempCard3.getName())) {
+			availableCards[2] = cf.getRandomCardWithRarityFallback(excludedNames, tempCard3);
+		} else {
+			availableCards[2] = tempCard3;
 		}
 		
 		checkForTripleCards();

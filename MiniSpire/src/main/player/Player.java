@@ -227,7 +227,7 @@ public class Player {
 
 		if (heal == 0){
 			Main.executor.schedule(() -> {
-				System.out.println(" >> Healed 0 HP (Lost)");
+				System.out.println(" >> Healed 0 HP (\u001B[31mLost\u001B[0m)");
 			}, time, TimeUnit.MILLISECONDS);
 			return;
 		}
@@ -315,8 +315,8 @@ public class Player {
 				
 		buffList.add(buff);
 		Main.executor.schedule(() -> {
-			System.out.println(" >> Obtained buff: " + buff.getName());
-		}, 1, TimeUnit.MILLISECONDS);
+			System.out.println(" >> Obtained buff: " + buff.getColorName() + "\u001B[0m");
+		}, 2, TimeUnit.MILLISECONDS);
 	}
 	
 	public ArrayList<Buff> getBuffList() {

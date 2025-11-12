@@ -83,7 +83,7 @@ public class Enemy {
 				
 		buffList.add(buff);
 		Main.executor.schedule(() -> {
-			System.out.println(" >> " + this.name + " obtains buff " + buff.getName());
+			System.out.println(" >> " + this.name + " obtains buff " + buff.getColorName() + "\u001B[0m");
 		}, 1001, TimeUnit.MILLISECONDS);
 	}
 	

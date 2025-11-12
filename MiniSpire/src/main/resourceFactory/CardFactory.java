@@ -16,7 +16,7 @@ import main.card.attackCard.Card05DecesiveStrike;
 import main.card.attackCard.Card06LifeDrain;
 import main.card.attackCard.Card07Ruination;
 import main.card.attackCard.Card23Ragnarok;
-import main.card.attackCard.Card24FlurryOfBlows;
+import main.card.attackCard.Card24Flurry;
 import main.card.attackCard.Card25TheSinisterBlade;
 import main.card.attackCard.Card26Stratagem;
 import main.card.attackCard.Card27InnerRelease;
@@ -99,7 +99,7 @@ public class CardFactory implements ResourceFactory {
 
 		//v1.1 new card
 		cardPool.add(new Card23Ragnarok()); 				//23	epic
-		cardPool.add(new Card24FlurryOfBlows());			//24	rare
+		cardPool.add(new Card24Flurry());			//24	rare
 		cardPool.add(new Card25TheSinisterBlade());			//25	epic
 		cardPool.add(new Card26Stratagem());				//26	legendary
 		cardPool.add(new Card27InnerRelease());				//27	rare

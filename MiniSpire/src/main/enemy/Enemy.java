@@ -175,6 +175,19 @@ public class Enemy {
 		return "[Buff: " + result + "]";
 	}
 
+	public String getColoredBuffListString() {
+		
+		if (buffList.size() == 0) 
+			return "[Buff: ]";
+		
+		String result = "";
+		for (int i = 0; i < buffList.size() - 1; i++)
+			result += buffList.get(i).getColorName() + "\u001B[0m(" + buffList.get(i).getDuration() + "), ";
+		result += buffList.get(buffList.size() - 1).getColorName() + "\u001B[0m(" + buffList.get(buffList.size() - 1).getDuration() + ")";
+		
+		return "[Buff: " + result + "]";
+	}
+
 	public Boolean getIsDied(){
 		return isDied;
 	}

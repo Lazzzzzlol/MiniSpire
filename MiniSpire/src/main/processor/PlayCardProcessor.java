@@ -4,7 +4,6 @@ import main.player.Player;
 import main.resourceFactory.CardFactory;
 import main.Main;
 import main.Util;
-import main.buff.Buff;
 import main.card.Card;
 import main.card.attackCard.AttackCard;
 import main.card.effectCard.EffectCard;
@@ -51,7 +50,7 @@ public class PlayCardProcessor {
 
                 String coloredDouble = Util.getColorBuffName(player.getBuffList(), "Double");
                 System.out.println(" >> Played card: " + card.getName() + " (" + coloredDouble + "\u001B[0m)");
-                
+
                 attackCard.onPlay(player, enemy);
 
             }, 0, TimeUnit.SECONDS);

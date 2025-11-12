@@ -16,7 +16,7 @@ public class Card29PandorasBox extends AttackCard {
     
     public Card29PandorasBox() {
         this.name = "Pandora's Box";
-        this.info = "Do 1 random action of belows, towards the enemy: Deal 13~66 damage; Heal 13~66; Apply 333 round of Vulnerable; Apply 666 round of Weakened; Apply 999 round of Strengthened and Tough; Deal 666 damage; Heal 666.";
+        this.info = "Do 1 random action of belows, towards the enemy: Deal 13~66 damage; Heal 13~66; Apply 333 round of Vulnerable; Apply 666 round of Weakened; Apply 999 round of Strengthened and Tough; Deal 66 damage; Heal 66.";
         this.cost = 1;
         this.rarity = "epic";
         this.baseDamage = 13;

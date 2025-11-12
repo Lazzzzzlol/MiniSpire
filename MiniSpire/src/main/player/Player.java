@@ -276,7 +276,7 @@ public class Player {
 	public void addGold(int gold) {
 		this.gold += gold;
 		this.totalGold += gold;
-		System.out.println(" >> Gained " + gold + " gold.");
+		System.out.println(" >> Gained " + gold + " gold");
 		System.out.println((" >> Current gold: " + this.gold));
 	}
 	
@@ -290,7 +290,7 @@ public class Player {
 
 	public void lostGold(int cost) {
 		this.gold -= cost;
-		System.out.println(" >> Lost " + cost + " gold.");
+		System.out.println(" >> Lost " + cost + " ");
 		System.out.println((" >> Current gold: " + this.gold));
 	}
 	

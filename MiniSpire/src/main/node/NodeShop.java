@@ -59,7 +59,7 @@ public class NodeShop extends Node {
 		if (!Welcoming){
 			Welcoming = true;
 			TextDisplay.printCharWithDelay(" [" + name + "] In this land of chaos, you suddenly see bright lights flickering in the distance...", 10);
-			TextDisplay.printCharWithDelay(" [Merchant] Ah, traveler! Care for some supplies? All this could be yours... for the right price.", 30);
+			TextDisplay.printCharWithDelay(" [Merchant] Ah, traveller! Care for some supplies? All this could be yours... for the right price.", 30);
 		}
 		drawCommonView();
 	}
@@ -117,15 +117,33 @@ public class NodeShop extends Node {
 
 	@Override
 	public boolean isValidInput(String input) {
+
 		if (input == null) return false;
-		if (input.equals("e")) return true;
+		
 		String[] parts = input.split(" ");
 		if (parts.length != 2) return false;
 		
 		String command = parts[0].toLowerCase();
-		return command.equals("b") || command.equals("r") || command.equals("c") || command.equals("l");
-	}
+		String option = parts[1];
+		
+		if (!validCommands.contains(command)) {
+			return false;
+		}
+		
+		switch (command) {
+			case "b":
+				return option.equals("1") || option.equals("2") || option.equals("3");
+			case "r":
+				return option.equals("1") || option.equals("2");
+			case "c":
+				return option.equals("1");
+			case "l":
+				return option.equals("1");
+			default:
+				return false;
+		}
 
+	}
 
 	private void generateRandomCards() {
 		isTripleCards = false;
@@ -155,17 +173,26 @@ public class NodeShop extends Node {
 	}
 
 	private void displayAvailableCards() {
+
+		Util.printBlankLines(1);
 		TextDisplay.printLineWithDelay(" Cards on sale:", 200);
+		Util.printBlankLines(1);
+
 		for (int i = 0; i < availableCards.length; i++) {
 			if (availableCards[i] == null) {
+
 				TextDisplay.printLineWithDelay("   " + (i + 1) + ") [" + "\u001B[33mSOLD OUT\u001B[0m" + "]", 200);
+
 			} else {
+
 				Card card = availableCards[i];
-				System.out.println("   " + (i + 1) + ") [" + card.getRarity() + "] <" + card.getCost() + "> "+ card.getName() + "  -" + card.getInfo());
+
+				System.out.println("   " + (i + 1) + ") <" + card.getCost() + "> [" + card.getRarity() + "] " + card.getName());
+				System.out.println("      " + card.getInfo());
 				if (isTripleCards){
-					System.out.println("   Cost: 0");
+					System.out.println("      Cost: 0");
 				}else{
-					System.out.println("   Cost: " + getCardCost(card));
+					System.out.println("      Cost: " + getCardCost(card));
 				}
 
 				try {
@@ -173,6 +200,7 @@ public class NodeShop extends Node {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+
 			}
 			System.out.println();
 		}

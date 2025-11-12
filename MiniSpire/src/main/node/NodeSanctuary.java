@@ -44,7 +44,7 @@ public class NodeSanctuary extends Node {
 		TextDisplay.printCharWithDelay(" [Sanctuary] You feel restored. Choose a path:", 10);
 		TextDisplay.printLineWithDelay("   c 1) Play Safe     : +20 Max HP, heal 35 HP", 150);
 		TextDisplay.printLineWithDelay("   c 2) Play Strategy : +1 draw per turn, +1 max action point", 150);
-		TextDisplay.printLineWithDelay("   c 3) Play Risk     : -15 Max HP, +2 max action points", 150);
+		TextDisplay.printLineWithDelay("   c 3) Play Risk     : -15 Max HP, +3 max action points", 150);
 		Util.printBlankLines(1);
 		System.out.println(Main.longLine);
 		System.out.print("Action >> ");
@@ -73,7 +73,7 @@ public class NodeSanctuary extends Node {
 			case "3":
 				TextDisplay.printCharWithDelay(" >> Chosen: Play Risk.", 30);
 				player.changeMaxHp(-15);
-				player.changeMaxActionPoints(2);
+				player.changeMaxActionPoints(3);
 				break;
 			default:
 				return;
@@ -84,12 +84,16 @@ public class NodeSanctuary extends Node {
 
 	@Override
 	public boolean isValidInput(String input) {
+
 		if (input == null) return false;
-		if (input.equals("e")) return true;
+		
 		String[] parts = input.split(" ");
 		if (parts.length != 2) return false;
+
 		if (!parts[0].equals("c")) return false;
+
 		return parts[1].equals("1") || parts[1].equals("2") || parts[1].equals("3");
+
 	}
 
 	public String getName(){

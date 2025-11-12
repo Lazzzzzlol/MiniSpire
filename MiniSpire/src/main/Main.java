@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.Random;
 
 import main.game.Game;
+import main.node.*;
 
 public class Main {
 	
@@ -55,9 +56,28 @@ public class Main {
 		        userInput = scanner.nextLine();
 		        
 		        while (!game.isValidInput(userInput)) {
-		            System.out.println(" Invalid input. | Play card - p 1 | Get info - i 1 | End turn - e |");
+
+		            /* System.out.println(" Invalid input. | Play card - p 1 | Get info - i 1 | End turn - e |");
 		            System.out.print("Action >> ");
-		            userInput = scanner.nextLine();
+		            userInput = scanner.nextLine(); */
+
+					Node currentNode = game.getCurrentNode();
+					if (currentNode instanceof NodeBattle) {
+						NodeBattle battleNode = (NodeBattle) currentNode;
+						if (battleNode.getIsWin()) {
+							System.out.println(" Invalid input. | Choose card or action - c 1 |");
+						} else {
+							System.out.println(" Invalid input. | Play card - p 1 | Get info - i 1 | End turn - e |");
+						}
+					} else if (currentNode instanceof NodeSanctuary) {
+						System.out.println(" Invalid input. | Choose action - c 1 |");
+					} else if (currentNode instanceof NodeShop) {
+						System.out.println(" Invalid input. | Buy - b 1 | Refresh - r 1 | Remove - r 2 | Check - c 1 | Leave - l 1 |");
+					} else {
+						System.out.println(" Invalid input. ");
+					}
+					System.out.print("Action >> ");
+					userInput = scanner.nextLine();
 		        }
 	        	
 		        game.onInput(userInput);

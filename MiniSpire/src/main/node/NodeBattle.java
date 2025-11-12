@@ -165,12 +165,18 @@ public class NodeBattle extends Node {
 			onEndTurn();
 		}
 	}
-	
+
 	@Override
 	public boolean isValidInput(String input) {
+		if (isWin) return isValidWinInput(input);
+		else return isValidBattleInput(input);
+	}
+	
+	public boolean isValidBattleInput(String input) {
 		
 		if (input == null) return false;
 		if (input.equals("e")) return true;
+
 		String[] parts = input.split(" ");
 		if (parts.length != 2) return false;
 		
@@ -187,16 +193,35 @@ public class NodeBattle extends Node {
 				return false;
 			}
 		}
-
-		if (parts[0].equals("c"))
-			return true;
-		
-		if (input.equals("e"))
-			return true;
 		
 		return false;
+
 	}
 	
+	private boolean isValidWinInput(String input) {
+
+		if (input == null) return false;
+		
+		String[] parts = input.split(" ");
+		if (parts.length != 2) return false;
+		
+		if (!parts[0].equals("c")) {
+			return false;
+		}
+		
+		try {
+			int choice = Integer.parseInt(parts[1]);
+			if (parts[0].equals("c")) {
+				return choice >= 1 && choice <= 4;
+			}
+		} catch (NumberFormatException e) {
+			return false;
+		}
+
+		return false;
+
+	}
+
 	private void playcard(int cardIndex) {
 		
 		Player player = Player.getInstance();
@@ -239,12 +264,10 @@ public class NodeBattle extends Node {
 		int gainedGold;
 		gainedGold = 70 + Main.random.nextInt(16);
 		if (enemyType.equals("elite"))
-			gainedGold += (20 + Main.random.nextInt(6));
+			gainedGold += (35 + Main.random.nextInt(8));
 		
-		// 计算并添加得分
 		ScoreCalculator scoreCalculator = ScoreCalculator.getInstance();
 		int gainedScore = scoreCalculator.calculateBattleScore(enemy, enemyType);
-
 
 		// Util.printBlankLines(3);
 		System.out.println(Main.longLine);
@@ -255,10 +278,18 @@ public class NodeBattle extends Node {
 
 		System.out.println();
 		System.out.println(" >> Choose a reward card:");
-		System.out.println( " >> 1) [" + rewardCard1.getRarity() + "] <" + rewardCard1.getCost() + "> " + rewardCard1.getName() + ",  " + 
-							"2) [" + rewardCard2.getRarity() + "] <" + rewardCard2.getCost() + "> " + rewardCard2.getName() + ",  " + 
-							"3) [" + rewardCard3.getRarity() + "] <" + rewardCard3.getCost() + "> " + rewardCard3.getName());
-		System.out.println(" >> 4) Move on");
+		System.out.println();
+
+		System.out.println("   c 1) <" + rewardCard1.getCost() + "> [" + rewardCard1.getRarity() + "] " + rewardCard1.getName());
+		System.out.println("        " + rewardCard1.getInfo());
+		
+		System.out.println("   c 2) <" + rewardCard2.getCost() + "> [" + rewardCard2.getRarity() + "] " + rewardCard2.getName());
+		System.out.println("        " + rewardCard2.getInfo());
+		
+		System.out.println("   c 3) <" + rewardCard3.getCost() + "> [" + rewardCard3.getRarity() + "] " + rewardCard3.getName());
+		System.out.println("        " + rewardCard3.getInfo());
+
+		System.out.println("   c 4) Move on");
 		Util.printBlankLines(1);
 		System.out.println(Main.longLine);
 
@@ -267,21 +298,23 @@ public class NodeBattle extends Node {
 
 	private void onWinInput(String input) {
 
-		String[] parts = input.split(" ");
-		
-		if (parts.length < 2) {
-			System.out.println(" Invalid input. | Choose card or action - c 1 | Get info - i 1 |\nAction >> ");
-			return;
+		String invalidInput = " Invalid input. | Choose card or action - c 1 |\nAction >> ";
+
+		if (!isValidWinInput(input)) {
+			System.out.println(invalidInput);
+        	return;
 		}
+
+		String[] parts = input.split(" ");
 		
 		try {
 			int choice = Integer.parseInt(parts[1]);
-			if (choice < 1 || choice > 4 || (parts[0].equals("i") && choice == 4)) {
+			if (choice < 1 || choice > 4) {
 				System.out.println(" Invalid choice.\nAction >> ");
 				return;
 			}
 			
-			if (parts[0].equals("i")) {
+			/* if (parts[0].equals("i")) {
 				Card cardToShow = null;
 				switch (choice) {
 					case 1:
@@ -298,7 +331,7 @@ public class NodeBattle extends Node {
 					System.out.println(" >> " + cardToShow.getInfo() + "\nAction >> ");
 				}
 				return;
-			}
+			} */
 			
 			if (parts[0].equals("c")) {
 				Card chosenCard = null;
@@ -323,7 +356,7 @@ public class NodeBattle extends Node {
 				completeBattleNode();
 			}
 		} catch (NumberFormatException e) {
-			System.out.println("Please enter a valid number.");
+			System.out.println(" Please enter a valid number. ");
 		}
 	}
 

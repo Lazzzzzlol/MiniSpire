@@ -175,6 +175,19 @@ public class Enemy {
 		
 		String result = "";
 		for (int i = 0; i < buffList.size() - 1; i++)
+			result += buffList.get(i).getName() + "(" + buffList.get(i).getDuration() + "), ";
+		result += buffList.get(buffList.size() - 1).getName() + "(" + buffList.get(buffList.size() - 1).getDuration() + ")";
+		
+		return "[Buff: " + result + "]";
+	}
+
+	public String getBuffListStringWithColor() {
+		
+		if (buffList.size() == 0) 
+			return "[Buff: ]";
+		
+		String result = "";
+		for (int i = 0; i < buffList.size() - 1; i++)
 			result += Colors.colorOnForBuff(buffList.get(i).getName(), buffList.get(i).getType()) + "(" + buffList.get(i).getDuration() + "), ";
 		result += Colors.colorOnForBuff(buffList.get(buffList.size() - 1).getName(), buffList.get(buffList.size() - 1).getType()) + "(" + buffList.get(buffList.size() - 1).getDuration() + ")";
 		

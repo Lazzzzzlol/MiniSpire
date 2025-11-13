@@ -120,18 +120,23 @@ public class NodeBattle extends Node {
 		String enemyLeftPattern = getEnemyLeftPattern();
 		String enemyRightPattern = getEnemyRightPattern();
 		
-		String enemyInfo = enemyLeftPattern + Colors.colorOnForEnemyName(enemy.getName(), enemy.getType()) + " HP: " + Colors.colorOnForHP(enemy.getHp(), enemy.getInitialHp()) + enemyRightPattern;
+		String enemyInfo = enemyLeftPattern + enemy.getName() + " HP: " + enemy.getHp() + enemyRightPattern;
+		String enemyInfoWithColor = enemyLeftPattern + Colors.colorOnForEnemyName(enemy.getName(), enemy.getType())
+			+ " HP: " + Colors.colorOnForHP(enemy.getHp(), enemy.getInitialHp()) + enemyRightPattern;
+
 		String enemyBuffList = enemy.getBuffListString();
+		String enemyBuffListWithColor = enemy.getBuffListStringWithColor();
+
 		String enemySpecialContainer = "";
 		if (enemy.getHasSpecialContainer())
 			enemySpecialContainer = enemy.getSpecialContainerString();
 		
 		for (int i = 0; i < Util.getCenterAlignSpaceNum(enemyInfo, Main.longLine.length()); i++) 
 			System.out.print(" ");
-		System.out.println(enemyInfo);
+		System.out.println(enemyInfoWithColor);
 		for (int i = 0; i < Util.getCenterAlignSpaceNum(enemyBuffList, Main.longLine.length()); i++) 
 			System.out.print(" ");
-		System.out.println(enemyBuffList);
+		System.out.println(enemyBuffListWithColor);
 		if (!enemySpecialContainer.equals("")){
 			for (int i = 0; i < Util.getCenterAlignSpaceNum(enemySpecialContainer, Main.longLine.length()); i++) 
 				System.out.print(" ");

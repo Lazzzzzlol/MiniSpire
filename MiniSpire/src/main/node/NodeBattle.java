@@ -115,9 +115,13 @@ public class NodeBattle extends Node {
 		
 		System.out.println(Main.longLine);
 		Util.printBlankLines(1);
+
+		String enemyLeftPattern = getEnemyLeftPattern();
+		String enemyRightPattern = getEnemyRightPattern();
 		
-		String enemyInfo = "-  " + enemy.getName() + " HP: " + enemy.getHp() + "  -";
-		String enemyBuffList = enemy.getColoredBuffListString();
+		String enemyInfo = enemyLeftPattern + enemy.getName() + " HP: " + enemy.getHp() + enemyRightPattern;
+		String enemyBuffList = enemy.getBuffListString();
+		String enemyColoredBuffList = enemy.getColoredBuffListString();
 		String enemySpecialContainer = "";
 		if (enemy.getHasSpecialContainer())
 			enemySpecialContainer = enemy.getSpecialContainerString();
@@ -127,7 +131,7 @@ public class NodeBattle extends Node {
 		System.out.println(enemyInfo);
 		for (int i = 0; i < Util.getCenterAlignSpaceNum(enemyBuffList, Main.longLine.length()); i++) 
 			System.out.print(" ");
-		System.out.println(enemyBuffList);
+		System.out.println(enemyColoredBuffList);
 		if (!enemySpecialContainer.equals("")){
 			for (int i = 0; i < Util.getCenterAlignSpaceNum(enemySpecialContainer, Main.longLine.length()); i++) 
 				System.out.print(" ");
@@ -145,6 +149,38 @@ public class NodeBattle extends Node {
 		System.out.println(Main.longLine);
 		
 		System.out.print("Action >> ");
+	}
+
+	private String getEnemyLeftPattern(){
+		switch (enemyType) {
+			case "normal":
+				return "- ";
+
+			case "elite":
+				return "-= ";
+
+			case "boss":
+				return "--=[ ";
+
+			default:
+				return "- ";
+		}
+	}
+
+	private String getEnemyRightPattern(){
+		switch (enemyType) {
+			case "normal":
+				return " -";
+
+			case "elite":
+				return " =-";
+
+			case "boss":
+				return " ]=--";
+
+			default:
+				return " -";
+		}
 	}
 	
 	@Override

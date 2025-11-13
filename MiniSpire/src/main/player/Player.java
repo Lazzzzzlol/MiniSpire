@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
+import main.Colors;
 import main.Main;
 import main.TextDisplay;
 import main.buff.Buff;
@@ -70,18 +71,16 @@ public class Player {
 	}
 	
 	public void onStartTurn() {
-
-		boolean playerHasMuted = buffList.stream()
-                .anyMatch(buff -> "Muted".equals(buff.getName()));
+		boolean playerHasMuted = buffList.stream().anyMatch(buff -> "Muted".equals(buff.getName()));
 
 		if (playerHasMuted){
 			this.actionPoints = 0;
 			System.out.println(" >> Action Point becomes 0 (Muted).");
 		}
-		else
+		else{
 			this.actionPoints = this.maxActionPoints;
-			
-		drawHandCards(drawCardNumPerTurn, 2000);
+			drawHandCards(drawCardNumPerTurn, 2000);
+		}
 	}
 	
 	public void drawHandCards(int num, Integer time) {
@@ -129,7 +128,7 @@ public class Player {
 				if (i > 0) {
 					log.append(", ");
 				}
-				log.append(drawnCards.get(i).getName());
+				log.append(Colors.colorOnForCardName(drawnCards.get(i).getName(), drawnCards.get(i).getType()));
 			}
 			Main.executor.schedule(() -> {
 				System.out.println(log.toString());
@@ -333,7 +332,7 @@ public class Player {
 				
 		buffList.add(buff);
 		Main.executor.schedule(() -> {
-			System.out.println(" >> Obtained buff: " + buff.getColorName() + "\u001B[0m");
+			System.out.println(" >> Obtained buff: " + Colors.colorOnForBuff(buff.getName(), buff.getType()));
 		}, 2, TimeUnit.MILLISECONDS);
 	}
 	
@@ -357,21 +356,9 @@ public class Player {
 		
 		String result = "";
 		for (int i = 0; i < buffList.size() - 1; i++)
-			result += (buffList.get(i).getName() + "(" + buffList.get(i).getDuration() + "),  ");
-		result += buffList.get(buffList.size() - 1).getName() + "(" + buffList.get(buffList.size() - 1).getDuration() + ")";
-		
-		return result;
-	}
-
-	public String getColoredBuffListString() {
-		
-		if (buffList.size() == 0) 
-			return "";
-		
-		String result = "";
-		for (int i = 0; i < buffList.size() - 1; i++)
-			result += buffList.get(i).getColorName() + "\u001B[0m(" + buffList.get(i).getDuration() + "), ";
-		result += buffList.get(buffList.size() - 1).getColorName() + "\u001B[0m(" + buffList.get(buffList.size() - 1).getDuration() + ")";
+			
+			result += (Colors.colorOnForBuff(buffList.get(i).getName(), buffList.get(i).getType()) + "(" + buffList.get(i).getDuration() + "),  ");
+		result += Colors.colorOnForBuff(buffList.get(buffList.size() - 1).getName(), buffList.get(buffList.size() - 1).getType()) + "(" + buffList.get(buffList.size() - 1).getDuration() + ")";
 		
 		return result;
 	}
@@ -383,9 +370,8 @@ public class Player {
 		
 		String result = "";
 		for (int i = 0; i < handCardList.size() - 1; i++)
-			result += ((i + 1) + ") <" + handCardList.get(i).getCost() + "> " + handCardList.get(i).getName() + ",  ");
-		result += (handCardList.size() + ") <" + handCardList.get(handCardList.size() - 1).getCost() + "> " + 
-				handCardList.get(handCardList.size() - 1).getName());
+			result += ((i + 1) + ") <" + Colors.colorOnForCardCost(handCardList.get(i).getCost()) + "> " + Colors.colorOnForCardName(handCardList.get(i).getName(), handCardList.get(i).getType()) + ",  ");
+			result += (handCardList.size() + ") <" + Colors.colorOnForCardCost(handCardList.get(handCardList.size() - 1).getCost()) + "> " + Colors.colorOnForCardName(handCardList.get(handCardList.size() - 1).getName(), handCardList.get(handCardList.size() - 1).getName()));
 		
 		return result;
 	}
@@ -429,7 +415,7 @@ public class Player {
             System.out.println(" [" + cost + " Cost Cards]");
             
             for (Card card : bucket) {
-				TextDisplay.printLineWithDelay("   " + index++ + ") " + " [" + card.getRarity() + "] <" + card.getCost() + "> "+ card.getName() + "  -" + card.getInfo() , 50);
+				TextDisplay.printLineWithDelay("   " + index++ + ") " + " [" + Colors.colorOnForCardRarity(card.getRarity()) + "] <" + Colors.colorOnForCardCost(card.getCost()) + "> "+ Colors.colorOnForCardName(card.getName(), card.getType()) + "  -" + card.getInfo() , 50);
             }
             System.out.println();
         }
@@ -475,7 +461,7 @@ public class Player {
 				
 				for (Card card : bucket) {
 					indexToCardMap.put(index, card);
-					TextDisplay.printLineWithDelay("   " + index++ + ") " + " [" + card.getRarity() + "] <" + card.getCost() + "> "+ card.getName() + "  -" + card.getInfo() , 50);
+					TextDisplay.printLineWithDelay("   " + index++ + ") " + " [" + Colors.colorOnForCardRarity(card.getRarity()) + "] <" + Colors.colorOnForCardCost(card.getCost()) + "> "+ Colors.colorOnForCardName(card.getName(), card.getType()) + "  -" + card.getInfo() , 50);
 				}
 				System.out.println();
 			}

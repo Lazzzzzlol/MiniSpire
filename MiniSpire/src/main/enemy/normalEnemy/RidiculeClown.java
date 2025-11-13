@@ -17,14 +17,11 @@ public class RidiculeClown extends Enemy {
 	private int dmg = 0;
 
 	public RidiculeClown() {
-		super("Ridicule Clown", 45 + Main.random.nextInt(11));
+		super("Ridicule Clown", 45 + Main.random.nextInt(11),"normal");
 	}
 
-	public boolean onMove() {
-
-		if (!super.onMove())
-			return false;
-
+	@Override
+	public void onMove() {
 		dmg = 1 + Main.random.nextInt(10); // 1-10
 		switch (movementCounter) {
 			case 0:
@@ -60,7 +57,6 @@ public class RidiculeClown extends Enemy {
 			default:
 				movementCounter = 0;
 		}
-		return true;
 	}
 
 	private void surpriseBox() {

@@ -18,18 +18,15 @@ public class Watcher extends Enemy{
 	private int gettedDamagerCounter;
 	
 	public Watcher() {
-		super("Watcher", 90 + Main.random.nextInt(31));
+		super("Watcher", 90 + Main.random.nextInt(31),"elite");
 		gettedDamagerCounter = 0;
 		Main.executor.schedule(() -> {
 			addBuff(new BuffSteadfast(1), 1);
 		}, 1, TimeUnit.SECONDS);
 	}
 
-	public boolean onMove() {
-
-		if (!super.onMove())
-			return false;
-
+	@Override
+	public void onMove() {
 		switch (movementCounter) {
 			case 0:
 				System.out.println("\n >> " + this.getName() + " uses Blunt Hit!");
@@ -59,7 +56,6 @@ public class Watcher extends Enemy{
 			default:
 				movementCounter = 0;
 		}
-		return true;
 	}
 
 	private void bluntHit() {

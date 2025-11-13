@@ -24,31 +24,31 @@ public class Thanalous extends Enemy {
 	private List<String> declarations = new ArrayList<>(); 
 
 	public Thanalous() {
-		super("Thanalous", 450);
+		super("Thanalous", 450,"boss");
 
-		declarations.add("The lotus shall bloom again, no deny accepted... ");
-		declarations.add("Connecting the cycle of life, death, and rebirth... ");
-		declarations.add("Beauty, spirituality, and eternity... ");
-		declarations.add("Beholding the lush beauty of a hundred flowers... ");
-		declarations.add("Emerging from the mud yet unsoiled... ");
-		declarations.add("Washed by clear ripples yet unadorned... ");
+		declarations.add("The lotus shall bloom again, no deny accepted...");
+		declarations.add("Connecting the cycle of life, death, and rebirth...");
+		declarations.add("Beauty, spirituality, and eternity...");
+		declarations.add("Beholding the lush beauty of a hundred flowers...");
+		declarations.add("Emerging from the mud yet unsoiled...");
+		declarations.add("Washed by clear ripples yet unadorned...");
 	}
 
-	public boolean onMove() {
-
-		if (!super.onMove())
-			return false;
+	@Override
+	public void onMove() {
+		if (this.getHp() <= 0 || isDied) {
+			return;
+		}
 		
 		if (handlePhaseTransition()) {
-			return true;
+			return;
 		}
 
 		if (phase == 1) {
 			executePhaseOne();
-			return true;
+			return;
 		}
 		executePhaseTwo();
-		return true;
 	}
 
 	private void executePhaseOne() {

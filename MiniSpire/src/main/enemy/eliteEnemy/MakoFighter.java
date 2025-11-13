@@ -12,14 +12,11 @@ import main.processor.DamageProcessor;
 public class MakoFighter extends Enemy {
 
 	public MakoFighter() {
-		super("Mako Fighter", 120 + Main.random.nextInt(21));
+		super("Mako Fighter", 120 + Main.random.nextInt(21),"elite");
 	}
 
-	public boolean onMove() {
-
-		if (!super.onMove())
-			return false;
-
+	@Override
+	public void onMove() {
 		switch (movementCounter) {
 			case 0:
 				System.out.println("\n >> " + this.getName() + " uses Mako SharkO!");
@@ -44,8 +41,6 @@ public class MakoFighter extends Enemy {
 			default:
 				movementCounter = 0;
 		}
-
-		return true;
 	}
 
 	private void makoSharko() {

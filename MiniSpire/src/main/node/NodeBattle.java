@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import main.Colors;
 import main.Main;
 import main.ScoreCalculator;
 import main.Util;
@@ -119,9 +120,8 @@ public class NodeBattle extends Node {
 		String enemyLeftPattern = getEnemyLeftPattern();
 		String enemyRightPattern = getEnemyRightPattern();
 		
-		String enemyInfo = enemyLeftPattern + enemy.getName() + " HP: " + enemy.getHp() + enemyRightPattern;
+		String enemyInfo = enemyLeftPattern + Colors.colorOnForEnemyName(enemy.getName(), enemy.getType()) + " HP: " + Colors.colorOnForHP(enemy.getHp(), enemy.getInitialHp()) + enemyRightPattern;
 		String enemyBuffList = enemy.getBuffListString();
-		String enemyColoredBuffList = enemy.getColoredBuffListString();
 		String enemySpecialContainer = "";
 		if (enemy.getHasSpecialContainer())
 			enemySpecialContainer = enemy.getSpecialContainerString();
@@ -131,7 +131,7 @@ public class NodeBattle extends Node {
 		System.out.println(enemyInfo);
 		for (int i = 0; i < Util.getCenterAlignSpaceNum(enemyBuffList, Main.longLine.length()); i++) 
 			System.out.print(" ");
-		System.out.println(enemyColoredBuffList);
+		System.out.println(enemyBuffList);
 		if (!enemySpecialContainer.equals("")){
 			for (int i = 0; i < Util.getCenterAlignSpaceNum(enemySpecialContainer, Main.longLine.length()); i++) 
 				System.out.print(" ");
@@ -140,9 +140,9 @@ public class NodeBattle extends Node {
 		
 		Util.printBlankLines(1);
 		
-		System.out.println(" [Status:   HP: " + player.getHp() + "/" + player.getMaxHp() + 
+		System.out.println(" [Status:   HP: " + Colors.colorOnForHP(player.getHp(), player.getMaxHp()) + "/" + player.getMaxHp() + 
 				"   Action points: " + player.getActionPoints() + "/" + player.getMaxActionPoints() + "]");
-		System.out.println(" [Buff: " + player.getColoredBuffListString() + "]");
+		System.out.println(" [Buff: " + player.getBuffListString() + "]");
 		System.out.println();
 		System.out.println(" [Card: " + player.getHandCardListString() + "]\n");
 		
@@ -337,7 +337,7 @@ public class NodeBattle extends Node {
 		// Util.printBlankLines(3);
 		System.out.println(Main.longLine);
 
-		System.out.println("\n >> You defeated " + enemy.getName() + "!");
+		System.out.println("\n >> You defeated " + Colors.colorOnForEnemyName(enemy.getName(), enemy.getType()) + "!");
 		Player.getInstance().addGold(gainedGold);
 		scoreCalculator.addScore(gainedScore);
 
@@ -348,7 +348,7 @@ public class NodeBattle extends Node {
 		Card[] rewardCards = {rewardCard1, rewardCard2, rewardCard3};
 		for (int i = 0; i < rewardCards.length; i++) {
 			Card card = rewardCards[i];
-			System.out.println("   c " + (i + 1) + ") <" + card.getCost() + "> [" + card.getRarity() + "] " + card.getName());
+			System.out.println("   c " + (i + 1) + ") <" + Colors.colorOnForCardCost(card.getCost()) + "> [" + Colors.colorOnForCardRarity(card.getRarity()) + "] " + Colors.colorOnForCardName(card.getName(), card.getType()));
 			System.out.println("        " + card.getInfo());
 		}
 
@@ -414,7 +414,7 @@ public class NodeBattle extends Node {
 				}
 				if (chosenCard != null) {
 					Player.getInstance().addCardToDeck(chosenCard);
-					System.out.println(" >> Added " + chosenCard.getName() + " to your deck!");
+					System.out.println(" >> Added " + Colors.colorOnForCardName(chosenCard.getName(), chosenCard.getType()) + " to your deck!");
 				}
 				completeBattleNode();
 			}

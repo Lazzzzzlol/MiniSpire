@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import main.Colors;
 import main.Main;
 import main.TextDisplay;
 import main.Util;
@@ -199,13 +200,13 @@ public class NodeShop extends Node {
 		for (int i = 0; i < availableCards.length; i++) {
 			if (availableCards[i] == null) {
 
-				TextDisplay.printLineWithDelay("   " + (i + 1) + ") [" + "\u001B[33mSOLD OUT\u001B[0m" + "]", 200);
+				TextDisplay.printLineWithDelay("   " + (i + 1) + ") [" + Colors.colorOnForSOLDOUT("SOLD OUT") + "]", 200);
 
 			} else {
 
 				Card card = availableCards[i];
 
-				System.out.println("   " + (i + 1) + ") <" + card.getCost() + "> [" + card.getRarity() + "] " + card.getName());
+				System.out.println("   " + (i + 1) + ") <" + Colors.colorOnForCardCost(card.getCost()) + "> [" + Colors.colorOnForCardRarity(card.getRarity()) + "] " + Colors.colorOnForCardName(card.getName(), card.getType()));
 				System.out.println("      " + card.getInfo());
 				if (isTripleCards){
 					System.out.println("      Cost: 0");
@@ -226,10 +227,7 @@ public class NodeShop extends Node {
 
 	private int getCardCost(Card card) {
 		String rarity = card.getRarity();
-    
-		String origRarity = rarity.replaceAll("\u001B\\[[;\\d]*m", "");
-		
-		switch (origRarity) {
+		switch (rarity) {
 			case "NORMAL":
 				return 30;
 			case "RARE":
@@ -308,7 +306,7 @@ public class NodeShop extends Node {
 				
 				if (removed) {
 					player.lostGold(REMOVE_CARD_COST);
-					System.out.println(" >> Removed: " + cardToRemove.getName() + " for " + REMOVE_CARD_COST + " gold.");
+					System.out.println(" >> Removed: " + Colors.colorOnForCardName(cardToRemove.getName(), cardToRemove.getType()) + " for " + REMOVE_CARD_COST + " gold.");
 					this.isRemoved = true;
 				} else {
 					System.out.println(" >> Failed to remove the card. Please try again.");

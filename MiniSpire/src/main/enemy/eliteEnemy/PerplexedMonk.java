@@ -14,14 +14,11 @@ public class PerplexedMonk extends Enemy {
 	private boolean haveOpoStance = false; // 魔猿身形
 
 	public PerplexedMonk() {
-		super("Perplexed Monk", 130 + Main.random.nextInt(21));
+		super("Perplexed Monk", 130 + Main.random.nextInt(21),"elite");
 	}
 
-	public boolean onMove() {
-
-		if (!super.onMove())
-			return false;
-		
+	@Override
+	public void onMove() {
 		switch (movementCounter) {
 			case 0:
 			case 1:
@@ -44,7 +41,6 @@ public class PerplexedMonk extends Enemy {
 			default:
 				movementCounter = 0;
 		}
-		return true;
 	}
 
 	private void formShiftAttack() {

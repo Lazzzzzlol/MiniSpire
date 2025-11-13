@@ -13,14 +13,11 @@ public class LostDancer extends Enemy{
     private boolean hasSpecialContainer = true;
 
     public LostDancer() {
-        super("Lost Dancer", 70 + Main.random.nextInt(11));
+        super("Lost Dancer", 70 + Main.random.nextInt(11),"normal");
         markList = new ArrayList<>();
     }
 
-    public boolean onMove() {
-
-        if (!super.onMove())
-			return false;
+    public void onMove() {
 		
 		switch (movementCounter) {
 		
@@ -59,7 +56,6 @@ public class LostDancer extends Enemy{
 				movementCounter = 0;
 				break;
 		}
-        return true;
     }
     
     public void reverseCascade(){

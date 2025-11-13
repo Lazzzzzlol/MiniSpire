@@ -15,16 +15,13 @@ import main.buff.positiveBuff.BuffStrengthened;
 public class Zombie extends Enemy {
 	
 	public Zombie() {
-		super("Zombie", 30 + Main.random.nextInt(11));
+		super("Zombie", 30 + Main.random.nextInt(11), "normal");
 		Main.executor.schedule(() -> {
 			addBuff(new BuffResurrection(1), 1);
 		}, 1, TimeUnit.SECONDS);
 	}
 	
-	public boolean onMove() {
-
-		if (!super.onMove())
-			return false;
+	public void onMove() {
 		
 		switch (movementCounter) {
 		
@@ -51,7 +48,6 @@ public class Zombie extends Enemy {
 				movementCounter = 0;
 				break;
 		}
-		return true;
 	}
 	
 	private void scratch() {

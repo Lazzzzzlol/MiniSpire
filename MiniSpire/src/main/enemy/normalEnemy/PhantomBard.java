@@ -19,17 +19,14 @@ public class PhantomBard extends Enemy {
 	private boolean grantRegenNextBattleVoice = false;
 
 	public PhantomBard() {
-		super("Phantom Bard", 25 + Main.random.nextInt(11));
+		super("Phantom Bard", 25 + Main.random.nextInt(11),"normal");
 		Main.executor.schedule(() -> {
 			addBuff(new BuffMisty(1), 1);
 		}, 1, TimeUnit.SECONDS);
 	}
 
-	public boolean onMove() {
-
-		if (!super.onMove())
-			return false;
-		
+	@Override
+	public void onMove() {
 		switch (movementCounter) {
 			case 0:
 				System.out.println("\n >> " + this.getName() + " uses Battle Voice!");
@@ -60,7 +57,6 @@ public class PhantomBard extends Enemy {
 			default:
 				movementCounter = 0;
 		}
-		return true;
 	}
 
 	private void battleVoice() {

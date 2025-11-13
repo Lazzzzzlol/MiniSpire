@@ -2,8 +2,8 @@ package main.processor;
 
 import main.player.Player;
 import main.resourceFactory.CardFactory;
+import main.Colors;
 import main.Main;
-import main.Util;
 import main.card.Card;
 import main.card.attackCard.AttackCard;
 import main.card.effectCard.EffectCard;
@@ -40,16 +40,14 @@ public class PlayCardProcessor {
         AttackCard attackCard = (AttackCard) card;
 
         attackCard.onPlay(player, enemy);
-        System.out.println(" >> Played card: " + card.getName());
+        System.out.println(" >> Played card: " + Colors.colorOnForCardName(card.getName(), card.getType()));
 
         if (hasBuff(player, "Double") && (enemy.getHp() > 0) ) {
 
             player.getBuffList().removeIf(buff -> "Double".equals(buff.getName()));
 
             Main.executor.schedule(() -> {
-
-                String coloredDouble = Util.getColorBuffName(player.getBuffList(), "Double");
-                System.out.println(" >> Played card: " + card.getName() + " (" + coloredDouble + "\u001B[0m)");
+                System.out.println(" >> Played card: " + Colors.colorOnForCardName(card.getName(), card.getType()) + " (" + Colors.colorOnForBuff("Double", "positive") + ")");
 
                 attackCard.onPlay(player, enemy);
 
@@ -64,7 +62,7 @@ public class PlayCardProcessor {
         EffectCard effectCard = (EffectCard) card;
 
         effectCard.onUse(player, enemy);
-        System.out.println(" >> Played card: " + card.getName());
+        System.out.println(" >> Played card: " + Colors.colorOnForCardName(card.getName(), card.getType()));
 
         if (hasBuff(player, "Flurry")) {
             addFlurryToHand(player);
@@ -84,7 +82,7 @@ public class PlayCardProcessor {
         Card flurryCard = CardFactory.getInstance().createCard(24);
         player.getHandCardList().add(flurryCard);
         Main.executor.schedule(() -> {
-            System.out.println(" >> Drawed card: " + flurryCard.getName());
+            System.out.println(" >> Drawed card: " + Colors.colorOnForCardName(flurryCard.getName(), flurryCard.getType()));
         }, 1001, TimeUnit.MILLISECONDS);
 
     }

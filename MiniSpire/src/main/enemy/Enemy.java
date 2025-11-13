@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import main.Colors;
 import main.Main;
 import main.buff.Buff;
 import main.game.Game;
@@ -24,38 +25,27 @@ public class Enemy {
 	private boolean hasSpecialContainer;
 	protected boolean isDied;
 	private int steelsoulAbsorbedDamage = 0; // 钢魂吸收的伤害
+	private String type;
 	
-	public Enemy(String name, int hp) {
+	public Enemy(String name, int hp, String type) {
 		this.hp = hp;
 		this.initialHp = hp;
 		this.name = name;
 		this.buffList = new ArrayList<Buff>();
 		this.hasSpecialContainer = false;
 		this.isDied = false;
+		this.type = type;
 	}
 	
-	public boolean onMove() {
-
+	public void onMove() {
 		if (this.getHp() <= 0 || isDied) {
-			return false;
+			return;
 		}
-
-		boolean hasMuted = buffList.stream()
-				.anyMatch(buff -> "Muted".equals(buff.getName()));
-
-		if (hasMuted){
-			movementCounter++;
-			System.out.println(" >> " + this.getName() + " failed to act (Muted).");
-			return false;
-		}
-
-		return true;
 	};
 
 	public void onEndTurn() {
 
-		boolean hasRecovering = buffList.stream()
-				.anyMatch(buff -> "Recovering".equals(buff.getName()));
+		boolean hasRecovering = buffList.stream().anyMatch(buff -> "Recovering".equals(buff.getName()));
 
 		if (hasRecovering) {
 			Buff recoveringBuff = null;
@@ -78,7 +68,7 @@ public class Enemy {
 	        	if ("Steelsoul".equals(buff.getName()) && steelsoulAbsorbedDamage > 0) {
 	        		int damageToReturn = steelsoulAbsorbedDamage;
 	        		steelsoulAbsorbedDamage = 0;
-	        		Player.getInstance().deductHp(damageToReturn);
+					Player.getInstance().deductHp(damageToReturn);
 	        		Main.executor.schedule(() -> {
 	        			System.out.println(" >> " + this.name + " returns " + damageToReturn + " absorbed damage from Steelsoul!");
 	        		}, 1, TimeUnit.SECONDS);
@@ -98,7 +88,7 @@ public class Enemy {
 				
 		buffList.add(buff);
 		Main.executor.schedule(() -> {
-			System.out.println(" >> " + this.name + " obtains buff " + buff.getColorName() + "\u001B[0m");
+			System.out.println(" >> " + Colors.colorOnForEnemyName(this.name, this.type) + " obtains buff " + Colors.colorOnForBuff(buff.getName(), buff.getType()));
 		}, 1001, TimeUnit.MILLISECONDS);
 	}
 	
@@ -185,24 +175,12 @@ public class Enemy {
 		
 		String result = "";
 		for (int i = 0; i < buffList.size() - 1; i++)
-			result += buffList.get(i).getName() + "(" + buffList.get(i).getDuration() + "), ";
-		result += buffList.get(buffList.size() - 1).getName() + "(" + buffList.get(buffList.size() - 1).getDuration() + ")";
+			result += Colors.colorOnForBuff(buffList.get(i).getName(), buffList.get(i).getType()) + "(" + buffList.get(i).getDuration() + "), ";
+		result += Colors.colorOnForBuff(buffList.get(buffList.size() - 1).getName(), buffList.get(buffList.size() - 1).getType()) + "(" + buffList.get(buffList.size() - 1).getDuration() + ")";
 		
 		return "[Buff: " + result + "]";
 	}
 
-	public String getColoredBuffListString() {
-		
-		if (buffList.size() == 0) 
-			return "[Buff: ]";
-		
-		String result = "";
-		for (int i = 0; i < buffList.size() - 1; i++)
-			result += buffList.get(i).getColorName() + "\u001B[0m(" + buffList.get(i).getDuration() + "), ";
-		result += buffList.get(buffList.size() - 1).getColorName() + "\u001B[0m(" + buffList.get(buffList.size() - 1).getDuration() + ")";
-		
-		return "[Buff: " + result + "]";
-	}
 
 	public Boolean getIsDied(){
 		return isDied;
@@ -220,5 +198,9 @@ public class Enemy {
 	 */
 	public int getSteelsoulAbsorbedDamage() {
 		return steelsoulAbsorbedDamage;
+	}
+
+	public String getType() {
+		return type;
 	}
 }

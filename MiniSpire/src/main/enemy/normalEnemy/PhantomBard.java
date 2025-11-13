@@ -26,7 +26,11 @@ public class PhantomBard extends Enemy {
 	}
 
 	@Override
-	public void onMove() {
+	public boolean onMove() {
+		
+		if (!super.onMove())
+			return false;
+		
 		switch (movementCounter) {
 			case 0:
 				System.out.println("\n >> " + this.getName() + " uses Battle Voice!");
@@ -57,6 +61,7 @@ public class PhantomBard extends Enemy {
 			default:
 				movementCounter = 0;
 		}
+		return true;
 	}
 
 	private void battleVoice() {

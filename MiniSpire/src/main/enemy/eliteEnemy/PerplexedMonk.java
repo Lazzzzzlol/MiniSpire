@@ -18,7 +18,11 @@ public class PerplexedMonk extends Enemy {
 	}
 
 	@Override
-	public void onMove() {
+	public boolean onMove() {
+
+		if (!super.onMove())
+			return false;
+
 		switch (movementCounter) {
 			case 0:
 			case 1:
@@ -41,6 +45,7 @@ public class PerplexedMonk extends Enemy {
 			default:
 				movementCounter = 0;
 		}
+		return true;
 	}
 
 	private void formShiftAttack() {

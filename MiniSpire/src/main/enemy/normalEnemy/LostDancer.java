@@ -17,8 +17,11 @@ public class LostDancer extends Enemy{
         markList = new ArrayList<>();
     }
 
-    public void onMove() {
+    public boolean onMove() {
 		
+        if (!super.onMove())
+			return false;
+
 		switch (movementCounter) {
 		
 			case 0:
@@ -56,6 +59,7 @@ public class LostDancer extends Enemy{
 				movementCounter = 0;
 				break;
 		}
+        return true;
     }
     
     public void reverseCascade(){

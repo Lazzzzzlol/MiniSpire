@@ -17,7 +17,7 @@ import main.processor.HealProcessor;
 
 public class Enemy {
 	
-	private String name;
+	protected String name;
 	private int hp;
 	private int initialHp;
 	protected int movementCounter = 0;
@@ -37,11 +37,22 @@ public class Enemy {
 		this.type = type;
 	}
 	
-	public void onMove() {
-		if (this.getHp() <= 0 || isDied) {
-			return;
-		}
-	};
+	public boolean onMove() {
+    if (this.getHp() <= 0 || isDied) {
+        return false;
+    }
+
+    boolean hasMuted = buffList.stream()
+            .anyMatch(buff -> "Muted".equals(buff.getName()));
+
+    if (hasMuted){
+        movementCounter++;
+        System.out.println(" >> " + this.getName() + " failed to act (Muted).");
+        return false;
+    }
+    
+    return true; // 可以继续执行
+}
 
 	public void onEndTurn() {
 

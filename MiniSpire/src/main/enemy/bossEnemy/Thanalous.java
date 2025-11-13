@@ -17,7 +17,7 @@ import main.processor.DamageProcessor;
 
 public class Thanalous extends Enemy {
 
-	private int phase = 1;
+	private int phrase = 1;
 	private boolean initiated = false;
 	private int declarationCount = 0;
 	private boolean forceNextBloodLeeching = false;
@@ -35,20 +35,20 @@ public class Thanalous extends Enemy {
 	}
 
 	@Override
-	public void onMove() {
-		if (this.getHp() <= 0 || isDied) {
-			return;
-		}
+	public boolean onMove() {
+		
+		if (!super.onMove())
+			return false;
 		
 		if (handlePhaseTransition()) {
-			return;
+			return true;
 		}
 
-		if (phase == 1) {
+		if (phrase == 1) 
 			executePhaseOne();
-			return;
-		}
-		executePhaseTwo();
+		else
+			executePhaseTwo();
+		return true;
 	}
 
 	private void executePhaseOne() {
@@ -111,7 +111,7 @@ public class Thanalous extends Enemy {
 			return false;
 		}
 		
-		if (phase == 1 && this.getHp() < 150 && !forceNextBloodLeeching) {
+		if (phrase == 1 && this.getHp() < 150 && !forceNextBloodLeeching) {
 			System.out.println(" >> Thanalous: You will regret this...");
 			forceNextBloodLeeching = true;
 		}
@@ -140,22 +140,36 @@ public class Thanalous extends Enemy {
 
 	private void growth() {
 		System.out.println(" >> Growth!");
-		Player.getInstance().addBuff(new main.buff.positiveBuff.BuffStrengthened(1), 1);
+		Player.getInstance().addBuff(new main.buff.positiveBuff.BuffStrengthened(2), 2);
 		addBuff(new BuffStrengthened(3), 3);
 		movementCounter++;
 	}
 
 	private void gibbet() {
+		
 		System.out.println(" >> Gibbet!");
 		int damage = 13 + Main.random.nextInt(5); // 13-17
 		DamageProcessor.applyDamageToPlayer(damage, this, Player.getInstance());
-		Player.getInstance().addBuff(new BuffEnshroud(1), 1);
+
+		boolean playerHasEnshroud = buffList.stream()
+                .anyMatch(buff -> "Enshroud".equals(buff.getName()));
+		if (playerHasEnshroud)
+			Player.getInstance().addBuff(new BuffEnshroud(2), 2);
+
 		movementCounter++;
 	}
 
 	private void gallows() {
 		System.out.println(" >> Gallows!");
-		addBuff(new BuffBloodLeeching(2), 2);
+
+		boolean playerHasEnshroud = buffList.stream()
+                .anyMatch(buff -> "Enshroud".equals(buff.getName()));
+		
+		if (playerHasEnshroud)
+			Player.getInstance().addBuff(new BuffEnshroud(3), 3);
+		else
+			addBuff(new BuffBloodLeeching(2), 2);
+
 		movementCounter++;
 	}
 
@@ -209,7 +223,7 @@ public class Thanalous extends Enemy {
 		System.out.println(" >> " + this.getName() + " gains overwhelming leech!");
 		addBuff(new BuffBloodLeeching(10), 10);
 		forceNextBloodLeeching = false;
-		phase = 2;
+		phrase = 2;
 		movementCounter = 0;
 	}
 

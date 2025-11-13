@@ -26,7 +26,11 @@ public class Watcher extends Enemy{
 	}
 
 	@Override
-	public void onMove() {
+	public boolean onMove() {
+		
+		if (!super.onMove())
+			return false;
+		
 		switch (movementCounter) {
 			case 0:
 				System.out.println("\n >> " + this.getName() + " uses Blunt Hit!");
@@ -56,6 +60,7 @@ public class Watcher extends Enemy{
 			default:
 				movementCounter = 0;
 		}
+		return true;
 	}
 
 	private void bluntHit() {

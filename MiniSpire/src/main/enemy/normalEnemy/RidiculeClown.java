@@ -21,8 +21,12 @@ public class RidiculeClown extends Enemy {
 	}
 
 	@Override
-	public void onMove() {
+	public boolean onMove() {
+		
 		dmg = 1 + Main.random.nextInt(10); // 1-10
+		if (!super.onMove())
+			return false;
+			
 		switch (movementCounter) {
 			case 0:
 				System.out.println("\n >> " + this.getName() + " uses Surprise Box!");
@@ -57,6 +61,7 @@ public class RidiculeClown extends Enemy {
 			default:
 				movementCounter = 0;
 		}
+		return true;
 	}
 
 	private void surpriseBox() {

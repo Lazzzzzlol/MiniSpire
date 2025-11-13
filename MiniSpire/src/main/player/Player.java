@@ -3,6 +3,7 @@ package main.player;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -187,9 +188,14 @@ public class Player {
 		discardCardList.addAll(handCardList);
 		handCardList.clear();
 		
-		if (buffList != null) {
-	        buffList.removeIf(buff -> buff.getDuration() <= 0);
-	    }
+		Iterator<Buff> it = buffList.iterator();
+	    
+	    while (it.hasNext()) {
+	        Buff buff = it.next();
+	        buff.onEndTurn();
+			if (buff.getDuration() <= 0)
+	            it.remove();
+		}
 	}
 
 	public void onWin(){

@@ -159,7 +159,7 @@ public class Main {
 			}, 3, TimeUnit.SECONDS);
 			
 			executor.schedule(() -> {
-				System.out.println("and your dog.");
+				System.out.println(" and your dog.");
 			}, 4, TimeUnit.SECONDS);
 			
 			executor.schedule(() -> {

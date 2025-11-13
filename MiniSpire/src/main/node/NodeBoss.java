@@ -73,15 +73,15 @@ public class NodeBoss extends NodeBattle {
 		Util.printBlankLines(10);
 
 		Main.executor.schedule(() -> {
-			System.out.println(" >> Thanalous: ...");
+			System.out.println(" >> Thanalous: ... ");
 		}, 1, TimeUnit.SECONDS);
 
 		Main.executor.schedule(() -> {
-			System.out.println(" >> Thanalous: Well...you defeated me...");
+			System.out.println(" >> Thanalous: Well... you defeated me... ");
 		}, 3, TimeUnit.SECONDS);
 
 		Main.executor.schedule(() -> {
-			System.out.print(" >> Thanalous: As you wish, you may pass now...");
+			System.out.print(" >> Thanalous: As you wish, you may pass now... ");
 		}, 5, TimeUnit.SECONDS);
 
 		Main.executor.schedule(() -> {

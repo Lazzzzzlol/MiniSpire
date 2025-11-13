@@ -173,7 +173,7 @@ public class Main {
 			System.out.println(mediumLine);
 			
 			executor.schedule(() -> {
-				System.out.print("      You defeated...");
+				System.out.print("      You are defeated... ");
 			}, 1, TimeUnit.SECONDS);
 			
 			executor.schedule(() -> {

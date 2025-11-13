@@ -26,12 +26,12 @@ public class Thanalous extends Enemy {
 	public Thanalous() {
 		super("Thanalous", 450);
 
-		declarations.add("The lotus shall bloom again, no deny accepted...");
-		declarations.add("Connecting the cycle of life, death, and rebirth...");
-		declarations.add("Beauty, spirituality, and eternity...");
-		declarations.add("Beholding the lush beauty of a hundred flowers...");
-		declarations.add("Emerging from the mud yet unsoiled...");
-		declarations.add("Washed by clear ripples yet unadorned...");
+		declarations.add("The lotus shall bloom again, no deny accepted... ");
+		declarations.add("Connecting the cycle of life, death, and rebirth... ");
+		declarations.add("Beauty, spirituality, and eternity... ");
+		declarations.add("Beholding the lush beauty of a hundred flowers... ");
+		declarations.add("Emerging from the mud yet unsoiled... ");
+		declarations.add("Washed by clear ripples yet unadorned... ");
 	}
 
 	public void onMove() {

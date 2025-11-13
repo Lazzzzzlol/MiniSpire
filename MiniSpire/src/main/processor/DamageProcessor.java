@@ -93,14 +93,12 @@ public class DamageProcessor {
 
                     case "Strengthened":
                         damageMultiplier += 0.3f;
-                        break;
+
                     case "Weakened":
                         damageMultiplier -= 0.3f;
-                        break;
 
                     case "Indomitable":
                         damageMultiplier *= 2.0f;
-                        break;
 
                 }
             }
@@ -112,10 +110,9 @@ public class DamageProcessor {
 
                 case "Vulnerable":
                     damageMultiplier += 0.3f;
-                    break;
+
                 case "Tough":
                     if (!hasIgnore) damageMultiplier -= 0.3f;
-                    break;
                     
                 case "Enshroud":
                     damageMultiplier += 0.5f;
@@ -128,10 +125,10 @@ public class DamageProcessor {
                     }
                     break;
 
+
                 case "Steelsoul":
                     attackAbsorbed = true;
                     break;
-
             }
         }
 

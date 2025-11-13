@@ -163,7 +163,8 @@ public class Main {
 			}, 4, TimeUnit.SECONDS);
 			
 			executor.schedule(() -> {
-				System.out.println("                    Score: " + game.getScore());
+				System.out.println();
+				System.out.println("Score: " + game.getScore());
 				System.out.println(mediumLine);
 				executor.shutdown();
 			}, 5, TimeUnit.SECONDS);
@@ -181,7 +182,8 @@ public class Main {
 			}, 3, TimeUnit.SECONDS);
 			
 			executor.schedule(() -> {
-				System.out.println("                    Score: " + game.getScore());
+				System.out.println();
+				System.out.println("Score: " + game.getScore());
 				System.out.println(mediumLine);
 				executor.shutdown();
 			}, 4, TimeUnit.SECONDS);

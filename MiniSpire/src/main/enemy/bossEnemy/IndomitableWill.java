@@ -87,15 +87,18 @@ public class IndomitableWill extends Enemy {
 		movementCounter = 0;
 	}
 
-	public void onMove() {
+	public boolean onMove() {
 
-		super.onMove();
-
+		if (!super.onMove())
+			return false;
+		
 		if (!phase2) {
 			phase1Move();
 		} else {
 			phase2Move();
 		}
+
+		return true;
 	}
 
 	private void phase1Move() {

@@ -34,18 +34,17 @@ public class Thanalous extends Enemy {
 		declarations.add("Washed by clear ripples yet unadorned... ");
 	}
 
-	public void onMove() {
-		super.onMove();
-		
-		if (handlePhaseTransition()) {
-			return;
-		}
+	public boolean onMove() {
+
+		if (!super.onMove())
+			return false;
 
 		if (phase == 1) {
 			executePhaseOne();
-			return;
 		}
 		executePhaseTwo();
+
+		return true;
 	}
 
 	private void executePhaseOne() {

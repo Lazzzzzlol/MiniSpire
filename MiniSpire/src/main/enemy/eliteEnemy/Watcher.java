@@ -25,9 +25,10 @@ public class Watcher extends Enemy{
 		}, 1, TimeUnit.SECONDS);
 	}
 
-	public void onMove() {
+	public boolean onMove() {
 
-		super.onMove();
+		if (!super.onMove())
+			return false;
 
 		switch (movementCounter) {
 			case 0:
@@ -58,6 +59,7 @@ public class Watcher extends Enemy{
 			default:
 				movementCounter = 0;
 		}
+		return true;
 	}
 
 	private void bluntHit() {

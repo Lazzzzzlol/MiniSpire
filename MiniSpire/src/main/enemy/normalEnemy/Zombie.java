@@ -21,9 +21,10 @@ public class Zombie extends Enemy {
 		}, 1, TimeUnit.SECONDS);
 	}
 	
-	public void onMove() {
+	public boolean onMove() {
 
-		super.onMove();
+		if (!super.onMove())
+			return false;
 		
 		switch (movementCounter) {
 		
@@ -50,6 +51,7 @@ public class Zombie extends Enemy {
 				movementCounter = 0;
 				break;
 		}
+		return true;
 	}
 	
 	private void scratch() {

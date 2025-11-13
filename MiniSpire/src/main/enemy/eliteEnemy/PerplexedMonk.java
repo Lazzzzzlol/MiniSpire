@@ -17,9 +17,10 @@ public class PerplexedMonk extends Enemy {
 		super("Perplexed Monk", 130 + Main.random.nextInt(21));
 	}
 
-	public void onMove() {
+	public boolean onMove() {
 
-		super.onMove();
+		if (!super.onMove())
+			return false;
 		
 		switch (movementCounter) {
 			case 0:
@@ -43,6 +44,7 @@ public class PerplexedMonk extends Enemy {
 			default:
 				movementCounter = 0;
 		}
+		return true;
 	}
 
 	private void formShiftAttack() {

@@ -34,9 +34,10 @@ public class Enemy {
 		this.isDied = false;
 	}
 	
-	public void onMove() {
+	public boolean onMove() {
+
 		if (this.getHp() <= 0 || isDied) {
-			return;
+			return false;
 		}
 
 		boolean hasMuted = buffList.stream()
@@ -44,8 +45,11 @@ public class Enemy {
 
 		if (hasMuted){
 			movementCounter++;
-			System.out.println(" >> " + this.getName() + "failed to act (Muted).");
+			System.out.println(" >> " + this.getName() + " failed to act (Muted).");
+			return false;
 		}
+
+		return true;
 	};
 
 	public void onEndTurn() {

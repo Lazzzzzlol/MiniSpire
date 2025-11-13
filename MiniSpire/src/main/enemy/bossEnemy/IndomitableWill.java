@@ -69,31 +69,27 @@ public class IndomitableWill extends Enemy {
 		movementCounter = 0;
 	}
 
+	public void onDie(){
+
+		super.onDie();
+
+		phase2 = true;
+		System.out.println(" >> In dom?tab?e W?ll : Pr epare thy self to d ie.");
+		System.out.println(" >> " + this.getName() + " enters Phase 2!");
+		addBuff(new BuffIndomitable(999), 999);
+		desperateRoarDone = false;
+		scarletDeliriumDone = false;
+		impalementDone = false;
+		comboCompleted = false;
+		desperateRoarSucceeded = false;
+		scarletDeliriumSucceeded = false;
+		impalementSucceeded = false;
+		movementCounter = 0;
+	}
+
 	public void onMove() {
-		if (isDied || this.getHp() <= 0) {
-			return;
-		}
 
-		boolean hasResurrection = buffList.stream()
-                .anyMatch(buff -> "Resurrection".equals(buff.getName()));
-
-		// 失去 Resurrection 后进入第二阶段
-		if (!phase2 && !hasResurrection) {
-			phase2 = true;
-			System.out.println(" >> " + this.getName() + " enters Phase 2!");
-			addBuff(new BuffIndomitable(999), 999);
-			// 进入第二阶段后立即执行 Desperate Roar
-			desperateRoarDone = false;
-			scarletDeliriumDone = false;
-			impalementDone = false;
-			comboCompleted = false;
-			desperateRoarSucceeded = false;
-			scarletDeliriumSucceeded = false;
-			impalementSucceeded = false;
-			movementCounter = 0;
-			phase2Move();
-			return;
-		}
+		super.onMove();
 
 		if (!phase2) {
 			phase1Move();

@@ -15,8 +15,10 @@ public class MakoFighter extends Enemy {
 		super("Mako Fighter", 120 + Main.random.nextInt(21));
 	}
 
-	@Override
 	public void onMove() {
+
+		super.onMove();
+
 		switch (movementCounter) {
 			case 0:
 				System.out.println("\n >> " + this.getName() + " uses Mako SharkO!");

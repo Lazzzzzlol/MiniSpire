@@ -20,8 +20,10 @@ public class RidiculeClown extends Enemy {
 		super("Ridicule Clown", 45 + Main.random.nextInt(11));
 	}
 
-	@Override
 	public void onMove() {
+
+		super.onMove();
+
 		dmg = 1 + Main.random.nextInt(10); // 1-10
 		switch (movementCounter) {
 			case 0:

@@ -22,6 +22,8 @@ public class Zombie extends Enemy {
 	}
 	
 	public void onMove() {
+
+		super.onMove();
 		
 		switch (movementCounter) {
 		

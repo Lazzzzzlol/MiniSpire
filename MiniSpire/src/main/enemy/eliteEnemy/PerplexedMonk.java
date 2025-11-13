@@ -17,8 +17,10 @@ public class PerplexedMonk extends Enemy {
 		super("Perplexed Monk", 130 + Main.random.nextInt(21));
 	}
 
-	@Override
 	public void onMove() {
+
+		super.onMove();
+		
 		switch (movementCounter) {
 			case 0:
 			case 1:

@@ -18,6 +18,8 @@ public class LostDancer extends Enemy{
     }
 
     public void onMove() {
+
+        super.onMove();
 		
 		switch (movementCounter) {
 		

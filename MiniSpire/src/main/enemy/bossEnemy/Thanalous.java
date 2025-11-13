@@ -34,11 +34,8 @@ public class Thanalous extends Enemy {
 		declarations.add("Washed by clear ripples yet unadorned...");
 	}
 
-	@Override
 	public void onMove() {
-		if (this.getHp() <= 0 || isDied) {
-			return;
-		}
+		super.onMove();
 		
 		if (handlePhaseTransition()) {
 			return;

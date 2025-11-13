@@ -25,8 +25,10 @@ public class Watcher extends Enemy{
 		}, 1, TimeUnit.SECONDS);
 	}
 
-	@Override
 	public void onMove() {
+
+		super.onMove();
+
 		switch (movementCounter) {
 			case 0:
 				System.out.println("\n >> " + this.getName() + " uses Blunt Hit!");

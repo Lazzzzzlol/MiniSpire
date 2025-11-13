@@ -38,6 +38,14 @@ public class Enemy {
 		if (this.getHp() <= 0 || isDied) {
 			return;
 		}
+
+		boolean hasMuted = buffList.stream()
+				.anyMatch(buff -> "Muted".equals(buff.getName()));
+
+		if (hasMuted){
+			movementCounter++;
+			System.out.println(" >> " + this.getName() + "failed to act (Muted).");
+		}
 	};
 
 	public void onEndTurn() {

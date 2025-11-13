@@ -10,8 +10,9 @@ import main.processor.DamageProcessor;
 
 public class PerplexedMonk extends Enemy {
 
-	private HashSet<String> chakras = new HashSet<>(); // Opo, Raptor, Coeurl
-	private boolean haveOpoStance = false; // 魔猿身形
+	private HashSet<String> chakras = new HashSet<>();
+	private boolean haveOpoStance = false;
+	private boolean hasSpecialContainer = true;
 
 	public PerplexedMonk() {
 		super("Perplexed Monk", 130 + Main.random.nextInt(21),"elite");
@@ -103,6 +104,25 @@ public class PerplexedMonk extends Enemy {
 		System.out.println(" >> Fires Reply!");
 		DamageProcessor.applyDamageToPlayer(50, this, Player.getInstance());
 	}
+
+	@Override
+    public boolean getHasSpecialContainer(){
+		return this.hasSpecialContainer;
+	}
+
+    @Override
+    public String getSpecialContainerString(){
+
+        String result = "[Chakra: ";
+        for (String chakra : chakras)
+            result += chakra + " ";
+        result += "] ";
+		
+		if (haveOpoStance)
+			result += "(Opo Stance ready)";
+
+        return result;
+    }
 }
 
 

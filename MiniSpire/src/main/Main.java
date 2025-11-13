@@ -183,7 +183,7 @@ public class Main {
 			
 			executor.schedule(() -> {
 				System.out.println();
-				System.out.println("Score: " + game.getScore());
+				System.out.println(" [Score: " + game.getScore() + "]");
 				System.out.println(mediumLine);
 				executor.shutdown();
 			}, 4, TimeUnit.SECONDS);

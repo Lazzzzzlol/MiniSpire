@@ -11,6 +11,7 @@ import main.Main;
 import main.buff.Buff;
 import main.game.Game;
 import main.node.NodeBoss;
+import main.player.Player;
 import main.processor.HealProcessor;
 
 public class Enemy {
@@ -65,7 +66,7 @@ public class Enemy {
 	        	if ("Steelsoul".equals(buff.getName()) && steelsoulAbsorbedDamage > 0) {
 	        		int damageToReturn = steelsoulAbsorbedDamage;
 	        		steelsoulAbsorbedDamage = 0;
-	        		deductHp(damageToReturn);
+	        		Player.getInstance().deductHp(damageToReturn);
 	        		Main.executor.schedule(() -> {
 	        			System.out.println(" >> " + this.name + " returns " + damageToReturn + " absorbed damage from Steelsoul!");
 	        		}, 1, TimeUnit.SECONDS);

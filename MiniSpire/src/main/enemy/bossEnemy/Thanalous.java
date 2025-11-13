@@ -204,6 +204,9 @@ public class Thanalous extends Enemy {
 	private void feast() {
 		System.out.println(" >> Feast!");
 
+		int damage = 15 + Main.random.nextInt(5);
+		DamageProcessor.applyDamageToPlayer(damage, this, Player.getInstance());
+
 		Card deathBrandCard = CardFactory.getInstance().createCard(22);
 		Player.getInstance().addCardToDeck(deathBrandCard);
 		Player.getInstance().addCardToDeck(deathBrandCard);
@@ -215,7 +218,18 @@ public class Thanalous extends Enemy {
 
 	private void gluttony() {
 		System.out.println(" >> Gluttony!");
-		addBuff(new BuffEnshroud(2), 2);
+
+		int damage = 11 + Main.random.nextInt(7);
+		DamageProcessor.applyDamageToPlayer(damage, this, Player.getInstance());
+
+		boolean hasBloodLeeching = buffList.stream()
+            .anyMatch(buff -> "BloodLeeching".equals(buff.getName()));
+
+		if (hasBloodLeeching)
+			addBuff(new BuffEnshroud(2), 2);
+		else
+			addBuff(new BuffStrengthened(4), 4);
+
 		movementCounter++;
 	}
 

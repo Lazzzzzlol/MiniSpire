@@ -66,7 +66,7 @@ public class EnemyFactory implements ResourceFactory {
 				}
 
 			case "boss":
-
+			
 				switch (Main.random.nextInt(2)) {
 					case 0:
 						return new Thanalous();

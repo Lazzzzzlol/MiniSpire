@@ -2,6 +2,7 @@ package main.game;
 
 import main.Main;
 import main.Util;
+import main.enemy.Enemy;
 import main.node.Node;
 import main.node.NodeBattle;
 import main.node.NodeBoss;
@@ -35,6 +36,7 @@ public class Game {
 	private Boolean isEndTurn;
 	private Boolean hasDrawnNodeInfo;
 	
+	private Enemy finalBoss;
 	private Boolean isVictory;
 	private int score;
 	
@@ -43,7 +45,7 @@ public class Game {
 		this.player = Player.getInstance();
 		this.isGameOver = false;
 		
-		this.nodeIndex = 1;
+		this.nodeIndex = 12;
 		this.currentNode = null;
 		this.nodeHistory = new ArrayList<Node>();
 		this.nodeDecider = NodeDecider.getInstance();
@@ -165,10 +167,23 @@ public class Game {
 	public Node getCurrentNode(){
 		return currentNode;
 	}
+
+	public void setFinalBoss(Enemy boss){
+		finalBoss = boss;
+	}
+
+	public Enemy getFinalBoss(){
+		return finalBoss;
+	}
 	
 	public void advanceToNextNode() {
 
 		nodeHistory.add(currentNode);
+
+		if (nodeIndex == 12){
+			return;
+		}
+
 		nodeIndex += 1;
 		hasDrawnNodeInfo = false;
 

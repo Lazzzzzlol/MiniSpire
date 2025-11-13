@@ -9,6 +9,8 @@ import java.util.concurrent.TimeUnit;
 
 import main.Main;
 import main.buff.Buff;
+import main.game.Game;
+import main.node.NodeBoss;
 import main.processor.HealProcessor;
 
 public class Enemy {
@@ -117,6 +119,7 @@ public class Enemy {
 
 	public void onDie(){
 
+		if (Game.getInstance().getCurrentNode().getClass() != NodeBoss.class)
 		Main.executor.schedule(() -> {
 			List<String> messages = Arrays.asList(
 				"dies", "is defeated", "falls", "meets the end", 

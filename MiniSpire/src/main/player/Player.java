@@ -74,6 +74,8 @@ public class Player {
 	}
 	
 	public void drawHandCards(int num, Integer time) {
+		if (Game.getInstance().getIsVictory())
+			return;
 		if (time == null) time = 1001;
 		internalDrawHandCards(num, time);
 	}

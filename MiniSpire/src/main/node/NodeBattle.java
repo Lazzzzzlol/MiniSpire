@@ -21,7 +21,7 @@ public class NodeBattle extends Node {
 	protected String enemyType;
 	protected Enemy enemy;
 
-	private boolean isWin;
+	protected boolean isWin;
 	private Card rewardCard1;
 	private Card rewardCard2;
 	private Card rewardCard3;
@@ -164,7 +164,6 @@ public class NodeBattle extends Node {
 				playcard(Integer.parseInt(parts[1]));
 
 				int delay = 3000;
-
 				Main.executor.schedule(() -> {
 					if (enemy.getIsDied())
 						onWin();
@@ -188,7 +187,11 @@ public class NodeBattle extends Node {
 
 	@Override
 	public boolean isValidInput(String input) {
-		if (isWin) return isValidWinInput(input);
+		if (isWin) 
+			if (Game.getInstance().getIsVictory())
+				return isValidVictoryInput(input);
+			else
+				return isValidWinInput(input);
 		else return isValidBattleInput(input);
 	}
 	
@@ -240,6 +243,12 @@ public class NodeBattle extends Node {
 
 		return false;
 
+	}
+
+	private boolean isValidVictoryInput(String input){
+		if (!input.equals("e"))
+			return false;
+		return true;
 	}
 
 	private void playcard(int cardIndex) {

@@ -6,6 +6,7 @@ import main.Main;
 import main.ScoreCalculator;
 import main.Util;
 import main.game.Game;
+import main.player.Player;
 
 public class NodeBoss extends NodeBattle {
 	
@@ -16,24 +17,33 @@ public class NodeBoss extends NodeBattle {
 	}
 
 	public void onStartTurn(){
-
-		if (enemy.getIsDied()){
-			setIsWin(true);
-			Game game = Game.getInstance();
-			game.setIsGameOver(true);
-			game.setIsVictory(true);
-			onWin();
-		}
-		else
-			super.onStartTurn();
+		super.onStartTurn();
+		Game.getInstance().setFinalBoss(enemy);
 	}
 
 	@Override
 	public void onWin(){
 
+		isWin = true;
+
+		Game game = Game.getInstance();
+		game.setIsEndTurn(true);
+		game.setIsGameOver(true);
+		game.setIsVictory(true);
+
+		Player.getInstance().onWin();
+
+		Main.executor.schedule(() -> {
+			onWinDraw();
+		}, 500, TimeUnit.MILLISECONDS);
+
 		ScoreCalculator scoreCalculator = ScoreCalculator.getInstance();
 		int gainedScore = scoreCalculator.calculateBattleScore(enemy, enemyType);
 		scoreCalculator.addScore(gainedScore);
+
+	}
+
+	private void onWinDraw(){
 
 		switch (enemy.getName()) {
 			case "Thanalous":
@@ -46,12 +56,16 @@ public class NodeBoss extends NodeBattle {
 			default:
 				break;
 		}
-		
-		//Main.executor.schedule(() -> {
-			Game game = Game.getInstance();
-			game.setIsGameOver(true);
-			game.setIsVictory(true);
-		//}, 10, TimeUnit.SECONDS);
+	}
+
+	@Override
+	public void onInput(String input){
+
+		if (!isWin)
+			super.onInput(input);
+		else
+			while (!input.equals("e"))
+				input = Main.scanner.nextLine();
 	}
 
 	private void printThanalousSpeech() {
@@ -68,11 +82,15 @@ public class NodeBoss extends NodeBattle {
 
 		Main.executor.schedule(() -> {
 			System.out.print(" >> Thanalous: As you wish, you may pass now...");
-		}, 6, TimeUnit.SECONDS);
+		}, 5, TimeUnit.SECONDS);
 
 		Main.executor.schedule(() -> {
 			System.out.println("for your dog I guess..?");
-		}, 8, TimeUnit.SECONDS);
+		}, 7, TimeUnit.SECONDS);
+
+		Main.executor.schedule(() -> {
+			System.out.println("[Type 'e' to end game.]");
+		}, 9, TimeUnit.SECONDS);
 	}
 
 	private void printIndomitableWillSpeech() {
@@ -95,10 +113,13 @@ public class NodeBoss extends NodeBattle {
 			System.out.println(" >> : Unacceptable.");
 		}, 5, TimeUnit.SECONDS);
 
-		for (int i = 1; i <= 50; i++){
+		for (int i = 1; i <= 70; i++){
 			Main.executor.schedule(() -> {
 			System.out.println(" >> : Unacceptable.");
-			}, 7000 + 50 * i, TimeUnit.MILLISECONDS);
+			}, 7000 + 25 * i, TimeUnit.MILLISECONDS);
 		}
+		Main.executor.schedule(() -> {
+			System.out.println("[Type 'e' to end game.]");
+		}, 9, TimeUnit.SECONDS);
 	}
 }

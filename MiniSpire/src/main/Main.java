@@ -97,7 +97,7 @@ public class Main {
 		
 		//游戏结束		
 		
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 		Util.printBlankLines(30);
 		
 		printGameOverMessage(executor, game);

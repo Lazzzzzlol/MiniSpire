@@ -73,14 +73,12 @@ public class Player {
 	public void onStartTurn() {
 		boolean playerHasMuted = buffList.stream().anyMatch(buff -> "Muted".equals(buff.getName()));
 
+		this.actionPoints = this.maxActionPoints;
 		if (playerHasMuted){
 			this.actionPoints = 0;
 			System.out.println(" >> Action Point becomes 0 (Muted).");
 		}
-		else{
-			this.actionPoints = this.maxActionPoints;
-			drawHandCards(drawCardNumPerTurn, 2000);
-		}
+		drawHandCards(drawCardNumPerTurn, 2000);
 	}
 	
 	public void drawHandCards(int num, Integer time) {

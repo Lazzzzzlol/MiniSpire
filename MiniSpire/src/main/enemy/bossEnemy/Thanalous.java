@@ -10,10 +10,12 @@ import main.Main;
 import main.buff.debuff.BuffEnshroud;
 import main.buff.positiveBuff.BuffRecovering;
 import main.buff.positiveBuff.BuffStrengthened;
+import main.card.Card;
 import main.buff.positiveBuff.BuffBloodLeeching;
 import main.buff.debuff.BuffWeakened;
 import main.buff.debuff.BuffLost;
 import main.processor.DamageProcessor;
+import main.resourceFactory.CardFactory;
 
 public class Thanalous extends Enemy {
 
@@ -146,7 +148,7 @@ public class Thanalous extends Enemy {
 	}
 
 	private void gibbet() {
-		
+
 		System.out.println(" >> Gibbet!");
 		int damage = 13 + Main.random.nextInt(5); // 13-17
 		DamageProcessor.applyDamageToPlayer(damage, this, Player.getInstance());
@@ -194,14 +196,20 @@ public class Thanalous extends Enemy {
 	private void devour() {
 		System.out.println(" >> Devour!");
 		int bonus = 1 + Main.random.nextInt(2);
-		int damage = 20 + Main.random.nextInt(4) + declarationCount * bonus;
+		int damage = 25 + Main.random.nextInt(4) + declarationCount * bonus;
 		DamageProcessor.applyDamageToPlayer(damage, this, Player.getInstance());
 		movementCounter++;
 	}
 
 	private void feast() {
 		System.out.println(" >> Feast!");
+
+		Card deathBrandCard = CardFactory.getInstance().createCard(22);
+		Player.getInstance().addCardToDeck(deathBrandCard);
+		Player.getInstance().addCardToDeck(deathBrandCard);
+
 		Player.getInstance().addBuff(new BuffLost(2), 2);
+
 		movementCounter++;
 	}
 

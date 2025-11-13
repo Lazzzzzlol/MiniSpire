@@ -38,12 +38,16 @@ public class Thanalous extends Enemy {
 
 		if (!super.onMove())
 			return false;
+		
+		if (handlePhaseTransition()) {
+			return true;
+		}
 
 		if (phase == 1) {
 			executePhaseOne();
+			return true;
 		}
 		executePhaseTwo();
-
 		return true;
 	}
 

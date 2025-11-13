@@ -117,7 +117,7 @@ public class NodeBattle extends Node {
 		Util.printBlankLines(1);
 		
 		String enemyInfo = "-  " + enemy.getName() + " HP: " + enemy.getHp() + "  -";
-		String enemyBuffList = enemy.getBuffListString();
+		String enemyBuffList = enemy.getColoredBuffListString();
 		String enemySpecialContainer = "";
 		if (enemy.getHasSpecialContainer())
 			enemySpecialContainer = enemy.getSpecialContainerString();
@@ -138,7 +138,7 @@ public class NodeBattle extends Node {
 		
 		System.out.println(" [Status:   HP: " + player.getHp() + "/" + player.getMaxHp() + 
 				"   Action points: " + player.getActionPoints() + "/" + player.getMaxActionPoints() + "]");
-		System.out.println(" [Buff: " + player.getBuffListString() + "]");
+		System.out.println(" [Buff: " + player.getColoredBuffListString() + "]");
 		System.out.println();
 		System.out.println(" [Card: " + player.getHandCardListString() + "]\n");
 		

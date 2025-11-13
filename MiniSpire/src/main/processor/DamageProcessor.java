@@ -2,6 +2,7 @@ package main.processor;
 
 import main.player.Player;
 import main.Main;
+import main.Util;
 import main.enemy.Enemy;
 import main.enemy.eliteEnemy.Watcher;
 import main.buff.Buff;
@@ -81,7 +82,8 @@ public class DamageProcessor {
         boolean attackAbsorbed = false;
 
         if (hasInvincible && !hasIgnore) {
-            scheduleDamageMessage(target, "The attack fails (Invincible)", 1);
+            String coloredInvincible = Util.getColorBuffName(getBuffList(target), "Invincible");
+            scheduleDamageMessage(target, "The attack fails (" + coloredInvincible + "\u001B[0m)", 1);
             return 0;
         }
 
@@ -138,15 +140,18 @@ public class DamageProcessor {
         int calculatedDamage = Math.round(baseDamage * damageMultiplier);
         
         if (attackMistied) {
-            scheduleDamageMessage(target, "The attack fails (Misty)", 1);
+            String coloredMisty = Util.getColorBuffName(getBuffList(target), "Misty");
+            scheduleDamageMessage(target, "The attack fails (" + coloredMisty + "\u001B[0m)", 1);
             return 0;
         }
         
         if (attackAbsorbed && target instanceof Enemy) {
             Enemy enemy = (Enemy) target;
             enemy.absorbDamageWithSteelsoul(calculatedDamage);
-            String message = getTargetName(target) + " absorbs " + 
-                           getDamageDisplay(baseDamage, calculatedDamage) + " damage (Steelsoul)";
+            String coloredSteelsoul = Util.getColorBuffName(getBuffList(target), "Steelsoul");
+            String message = getTargetName(target) + 
+                            " absorbs " + getDamageDisplay(baseDamage, calculatedDamage) + 
+                            " damage (" + coloredSteelsoul + "\u001B[0m)";
             scheduleDamageMessage(target, message, 1);
             
             if (hasSteadfast(target)) {

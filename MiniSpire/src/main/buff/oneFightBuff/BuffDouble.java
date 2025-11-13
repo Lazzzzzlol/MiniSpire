@@ -6,9 +6,4 @@ public class BuffDouble extends OneFightBuff {
         this.name = "Double";
         this.duration = duration;
     }
-    
-    @Override
-    public void onEndTurn() {
-        this.duration -= 0;
-    }
 }

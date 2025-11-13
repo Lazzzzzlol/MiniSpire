@@ -229,7 +229,7 @@ public class Player {
 
 		if (heal == 0){
 			Main.executor.schedule(() -> {
-				System.out.println(" >> Healed 0 HP (Lost)");
+				System.out.println(" >> Healed 0 HP (\u001B[31mLost\u001B[0m)");
 			}, time, TimeUnit.MILLISECONDS);
 			return;
 		}
@@ -317,8 +317,8 @@ public class Player {
 				
 		buffList.add(buff);
 		Main.executor.schedule(() -> {
-			System.out.println(" >> Obtained buff: " + buff.getName());
-		}, 1, TimeUnit.MILLISECONDS);
+			System.out.println(" >> Obtained buff: " + buff.getColorName() + "\u001B[0m");
+		}, 2, TimeUnit.MILLISECONDS);
 	}
 	
 	public ArrayList<Buff> getBuffList() {
@@ -343,6 +343,19 @@ public class Player {
 		for (int i = 0; i < buffList.size() - 1; i++)
 			result += (buffList.get(i).getName() + "(" + buffList.get(i).getDuration() + "),  ");
 		result += buffList.get(buffList.size() - 1).getName() + "(" + buffList.get(buffList.size() - 1).getDuration() + ")";
+		
+		return result;
+	}
+
+	public String getColoredBuffListString() {
+		
+		if (buffList.size() == 0) 
+			return "";
+		
+		String result = "";
+		for (int i = 0; i < buffList.size() - 1; i++)
+			result += buffList.get(i).getColorName() + "\u001B[0m(" + buffList.get(i).getDuration() + "), ";
+		result += buffList.get(buffList.size() - 1).getColorName() + "\u001B[0m(" + buffList.get(buffList.size() - 1).getDuration() + ")";
 		
 		return result;
 	}

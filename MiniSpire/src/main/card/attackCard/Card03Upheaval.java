@@ -8,7 +8,7 @@ public class Card03Upheaval extends AttackCard {
     
     public Card03Upheaval() {
         this.name = "Upheaval";
-        this.info = "Deal increasing damage from 6 each time played.";
+        this.info = "Deal increasing damage from 6 each time played in this fight.";
         this.cost = 1;
         this.rarity = "rare";
         this.baseDamage = 6;

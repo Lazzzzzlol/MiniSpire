@@ -6,9 +6,4 @@ public class BuffWeakened extends Debuff {
         this.name = "Weakened";
         this.duration = duration;
     }
-    
-    @Override
-    public void onEndTurn() {
-        this.duration -= 1;
-    }
 }

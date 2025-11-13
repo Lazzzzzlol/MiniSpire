@@ -85,7 +85,7 @@ public class Enemy {
 				
 		buffList.add(buff);
 		Main.executor.schedule(() -> {
-			System.out.println(" >> " + this.name + " obtains buff " + buff.getName());
+			System.out.println(" >> " + this.name + " obtains buff " + buff.getColorName() + "\u001B[0m");
 		}, 1001, TimeUnit.MILLISECONDS);
 	}
 	
@@ -174,6 +174,19 @@ public class Enemy {
 		for (int i = 0; i < buffList.size() - 1; i++)
 			result += buffList.get(i).getName() + "(" + buffList.get(i).getDuration() + "), ";
 		result += buffList.get(buffList.size() - 1).getName() + "(" + buffList.get(buffList.size() - 1).getDuration() + ")";
+		
+		return "[Buff: " + result + "]";
+	}
+
+	public String getColoredBuffListString() {
+		
+		if (buffList.size() == 0) 
+			return "[Buff: ]";
+		
+		String result = "";
+		for (int i = 0; i < buffList.size() - 1; i++)
+			result += buffList.get(i).getColorName() + "\u001B[0m(" + buffList.get(i).getDuration() + "), ";
+		result += buffList.get(buffList.size() - 1).getColorName() + "\u001B[0m(" + buffList.get(buffList.size() - 1).getDuration() + ")";
 		
 		return "[Buff: " + result + "]";
 	}

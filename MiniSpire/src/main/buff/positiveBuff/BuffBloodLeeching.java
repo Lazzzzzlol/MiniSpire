@@ -6,9 +6,4 @@ public class BuffBloodLeeching extends PositiveBuff {
         this.name = "BloodLeeching";
         this.duration = duration;
     }
-    
-    @Override
-    public void onEndTurn() {
-        this.duration -= 1;
-    }
 }

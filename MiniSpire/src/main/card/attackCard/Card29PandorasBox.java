@@ -16,7 +16,7 @@ public class Card29PandorasBox extends AttackCard {
     
     public Card29PandorasBox() {
         this.name = "Pandora's Box";
-        this.info = "Do 1 random action of belows, towards the enemy: Deal 13~66 damage; Heal 13~66; Apply 333 round of Vulnerable; Apply 666 round of Weakened; Apply 999 round of Strengthened and Tough; Deal 666 damage; Heal 666.";
+        this.info = "Do 1 random action of belows, towards the enemy: Deal 13~66 damage; Heal 13~66; Apply 33 round of Vulnerable; Apply 66 round of Weakened; Apply 99 round of Strengthened and Tough; Deal 66 damage; Heal 66.";
         this.cost = 1;
         this.rarity = "epic";
         this.baseDamage = 13;
@@ -33,20 +33,20 @@ public class Card29PandorasBox extends AttackCard {
         } else if (randomValue < 45) {
             effectType = 1; // 15%: 13~66 Heal
         } else if (randomValue < 60) {
-            effectType = 2; // 15%: 333 round Vulnerable
+            effectType = 2; // 15%: 33 round Vulnerable
         } else if (randomValue < 75) {
-            effectType = 3; // 15%: 666 round Weakened
+            effectType = 3; // 15%: 66 round Weakened
         } else if (randomValue < 90) {
-            effectType = 4; // 15%: 999 round Strengthened and Tough
+            effectType = 4; // 15%: 99 round Strengthened and Tough
         } else if (randomValue < 95) {
-            effectType = 5; // 5%: 666 Damage
+            effectType = 5; // 5%: 66 Damage
         } else {
-            effectType = 6; // 5%: 666 Heal
+            effectType = 6; // 5%: 66 Heal
         }
         
         switch (effectType) {
             case 0:
-                int damage1 = Main.random.nextInt(54) + 13; // 13-66
+                int damage1 = Main.random.nextInt(54) + baseDamage; // 13-66
                 DamageProcessor.applyDamageToEnemy(damage1, player, enemy);
                 Main.executor.schedule(() -> {
                     System.out.println(" >> Box: *screams* ");
@@ -54,7 +54,7 @@ public class Card29PandorasBox extends AttackCard {
                 break;
                 
             case 1:
-                int heal1 = Main.random.nextInt(54) + 13; // 13-66
+                int heal1 = Main.random.nextInt(54) + baseDamage; // 13-66
                 HealProcessor.applyHeal(enemy, heal1, null);
                 Main.executor.schedule(() -> {
                     System.out.println(" >> Box: *puffs* ");
@@ -62,36 +62,36 @@ public class Card29PandorasBox extends AttackCard {
                 break;
                 
             case 2:
-                enemy.addBuff(new BuffVulnerable(333), 333);
+                enemy.addBuff(new BuffVulnerable(33), 33);
                 Main.executor.schedule(() -> {
                     System.out.println(" >> Box: *mumbles* ");
                 }, 1, TimeUnit.MILLISECONDS);
                 break;
                 
             case 3:
-                enemy.addBuff(new BuffWeakened(666), 666);
+                enemy.addBuff(new BuffWeakened(66), 66);
                 Main.executor.schedule(() -> {
                     System.out.println(" >> Box: *wriggles* ");
                 }, 1, TimeUnit.MILLISECONDS);
                 break;
                 
             case 4:
-                enemy.addBuff(new BuffStrengthened(999), 999);
-                enemy.addBuff(new BuffTough(999), 999);
+                enemy.addBuff(new BuffStrengthened(99), 99);
+                enemy.addBuff(new BuffTough(99), 99);
                 Main.executor.schedule(() -> {
                     System.out.println(" >> Box: *smirks* "); 
                 }, 1, TimeUnit.MILLISECONDS);
                 break;
                 
             case 5:
-                DamageProcessor.applyDamageToEnemy(666, player, enemy);
+                DamageProcessor.applyDamageToEnemy(66, player, enemy);
                 Main.executor.schedule(() -> {
                     System.out.println(" >> Box: *opens* ");
                 }, 1, TimeUnit.MILLISECONDS);
                 break;
                 
             case 6:
-                HealProcessor.applyHeal(enemy, 666, null);
+                HealProcessor.applyHeal(enemy, 66, null);
                 Main.executor.schedule(() -> {
                     System.out.println(" >> Box: *giggles* ");
                 }, 1, TimeUnit.MILLISECONDS);

@@ -3,6 +3,7 @@ package main.processor;
 import main.player.Player;
 import main.resourceFactory.CardFactory;
 import main.Main;
+import main.Util;
 import main.card.Card;
 import main.card.attackCard.AttackCard;
 import main.card.effectCard.EffectCard;
@@ -46,8 +47,12 @@ public class PlayCardProcessor {
             player.getBuffList().removeIf(buff -> "Double".equals(buff.getName()));
 
             Main.executor.schedule(() -> {
-                System.out.println(" >> Played card: " + card.getName() + " (Double)");
+
+                String coloredDouble = Util.getColorBuffName(player.getBuffList(), "Double");
+                System.out.println(" >> Played card: " + card.getName() + " (" + coloredDouble + "\u001B[0m)");
+
                 attackCard.onPlay(player, enemy);
+
             }, 0, TimeUnit.SECONDS);
             
         }
@@ -61,8 +66,8 @@ public class PlayCardProcessor {
         effectCard.onUse(player, enemy);
         System.out.println(" >> Played card: " + card.getName());
 
-        if (hasBuff(player, "GainFlurryOfBlows")) {
-            addFlurryOfBlowsToHand(player);
+        if (hasBuff(player, "Flurry")) {
+            addFlurryToHand(player);
         }
 
     }
@@ -74,7 +79,7 @@ public class PlayCardProcessor {
 
     }
     
-    private static void addFlurryOfBlowsToHand(Player player) {
+    private static void addFlurryToHand(Player player) {
 
         Card flurryCard = CardFactory.getInstance().createCard(24);
         player.getHandCardList().add(flurryCard);

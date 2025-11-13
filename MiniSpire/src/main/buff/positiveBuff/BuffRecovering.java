@@ -6,9 +6,4 @@ public class BuffRecovering extends PositiveBuff {
         this.name = "Recovering";
         this.duration = duration;
     }
-    
-    @Override
-    public void onEndTurn() {
-        this.duration -= 1;
-    }
 }

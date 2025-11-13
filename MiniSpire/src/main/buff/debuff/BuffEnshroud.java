@@ -6,9 +6,4 @@ public class BuffEnshroud extends Debuff {
         this.name = "Enshroud";
         this.duration = duration;
     }
-    
-    @Override
-    public void onEndTurn() {
-        this.duration -= 0;
-    }
 }

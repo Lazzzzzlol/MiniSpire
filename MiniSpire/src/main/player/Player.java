@@ -417,7 +417,7 @@ public class Player {
             System.out.println(" [" + cost + " Cost Cards]");
             
             for (Card card : bucket) {
-				TextDisplay.printLineWithDelay("   " + index++ + ") " + " [" + Colors.colorOnForCardRarity(card) + "] <" + Colors.colorOnForCardCost(card) + "> "+ Colors.colorOnForCardName(card) + "  -" + card.getInfo() , 50);
+				TextDisplay.printLineWithDelay("   " + index++ + ") " + " [" + Colors.colorOnForCardRarity(card) + "] <" + Colors.colorOnForCardCost(card) + "> "+ Colors.colorOnForCardName(card) + "  -" + Colors.colorOnForCardInfo(card) , 50);
             }
             System.out.println();
         }
@@ -463,7 +463,7 @@ public class Player {
 				
 				for (Card card : bucket) {
 					indexToCardMap.put(index, card);
-					TextDisplay.printLineWithDelay("   " + index++ + ") " + " [" + Colors.colorOnForCardRarity(card) + "] <" + Colors.colorOnForCardCost(card) + "> "+ Colors.colorOnForCardName(card) + "  -" + card.getInfo() , 50);
+					TextDisplay.printLineWithDelay("   " + index++ + ") " + " [" + Colors.colorOnForCardRarity(card) + "] <" + Colors.colorOnForCardCost(card) + "> "+ Colors.colorOnForCardName(card) + "  -" + Colors.colorOnForCardInfo(card) , 50);
 				}
 				System.out.println();
 			}

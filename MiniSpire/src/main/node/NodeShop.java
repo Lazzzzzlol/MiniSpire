@@ -228,13 +228,13 @@ public class NodeShop extends Node {
 	private int getCardCost(Card card) {
 		String rarity = card.getRarity();
 		switch (rarity) {
-			case "NORMAL":
+			case "normal":
 				return 30;
-			case "RARE":
+			case "rare":
 				return 50;
-			case "EPIC":
+			case "epic":
 				return 80;
-			case "LEGENDARY":
+			case "legendary":
 				return 120;
 			default:
 				return 30;

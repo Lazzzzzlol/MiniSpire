@@ -353,7 +353,7 @@ public class NodeBattle extends Node {
 		Card[] rewardCards = {rewardCard1, rewardCard2, rewardCard3};
 		for (int i = 0; i < rewardCards.length; i++) {
 			Card card = rewardCards[i];
-			System.out.println("   c " + (i + 1) + ") <" + Colors.colorOnForCardCost(card.getCost()) + "> [" + Colors.colorOnForCardRarity(card.getRarity()) + "] " + Colors.colorOnForCardName(card.getName(), card.getType()));
+			System.out.println("   c " + (i + 1) + ") <" + Colors.colorOnForCardCost(card) + "> [" + Colors.colorOnForCardRarity(card) + "] " + Colors.colorOnForCardName(card));
 			System.out.println("        " + card.getInfo());
 		}
 
@@ -419,7 +419,7 @@ public class NodeBattle extends Node {
 				}
 				if (chosenCard != null) {
 					Player.getInstance().addCardToDeck(chosenCard);
-					System.out.println(" >> Added " + Colors.colorOnForCardName(chosenCard.getName(), chosenCard.getType()) + " to your deck!");
+					System.out.println(" >> Added " + Colors.colorOnForCardName(chosenCard) + " to your deck!");
 				}
 				completeBattleNode();
 			}

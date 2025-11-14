@@ -206,7 +206,7 @@ public class NodeShop extends Node {
 
 				Card card = availableCards[i];
 
-				System.out.println("   " + (i + 1) + ") <" + Colors.colorOnForCardCost(card.getCost()) + "> [" + Colors.colorOnForCardRarity(card.getRarity()) + "] " + Colors.colorOnForCardName(card.getName(), card.getType()));
+				System.out.println("   " + (i + 1) + ") <" + Colors.colorOnForCardCost(card) + "> [" + Colors.colorOnForCardRarity(card) + "] " + Colors.colorOnForCardName(card));
 				System.out.println("      " + card.getInfo());
 				if (isTripleCards){
 					System.out.println("      Cost: 0");
@@ -306,7 +306,7 @@ public class NodeShop extends Node {
 				
 				if (removed) {
 					player.lostGold(REMOVE_CARD_COST);
-					System.out.println(" >> Removed: " + Colors.colorOnForCardName(cardToRemove.getName(), cardToRemove.getType()) + " for " + REMOVE_CARD_COST + " gold.");
+					System.out.println(" >> Removed: " + Colors.colorOnForCardName(cardToRemove) + " for " + REMOVE_CARD_COST + " gold.");
 					this.isRemoved = true;
 				} else {
 					System.out.println(" >> Failed to remove the card. Please try again.");

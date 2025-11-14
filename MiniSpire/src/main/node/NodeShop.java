@@ -207,7 +207,7 @@ public class NodeShop extends Node {
 				Card card = availableCards[i];
 
 				System.out.println("   " + (i + 1) + ") <" + Colors.colorOnForCardCost(card) + "> [" + Colors.colorOnForCardRarity(card) + "] " + Colors.colorOnForCardName(card));
-				System.out.println("      " + card.getInfo());
+				System.out.println("      " + Colors.colorOnForCardInfo(card));
 				if (isTripleCards){
 					System.out.println("      Cost: 0");
 				}else{

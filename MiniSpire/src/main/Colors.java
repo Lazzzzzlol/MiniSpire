@@ -1,5 +1,8 @@
 package main;
 
+import main.card.Card;
+import main.player.Player;
+
 public class Colors {
     public static final String RESET = "\u001B[0m";
     public static final String BLACK = "\u001B[30m";
@@ -20,7 +23,12 @@ public class Colors {
     public static final String BRIGHT_CYAN = "\u001B[96m";
     public static final String BRIGHT_WHITE = "\u001B[97m";
 
-    public static String colorOnForCardRarity(String rarity) {
+    public static String colorOnForCardRarity(Card card) {
+        String rarity = card.getRarity();
+        if (!Player.getInstance().getColorViewStatus()){
+            return rarity;
+        }
+
         String colorCode;
         switch (rarity.toLowerCase()) {
             case "normal":
@@ -35,6 +43,8 @@ public class Colors {
             case "legendary":
                 colorCode = BRIGHT_YELLOW;
                 break;
+            case "special":
+
             default:
                 return rarity;
         }
@@ -42,10 +52,19 @@ public class Colors {
     }
 
     public static String colorOnForSOLDOUT(String SOLDOUT) {
+        if (!Player.getInstance().getColorViewStatus()){
+            return SOLDOUT;
+        }
         return YELLOW + SOLDOUT + RESET;
     }
 
-    public static String colorOnForCardName(String name, String type) {
+    public static String colorOnForCardName(Card card) {   
+        String name = card.getName();     
+        if (!Player.getInstance().getColorViewStatus()){
+            return name;
+        }
+
+        String type = card.getType();
         String colorCode;
         switch (type.toLowerCase()) {
             case "attack":
@@ -63,11 +82,20 @@ public class Colors {
         return colorCode + name + RESET;
     }
 
-    public static String colorOnForCardCost(int cost) {
+    public static String colorOnForCardCost(Card card) {
+        int cost = card.getCost();
+        
+        if (!Player.getInstance().getColorViewStatus()){
+            return cost + RESET;
+        }
         return YELLOW + cost + RESET;
     }
 
     public static String colorOnForEnemyName(String name, String type) {
+        if (!Player.getInstance().getColorViewStatus()){
+            return name;
+        }
+
         String colorCode;
         switch (type.toLowerCase()) {
             case "boss":
@@ -86,6 +114,10 @@ public class Colors {
     }
 
     public static String colorOnForHP(int currentHp, int maxHp) {
+        if (!Player.getInstance().getColorViewStatus()){
+            return currentHp + RESET;
+        }
+
         double ratio = (double) currentHp / maxHp;
         String colorCode;
         
@@ -100,6 +132,10 @@ public class Colors {
     }
 
     public static String colorOnForBuff(String name, String type) {
+        if (!Player.getInstance().getColorViewStatus()){
+            return name;
+        }
+        
         String colorCode;
         switch (type.toLowerCase()) {
             case "positive":

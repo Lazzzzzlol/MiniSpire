@@ -12,6 +12,7 @@ public class Card30SacrificialRitual_cOLoRS extends AttackCard {
         this.cost = 0;
         this.rarity = "special";
         this.baseDamage = 100;
+        this.disposable = true;
     }
 
     @Override
@@ -19,4 +20,5 @@ public class Card30SacrificialRitual_cOLoRS extends AttackCard {
         DamageProcessor.applyDamageToEnemy(baseDamage, Player.getInstance(), enemy);
         player.lostColors();
     }
+
 }

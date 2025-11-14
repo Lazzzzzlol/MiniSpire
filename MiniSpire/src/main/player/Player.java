@@ -37,6 +37,8 @@ public class Player {
 	private int gold;
 	private int totalGold;
 	private int drawCardNumPerTurn;
+
+	private boolean colorViews;
 	
 	private ArrayList<Card> handCardList;
 	private ArrayList<Card> drawCardList;
@@ -54,6 +56,8 @@ public class Player {
 		this.gold = 0;
 		this.totalGold = 0;
 		this.drawCardNumPerTurn = 5;
+
+		this.colorViews = true;
 		
 		this.handCardList = new ArrayList<Card>();
 		this.drawCardList = new ArrayList<Card>();
@@ -126,7 +130,7 @@ public class Player {
 				if (i > 0) {
 					log.append(", ");
 				}
-				log.append(Colors.colorOnForCardName(drawnCards.get(i).getName(), drawnCards.get(i).getType()));
+				log.append(Colors.colorOnForCardName(drawnCards.get(i)));
 			}
 			Main.executor.schedule(() -> {
 				System.out.println(log.toString());
@@ -368,8 +372,8 @@ public class Player {
 		
 		String result = "";
 		for (int i = 0; i < handCardList.size() - 1; i++)
-			result += ((i + 1) + ") <" + Colors.colorOnForCardCost(handCardList.get(i).getCost()) + "> " + Colors.colorOnForCardName(handCardList.get(i).getName(), handCardList.get(i).getType()) + ",  ");
-			result += (handCardList.size() + ") <" + Colors.colorOnForCardCost(handCardList.get(handCardList.size() - 1).getCost()) + "> " + Colors.colorOnForCardName(handCardList.get(handCardList.size() - 1).getName(), handCardList.get(handCardList.size() - 1).getType()));
+			result += ((i + 1) + ") <" + Colors.colorOnForCardCost(handCardList.get(i)) + "> " + Colors.colorOnForCardName(handCardList.get(i)) + ",  ");
+			result += (handCardList.size() + ") <" + Colors.colorOnForCardCost(handCardList.get(handCardList.size() - 1)) + "> " + Colors.colorOnForCardName(handCardList.get(handCardList.size() - 1)));
 		
 		return result;
 	}
@@ -413,7 +417,7 @@ public class Player {
             System.out.println(" [" + cost + " Cost Cards]");
             
             for (Card card : bucket) {
-				TextDisplay.printLineWithDelay("   " + index++ + ") " + " [" + Colors.colorOnForCardRarity(card.getRarity()) + "] <" + Colors.colorOnForCardCost(card.getCost()) + "> "+ Colors.colorOnForCardName(card.getName(), card.getType()) + "  -" + card.getInfo() , 50);
+				TextDisplay.printLineWithDelay("   " + index++ + ") " + " [" + Colors.colorOnForCardRarity(card) + "] <" + Colors.colorOnForCardCost(card) + "> "+ Colors.colorOnForCardName(card) + "  -" + card.getInfo() , 50);
             }
             System.out.println();
         }
@@ -459,7 +463,7 @@ public class Player {
 				
 				for (Card card : bucket) {
 					indexToCardMap.put(index, card);
-					TextDisplay.printLineWithDelay("   " + index++ + ") " + " [" + Colors.colorOnForCardRarity(card.getRarity()) + "] <" + Colors.colorOnForCardCost(card.getCost()) + "> "+ Colors.colorOnForCardName(card.getName(), card.getType()) + "  -" + card.getInfo() , 50);
+					TextDisplay.printLineWithDelay("   " + index++ + ") " + " [" + Colors.colorOnForCardRarity(card) + "] <" + Colors.colorOnForCardCost(card) + "> "+ Colors.colorOnForCardName(card) + "  -" + card.getInfo() , 50);
 				}
 				System.out.println();
 			}
@@ -472,5 +476,12 @@ public class Player {
 	public void addCardToDeck(Card card) {
 		this.drawCardList.add(card);
 	}
-}
 
+	public void lostColors(){
+		this.colorViews = false;
+	}
+
+	public boolean getColorViewStatus(){
+		return this.colorViews;
+	}
+}

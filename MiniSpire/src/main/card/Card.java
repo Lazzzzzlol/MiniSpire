@@ -15,21 +15,7 @@ public abstract class Card {
     }
 
     public String getName() {
-        String colorCode;
-        switch (this.type.toLowerCase()) {
-            case "attack":
-                colorCode = "\u001B[91m";
-                break;
-            case "effect":
-                colorCode = "\u001B[36m";
-                break;
-            case "passive":
-                colorCode = "\u001B[92m";
-                break;
-            default:
-                colorCode = "\u001B[37m";
-        }
-        return colorCode + name + "\u001B[0m";
+        return name;
     }
 
     public String getInfo(){
@@ -45,17 +31,7 @@ public abstract class Card {
     }
 
     public String getRarity(){
-        switch (this.rarity.toLowerCase()) {
-            case "normal":
-                return "\u001B[34mNORMAL\u001B[0m";
-            case "rare":
-                return "\u001B[35mRARE\u001B[0m";
-            case "epic":
-                return "\u001B[33mEPIC\u001B[0m";
-            case "legendary":
-                return "\u001B[31mLEGENDARY\u001B[0m";
-            default:
-                return this.rarity;
-        }
+        return rarity;
     }
 }
+

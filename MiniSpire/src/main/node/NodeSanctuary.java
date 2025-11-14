@@ -2,10 +2,13 @@ package main.node;
 
 import java.util.concurrent.TimeUnit;
 
+import main.Colors;
 import main.Main;
 import main.TextDisplay;
 import main.Util;
+import main.card.Card;
 import main.processor.HealProcessor;
+import main.resourceFactory.CardFactory;
 import main.game.Game;
 import main.player.Player;
 
@@ -28,12 +31,26 @@ public class NodeSanctuary extends Node {
 	@Override
 	public void onStartTurn() {
 		Player player = Player.getInstance();
+		
 		if (!hasHealed) {
 			int heal = (int)Math.floor(player.getMaxHp() * 0.3);
 			Main.executor.schedule(() -> {
 			HealProcessor.applyHeal(player, heal, null);
 			hasHealed = true;
 			}, 1500, TimeUnit.MILLISECONDS);
+		}
+
+		int getCard30RandNum = Main.random.nextInt(10);
+		switch (getCard30RandNum) {
+			case 0:
+				Card card30 = CardFactory.getInstance().createCard(30);
+				player.addCardToDeck(card30);
+				TextDisplay.printCharWithDelay("A flicker of light from the campfire's ashes catches your eye. There's something there.",10);
+				TextDisplay.printCharWithDelay("It's a... vibrantly colorful card. Yet when you look directly at it, a sharp pain stings your eyes. It seems as though everything around the card is losing its color.", 5);
+				TextDisplay.printLineWithDelay(" >> Added " + Colors.colorOnForCardName(card30) + " to your deck!", 100);
+				break;
+			default:
+				break;
 		}
 	}
 

@@ -162,7 +162,7 @@ public class Player {
 
 			if (cardToPlay.getNeedRemove())
 				removeCardList.add(cardToPlay);
-			else
+			else if (!cardToPlay.getDisposable())
 				discardCardList.add(cardToPlay);
 			
 		} else {

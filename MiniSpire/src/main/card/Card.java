@@ -43,4 +43,8 @@ public abstract class Card {
     public boolean getNeedRemove(){
         return needRemove;
     }
+
+    public boolean getDisposable(){
+        return disposable;
+    }
 }

@@ -209,9 +209,9 @@ public class NodeShop extends Node {
 				System.out.println("   " + (i + 1) + ") <" + Colors.colorOnForCardCost(card) + "> [" + Colors.colorOnForCardRarity(card) + "] " + Colors.colorOnForCardName(card));
 				System.out.println("      " + Colors.colorOnForCardInfo(card));
 				if (isTripleCards){
-					System.out.println("      Cost: 0");
+					System.out.println("      Cost: 0 G");
 				}else{
-					System.out.println("      Cost: " + getCardCost(card));
+					System.out.println("      Cost: " + getCardCost(card) + " G");
 				}
 
 				try {
@@ -359,7 +359,7 @@ public class NodeShop extends Node {
 		Util.printBlankLines(1);
 
 		System.out.println(Main.longLine);
-		System.out.println("Your gold sack: " + player.getGold());
+		System.out.println("Your gold sack: " + player.getGold() + " G");
 		System.out.print("Action >> ");
 	}
 }

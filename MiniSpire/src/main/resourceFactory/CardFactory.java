@@ -21,6 +21,7 @@ import main.card.attackCard.Card25TheSinisterBlade;
 import main.card.attackCard.Card26Stratagem;
 import main.card.attackCard.Card27InnerRelease;
 import main.card.attackCard.Card29PandorasBox;
+import main.card.attackCard.Card30SacrificialRitual_cOLoRS;
 
 import main.card.effectCard.Card08Bloodbath;
 import main.card.effectCard.Card09Double;
@@ -109,8 +110,11 @@ public class CardFactory implements ResourceFactory {
 		// v1.1.1
 		cardPool.add(new Card29PandorasBox());				//29	epic
 
+		// special card
+		cardPool.add(new Card30SacrificialRitual_cOLoRS()); // 30   special
+
 		for (Card card : cardPool) {
-			String rarity = card.getRarity().toLowerCase().replace("\u001B[0m", "");
+			String rarity = card.getRarity().toLowerCase();
 			if (rarity.contains("normal")) {
 				normalCards.add(card);
 			} else if (rarity.contains("rare")) {
@@ -162,6 +166,8 @@ public class CardFactory implements ResourceFactory {
 		drawCardList.add(cardPool.get(0));
 		drawCardList.add(cardPool.get(14));
 		drawCardList.add(cardPool.get(14));
+
+		drawCardList.add(cardPool.get(30));
 		
 		return drawCardList;
 	}

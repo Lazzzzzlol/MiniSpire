@@ -28,6 +28,9 @@ public class Colors {
         if (!Player.getInstance().getColorViewStatus()){
             return rarity;
         }
+        if (card.getRarity() == "special"){
+            return colorOnSpecialCardsAllInfo(card, rarity);
+        }
 
         String colorCode;
         switch (rarity.toLowerCase()) {
@@ -43,8 +46,6 @@ public class Colors {
             case "legendary":
                 colorCode = BRIGHT_YELLOW;
                 break;
-            case "special":
-
             default:
                 return rarity;
         }
@@ -62,6 +63,9 @@ public class Colors {
         String name = card.getName();     
         if (!Player.getInstance().getColorViewStatus()){
             return name;
+        }
+        if (card.getRarity() == "special"){
+            return colorOnSpecialCardsAllInfo(card, name);
         }
 
         String type = card.getType();
@@ -83,12 +87,54 @@ public class Colors {
     }
 
     public static String colorOnForCardCost(Card card) {
-        int cost = card.getCost();
+        String cost = String.valueOf(card.getCost());
         
         if (!Player.getInstance().getColorViewStatus()){
-            return cost + RESET;
+            return cost;
         }
         return YELLOW + cost + RESET;
+    }
+
+    public static String colorOnForCardInfo(Card card) {
+        String info = card.getInfo();
+        if (!Player.getInstance().getColorViewStatus()){
+            return info;
+        }
+        if (card.getRarity() == "special"){
+            return colorOnSpecialCardsAllInfo(card, info);
+        }
+
+        return info;
+    }
+
+    public static String colorOnSpecialCardsAllInfo(Card card, String text){
+        String colorOnText = text;
+        switch (card.getName()){
+            case "Sacrificial Ritual - cOLoRS":
+                colorOnText = getRainbowText(text);
+            default:
+                break;
+        }
+        return colorOnText;
+    }
+
+    private static String getRainbowText(String text) {
+        String[] colorPool = {
+            BLACK, RED, GREEN, YELLOW, BLUE, PURPLE, CYAN, WHITE,
+            BRIGHT_BLACK, BRIGHT_RED, BRIGHT_GREEN, BRIGHT_YELLOW, 
+            BRIGHT_BLUE, BRIGHT_PURPLE, BRIGHT_CYAN, BRIGHT_WHITE
+        };
+        
+        StringBuilder rainbowText = new StringBuilder();
+        
+        for (int i = 0; i < text.length(); i++) {
+            int randomIndex = Main.random.nextInt(colorPool.length);
+            String randomColor = colorPool[randomIndex];
+            rainbowText.append(randomColor).append(text.charAt(i));
+        }
+        
+        rainbowText.append(RESET);
+        return rainbowText.toString();
     }
 
     public static String colorOnForEnemyName(String name, String type) {
@@ -115,7 +161,7 @@ public class Colors {
 
     public static String colorOnForHP(int currentHp, int maxHp) {
         if (!Player.getInstance().getColorViewStatus()){
-            return currentHp + RESET;
+            return String.valueOf(currentHp);
         }
 
         double ratio = (double) currentHp / maxHp;
@@ -149,4 +195,6 @@ public class Colors {
         }
         return colorCode + name + RESET;
     }
+
+    
 }

@@ -7,6 +7,8 @@ public abstract class Card {
     protected String type;
     protected String rarity;
     protected Boolean canPlay;
+    protected boolean needRemove = false;
+    protected boolean disposable = false;
 
     public abstract void onPlay(main.player.Player player, main.enemy.Enemy enemy);
     
@@ -34,4 +36,3 @@ public abstract class Card {
         return rarity;
     }
 }
-

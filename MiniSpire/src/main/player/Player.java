@@ -43,6 +43,7 @@ public class Player {
 	private ArrayList<Card> handCardList;
 	private ArrayList<Card> drawCardList;
 	private ArrayList<Card> discardCardList;
+	private ArrayList<Card> removeCardList;
 	
 	private ArrayList<Buff> buffList;
 	//private ArrayList<Ability> abilityList;
@@ -158,7 +159,11 @@ public class Player {
 			PlayCardProcessor.processCardPlay(this, cardToPlay, enemy);
 
 			handCardList.remove(cardIndex - 1);
-			discardCardList.add(cardToPlay);
+
+			if (cardToPlay.getNeedRemove())
+				removeCardList.add(cardToPlay);
+			else
+				discardCardList.add(cardToPlay);
 			
 		} else {
 			System.out.println(" >> Not enough action points to play this card.");
@@ -215,6 +220,11 @@ public class Player {
 		discardCardList.clear();
 		drawCardList.addAll(handCardList);
 		handCardList.clear();
+
+		for (Card card : removeCardList)
+			card.setNeedRemove(false);
+		drawCardList.addAll(removeCardList);
+		removeCardList.clear();
 
 		buffList.clear();
 	}

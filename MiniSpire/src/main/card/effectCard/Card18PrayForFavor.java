@@ -17,5 +17,6 @@ public class Card18PrayForFavor extends EffectCard{
     @Override
     public void onUse(Player player, Enemy enemy) {
         player.addBuff(new BuffBlessed(1), 1);
+        setNeedRemove(true);
     }
 }

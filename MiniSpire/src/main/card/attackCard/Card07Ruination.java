@@ -23,5 +23,6 @@ public class Card07Ruination extends AttackCard {
 		if (finalDamage > baseDamage) {
 			DamageProcessor.applyDamageToEnemy(baseDamage, Player.getInstance(), enemy);
 		}
+        setNeedRemove(true);
     }
 }

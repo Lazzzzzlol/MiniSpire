@@ -35,4 +35,12 @@ public abstract class Card {
     public String getRarity(){
         return rarity;
     }
+    
+    public void setNeedRemove(boolean b){
+        this.needRemove = b;
+    }
+
+    public boolean getNeedRemove(){
+        return needRemove;
+    }
 }

@@ -13,8 +13,8 @@ public class Colors {
     public static final String PURPLE = "\u001B[35m";
     public static final String CYAN = "\u001B[36m";
     public static final String WHITE = "\u001B[37m";
+    public static final String DARK_GRAY = "\u001B[90m";
     
-    public static final String BRIGHT_BLACK = "\u001B[90m";
     public static final String BRIGHT_RED = "\u001B[91m";
     public static final String BRIGHT_GREEN = "\u001B[92m";
     public static final String BRIGHT_YELLOW = "\u001B[93m";
@@ -112,6 +112,9 @@ public class Colors {
         switch (card.getName()){
             case "Sacrificial Ritual - cOLoRS":
                 colorOnText = getRainbowText(text);
+            case "Death Brand":
+                colorOnText = DARK_GRAY + text + RESET;
+                break;
             default:
                 break;
         }
@@ -121,7 +124,7 @@ public class Colors {
     private static String getRainbowText(String text) {
         String[] colorPool = {
             BLACK, RED, GREEN, YELLOW, BLUE, PURPLE, CYAN, WHITE,
-            BRIGHT_BLACK, BRIGHT_RED, BRIGHT_GREEN, BRIGHT_YELLOW, 
+            DARK_GRAY, BRIGHT_RED, BRIGHT_GREEN, BRIGHT_YELLOW, 
             BRIGHT_BLUE, BRIGHT_PURPLE, BRIGHT_CYAN, BRIGHT_WHITE
         };
         

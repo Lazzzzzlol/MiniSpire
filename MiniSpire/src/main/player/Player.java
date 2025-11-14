@@ -369,7 +369,7 @@ public class Player {
 		String result = "";
 		for (int i = 0; i < handCardList.size() - 1; i++)
 			result += ((i + 1) + ") <" + Colors.colorOnForCardCost(handCardList.get(i).getCost()) + "> " + Colors.colorOnForCardName(handCardList.get(i).getName(), handCardList.get(i).getType()) + ",  ");
-			result += (handCardList.size() + ") <" + Colors.colorOnForCardCost(handCardList.get(handCardList.size() - 1).getCost()) + "> " + Colors.colorOnForCardName(handCardList.get(handCardList.size() - 1).getName(), handCardList.get(handCardList.size() - 1).getName()));
+			result += (handCardList.size() + ") <" + Colors.colorOnForCardCost(handCardList.get(handCardList.size() - 1).getCost()) + "> " + Colors.colorOnForCardName(handCardList.get(handCardList.size() - 1).getName(), handCardList.get(handCardList.size() - 1).getType()));
 		
 		return result;
 	}
@@ -473,3 +473,4 @@ public class Player {
 		this.drawCardList.add(card);
 	}
 }
+

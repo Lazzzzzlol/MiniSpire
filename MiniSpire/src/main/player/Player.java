@@ -81,7 +81,7 @@ public class Player {
 		this.actionPoints = this.maxActionPoints;
 		if (playerHasMuted){
 			this.actionPoints = 0;
-			System.out.println(" >> Action Point becomes 0 (Muted).");
+			System.out.println(" >> Action Point becomes 0 (" + Colors.colorOnAnyElse("Muted", Colors.BLUE) + ").");
 		}
 		drawHandCards(drawCardNumPerTurn, 2000);
 	}

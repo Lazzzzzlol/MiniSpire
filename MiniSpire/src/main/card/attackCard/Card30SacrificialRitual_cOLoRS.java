@@ -20,7 +20,7 @@ public class Card30SacrificialRitual_cOLoRS extends AttackCard {
     public void onPlay(Player player, Enemy enemy) {
         DamageProcessor.applyDamageToEnemy(baseDamage, Player.getInstance(), enemy);
         player.lostColors();
-        TextDisplay.printCharWithDelay("You sense it — the world grows pale before your very eyes.", 50);
+        TextDisplay.printLineWithDelay("You sense it — the world grows pale before your very eyes.", 50);
     }
 
 }

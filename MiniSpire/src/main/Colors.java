@@ -23,13 +23,22 @@ public class Colors {
     public static final String BRIGHT_CYAN = "\u001B[96m";
     public static final String BRIGHT_WHITE = "\u001B[97m";
 
+
+    public static String colorOnAnyElse(String text, String colorCode) {
+        if (!Player.getInstance().getColorViewStatus()){
+            return text;
+        }
+        return colorCode + text + RESET;
+        
+    }
+
     public static String colorOnForCardRarity(Card card) {
         String rarity = card.getRarity();
         if (!Player.getInstance().getColorViewStatus()){
             return rarity;
         }
         if (card.getRarity() == "special"){
-            return colorOnSpecialCardsAllInfo(card, rarity);
+            return colorOnSpecialCardsAllInfo(card, rarity.toUpperCase());
         }
 
         String colorCode;

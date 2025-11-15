@@ -111,7 +111,7 @@ public class NodeShop extends Node {
 			}else if (parts[0].equals("l")){
 				switch (parts[1]) {
 					case "1":
-						System.out.println(" >> [Merchant] Bye for now, hope luck smiles on you.");
+						TextDisplay.printCharWithDelay(" >> [Merchant] Bye for now, hope luck smiles on you.", 30);
 						Game.getInstance().advanceToNextNode();
 				}
 			}

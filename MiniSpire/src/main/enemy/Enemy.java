@@ -47,7 +47,7 @@ public class Enemy {
 
     if (hasMuted){
         movementCounter++;
-        System.out.println(" >> " + this.getName() + " failed to act (Muted).");
+        System.out.println(" >> " + Colors.colorOnForEnemyName(this.name,this.type) + " failed to act (" + Colors.colorOnAnyElse("Muted", Colors.BLUE) + ").");
         return false;
     }
     
@@ -81,7 +81,7 @@ public class Enemy {
 	        		steelsoulAbsorbedDamage = 0;
 					Player.getInstance().deductHp(damageToReturn);
 	        		Main.executor.schedule(() -> {
-	        			System.out.println(" >> " + this.name + " returns " + damageToReturn + " absorbed damage from Steelsoul!");
+	        			System.out.println(" >> " + Colors.colorOnForEnemyName(this.name,this.type) + " returns " + damageToReturn + " absorbed damage from Steelsoul!");
 	        		}, 1, TimeUnit.SECONDS);
 	        	}
 	            it.remove();
@@ -127,7 +127,7 @@ public class Enemy {
 			this.hp = initialHp;
 		
 		Main.executor.schedule(() -> {
-			System.out.println(" >> " + this.name + " heals " + heal + " HP ");
+			System.out.println(" >> " + Colors.colorOnForEnemyName(this.name,this.type) + " heals " + heal + " HP ");
 		}, 1, TimeUnit.SECONDS);
 	}
 
@@ -141,7 +141,7 @@ public class Enemy {
 			);
 			Random random = new Random();
 			String action = messages.get(random.nextInt(messages.size()));
-			System.out.println(" >> " + this.name + " " + action);
+			System.out.println(" >> " + Colors.colorOnForEnemyName(this.name,this.type) + " " + action);
 		}, 1, TimeUnit.SECONDS);
 
 		boolean hasResurrection = buffList.stream()
@@ -154,7 +154,7 @@ public class Enemy {
 
 		buffList.removeIf(buff -> "Resurrection".equals(buff.getName()));
 		Main.executor.schedule(() -> {
-			System.out.println("\n >> " + this.name + " resurrected!");
+			System.out.println("\n >> " + Colors.colorOnForEnemyName(this.name,this.type) + " " + Colors.colorOnAnyElse("resurrected", Colors.BLUE) + "!");
 		}, 1, TimeUnit.SECONDS);
 		hp = initialHp;
 	}

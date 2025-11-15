@@ -112,6 +112,7 @@ public class Colors {
         switch (card.getName()){
             case "Sacrificial Ritual - cOLoRS":
                 colorOnText = getRainbowText(text);
+                break;
             case "Death Brand":
                 colorOnText = DARK_GRAY + text + RESET;
                 break;

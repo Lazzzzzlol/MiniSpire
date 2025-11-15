@@ -19,7 +19,7 @@ public class NodeDecider {
 		
 		switch (index) {
 			case 1:
-				return new NodeSanctuary();
+				return new NodeShop();
 				
 			case 2:
 				switch (Main.random.nextInt(2)) {

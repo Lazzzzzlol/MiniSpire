@@ -1,6 +1,7 @@
 package main.card.attackCard;
 
 import main.processor.DamageProcessor;
+import main.TextDisplay;
 import main.enemy.Enemy;
 import main.player.Player;
 
@@ -19,6 +20,7 @@ public class Card30SacrificialRitual_cOLoRS extends AttackCard {
     public void onPlay(Player player, Enemy enemy) {
         DamageProcessor.applyDamageToEnemy(baseDamage, Player.getInstance(), enemy);
         player.lostColors();
+        TextDisplay.printCharWithDelay("You sense it — the world grows pale before your very eyes.", 50);
     }
 
 }

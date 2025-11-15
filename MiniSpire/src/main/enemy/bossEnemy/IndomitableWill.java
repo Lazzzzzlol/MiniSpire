@@ -73,7 +73,7 @@ public class IndomitableWill extends Enemy {
 
 		super.onDie();
 
-		phase2 = true;
+
 		addBuff(new BuffIndomitable(999), 999);
 		desperateRoarDone = false;
 		scarletDeliriumDone = false;
@@ -85,10 +85,13 @@ public class IndomitableWill extends Enemy {
 		movementCounter = 0;
 		this.name = "IndOm?taB?e W?Ll";
 
-		Main.executor.schedule(() -> {
-			System.out.println();
-			System.out.println(" >> IndOm?taB?e W?Ll: Pre pa re  thy self  to  di e.");
-		}, 10, TimeUnit.MILLISECONDS);
+		if (!phase2){
+			Main.executor.schedule(() -> {
+				System.out.println();
+				System.out.println(" >> IndOm?taB?e W?Ll: Pre pa re  thy self  to  di e.");
+			}, 10, TimeUnit.MILLISECONDS);
+			phase2 = true;
+		}
 		return;
 	}
 

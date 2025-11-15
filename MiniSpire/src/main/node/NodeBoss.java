@@ -6,7 +6,6 @@ import main.Main;
 import main.ScoreCalculator;
 import main.Util;
 import main.game.Game;
-import main.player.Player;
 
 public class NodeBoss extends NodeBattle {
 	
@@ -31,7 +30,7 @@ public class NodeBoss extends NodeBattle {
 		game.setIsGameOver(true);
 		game.setIsVictory(true);
 
-		Player.getInstance().onWin();
+		//Player.getInstance().onWin();
 
 		Main.executor.schedule(() -> {
 			onWinDraw();
@@ -50,7 +49,7 @@ public class NodeBoss extends NodeBattle {
 				printThanalousSpeech();
 				break;
 
-			case "Indomitable Will":
+			case "IndOm?taB?e W?Ll":
 				printIndomitableWillSpeech();
 		
 			default:

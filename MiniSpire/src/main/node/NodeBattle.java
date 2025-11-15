@@ -321,12 +321,13 @@ public class NodeBattle extends Node {
 	public void onWin(){
 
 		isWin = true;
-		Player.getInstance().onWin();
 
 		Main.executor.schedule(() -> {
 			onWinDraw();
 		}, 500, TimeUnit.MILLISECONDS);
 
+		if (Game.getInstance().getCurrentNode().getClass() != NodeBattle.class)
+			Player.getInstance().onWin();
 	}
 
 	private void onWinDraw(){

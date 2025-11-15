@@ -45,7 +45,7 @@ public class Game {
 		this.player = Player.getInstance();
 		this.isGameOver = false;
 		
-		this.nodeIndex = 1;
+		this.nodeIndex = 12;
 		this.currentNode = null;
 		this.nodeHistory = new ArrayList<Node>();
 		this.nodeDecider = NodeDecider.getInstance();

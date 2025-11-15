@@ -80,7 +80,7 @@ public class NodeSanctuary extends Node {
 			case "1":
 				TextDisplay.printCharWithDelay(" >> Chosen: Play Safe.", 30);
 				player.changeMaxHp(20);
-				HealProcessor.applyHeal(player, 35, null);
+				HealProcessor.applyHeal(player, 35, 0);
 				break;
 			case "2":
 				TextDisplay.printCharWithDelay(" >> Chosen: Play Strategy.", 30);

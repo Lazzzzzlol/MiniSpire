@@ -325,9 +325,9 @@ public class NodeBattle extends Node {
 		Main.executor.schedule(() -> {
 			onWinDraw();
 		}, 500, TimeUnit.MILLISECONDS);
-
-		if (Game.getInstance().getCurrentNode().getClass() != NodeBattle.class)
-			Player.getInstance().onWin();
+		
+		if (Game.getInstance().getCurrentNode().getClass() != NodeBoss.class)
+				Player.getInstance().onWin();
 	}
 
 	private void onWinDraw(){

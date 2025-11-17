@@ -27,6 +27,7 @@ public class Card23Ragnarok extends AttackCard {
 				currentDamage = 2 * finalDamage;
 			}
 		}
+        currentDamage = baseDamage;
     }
 
     @Override

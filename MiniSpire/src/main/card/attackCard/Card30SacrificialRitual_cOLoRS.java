@@ -20,12 +20,13 @@ public class Card30SacrificialRitual_cOLoRS extends AttackCard {
     public void onPlay(Player player, Enemy enemy) {
         DamageProcessor.applyDamageToEnemy(baseDamage, Player.getInstance(), enemy);
         player.lostColors();
-        TextDisplay.printLineWithDelay(" The garish, colorful card dissolves into dead gray dust within your grasp, vanishing on the wind.", 50);
-        TextDisplay.printLineWithDelay(" You sense it — the world grows pale before your very eyes.", 50);
-        TextDisplay.printLineWithDelay(" >> The card ‘Sacrificial Ritual - cOLoRS’ is gone, as if it had never been.", 50);
+        TextDisplay.printLineWithDelay("The garish, colorful card dissolves into dead gray dust within your grasp, vanishing on the wind.", 50);
+        TextDisplay.printLineWithDelay("You sense it — the world grows pale before your very eyes.", 50);
+        TextDisplay.printLineWithDelay(" >> The card 'Sacrificial Ritual - cOLoRS' is gone, as if it had never been.", 50);
     }
 
 }
+
 
 
 

@@ -51,7 +51,7 @@ public class Player {
 	
 	public Player() {
 		
-		this.hp = 2;
+		this.hp = 70;
 		this.maxHp = 70;
 		this.actionPoints = 4;
 		this.maxActionPoints = 4;
@@ -213,6 +213,12 @@ public class Player {
 	        buff.onEndTurn();
 			if (buff.getDuration() <= 0)
 	            it.remove();
+		}
+
+		try {
+			TimeUnit.SECONDS.sleep(1);
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
 		}
 	}
 

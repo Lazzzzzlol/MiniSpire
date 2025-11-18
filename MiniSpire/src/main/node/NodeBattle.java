@@ -450,4 +450,9 @@ public class NodeBattle extends Node {
 	public boolean getIsWin(){
 		return isWin;
 	}
+
+	public Enemy getEnemy() {
+		return enemy;
+	}
 }
+

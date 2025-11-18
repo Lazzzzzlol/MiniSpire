@@ -31,3 +31,4 @@ public class Card30SacrificialRitual_cOLoRS extends AttackCard {
 
 
 
+

@@ -6,6 +6,7 @@ import main.enemy.Enemy;
 import main.buff.Buff;
 
 public class HealProcessor {
+    private static final ThreadLocal<Boolean> isProcessingScurvy = ThreadLocal.withInitial(() -> false);
     
     public static int calculateHeal(List<Buff> buffList, int value){
         
@@ -55,5 +56,18 @@ public class HealProcessor {
                 }
             }
         }
+    }
+
+    private static Enemy getCurrentEnemy() {
+        try {
+            Game game = Game.getInstance();
+            if (game != null && (game.getCurrentNode() instanceof NodeBattle || game.getCurrentNode() instanceof NodeBoss)) {
+                NodeBattle battleNode = (NodeBattle) game.getCurrentNode();
+                return battleNode.getEnemy();
+            }
+        } catch (Exception e) {
+
+        }
+        return null;
     }
 }

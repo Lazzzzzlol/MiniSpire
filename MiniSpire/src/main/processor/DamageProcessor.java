@@ -8,7 +8,6 @@ import main.enemy.eliteEnemy.Watcher;
 import main.buff.Buff;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class DamageProcessor {
     
@@ -82,7 +81,7 @@ public class DamageProcessor {
         boolean attackAbsorbed = false;
 
         if (hasInvincible && !hasIgnore) {
-            scheduleDamageMessage(target, "The attack fails (" + Colors.colorOnForBuff("Invincible", "positive") + ")", 1);
+            scheduleDamageMessage(target, "The attack fails (" + Colors.colorOnForBuff("Invincible", "positive") + ")", 250L);
             return 0;
         }
 
@@ -136,7 +135,7 @@ public class DamageProcessor {
         int calculatedDamage = Math.round(baseDamage * damageMultiplier);
         
         if (attackMistied) {
-            scheduleDamageMessage(target, "The attack fails (" + Colors.colorOnForBuff("Misty", "positive") + ")", 1);
+            scheduleDamageMessage(target, "The attack fails (" + Colors.colorOnForBuff("Misty", "positive") + ")", 250L);
             return 0;
         }
         
@@ -146,7 +145,7 @@ public class DamageProcessor {
             String message = getTargetName(target) + 
                             " absorbs " + getDamageDisplay(baseDamage, calculatedDamage) + 
                             " damage (" + Colors.colorOnForBuff("Steelsoul", "positive") + ")";
-            scheduleDamageMessage(target, message, 1);
+            scheduleDamageMessage(target, message, 250L);
             
             if (hasSteadfast(target)) {
                 ((Watcher) target).addGettedDamageCounter(calculatedDamage);
@@ -181,7 +180,7 @@ public class DamageProcessor {
             return;
         }
         
-        scheduleDamageMessage(target, message, 1);
+        scheduleDamageMessage(target, message, 250L);
     }
     
     private static void applyZeroDamageEffect(Object target) {
@@ -194,14 +193,17 @@ public class DamageProcessor {
             message = "Took 0 damage";
         }
 
-        scheduleDamageMessage(target, message, 1);
+        scheduleDamageMessage(target, message, 250L);
     }
     
-    private static void scheduleDamageMessage(Object target, String message, int delaySeconds) {
+    // private static void scheduleDamageMessage(Object target, String message, int delaySeconds) {
 
-        Main.executor.schedule(() -> {
-            System.out.println(" >> " + message);
-        }, delaySeconds, TimeUnit.SECONDS);
+    //     Main.executor.schedule(() -> {
+    //         System.out.println(" >> " + message);
+    //     }, delaySeconds, TimeUnit.SECONDS);
+    // }
+    private static void scheduleDamageMessage(Object target, String message, Long delaySeconds) {
+        MessageQueue.scheduleMessage(message, delaySeconds);
     }
     
     private static String getTargetName(Object target) {

@@ -27,7 +27,7 @@ public class HealProcessor {
             boolean hasScurvy = player.getBuffList().stream().anyMatch(buff -> "Scurvy".equals(buff.getName()));
             Enemy enemy = getCurrentEnemy();
             if (hasScurvy && enemy != null){
-                System.out.println(" >> Life force is channeled into destructive power.");
+                scheduleHealMessage("Life force is channeled into destructive power.", 250L);
                 DamageProcessor.applyDamageToEnemy(finalHeal, null, enemy);
             }else{
                 player.addHp(finalHeal, time);
@@ -65,5 +65,9 @@ public class HealProcessor {
 
         }
         return null;
+    }
+
+    private static void scheduleHealMessage(String message, long delaySeconds) {
+        MessageQueue.scheduleMessage(message, delaySeconds);
     }
 }

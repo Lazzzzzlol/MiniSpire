@@ -35,6 +35,7 @@ import main.card.effectCard.Card16Holmgang;
 import main.card.effectCard.Card17PrimalRend;
 import main.card.effectCard.Card18PrayForFavor;
 import main.card.effectCard.Card28Tremble;
+import main.card.effectCard.Card31Scurvy;
 
 import main.card.passiveCard.Card19RecoveryStone;
 import main.card.passiveCard.Card20OldRadiantLifegem;
@@ -401,4 +402,5 @@ public class CardFactory implements ResourceFactory {
 		return normalCards.get(randNum);
 	}
 }
+
 

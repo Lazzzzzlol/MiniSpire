@@ -87,6 +87,12 @@ public class Enemy {
 	            it.remove();
 	        }
 	    }
+
+		try {
+			TimeUnit.SECONDS.sleep(1);
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+		}
 	}
 	
 	public void addBuff(Buff buff, int duration) {

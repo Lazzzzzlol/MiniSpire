@@ -3,10 +3,12 @@ package main.processor;
 import java.util.List;
 import main.player.Player;
 import main.enemy.Enemy;
+import main.game.Game;
+import main.node.NodeBattle;
+import main.node.NodeBoss;
 import main.buff.Buff;
 
 public class HealProcessor {
-    private static final ThreadLocal<Boolean> isProcessingScurvy = ThreadLocal.withInitial(() -> false);
     
     public static int calculateHeal(List<Buff> buffList, int value){
         
@@ -25,14 +27,8 @@ public class HealProcessor {
             boolean hasScurvy = player.getBuffList().stream().anyMatch(buff -> "Scurvy".equals(buff.getName()));
             Enemy enemy = getCurrentEnemy();
             if (hasScurvy && enemy != null){
-                if (isProcessingScurvy.get()) return;
-                try {
-                    System.out.println(" >> Life force is channeled into destructive power.");
-                    isProcessingScurvy.set(true);
-                    DamageProcessor.applyDamageToEnemy(finalHeal, Player.getInstance(), enemy);
-                } finally {
-                    isProcessingScurvy.set(false);
-                }
+                System.out.println(" >> Life force is channeled into destructive power.");
+                DamageProcessor.applyDamageToEnemy(finalHeal, null, enemy);
             }else{
                 player.addHp(finalHeal, time);
             }

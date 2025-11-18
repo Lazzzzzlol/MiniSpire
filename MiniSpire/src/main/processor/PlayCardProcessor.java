@@ -3,20 +3,17 @@ package main.processor;
 import main.player.Player;
 import main.resourceFactory.CardFactory;
 import main.Colors;
-import main.Main;
 import main.card.Card;
 import main.card.attackCard.AttackCard;
 import main.card.effectCard.EffectCard;
 import main.enemy.Enemy;
-
-import java.util.concurrent.TimeUnit;
 
 public class PlayCardProcessor {
     
     public static void processCardPlay(Player player, Card card, Enemy enemy) {
 
         if (!card.getCanPlay()) {
-            System.out.println(" >> Unplayable card type.");
+            schedulePlayCardMessage("Unplayable card type.", 250L);
             return;
         }
 
@@ -29,7 +26,7 @@ public class PlayCardProcessor {
                 processEffectCard(player, card, enemy);
                 break;
             default:
-                System.out.println(" >> Unknown or unplayable card type.");
+                schedulePlayCardMessage("Unknown or unplayable card type.", 250L);
                 break;
 
         }
@@ -40,21 +37,13 @@ public class PlayCardProcessor {
         AttackCard attackCard = (AttackCard) card;
 
         attackCard.onPlay(player, enemy);
-        System.out.println(" >> Played card: " + Colors.colorOnForCardName(card));
+        schedulePlayCardMessage("Played card: " + Colors.colorOnForCardName(card), 250L);
 
         if (hasBuff(player, "Double") && (enemy.getHp() > 0) ) {
-
             player.getBuffList().removeIf(buff -> "Double".equals(buff.getName()));
-
-            Main.executor.schedule(() -> {
-                System.out.println(" >> Played card: " + Colors.colorOnForCardName(card) + " (" + Colors.colorOnForBuff("Double", "positive") + ")");
-
-                attackCard.onPlay(player, enemy);
-
-            }, 0, TimeUnit.SECONDS);
-            
+            schedulePlayCardMessage("Played card: " + Colors.colorOnForCardName(card) + " (" + Colors.colorOnForBuff("Double", "positive") + ")", 250L);
+            attackCard.onPlay(player, enemy);
         }
-
     }
     
     private static void processEffectCard(Player player, Card card, Enemy enemy) {
@@ -62,7 +51,7 @@ public class PlayCardProcessor {
         EffectCard effectCard = (EffectCard) card;
 
         effectCard.onUse(player, enemy);
-        System.out.println(" >> Played card: " + Colors.colorOnForCardName(card));
+        schedulePlayCardMessage("Played card: " + Colors.colorOnForCardName(card), 250L);
 
         if (hasBuff(player, "Flurry")) {
             addFlurryToHand(player);
@@ -81,9 +70,11 @@ public class PlayCardProcessor {
 
         Card flurryCard = CardFactory.getInstance().createCard(24);
         player.getHandCardList().add(flurryCard);
-        Main.executor.schedule(() -> {
-            System.out.println(" >> Drawed card: " + Colors.colorOnForCardName(flurryCard));
-        }, 1001, TimeUnit.MILLISECONDS);
+        schedulePlayCardMessage("Drawed card: " + Colors.colorOnForCardName(flurryCard),250L);
 
+    }
+
+    private static void schedulePlayCardMessage(String message, Long delaySeconds) {
+        MessageQueue.scheduleMessage(message, delaySeconds);
     }
 }

@@ -119,7 +119,7 @@ public class DamageProcessor {
                     break;
 
                 case "Misty":
-                    if (Main.random.nextInt(2) == 0) {
+                    if (Main.random.nextInt(10) <= 4) {
                         attackMistied = true;
                         damageMultiplier = 0.0f;
                     }

@@ -13,6 +13,7 @@ import main.Colors;
 import main.Main;
 import main.TextDisplay;
 import main.buff.Buff;
+import main.buff.positiveBuff.BuffInvincible;
 import main.processor.HealProcessor;
 import main.processor.PlayCardProcessor;
 import main.card.Card;
@@ -50,10 +51,10 @@ public class Player {
 	
 	public Player() {
 		
-		this.hp = 7000;
-		this.maxHp = 7000;
-		this.actionPoints = 3;
-		this.maxActionPoints = 3;
+		this.hp = 2;
+		this.maxHp = 70;
+		this.actionPoints = 4;
+		this.maxActionPoints = 4;
 		this.gold = 0;
 		this.totalGold = 0;
 		this.drawCardNumPerTurn = 5;
@@ -88,7 +89,7 @@ public class Player {
 	}
 	
 	public void drawHandCards(int num, Integer time) {
-		if (Game.getInstance().getIsVictory())
+		if (Game.getInstance().getIsVictory() || hp <= 0)
 			return;
 		if (time == null) time = 1001;
 		internalDrawHandCards(num, time);
@@ -274,12 +275,25 @@ public class Player {
 	public void deductHp(int damage) {
 		
 		this.hp -= damage;
-		if (this.hp < 0)
-			Game.getInstance().setIsGameOver(true);
-		
-		Main.executor.schedule(() -> {
-			// System.out.println(" >> Took " + damage + " damage.");
-		}, 1, TimeUnit.SECONDS);
+		if (this.hp < 0){
+
+			boolean hasBlessed = buffList.stream()
+            .anyMatch(buff -> "Blessed".equals(buff.getName()));
+
+				if (hasBlessed) {
+
+					Main.executor.schedule(() -> {
+						System.out.println(" >> Blessed be thou, that thou shalt be delivered from death. ");
+					}, 1000, TimeUnit.MILLISECONDS);
+
+					addHp((maxHp / 2), 1);
+					buffList.removeIf(buff -> "Blessed".equals(buff.getName()));
+					buffList.add(new BuffInvincible(3));
+
+				} else {
+					Game.getInstance().setIsGameOver(true);
+				}
+		}
 	}
 	
 	public int getActionPoints() {

@@ -63,6 +63,7 @@ public class Player {
 		this.handCardList = new ArrayList<Card>();
 		this.drawCardList = new ArrayList<Card>();
 		this.discardCardList = new ArrayList<Card>();
+		this.removeCardList = new ArrayList<Card>();
 		
 		this.buffList = new ArrayList<Buff>();
 		//this.abilityList = new ArrayList<Ability>();
@@ -495,3 +496,4 @@ public class Player {
 		return this.colorViews;
 	}
 }
+

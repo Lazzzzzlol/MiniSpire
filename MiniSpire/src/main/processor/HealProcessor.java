@@ -21,7 +21,20 @@ public class HealProcessor {
         if (target instanceof Player) {
             Player player = (Player) target;
             int finalHeal = calculateHeal(player.getBuffList(), heal);
-            player.addHp(finalHeal, time);
+            boolean hasScurvy = player.getBuffList().stream().anyMatch(buff -> "Scurvy".equals(buff.getName()));
+            Enemy enemy = getCurrentEnemy();
+            if (hasScurvy && enemy != null){
+                if (isProcessingScurvy.get()) return;
+                try {
+                    System.out.println(" >> Life force is channeled into destructive power.");
+                    isProcessingScurvy.set(true);
+                    DamageProcessor.applyDamageToEnemy(finalHeal, Player.getInstance(), enemy);
+                } finally {
+                    isProcessingScurvy.set(false);
+                }
+            }else{
+                player.addHp(finalHeal, time);
+            }
         } else if (target instanceof Enemy) {
             Enemy enemy = (Enemy) target;
             int finalHeal = calculateHeal(enemy.getBuffList(), heal);

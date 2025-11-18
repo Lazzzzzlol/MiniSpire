@@ -113,6 +113,8 @@ public class CardFactory implements ResourceFactory {
 		// special card
 		cardPool.add(new Card30SacrificialRitual_cOLoRS()); // 30   special
 
+		cardPool.add(new Card31Scurvy());                   // 31   epic
+
 		for (Card card : cardPool) {
 			String rarity = card.getRarity().toLowerCase();
 			if (rarity.contains("normal")) {
@@ -399,3 +401,4 @@ public class CardFactory implements ResourceFactory {
 		return normalCards.get(randNum);
 	}
 }
+

@@ -10,9 +10,11 @@ import java.util.concurrent.TimeUnit;
 import main.Colors;
 import main.Main;
 import main.buff.Buff;
+import main.buff.positiveBuff.BuffSteelsoul;
 import main.game.Game;
 import main.node.NodeBoss;
 import main.player.Player;
+import main.processor.DamageProcessor;
 import main.processor.HealProcessor;
 
 public class Enemy {
@@ -24,7 +26,6 @@ public class Enemy {
 	protected ArrayList<Buff> buffList;
 	private boolean hasSpecialContainer;
 	protected boolean isDied;
-	private int steelsoulAbsorbedDamage = 0; // 钢魂吸收的伤害
 	private String type;
 	
 	public Enemy(String name, int hp, String type) {
@@ -75,15 +76,17 @@ public class Enemy {
 	        Buff buff = it.next();
 	        buff.onEndTurn();
 	        if (buff.getDuration() == 0) {
-	        	// 如果 Steelsoul 消失，返还所有吸收的伤害
-	        	if ("Steelsoul".equals(buff.getName()) && steelsoulAbsorbedDamage > 0) {
-	        		int damageToReturn = steelsoulAbsorbedDamage;
-	        		steelsoulAbsorbedDamage = 0;
-					Player.getInstance().deductHp(damageToReturn);
-	        		Main.executor.schedule(() -> {
-	        			System.out.println(" >> " + Colors.colorOnForEnemyName(this.name,this.type) + " returns " + damageToReturn + " absorbed damage from Steelsoul!");
-	        		}, 1, TimeUnit.SECONDS);
-	        	}
+	        	if (buff instanceof BuffSteelsoul) {
+					BuffSteelsoul steelsoul = (BuffSteelsoul) buff;
+					int damageToReturn = steelsoul.getAbsorbedDamageAndReset();
+					if (damageToReturn > 0) {
+						DamageProcessor.applyDamageToPlayer(damageToReturn, this, Player.getInstance());
+						Main.executor.schedule(() -> {
+							System.out.println(" >> " + Colors.colorOnForEnemyName(this.name,this.type) + 
+											" returns " + damageToReturn + " absorbed damage from Steelsoul!");
+						}, 1000, TimeUnit.MILLISECONDS);
+					}
+				}
 	            it.remove();
 	        }
 	    }
@@ -214,20 +217,6 @@ public class Enemy {
 
 	public Boolean getIsDied(){
 		return isDied;
-	}
-	
-	/**
-	 * 吸收伤害（用于 Steelsoul）
-	 */
-	public void absorbDamageWithSteelsoul(int damage) {
-		this.steelsoulAbsorbedDamage += damage;
-	}
-	
-	/**
-	 * 获取当前吸收的伤害
-	 */
-	public int getSteelsoulAbsorbedDamage() {
-		return steelsoulAbsorbedDamage;
 	}
 
 	public String getType() {

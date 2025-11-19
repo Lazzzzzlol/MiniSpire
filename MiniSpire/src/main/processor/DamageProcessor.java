@@ -6,6 +6,7 @@ import main.Main;
 import main.enemy.Enemy;
 import main.enemy.eliteEnemy.Watcher;
 import main.buff.Buff;
+import main.buff.positiveBuff.BuffSteelsoul;
 
 import java.util.List;
 
@@ -140,16 +141,19 @@ public class DamageProcessor {
         }
         
         if (attackAbsorbed && target instanceof Enemy) {
-            Enemy enemy = (Enemy) target;
-            enemy.absorbDamageWithSteelsoul(calculatedDamage);
+            Enemy enemy = (Enemy)target;
+            
+            // 找到 Steelsoul buff 实例
+            enemy.getBuffList().stream()
+                .filter(b -> b instanceof BuffSteelsoul)
+                .findFirst()
+                .ifPresent(sb -> ((BuffSteelsoul) sb).absorb(calculatedDamage));
+
             String message = getTargetName(target) + 
                             " absorbs " + getDamageDisplay(baseDamage, calculatedDamage) + 
                             " damage (" + Colors.colorOnForBuff("Steelsoul", "positive") + ")";
             scheduleDamageMessage(target, message, 250L);
             
-            if (hasSteadfast(target)) {
-                ((Watcher) target).addGettedDamageCounter(calculatedDamage);
-            }
             return 0;
         }
         

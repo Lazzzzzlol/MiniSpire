@@ -68,6 +68,7 @@ public class PerplexedMonk extends Enemy {
 		if (haveOpoStance) dmg += 5;
 		DamageProcessor.applyDamageToPlayer(dmg, this, Player.getInstance());
 		chakras.add("Opo");
+		haveOpoStance = false;
 	}
 
 	private void risingRaptor() {
@@ -75,7 +76,6 @@ public class PerplexedMonk extends Enemy {
 		int dmg = 12 + Main.random.nextInt(3); // 12-14
 		DamageProcessor.applyDamageToPlayer(dmg, this, Player.getInstance());
 		chakras.add("Raptor");
-		// if damage dealt successfully, gain Endure 2 (忍耐)
 		addBuff(new BuffTough(2), 2);
 	}
 
@@ -84,25 +84,28 @@ public class PerplexedMonk extends Enemy {
 		int dmg = 11 + Main.random.nextInt(3); // 11-13
 		DamageProcessor.applyDamageToPlayer(dmg, this, Player.getInstance());
 		chakras.add("Coeurl");
-		// if damage dealt successfully, gain 魔猿身形 标记
 		haveOpoStance = true;
 	}
 
 	private void masterfulBlitz() {
 		int types = chakras.size();
-		if (types <= 0) return;
+		if (types <= 0) {
+			System.out.println(" >> (Awkward scilence...)");
+		};
 		if (types == 1) {
 			System.out.println(" >> Tornado Kick!");
-		DamageProcessor.applyDamageToPlayer(20, this, Player.getInstance());
-			return;
+			DamageProcessor.applyDamageToPlayer(20, this, Player.getInstance());
 		}
 		if (types == 2) {
 			System.out.println(" >> Phantom Rush!");
-		DamageProcessor.applyDamageToPlayer(30, this, Player.getInstance());
-			return;
+			DamageProcessor.applyDamageToPlayer(30, this, Player.getInstance());
 		}
-		System.out.println(" >> Fires Reply!");
-		DamageProcessor.applyDamageToPlayer(50, this, Player.getInstance());
+		if (types == 2) {
+			System.out.println(" >> Fires Reply!");
+			DamageProcessor.applyDamageToPlayer(50, this, Player.getInstance());
+		}
+
+		chakras.clear();
 	}
 
 	@Override
@@ -116,10 +119,10 @@ public class PerplexedMonk extends Enemy {
         String result = "[Chakra: ";
         for (String chakra : chakras)
             result += chakra + " ";
-        result += "] ";
+        result += "]";
 		
 		if (haveOpoStance)
-			result += "(Opo Stance ready)";
+			result += " (Opo Stance ready)";
 
         return result;
     }

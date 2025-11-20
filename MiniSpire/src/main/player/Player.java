@@ -53,8 +53,8 @@ public class Player {
 		
 		this.hp = 70;
 		this.maxHp = 70;
-		this.actionPoints = 3;
-		this.maxActionPoints = 3;
+		this.actionPoints = 4;
+		this.maxActionPoints = 4;
 		this.gold = 0;
 		this.totalGold = 0;
 		this.drawCardNumPerTurn = 5;
@@ -78,6 +78,7 @@ public class Player {
 	}
 	
 	public void onStartTurn() {
+
 		boolean playerHasMuted = buffList.stream().anyMatch(buff -> "Muted".equals(buff.getName()));
 
 		this.actionPoints = this.maxActionPoints;
@@ -85,7 +86,7 @@ public class Player {
 			this.actionPoints = 0;
 			System.out.println(" >> Action Point becomes 0 (" + Colors.colorOnAnyElse("Muted", Colors.BLUE) + ").");
 		}
-		
+
 		Iterator<Buff> it = buffList.iterator();
 	    
 	    while (it.hasNext()) {
@@ -174,7 +175,7 @@ public class Player {
 
 			if (cardToPlay.getNeedRemove())
 				removeCardList.add(cardToPlay);
-			else if (!cardToPlay.getDisposable())
+			else if (!cardToPlay.getDisposable() && !cardToPlay.getTemporary())
 				discardCardList.add(cardToPlay);
 			
 		} else {
@@ -213,9 +214,7 @@ public class Player {
 			HealProcessor.applyHeal(this, recoveringBuff.getDuration(), null);
 		}
 		
-		discardCardList.addAll(handCardList);
-		handCardList.clear();
-		
+		clearHandCards();
 		
 
 		try {
@@ -227,10 +226,10 @@ public class Player {
 
 	public void onWin(){
 
+		clearHandCards();
 		drawCardList.addAll(discardCardList);
 		discardCardList.clear();
-		drawCardList.addAll(handCardList);
-		handCardList.clear();
+
 
 		for (Card card : removeCardList)
 			card.setNeedRemove(false);
@@ -381,7 +380,11 @@ public class Player {
 	}
 	
 	public void clearHandCards(){
-		discardCardList.addAll(handCardList);
+		for (Card card : handCardList){
+			if (!card.getTemporary()){
+				discardCardList.add(card);
+			}
+		}
 		handCardList.clear();
 	}
 	
@@ -519,6 +522,5 @@ public class Player {
 		return this.colorViews;
 	}
 }
-
 
 

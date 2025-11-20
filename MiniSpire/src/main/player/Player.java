@@ -85,6 +85,16 @@ public class Player {
 			this.actionPoints = 0;
 			System.out.println(" >> Action Point becomes 0 (" + Colors.colorOnAnyElse("Muted", Colors.BLUE) + ").");
 		}
+		
+		Iterator<Buff> it = buffList.iterator();
+	    
+	    while (it.hasNext()) {
+	        Buff buff = it.next();
+	        buff.onEndTurn();
+			if (buff.getDuration() <= 0)
+	            it.remove();
+		}
+		
 		drawHandCards(drawCardNumPerTurn, 2000);
 	}
 	
@@ -206,14 +216,7 @@ public class Player {
 		discardCardList.addAll(handCardList);
 		handCardList.clear();
 		
-		Iterator<Buff> it = buffList.iterator();
-	    
-	    while (it.hasNext()) {
-	        Buff buff = it.next();
-	        buff.onEndTurn();
-			if (buff.getDuration() <= 0)
-	            it.remove();
-		}
+		
 
 		try {
 			TimeUnit.SECONDS.sleep(1);
@@ -516,5 +519,6 @@ public class Player {
 		return this.colorViews;
 	}
 }
+
 
 

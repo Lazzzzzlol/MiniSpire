@@ -29,32 +29,32 @@ public class RidiculeClown extends Enemy {
 			
 		switch (movementCounter) {
 			case 0:
-				System.out.println("\n >> " + this.getName() + " uses Surprise Box!");
+				System.out.println("\n >> " + this.getColoredName() + " uses Surprise Box!");
 				surpriseBox();
 				movementCounter++;
 				break;
 			case 1:
-				System.out.println("\n >> " + this.getName() + " uses Smash Hit!");
+				System.out.println("\n >> " + this.getColoredName() + " uses Smash Hit!");
 				smashHit();
 				movementCounter++;
 				break;
 			case 2:
-				System.out.println("\n >> " + this.getName() + " uses Surprise Box!");
+				System.out.println("\n >> " + this.getColoredName() + " uses Surprise Box!");
 				surpriseBox();
 				movementCounter++;
 				break;
 			case 3:
-				System.out.println("\n >> " + this.getName() + " uses Halftime!");
+				System.out.println("\n >> " + this.getColoredName() + " uses Halftime!");
 				halftime();
 				movementCounter++;
 				break;
 			case 4:
-				System.out.println("\n >> " + this.getName() + " uses Surprise Box!");
+				System.out.println("\n >> " + this.getColoredName() + " uses Surprise Box!");
 				surpriseBox();
 				movementCounter++;
 				break;
 			case 5:
-				System.out.println("\n >> " + this.getName() + " uses Perfect Ending!");
+				System.out.println("\n >> " + this.getColoredName() + " uses Perfect Ending!");
 				perfectEnding();
 				movementCounter = 0;
 				break;

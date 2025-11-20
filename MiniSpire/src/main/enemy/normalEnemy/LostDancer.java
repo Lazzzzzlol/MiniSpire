@@ -25,37 +25,37 @@ public class LostDancer extends Enemy{
 		switch (movementCounter) {
 		
 			case 0:
-				System.out.println("\n >> " + this.getName() + " uses Reverse Cascade!");
+				System.out.println("\n >> " + this.getColoredName() + " uses Reverse Cascade!");
 				reverseCascade();
 				movementCounter++;
 				break;
 				
 			case 1:
-				System.out.println("\n >> " + this.getName() + " uses Rising Windmill!");
+				System.out.println("\n >> " + this.getColoredName() + " uses Rising Windmill!");
 				risingWindmill();
 				movementCounter++;
 				break;
 				
 			case 2:
-				System.out.println("\n >> " + this.getName() + " uses Bladeshower!");
+				System.out.println("\n >> " + this.getColoredName() + " uses Bladeshower!");
 				bladeShower();
 				movementCounter++;
 				break;
 
             case 3:
-				System.out.println("\n >> " + this.getName() + " uses Foutainfall!");
+				System.out.println("\n >> " + this.getColoredName() + " uses Foutainfall!");
 				fountainFall();
 				movementCounter++;
 				break;
 
             case 4:
-				System.out.println("\n >> " + this.getName() + " uses Flourish!");
+				System.out.println("\n >> " + this.getColoredName() + " uses Flourish!");
 				flourish();
 				movementCounter = 0;
 				break;
 				
 			default:
-				System.out.println(" >> " + this.getName() + " is confused.");
+				System.out.println(" >> " + this.getColoredName() + " is confused.");
 				movementCounter = 0;
 				break;
 		}

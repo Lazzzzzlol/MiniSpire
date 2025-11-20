@@ -29,25 +29,25 @@ public class Zombie extends Enemy {
 		switch (movementCounter) {
 		
 			case 0:
-				System.out.println("\n >> " + this.getName() + " uses Scratch!");
+				System.out.println("\n >> " + this.getColoredName() + " uses Scratch!");
 				scratch();
 				movementCounter++;
 				break;
 				
 			case 1:
-				System.out.println("\n >> " + this.getName() + " uses Corruption!");
+				System.out.println("\n >> " + this.getColoredName() + " uses Corruption!");
 				corruption();
 				movementCounter++;
 				break;
 				
 			case 2:
-				System.out.println("\n >> " + this.getName() + " uses Strong Scratch!");
+				System.out.println("\n >> " + this.getColoredName() + " uses Strong Scratch!");
 				strongScratch();
 				movementCounter = 0;
 				break;
 				
 			default:
-				System.out.println(" >> " + this.getName() + " is confused.");
+				System.out.println(" >> " + this.getColoredName() + " is confused.");
 				movementCounter = 0;
 				break;
 		}

@@ -216,7 +216,7 @@ public class DamageProcessor {
     private static String getTargetName(Object target) {
 
         if (target instanceof Enemy) {
-            return ((Enemy) target).getName();
+            return ((Enemy) target).getColoredName();
         }
         return "";
     }

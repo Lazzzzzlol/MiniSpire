@@ -20,6 +20,7 @@ import main.processor.HealProcessor;
 public class Enemy {
 	
 	protected String name;
+	protected String coloredName;
 	private int hp;
 	private int initialHp;
 	protected int movementCounter = 0;
@@ -32,6 +33,7 @@ public class Enemy {
 		this.hp = hp;
 		this.initialHp = hp;
 		this.name = name;
+		this.coloredName = Colors.colorOnForEnemyName(name, type);
 		this.buffList = new ArrayList<Buff>();
 		this.hasSpecialContainer = false;
 		this.isDied = false;
@@ -48,7 +50,7 @@ public class Enemy {
 
     if (hasMuted){
         movementCounter++;
-        System.out.println(" >> " + Colors.colorOnForEnemyName(this.name,this.type) + " failed to act (" + Colors.colorOnAnyElse("Muted", Colors.BLUE) + ").");
+        System.out.println(" >> " + coloredName + " failed to act (" + Colors.colorOnAnyElse("Muted", Colors.BLUE) + ").");
         return false;
     }
     
@@ -82,8 +84,7 @@ public class Enemy {
 					if (damageToReturn > 0) {
 						DamageProcessor.applyDamageToPlayer(damageToReturn, this, Player.getInstance());
 						Main.executor.schedule(() -> {
-							System.out.println(" >> " + Colors.colorOnForEnemyName(this.name,this.type) + 
-											" returns " + damageToReturn + " absorbed damage from Steelsoul!");
+							System.out.println(" >> " + coloredName + " returns " + damageToReturn + " absorbed damage from Steelsoul!");
 						}, 1000, TimeUnit.MILLISECONDS);
 					}
 				}
@@ -108,7 +109,7 @@ public class Enemy {
 				
 		buffList.add(buff);
 		Main.executor.schedule(() -> {
-			System.out.println(" >> " + Colors.colorOnForEnemyName(this.name, this.type) + " obtains buff " + Colors.colorOnForBuff(buff.getName(), buff.getType()));
+			System.out.println(" >> " + coloredName + " obtains buff " + Colors.colorOnForBuff(buff.getName(), buff.getType()));
 		}, 1001, TimeUnit.MILLISECONDS);
 	}
 	
@@ -136,7 +137,7 @@ public class Enemy {
 			this.hp = initialHp;
 		
 		Main.executor.schedule(() -> {
-			System.out.println(" >> " + Colors.colorOnForEnemyName(this.name,this.type) + " heals " + heal + " HP ");
+			System.out.println(" >> " + coloredName + " heals " + heal + " HP ");
 		}, 1, TimeUnit.SECONDS);
 	}
 
@@ -150,7 +151,7 @@ public class Enemy {
 			);
 			Random random = new Random();
 			String action = messages.get(random.nextInt(messages.size()));
-			System.out.println(" >> " + Colors.colorOnForEnemyName(this.name,this.type) + " " + action);
+			System.out.println(" >> " + coloredName + " " + action);
 		}, 1, TimeUnit.SECONDS);
 
 		boolean hasResurrection = buffList.stream()
@@ -163,7 +164,7 @@ public class Enemy {
 
 		buffList.removeIf(buff -> "Resurrection".equals(buff.getName()));
 		Main.executor.schedule(() -> {
-			System.out.println("\n >> " + Colors.colorOnForEnemyName(this.name,this.type) + " " + Colors.colorOnAnyElse("resurrected", Colors.BLUE) + "!");
+			System.out.println("\n >> " + coloredName + " " + Colors.colorOnAnyElse("resurrected", Colors.BLUE) + "!");
 		}, 1, TimeUnit.SECONDS);
 		hp = initialHp;
 	}
@@ -174,6 +175,10 @@ public class Enemy {
 	
 	public String getName() {
 		return name;
+	}
+
+	public String getColoredName(){
+		return coloredName;
 	}
 
 	public ArrayList<Buff> getBuffList() {

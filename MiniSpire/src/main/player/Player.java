@@ -290,7 +290,7 @@ public class Player {
 
 					Main.executor.schedule(() -> {
 						System.out.println(" >> Blessed be thou, that thou shalt be delivered from death. ");
-					}, 1000, TimeUnit.MILLISECONDS);
+					}, 1, TimeUnit.MILLISECONDS);
 
 					addHp((maxHp / 2), 1);
 					buffList.removeIf(buff -> "Blessed".equals(buff.getName()));

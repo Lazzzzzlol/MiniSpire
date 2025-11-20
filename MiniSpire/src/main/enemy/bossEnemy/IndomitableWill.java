@@ -21,25 +21,15 @@ import main.processor.DamageProcessor;
 import main.buff.debuff.BuffMuted;
 import main.buff.debuff.BuffVulnerable;
 
-/**
- * 不屈意志 Boss：两阶段战斗，包含连招机制和常规循环
- */
 public class IndomitableWill extends Enemy { 
 
 	private boolean phase2 = false;
-	private int deliriumDamageBonus = 0; // Delirium 的伤害加成（有 Weakened 时 +5）
-	private boolean lastDeliriumHit = false; // 上次 Delirium 是否命中（用于 Reject 判断）
+	private int deliriumDamageBonus = 0;
+	private boolean lastDeliriumHit = false;
 	
-	// 第二阶段连招状态
 	private boolean desperateRoarDone = false;
 	private boolean scarletDeliriumDone =false;
 	private boolean impalementDone = false;
-	private boolean comboCompleted = false; // 连招完成后进入常规循环
-	
-	// 连招成功标志（用于 fallback 机制）
-	private boolean desperateRoarSucceeded = false;
-	private boolean scarletDeliriumSucceeded = false;
-	private boolean impalementSucceeded = false;
 	
 	private List<String> scriptures = new ArrayList<>();
 
@@ -59,13 +49,9 @@ public class IndomitableWill extends Enemy {
 		scriptures.add("The way of redemption dwelleth therein. (2:3)");
 		
 		phase2 = false;
-		comboCompleted = false;
 		desperateRoarDone = false;
 		scarletDeliriumDone = false;
 		impalementDone = false;
-		desperateRoarSucceeded = false;
-		scarletDeliriumSucceeded = false;
-		impalementSucceeded = false;
 		movementCounter = 0;
 	}
 
@@ -73,15 +59,10 @@ public class IndomitableWill extends Enemy {
 
 		super.onDie();
 
-
 		addBuff(new BuffIndomitable(999), 999);
 		desperateRoarDone = false;
 		scarletDeliriumDone = false;
 		impalementDone = false;
-		comboCompleted = false;
-		desperateRoarSucceeded = false;
-		scarletDeliriumSucceeded = false;
-		impalementSucceeded = false;
 		movementCounter = 0;
 		this.name = "IndOm?taB?e W?Ll";
 
@@ -159,75 +140,63 @@ public class IndomitableWill extends Enemy {
 	}
 
 	private void phase2Move() {
-		if (isDied || this.getHp() <= 0) {
-			return;
-		}
-		
-		// 连招完成后进入常规循环（Depressed ↔ Dark Missionary）
-		if (comboCompleted) {
-			switch (movementCounter % 2) {
-				case 0:
-					System.out.println("\n >> " + this.getName() + " uses Depressed!");
-					depressed();
-					movementCounter++;
-					break;
-				case 1:
-					System.out.println("\n >> " + this.getName() + " uses Dark Missionary!");
-					darkMissionary();
-					movementCounter++;
-					break;
-			}
-			return;
-		}
-		
-		if (!desperateRoarDone) {
-			System.out.println("\n >> " + this.getName() + " uses Desperate Roar!");
-			desperateRoar();
-			desperateRoarDone = true;
-			return;
-		}
 
-		if (desperateRoarDone && !scarletDeliriumDone) {
-			System.out.println("\n >> " + this.getName() + " uses Scarlet Delirium!");
-			scarletDelirium();
-			scarletDeliriumDone = true;
-			return;
-		}
-
-		if (scarletDeliriumDone && !impalementDone) {
-			System.out.println("\n >> " + this.getName() + " uses Impalement!");
-			impalement();
-			impalementDone = true;
-			return;
-		}
-
-		if (impalementDone) {
-			System.out.println("\n >> " + this.getName() + " uses Disesteem!");
-			disesteem();
-			comboCompleted = true; // 连招完成，进入常规循环
-			desperateRoarDone = false;
-			scarletDeliriumDone = false;
-			impalementDone = false;
-			desperateRoarSucceeded = false;
-			scarletDeliriumSucceeded = false;
-			impalementSucceeded = false;
-			movementCounter = 0;
-			return;
-		}
-
-		// Fallback: 安全机制，使用常规循环
-		switch (movementCounter % 2) {
+		switch (movementCounter) {
 			case 0:
-				System.out.println("\n >> " + this.getName() + " uses Depressed!");
+				System.out.println("\n >> " + this.getName() + " uses Desperate Roar!");
+				desperateRoar();
+				desperateRoarDone = true;
+				movementCounter++;
+				break;
+		
+			case 1:
+				if (desperateRoarDone){
+					System.out.println("\n >> " + this.getName() + " uses Scarlet Delirium!");
+					scarletDelirium();
+					scarletDeliriumDone = true;
+				} else {
+					darkMind();
+				}
+				movementCounter++;
+				break;
+
+			case 2:
+				if (scarletDeliriumDone){
+					System.out.println("\n >> " + this.getName() + " uses impalement!");
+					impalement();
+					impalementDone = true;
+				} else {
+					System.out.println(" >> : ... ..?");
+				}
+				movementCounter++;
+				break;
+
+			case 3:
+				if (impalementDone){
+					System.out.println("\n >> " + this.getName() + " uses disesteem!");
+					disesteem();
+
+					desperateRoarDone = false;
+					scarletDeliriumDone = false;
+					impalementDone = false;
+				} else {
+					depressed();
+				}
+				movementCounter++;
+				break;
+
+			case 4:
 				depressed();
 				movementCounter++;
-				break;
-			case 1:
-				System.out.println("\n >> " + this.getName() + " uses Dark Missionary!");
+
+			case 5:
 				darkMissionary();
-				movementCounter++;
+				movementCounter = 0;
+
+			default:
 				break;
 		}
+		
 	}
 
 	private void unleash() {
@@ -239,7 +208,7 @@ public class IndomitableWill extends Enemy {
 	}
 
 	private void torcleaver() {
-		// Gives Weakened only when damage is dealt successfully
+
 		int damage = 20;
 		DamageProcessor.applyDamageToPlayer(damage, this, Player.getInstance());
 
@@ -270,18 +239,19 @@ public class IndomitableWill extends Enemy {
 	}
 
 	private void reject() {
-		// 如果 Delirium 未命中，重新使用并 +10 伤害；否则施加 Muted
+
 		if (!lastDeliriumHit) {
 			deliriumDamageBonus += 10;
-			System.out.println(" >> Reject: Delirium failed!? Using again with +10 bonus!");
+			System.out.println(" >> Reject: Delirium absorbed more power... ");
 			delirium();
 			deliriumDamageBonus -= 10;
 		} else {
-			Player.getInstance().addBuff(new BuffMuted(2), 2);
+			Player.getInstance().addBuff(new BuffMuted(1), 1);
 		}
 	}
 
 	private void stalwartSoul() {
+
 		int playerActionPoints = Player.getInstance().getActionPoints();
 		
 		BuffSteelsoul existingSteelsoul = null;
@@ -308,74 +278,35 @@ public class IndomitableWill extends Enemy {
 
 	private void darkMissionary() {
 		String msg = scriptures.get(Main.random.nextInt(scriptures.size()));
-		System.out.println(" >> Indomitable Will" + msg);
+		System.out.println(" >> Indomitable Will: " + msg);
 	}
 
 	private void desperateRoar() {
-		desperateRoarSucceeded = false;
-		scarletDeliriumSucceeded = false;
-		impalementSucceeded = false;
 		
-		int hpBefore = this.getHp();
-		int hpLoss = 15 + Main.random.nextInt(6);
+		int hpLoss = 10 + Main.random.nextInt(6);
 		DamageProcessor.applyDamageToEnemy(hpLoss, null, this);
-		int hpAfter = this.getHp();
 		
-		desperateRoarSucceeded = (hpBefore > hpAfter);
-		
-		if (desperateRoarSucceeded) {
-			addBuff(new BuffSteelsoul(2), 2);
-		}
+		addBuff(new BuffSteelsoul(2), 2);
 	}
 
 	private void scarletDelirium() {
-		// Fallback: 如果 Desperate Roar 失败，使用 Dark Mind
-		if (!desperateRoarSucceeded) {
-			System.out.println("\n >> " + this.getName() + " uses Dark Mind!");
-			addBuff(new BuffTough(5), 5);
-			return;
-		}
 
-		int playerHpBefore = Player.getInstance().getHp();
 		int damage = 16 + Main.random.nextInt(2);
 		DamageProcessor.applyDamageToPlayer(damage, this, Player.getInstance());
-		int playerHpAfter = Player.getInstance().getHp();
-		
-		scarletDeliriumSucceeded = (playerHpBefore > playerHpAfter);
-		
-		if (scarletDeliriumSucceeded) {
-			addBuff(new BuffVulnerable(2), 2);
-		}
+		addBuff(new BuffVulnerable(2), 2);	
+	}
+
+	private void darkMind(){
+		addBuff(new BuffTough(5), 5);
 	}
 
 	private void impalement() {
-		if (isDied || this.getHp() <= 0) {
-			return;
-		}
-		
-		if (!scarletDeliriumSucceeded) {
-			System.out.println(" >> : ... ..?");
-			return;
-		}
 
-		int playerHpBefore = Player.getInstance().getHp();
 		int damage = 9 + Main.random.nextInt(3);
 		DamageProcessor.applyDamageToPlayer(damage, this, Player.getInstance());
-		int playerHpAfter = Player.getInstance().getHp();
-		
-		impalementSucceeded = (playerHpBefore > playerHpAfter);
-		
-		if (impalementSucceeded) {
-			Player.getInstance().addBuff(new BuffVulnerable(2), 2);
-		}
 	}
 
 	private void disesteem() {
-
-		if (!impalementSucceeded) {
-			depressed();
-			return;
-		}
 
 		addBuff(new BuffIgnore(1), 1);
 		DamageProcessor.applyDamageToPlayer(23, this, Player.getInstance());

@@ -11,7 +11,7 @@ public class Card00Strike extends AttackCard {
         this.info = "Deal 8 damage.";
         this.cost = 1;
         this.rarity = "normal";
-        this.baseDamage = 8;
+        this.baseDamage = 400;
     }
     
     @Override

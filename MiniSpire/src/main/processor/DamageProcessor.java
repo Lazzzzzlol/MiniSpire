@@ -93,13 +93,15 @@ public class DamageProcessor {
 
                     case "Strengthened":
                         damageMultiplier += 0.3f;
+                        break;
 
                     case "Weakened":
                         damageMultiplier -= 0.3f;
+                        break;
 
                     case "Indomitable":
                         damageMultiplier *= 2.0f;
-
+                        break;
                 }
             }
         }
@@ -110,9 +112,11 @@ public class DamageProcessor {
 
                 case "Vulnerable":
                     damageMultiplier += 0.3f;
+                    break;
 
                 case "Tough":
                     if (!hasIgnore) damageMultiplier -= 0.3f;
+                    break;
                     
                 case "Enshroud":
                     damageMultiplier += 0.5f;
@@ -143,7 +147,6 @@ public class DamageProcessor {
         if (attackAbsorbed && target instanceof Enemy) {
             Enemy enemy = (Enemy)target;
             
-            // 找到 Steelsoul buff 实例
             enemy.getBuffList().stream()
                 .filter(b -> b instanceof BuffSteelsoul)
                 .findFirst()

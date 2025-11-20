@@ -147,7 +147,7 @@ public class Main {
 			System.out.println(mediumLine);
 			
 			executor.schedule(() -> {
-				System.out.print("    You returned with victory.");
+				System.out.print("   You returned with victory.");
 			}, 1, TimeUnit.SECONDS);
 			
 			executor.schedule(() -> {
@@ -174,7 +174,7 @@ public class Main {
 			System.out.println(mediumLine);
 			
 			executor.schedule(() -> {
-				System.out.print("      You are defeated... ");
+				System.out.print("     You are defeated... ");
 			}, 1, TimeUnit.SECONDS);
 			
 			executor.schedule(() -> {

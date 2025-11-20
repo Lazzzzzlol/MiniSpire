@@ -155,6 +155,7 @@ public class IndomitableWill extends Enemy {
 					scarletDelirium();
 					scarletDeliriumDone = true;
 				} else {
+					desperateRoarDone = false;
 					darkMind();
 				}
 				movementCounter++;
@@ -166,6 +167,8 @@ public class IndomitableWill extends Enemy {
 					impalement();
 					impalementDone = true;
 				} else {
+					desperateRoarDone = false;
+					scarletDeliriumDone = false;
 					System.out.println(" >> : ... ..?");
 				}
 				movementCounter++;
@@ -181,16 +184,25 @@ public class IndomitableWill extends Enemy {
 					impalementDone = false;
 				} else {
 					depressed();
+					desperateRoarDone = false;
+					scarletDeliriumDone = false;
+					impalementDone = false;
 				}
 				movementCounter++;
 				break;
 
 			case 4:
 				depressed();
+				desperateRoarDone = false;
+				scarletDeliriumDone = false;
+				impalementDone = false;
 				movementCounter++;
 
 			case 5:
 				darkMissionary();
+				desperateRoarDone = false;
+				scarletDeliriumDone = false;
+				impalementDone = false;
 				movementCounter = 0;
 
 			default:

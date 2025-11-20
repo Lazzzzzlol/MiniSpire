@@ -16,6 +16,6 @@ public class Card11Rage extends EffectCard{
     @Override
     public void onUse(Player player, Enemy enemy) {
         player.addBuff(new BuffStrengthened(2), 2);
-        player.drawHandCards(2, null);
+        player.drawHandCards(1, null);
     }
 }

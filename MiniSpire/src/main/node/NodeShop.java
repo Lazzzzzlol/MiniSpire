@@ -183,8 +183,8 @@ public class NodeShop extends Node {
 			Card card2 = availableCards[1];
 			Card card3 = availableCards[2];
 			
-			if (card1.getName().equals(card2.getName()) && 
-				card2.getName().equals(card3.getName())) {
+			if (card1.getRarity().equals(card2.getRarity()) && 
+				card2.getRarity().equals(card3.getRarity())) {
 				isTripleCards = true;
 				System.out.println(" >> Special Offer! Triple cards found - all cards are FREE!");
 			}

@@ -9,6 +9,7 @@ public abstract class Card {
     protected Boolean canPlay;
     protected boolean needRemove = false;
     protected boolean disposable = false;
+    protected boolean Temporary = false;
 
     public abstract void onPlay(main.player.Player player, main.enemy.Enemy enemy);
     
@@ -44,11 +45,15 @@ public abstract class Card {
         return needRemove;
     }
 
-    public void setDisposable(boolean b){
-        this.disposable = b;
-    }
-
     public boolean getDisposable(){
         return disposable;
+    }
+
+    public void setTemporary(boolean b){
+        this.Temporary = b;
+    }
+
+    public boolean getTemporary(){
+        return Temporary;
     }
 }

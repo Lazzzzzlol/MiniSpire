@@ -71,7 +71,7 @@ public class PlayCardProcessor {
         Card flurryCard = CardFactory.getInstance().createCard(24);
         flurryCard.setDisposable(true);
         player.getHandCardList().add(flurryCard);
-        schedulePlayCardMessage("Drawed card: " + Colors.colorOnForCardName(flurryCard),250L);
+        schedulePlayCardMessage("Gained card: " + Colors.colorOnForCardName(flurryCard),250L);
 
     }
 

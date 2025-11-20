@@ -35,10 +35,10 @@ public class PlayCardProcessor {
     private static void processAttackCard(Player player, Card card, Enemy enemy) {
 
         AttackCard attackCard = (AttackCard) card;
-
-        attackCard.onPlay(player, enemy);
+        
         schedulePlayCardMessage("Played card: " + Colors.colorOnForCardName(card), 250L);
-
+        attackCard.onPlay(player, enemy);
+        
         if (hasBuff(player, "Double") && (enemy.getHp() > 0) ) {
             player.getBuffList().removeIf(buff -> "Double".equals(buff.getName()));
             schedulePlayCardMessage("Played card: " + Colors.colorOnForCardName(card) + " (" + Colors.colorOnForBuff("Double", "positive") + ")", 250L);
@@ -50,8 +50,8 @@ public class PlayCardProcessor {
 
         EffectCard effectCard = (EffectCard) card;
 
-        effectCard.onUse(player, enemy);
         schedulePlayCardMessage("Played card: " + Colors.colorOnForCardName(card), 250L);
+        effectCard.onUse(player, enemy);
 
         if (hasBuff(player, "Flurry")) {
             addFlurryToHand(player);

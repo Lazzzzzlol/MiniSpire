@@ -30,6 +30,8 @@ public class Watcher extends Enemy{
 		
 		if (!super.onMove())
 			return false;
+
+		gettedDamagerCounter = 0;
 		
 		switch (movementCounter) {
 			case 0:
@@ -89,10 +91,8 @@ public class Watcher extends Enemy{
 	public void addGettedDamageCounter(int damage){
 		gettedDamagerCounter += damage;
 
-		if (gettedDamagerCounter >= 15){
-			gettedDamagerCounter = 0;
+		if (gettedDamagerCounter >= 15)
 			if (!isDied)
 				addBuff(new BuffInvincible(1), 1);
-		}
 	}
 }

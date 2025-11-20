@@ -44,6 +44,10 @@ public abstract class Card {
         return needRemove;
     }
 
+    public void setDisposable(boolean b){
+        this.disposable = b;
+    }
+
     public boolean getDisposable(){
         return disposable;
     }

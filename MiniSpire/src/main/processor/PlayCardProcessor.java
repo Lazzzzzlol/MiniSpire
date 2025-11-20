@@ -69,6 +69,7 @@ public class PlayCardProcessor {
     private static void addFlurryToHand(Player player) {
 
         Card flurryCard = CardFactory.getInstance().createCard(24);
+        flurryCard.setDisposable(true);
         player.getHandCardList().add(flurryCard);
         schedulePlayCardMessage("Drawed card: " + Colors.colorOnForCardName(flurryCard),250L);
 

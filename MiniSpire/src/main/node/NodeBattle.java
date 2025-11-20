@@ -309,13 +309,13 @@ public class NodeBattle extends Node {
 			if (!card.getCanPlay())
 				((PassiveCard)card).onDiscard();
 
+		player.onEndTurn();
 		try {
 			MessageQueue.waitForCompletion();
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
 		}
-		player.onEndTurn();
-		
+	
 		if (enemy.getHp() <= 0 || enemy.getIsDied()) {
 			onWin();
 			return;
@@ -470,4 +470,5 @@ public class NodeBattle extends Node {
 		return enemy;
 	}
 }
+
 

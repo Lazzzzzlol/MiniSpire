@@ -56,7 +56,7 @@ public class DamageProcessor {
                 HealProcessor.applyHeal(attacker, finalDamage, null);
             }
 
-            if (hasStratagem(attacker) && finalDamage > 0 && attacker != null && attacker instanceof Player) {
+            if (hasStratagem(attacker) && attacker != null && attacker instanceof Player) {
                 Player playerAttacker = (Player) attacker;
                 playerAttacker.changeCurrentActionPoint(1);
                 playerAttacker.drawHandCards(1, null);

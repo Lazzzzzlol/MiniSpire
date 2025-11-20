@@ -53,8 +53,8 @@ public class Player {
 		
 		this.hp = 70;
 		this.maxHp = 70;
-		this.actionPoints = 4;
-		this.maxActionPoints = 4;
+		this.actionPoints = 3;
+		this.maxActionPoints = 3;
 		this.gold = 0;
 		this.totalGold = 0;
 		this.drawCardNumPerTurn = 5;

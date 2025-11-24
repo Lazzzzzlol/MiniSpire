@@ -54,7 +54,7 @@ public class Enemy {
         return false;
     }
     
-    return true; // 可以继续执行
+    return true;
 }
 
 	public void onEndTurn() {
@@ -119,6 +119,9 @@ public class Enemy {
 	
 	public void deductHp(int damage) {
 		
+		if (isDied)
+			return;
+
 		this.hp -= damage;
 		if (this.hp < 0)
 			this.hp = 0;
@@ -143,16 +146,19 @@ public class Enemy {
 
 	public void onDie(){
 
+		if (isDied)
+			return;
+
 		if (Game.getInstance().getCurrentNode().getClass() != NodeBoss.class)
-		Main.executor.schedule(() -> {
-			List<String> messages = Arrays.asList(
-				"dies", "is defeated", "falls", "meets the end", 
-				"breathes the last", "is gone", "perishes"
-			);
-			Random random = new Random();
-			String action = messages.get(random.nextInt(messages.size()));
-			System.out.println(" >> " + coloredName + " " + action);
-		}, 1, TimeUnit.SECONDS);
+			Main.executor.schedule(() -> {
+				List<String> messages = Arrays.asList(
+					"dies", "is defeated", "falls", "meets the end", 
+					"breathes the last", "is gone", "perishes"
+				);
+				Random random = new Random();
+				String action = messages.get(random.nextInt(messages.size()));
+				System.out.println(" >> " + coloredName + " " + action);
+			}, 1, TimeUnit.SECONDS);
 
 		boolean hasResurrection = buffList.stream()
                 .anyMatch(buff -> "Resurrection".equals(buff.getName()));

@@ -157,18 +157,18 @@ public class CardFactory implements ResourceFactory {
 		drawCardList.add(cardPool.get(19));
 
 		/* Test: 
-		drawCardList.add(cardPool.get(18));
-		drawCardList.add(cardPool.get(18));
-		drawCardList.add(cardPool.get(18));
-		drawCardList.add(cardPool.get(18));
-		drawCardList.add(cardPool.get(18));
-		drawCardList.add(cardPool.get(18));
-		drawCardList.add(cardPool.get(18));
-		drawCardList.add(cardPool.get(18));
-		drawCardList.add(cardPool.get(18));
-		drawCardList.add(cardPool.get(0));
-		drawCardList.add(cardPool.get(18));
-		drawCardList.add(cardPool.get(18));
+		drawCardList.add(cardPool.get(23));
+		drawCardList.add(cardPool.get(23));
+		drawCardList.add(cardPool.get(23));
+		drawCardList.add(cardPool.get(23));
+		drawCardList.add(cardPool.get(23));
+		drawCardList.add(cardPool.get(23));
+		drawCardList.add(cardPool.get(23));
+		drawCardList.add(cardPool.get(23));
+		drawCardList.add(cardPool.get(23));
+		drawCardList.add(cardPool.get(23));
+		drawCardList.add(cardPool.get(23));
+		drawCardList.add(cardPool.get(23));
 
 		drawCardList.add(cardPool.get(30));*/
 		

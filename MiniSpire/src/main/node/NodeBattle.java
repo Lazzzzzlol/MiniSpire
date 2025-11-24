@@ -54,7 +54,6 @@ public class NodeBattle extends Node {
 			rewardCard3 = tempCard3;
 		}
 
-		// reset per-battle state on all cards (Upheaval and any future cards that need it)
 		CardFactory.getInstance().resetCardsForNewBattle();
 	}
 
@@ -73,7 +72,6 @@ public class NodeBattle extends Node {
 		Player player = Player.getInstance();
 		player.onStartTurn();
 
-		// 检查敌人是否有 Steelsoul buff，如果有则扣除玩家行动点
 		if (enemy != null) {
 			for (main.buff.Buff buff : enemy.getBuffList()) {
 				if ("Steelsoul".equals(buff.getName()) && buff instanceof main.buff.positiveBuff.BuffSteelsoul) {
@@ -84,10 +82,9 @@ public class NodeBattle extends Node {
 						Main.executor.schedule(() -> {
 							System.out.println(" >> Steelsoul deducts " + actionPointsToDeduct + " action points!");
 						}, 1, TimeUnit.SECONDS);
-						// 扣除后重置，避免重复扣除
 						steelsoul.setActionPointsToDeduct(0);
 					}
-					break; // 只处理第一个 Steelsoul buff
+					break;
 				}
 			}
 		}
@@ -329,8 +326,6 @@ public class NodeBattle extends Node {
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
 		}
-
-		
 	}
 
 	public void onWin(){
@@ -355,7 +350,6 @@ public class NodeBattle extends Node {
 		ScoreCalculator scoreCalculator = ScoreCalculator.getInstance();
 		int gainedScore = scoreCalculator.calculateBattleScore(enemy, enemyType);
 
-		// Util.printBlankLines(3);
 		System.out.println(Main.longLine);
 
 		System.out.println("\n >> You defeated " + Colors.colorOnForEnemyName(enemy.getName(), enemy.getType()) + "!");

@@ -73,6 +73,9 @@ public class DamageProcessor {
     
     private static int calculateDamageOnly(int baseDamage, Object attacker, Object target, boolean isReflective) {
 
+        if (target instanceof Enemy && ((Enemy) target).getIsDied())
+            return 0;
+
         float damageMultiplier = 1.0f;
 
         boolean hasInvincible = hasInvincible(target);
@@ -123,7 +126,7 @@ public class DamageProcessor {
                     break;
 
                 case "Misty":
-                    if (Main.random.nextInt(10) <= 4) {
+                    if (Main.random.nextInt(10) <= 2) {
                         attackMistied = true;
                         damageMultiplier = 0.0f;
                     }

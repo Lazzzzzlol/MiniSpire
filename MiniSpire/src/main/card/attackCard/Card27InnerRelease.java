@@ -23,4 +23,8 @@ public class Card27InnerRelease extends AttackCard {
         player.addBuff(new BuffTough(2), 2);
 		DamageProcessor.applyDamageToEnemy(baseDamage, Player.getInstance(), enemy);
     }
+
+    public void resetBattle() {
+		this.cost = 0;
+	}
 }

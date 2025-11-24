@@ -3,5 +3,6 @@ version 1.1.0:
 
 version 1.1.1:
     - fixed bug that using mutiple damage card to defeat enemy may print mutiple times of dead messege
-
-    
+    - fixed bug that Indomitable will not add Vulnerable to player when using Implament
+    - fixed bug that Indomitable will may make hp to 0 when using Desperate Roar
+    - 

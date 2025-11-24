@@ -150,7 +150,7 @@ public class Thanalous extends Enemy {
 	private void gibbet() {
 
 		System.out.println(" >> Gibbet!");
-		int damage = 13 + Main.random.nextInt(5); // 13-17
+		int damage = 13 + Main.random.nextInt(5);
 		DamageProcessor.applyDamageToPlayer(damage, this, Player.getInstance());
 
 		boolean playerHasEnshroud = buffList.stream()

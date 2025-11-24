@@ -35,7 +35,6 @@ public class ScoreCalculator {
 				baseScore = 50;
 				break;
 		}
-		//这是一个注释
 		Player player = Player.getInstance();
 		int hpBonus = player.getHp(); 
 		int totalScore = baseScore + hpBonus;	

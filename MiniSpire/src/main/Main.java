@@ -21,7 +21,7 @@ public class Main {
 	
 	public static void main(String[] args) throws InterruptedException {
 		
-		//初始化
+		//inti
 		Game game = Game.getInstance();
 		game.init();
 		
@@ -30,26 +30,25 @@ public class Main {
 		
 		printGameBeginMessage(executor);
 		
-		//等待用户输入开始游戏
+		//input s to start
 		while (!userInput.equals("s")) {
 			userInput = scanner.nextLine();
 		}
 		
-		//游戏主循环
+		//main loop
 		while (!isGameOver) {
 			
-			//处理数据
+			//onUpdate - for data process
 			game.setIsEndTurn(false);
 			game.onUpdate();
 			
 			if (game.getIsGameOver())
 	        	break;
 			
-			//绘制画面
-			// Util.printBlankLines(3);
+			//onDraw - print user interface
 			game.onDraw();
 			
-			//读取操作
+			//onInupt - get user inputs
 
 	        while (!game.getIsEndTurn()) {
 	        	
@@ -82,9 +81,6 @@ public class Main {
 	        	
 		        game.onInput(userInput);
 		
-		        /*Main.executor.schedule(() -> {
-					Util.printBlankLines(3);
-				} , 10, TimeUnit.MILLISECONDS);*/
 		        if (!userInput.equals("e"))
 		        	game.onDraw();
 		        else
@@ -95,7 +91,7 @@ public class Main {
 	        }
 		}
 		
-		//游戏结束		
+		//gameover	
 		
 		Thread.sleep(1000);
 		Util.printBlankLines(30);
@@ -104,7 +100,7 @@ public class Main {
 		scanner.close();
 	}
 
-	//游戏开始信息
+	//begin message
 	private static void printGameBeginMessage(ScheduledExecutorService executor) {
 		
 		ArrayList<String> logo = new ArrayList<>();
@@ -139,7 +135,7 @@ public class Main {
 		}, logo.size() * 200 + 500, TimeUnit.MILLISECONDS);
 	}
 	
-	//游戏结束信息
+	//end message
 	private static void printGameOverMessage(ScheduledExecutorService executor, Game game) {
 
 		if (game.getIsVictory()) {

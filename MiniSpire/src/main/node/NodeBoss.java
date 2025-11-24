@@ -8,8 +8,6 @@ import main.Util;
 import main.game.Game;
 
 public class NodeBoss extends NodeBattle {
-	
-	//private String name = "Boss";
 
 	public NodeBoss() {
 		super("boss");
@@ -29,8 +27,6 @@ public class NodeBoss extends NodeBattle {
 		game.setIsEndTurn(true);
 		game.setIsGameOver(true);
 		game.setIsVictory(true);
-
-		//Player.getInstance().onWin();
 
 		Main.executor.schedule(() -> {
 			onWinDraw();

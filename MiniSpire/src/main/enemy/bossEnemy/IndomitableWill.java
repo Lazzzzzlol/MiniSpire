@@ -297,6 +297,8 @@ public class IndomitableWill extends Enemy {
 		
 		int hpLoss = 10 + Main.random.nextInt(6);
 		DamageProcessor.applyDamageToEnemy(hpLoss, null, this);
+		if (this.getHp() <= 0)
+			this.addHp(1);
 		
 		addBuff(new BuffSteelsoul(2), 2);
 	}
@@ -313,9 +315,9 @@ public class IndomitableWill extends Enemy {
 	}
 
 	private void impalement() {
-
 		int damage = 9 + Main.random.nextInt(3);
 		DamageProcessor.applyDamageToPlayer(damage, this, Player.getInstance());
+		Player.getInstance().addBuff(new BuffVulnerable(2), 2);
 	}
 
 	private void disesteem() {

@@ -113,8 +113,12 @@ public class Main {
 		logo.add(" 888   '   888 888 888   888 888    Y88b  d88P 888  888 888 888    Y8b.     ");
 		logo.add(" 888       888 888 888   888 888     'Y8888P'  88888P'  888 888     'Y8888  ");
 		logo.add("                                               888                          ");
-		logo.add("                                               888                          ");
-		logo.add("                                               888                          ");
+		logo.add("                       -+)                     888                          ");
+		logo.add("                        |    				    888                          ");
+		logo.add("                      O/              			                             ");
+		logo.add("                     /|                              						 ");
+		logo.add("           __________/ >_______________                           			 ");
+		logo.add("                                                       				     ");
 
 		System.out.println(longLine);
 		System.out.println();

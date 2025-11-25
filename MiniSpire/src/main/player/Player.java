@@ -265,9 +265,7 @@ public class Player {
 		if (time == null) time = 1001;
 
 		if (heal == 0){
-			Main.executor.schedule(() -> {
-				System.out.println(" >> Healed 0 HP (\u001B[31mLost\u001B[0m)");
-			}, time, TimeUnit.MILLISECONDS);
+			MessageQueue.scheduleMessage("Healed 0 HP (" + Colors.colorOnAnyElse("Lost", Colors.RED) + ")", 250L);
 			return;
 		}
 		
@@ -275,9 +273,7 @@ public class Player {
 		if (this.hp > this.maxHp)
 			this.hp = this.maxHp;
 		
-		Main.executor.schedule(() -> {
-			System.out.println(" >> Healed " + heal + " HP");
-		}, time, TimeUnit.MILLISECONDS);
+		MessageQueue.scheduleMessage("Healed " + heal + " HP", 250L);
 	}
 	
 	public void deductHp(int damage) {
@@ -522,5 +518,6 @@ public class Player {
 		return this.colorViews;
 	}
 }
+
 
 

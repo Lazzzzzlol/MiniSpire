@@ -68,7 +68,8 @@ public class NodeBattle extends Node {
 	
 	@Override
 	public void onStartTurn() {
-
+		if (isWin)
+			return;
 		Player player = Player.getInstance();
 		player.onStartTurn();
 
@@ -464,5 +465,6 @@ public class NodeBattle extends Node {
 		return enemy;
 	}
 }
+
 
 

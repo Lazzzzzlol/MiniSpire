@@ -137,46 +137,65 @@ public class CardFactory implements ResourceFactory {
 
 	public ArrayList<Card> getInitialDrawCardList(ArrayList<Card> drawCardList) {
 		
-		drawCardList.add(cardPool.get(0));
-		drawCardList.add(cardPool.get(0));
-		drawCardList.add(cardPool.get(0));
-		drawCardList.add(cardPool.get(0));
+		drawCardList.add(createCard(0));
+		drawCardList.add(createCard(0));
+		drawCardList.add(createCard(0));
+		drawCardList.add(createCard(0));
 		
-		drawCardList.add(cardPool.get(1));
-		drawCardList.add(cardPool.get(1));
+		drawCardList.add(createCard(1));
+		drawCardList.add(createCard(1));
 		
-		drawCardList.add(cardPool.get(5));
+		drawCardList.add(createCard(5));
 		
-		drawCardList.add(cardPool.get(8));
+		drawCardList.add(createCard(8));
 		
-		drawCardList.add(cardPool.get(9));
+		drawCardList.add(createCard(9));
 		
-		drawCardList.add(cardPool.get(13));
+		drawCardList.add(createCard(13));
 		
-		drawCardList.add(cardPool.get(19));
-		drawCardList.add(cardPool.get(19));
+		drawCardList.add(createCard(19));
+		drawCardList.add(createCard(19));
 
-		/* Test: 
-		drawCardList.add(cardPool.get(23));
-		drawCardList.add(cardPool.get(23));
-		drawCardList.add(cardPool.get(23));
-		drawCardList.add(cardPool.get(23));
-		drawCardList.add(cardPool.get(23));
-		drawCardList.add(cardPool.get(23));
-		drawCardList.add(cardPool.get(23));
-		drawCardList.add(cardPool.get(23));
-		drawCardList.add(cardPool.get(23));
-		drawCardList.add(cardPool.get(23));
-		drawCardList.add(cardPool.get(23));
-		drawCardList.add(cardPool.get(23));
-
-		drawCardList.add(cardPool.get(30));*/
 		
 		return drawCardList;
 	}
 
 	public Card createCard(int code){
-		return cardPool.get(code);
+		switch (code) {
+			case 0: return new Card00Strike();
+			case 1: return new Card01Onslaught();
+			case 2: return new Card02Earthquake();
+			case 3: return new Card03Upheaval();
+			case 4: return new Card04AbdomenTear();
+			case 5: return new Card05DecesiveStrike();
+			case 6: return new Card06LifeDrain();
+			case 7: return new Card07Ruination();
+			case 8: return new Card08Bloodbath();
+			case 9: return new Card09Double();
+			case 10: return new Card10Comeuppance();
+			case 11: return new Card11Rage();
+			case 12: return new Card12Rampart();
+			case 13: return new Card13Equilibrium();
+			case 14: return new Card14Interject();
+			case 15: return new Card15Esuna();
+			case 16: return new Card16Holmgang();
+			case 17: return new Card17PrimalRend();
+			case 18: return new Card18PrayForFavor();
+			case 19: return new Card19RecoveryStone();
+			case 20: return new Card20OldRadiantLifegem();
+			case 21: return new Card21BlessingOfTheErdtree();
+			case 22: return new Card22DeathBrand();
+			case 23: return new Card23Ragnarok();
+			case 24: return new Card24Flurry();
+			case 25: return new Card25TheSinisterBlade();
+			case 26: return new Card26Stratagem();
+			case 27: return new Card27InnerRelease();
+			case 28: return new Card28Tremble();
+			case 29: return new Card29PandorasBox();
+			case 30: return new Card30SacrificialRitual_cOLoRS();
+			case 31: return new Card31Scurvy();
+			default: return new Card00Strike();
+		}
 	}
 
 	// Reset any per-battle state on cards that need it. Called when a new battle/node starts.
@@ -226,31 +245,6 @@ public class CardFactory implements ResourceFactory {
 	}
 
 	public Card getRandomCard(){
-
-		/* int randNum = Main.random.nextInt(10) + 1;
-		switch (randNum) {
-			case 1:
-			case 2:
-			case 3:
-			case 4:
-				return getRandomNormalCard();
-
-			case 5:
-			case 6:
-			case 7:
-				return getRandomRareCard();
-			
-			case 8:
-			case 9:
-				return getRandomEpicCard();
-
-			case 10:
-				return getRandomLegendaryCard();
-		
-			default:
-				return getRandomNormalCard();
-		} */
-
 		double randNum = Main.random.nextDouble();
 	
 		if (randNum < NORMAL_RATE) {
@@ -265,22 +259,6 @@ public class CardFactory implements ResourceFactory {
 	}
 
 	private Card getRandomLegendaryCard() {
-
-		/* int randNum = Main.random.nextInt(legendaryCardNo) + 1;
-		switch (randNum) {
-			case 1:
-				return cardPool.get(7);
-
-			case 2:
-				return cardPool.get(24);
-
-			case 3:
-				return cardPool.get(18);
-		
-			default:
-				return cardPool.get(7);
-		} */
-
 		if (legendaryCards.isEmpty()) {
 			return getRandomNormalCard();
 		}
@@ -289,34 +267,6 @@ public class CardFactory implements ResourceFactory {
 	}
 
 	private Card getRandomEpicCard() {
-		
-		/* int randNum = Main.random.nextInt(epicCardNo) + 1;
-		switch (randNum) {
-			case 1:
-				return cardPool.get(16);
-				
-			case 2:
-				return cardPool.get(17);
-
-			case 3:
-				return cardPool.get(21);
-
-			case 4:
-				return cardPool.get(23);
-
-			case 5:
-				return cardPool.get(25);
-
-			case 6:
-				return cardPool.get(26);
-
-			case 7:
-				return cardPool.get(27);
-		
-			default:
-				return cardPool.get(16);
-		} */
-
 		if (epicCards.isEmpty()) {
 			return getRandomNormalCard();
 		}
@@ -325,43 +275,6 @@ public class CardFactory implements ResourceFactory {
 	}
 
 	private Card getRandomRareCard() {
-
-		/* int randNum = Main.random.nextInt(rareCardNo) + 1;
-		switch (randNum) {
-			case 1:
-				return cardPool.get(3);
-
-			case 2:
-				return cardPool.get(5);
-
-			case 3:
-				return cardPool.get(6);
-			
-			case 4:
-				return cardPool.get(10);
-
-			case 5:
-				return cardPool.get(11);
-
-			case 6:
-				return cardPool.get(12);
-
-			case 7:
-				return cardPool.get(13);
-
-			case 8:
-				return cardPool.get(14);
-
-			case 9:
-				return cardPool.get(15);
-
-			case 10:
-				return cardPool.get(20);
-		
-			default:
-				return cardPool.get(3);
-		} */
-
 		if (rareCards.isEmpty()) {
 			return getRandomNormalCard();
 		}
@@ -370,39 +283,8 @@ public class CardFactory implements ResourceFactory {
 	}
 
 	private Card getRandomNormalCard() {
-		
-		/* int randNum = Main.random.nextInt(normalCardNo) + 1;
-		switch (randNum) {
-			case 1:
-				return cardPool.get(0);
-		
-			case 2:
-				return cardPool.get(1);
-
-			case 3:
-				return cardPool.get(2);
-
-			case 4:
-				return cardPool.get(4);
-
-			case 5:
-				return cardPool.get(8);
-
-			case 6:
-				return cardPool.get(9);
-
-			case 7:
-				return cardPool.get(19);
-
-			case 8:
-				return cardPool.get(28);
-
-			default :
-			return cardPool.get(0);
-		} */
-
 		if (normalCards.isEmpty()) {
-			return cardPool.get(0);
+			return createCard(0);
 		}
 		int randNum = Main.random.nextInt(normalCards.size());
 		return normalCards.get(randNum);

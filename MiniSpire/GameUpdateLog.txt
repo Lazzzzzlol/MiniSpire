@@ -7,3 +7,7 @@ version 1.1.1:
     - fixed bug that Indomitable will may make hp to 0 when using Desperate Roar
     - fixed bug that Inner Release will not reset cost
     - fixed bug that Strengthen buff will not affect
+
+version 1.1.2:
+    - updated logo by adding a stick figure
+    - fixed bug that defeating boss by combination of "Recovery" and "Scurvy" may cause output error

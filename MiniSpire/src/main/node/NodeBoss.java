@@ -59,7 +59,7 @@ public class NodeBoss extends NodeBattle {
 		if (!isWin)
 			super.onInput(input);
 		else
-			while (!input.equals("e"))
+			while (!input.equals("end"))
 				input = Main.scanner.nextLine();
 	}
 
@@ -84,7 +84,7 @@ public class NodeBoss extends NodeBattle {
 		}, 7, TimeUnit.SECONDS);
 
 		Main.executor.schedule(() -> {
-			System.out.println("[Type 'e' to end game.]");
+			System.out.println("[Type 'end' to end game.]");
 		}, 9, TimeUnit.SECONDS);
 	}
 
@@ -114,7 +114,7 @@ public class NodeBoss extends NodeBattle {
 			}, 7000 + 25 * i, TimeUnit.MILLISECONDS);
 		}
 		Main.executor.schedule(() -> {
-			System.out.println("[Type 'e' to end game.]");
+			System.out.println("[Type 'end' to end game.]");
 		}, 9, TimeUnit.SECONDS);
 	}
 }

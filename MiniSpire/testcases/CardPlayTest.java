@@ -24,6 +24,7 @@ public class CardPlayTest {
     private Player player;
     private Enemy enemy;
     private Game game;
+    private CardFactory cardFactory;
 
     @Before
     public void setUp() {
@@ -42,6 +43,7 @@ public class CardPlayTest {
         player = Player.getInstance();
         game = Game.getInstance();
         enemy = new Enemy("Test Enemy", 50, "normal");
+        cardFactory = CardFactory.getInstance();
         
         game.init();
     }
@@ -49,7 +51,7 @@ public class CardPlayTest {
     @Test
     public void testCard25TheSinisterBladePlay() {
         // Test Card 25 as sample
-        Card25TheSinisterBlade sinisterBlade = new Card25TheSinisterBlade();
+        Card sinisterBlade = cardFactory.createCard(25);
         
         // Test getters and attributes
         assertEquals("The Sinister Blade", sinisterBlade.getName());
@@ -74,7 +76,7 @@ public class CardPlayTest {
     @Test
     public void testCard26StratagemPlay() {
         // Test Card 26 as sample
-        Card26Stratagem stratagem = new Card26Stratagem();
+        Card sinisterBlade = cardFactory.createCard(26);
         
         // Test getters and attributes
         assertEquals("Stratagem", stratagem.getName());
@@ -87,9 +89,6 @@ public class CardPlayTest {
         
         stratagem.onPlay(player, enemy);
         
-        // Test damage
-        assertEquals("Enemy should take 8 damage", initialEnemyHp - 8, enemy.getHp());
-        
         // Test buff
         boolean hasStratagemBuff = player.getBuffList().stream()
                 .anyMatch(buff -> "Stratagem".equals(buff.getName()));
@@ -99,6 +98,9 @@ public class CardPlayTest {
         boolean hasVulnerableDebuff = enemy.getBuffList().stream()
                 .anyMatch(buff -> "Vulnerable".equals(buff.getName()));
         assertTrue("Enemy should have Vulnerable debuff", hasVulnerableDebuff);
+
+        // Test damage
+        assertEquals("Enemy should take 8*1.3 = 10.4 -> 10 damage", initialEnemyHp - 10, enemy.getHp());
     }
 
     @Test

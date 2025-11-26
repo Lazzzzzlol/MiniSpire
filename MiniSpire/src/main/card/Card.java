@@ -49,10 +49,6 @@ public abstract class Card {
         return disposable;
     }
 
-    public void setTemporary(boolean b){
-        this.Temporary = b;
-    }
-
     public boolean getTemporary(){
         return Temporary;
     }

@@ -128,7 +128,6 @@ public class DamageProcessor {
                 case "Misty":
                     if (Main.random.nextInt(10) <= 2) {
                         attackMistied = true;
-                        damageMultiplier = 0.0f;
                     }
                     break;
 
@@ -141,6 +140,10 @@ public class DamageProcessor {
 
         damageMultiplier = Math.max(damageMultiplier, 0);
         int calculatedDamage = Math.round(baseDamage * damageMultiplier);
+
+        if (calculatedDamage == 0){
+            return 0;
+        }
         
         if (attackMistied) {
             scheduleDamageMessage(target, "The attack fails (" + Colors.colorOnForBuff("Misty", "positive") + ")", 250L);

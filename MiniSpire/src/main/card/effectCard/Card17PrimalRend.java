@@ -15,6 +15,7 @@ public class Card17PrimalRend extends EffectCard {
         this.info = "Deal damage that same as the total damage of Attack Cards in hand cards.";
         this.rarity = "epic";
         this.cost = 3;
+		this.needRemove = true;
     }
 
     @Override

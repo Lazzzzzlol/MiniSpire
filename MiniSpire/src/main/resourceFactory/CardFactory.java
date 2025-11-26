@@ -22,6 +22,7 @@ import main.card.attackCard.Card26Stratagem;
 import main.card.attackCard.Card27InnerRelease;
 import main.card.attackCard.Card29PandorasBox;
 import main.card.attackCard.Card30SacrificialRitual_cOLoRS;
+import main.card.attackCard.Card32InstantFlurry;
 
 import main.card.effectCard.Card08Bloodbath;
 import main.card.effectCard.Card09Double;
@@ -116,6 +117,8 @@ public class CardFactory implements ResourceFactory {
 
 		cardPool.add(new Card31Scurvy());                   // 31   epic
 
+		cardPool.add(new Card32InstantFlurry()); 			// 32   special
+
 		for (Card card : cardPool) {
 			String rarity = card.getRarity().toLowerCase();
 			if (rarity.contains("normal")) {
@@ -137,65 +140,33 @@ public class CardFactory implements ResourceFactory {
 
 	public ArrayList<Card> getInitialDrawCardList(ArrayList<Card> drawCardList) {
 		
-		drawCardList.add(createCard(0));
-		drawCardList.add(createCard(0));
-		drawCardList.add(createCard(0));
-		drawCardList.add(createCard(0));
+		drawCardList.add(cardPool.get(0));
+		drawCardList.add(cardPool.get(0));
+		drawCardList.add(cardPool.get(0));
+		drawCardList.add(cardPool.get(0));
 		
-		drawCardList.add(createCard(1));
-		drawCardList.add(createCard(1));
+		drawCardList.add(cardPool.get(1));
+		drawCardList.add(cardPool.get(1));
 		
-		drawCardList.add(createCard(5));
+		drawCardList.add(cardPool.get(5));
 		
-		drawCardList.add(createCard(8));
+		drawCardList.add(cardPool.get(8));
 		
-		drawCardList.add(createCard(9));
+		drawCardList.add(cardPool.get(9));
 		
-		drawCardList.add(createCard(13));
+		drawCardList.add(cardPool.get(13));
 		
-		drawCardList.add(createCard(19));
-		drawCardList.add(createCard(19));
+		drawCardList.add(cardPool.get(19));
+		drawCardList.add(cardPool.get(19));
+
+		drawCardList.add(cardPool.get(24));
 
 		
 		return drawCardList;
 	}
 
 	public Card createCard(int code){
-		switch (code) {
-			case 0: return new Card00Strike();
-			case 1: return new Card01Onslaught();
-			case 2: return new Card02Earthquake();
-			case 3: return new Card03Upheaval();
-			case 4: return new Card04AbdomenTear();
-			case 5: return new Card05DecesiveStrike();
-			case 6: return new Card06LifeDrain();
-			case 7: return new Card07Ruination();
-			case 8: return new Card08Bloodbath();
-			case 9: return new Card09Double();
-			case 10: return new Card10Comeuppance();
-			case 11: return new Card11Rage();
-			case 12: return new Card12Rampart();
-			case 13: return new Card13Equilibrium();
-			case 14: return new Card14Interject();
-			case 15: return new Card15Esuna();
-			case 16: return new Card16Holmgang();
-			case 17: return new Card17PrimalRend();
-			case 18: return new Card18PrayForFavor();
-			case 19: return new Card19RecoveryStone();
-			case 20: return new Card20OldRadiantLifegem();
-			case 21: return new Card21BlessingOfTheErdtree();
-			case 22: return new Card22DeathBrand();
-			case 23: return new Card23Ragnarok();
-			case 24: return new Card24Flurry();
-			case 25: return new Card25TheSinisterBlade();
-			case 26: return new Card26Stratagem();
-			case 27: return new Card27InnerRelease();
-			case 28: return new Card28Tremble();
-			case 29: return new Card29PandorasBox();
-			case 30: return new Card30SacrificialRitual_cOLoRS();
-			case 31: return new Card31Scurvy();
-			default: return new Card00Strike();
-		}
+		return cardPool.get(code);
 	}
 
 	// Reset any per-battle state on cards that need it. Called when a new battle/node starts.
@@ -284,7 +255,7 @@ public class CardFactory implements ResourceFactory {
 
 	private Card getRandomNormalCard() {
 		if (normalCards.isEmpty()) {
-			return createCard(0);
+			return cardPool.get(0);
 		}
 		int randNum = Main.random.nextInt(normalCards.size());
 		return normalCards.get(randNum);

@@ -12,11 +12,11 @@ public class Card18PrayForFavor extends EffectCard{
         this.info = "Apply Blessing to self, lasts for this fight.";
         this.rarity = "legendary";
         this.cost = 4;
+        this.needRemove = true;
     }
 
     @Override
     public void onUse(Player player, Enemy enemy) {
         player.addBuff(new BuffBlessed(1), 1);
-        setNeedRemove(true);
     }
 }

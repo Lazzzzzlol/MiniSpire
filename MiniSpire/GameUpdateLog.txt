@@ -10,4 +10,5 @@ version 1.1.1:
 
 version 1.1.2:
     - updated logo by adding a stick figure
-    - fixed bug that defeating boss by combination of "Recovery" and "Scurvy" may cause output error
+    - fixed bug that defeating enemy by "Scurvy" may cause output error
+    - fixed bug that Flurry of Blows card's wrong logic on copying itself

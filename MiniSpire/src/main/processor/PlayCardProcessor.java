@@ -68,10 +68,9 @@ public class PlayCardProcessor {
     
     private static void addFlurryToHand(Player player) {
 
-        Card temporaryFlurryCard = CardFactory.getInstance().createCard(24);
-        temporaryFlurryCard.setTemporary(true);
-        player.getHandCardList().add(temporaryFlurryCard);
-        schedulePlayCardMessage("Gained card: " + Colors.colorOnForCardName(temporaryFlurryCard),250L);
+        Card InstantFlurry = CardFactory.getInstance().createCard(32);
+        player.getHandCardList().add(InstantFlurry);
+        schedulePlayCardMessage("Gained card: " + Colors.colorOnForCardName(InstantFlurry),250L);
 
     }
 

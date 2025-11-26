@@ -1,4 +1,4 @@
-package main;
+ package main;
 
 import main.card.Card;
 import main.player.Player;
@@ -120,10 +120,13 @@ public class Colors {
         String colorOnText = text;
         switch (card.getName()){
             case "Sacrificial Ritual - cOLoRS":
-                colorOnText = getRainbowText(text);
+                colorOnText = getColorfulText(text, "rainbow");
                 break;
             case "Death Brand":
                 colorOnText = DARK_GRAY + text + RESET;
+                break;
+            case "Instant Flurry":
+                colorOnText = getColorfulText(text, "redGrayWhite");
                 break;
             default:
                 break;
@@ -131,12 +134,24 @@ public class Colors {
         return colorOnText;
     }
 
-    private static String getRainbowText(String text) {
-        String[] colorPool = {
-            BLACK, RED, GREEN, YELLOW, BLUE, PURPLE, CYAN, WHITE,
-            DARK_GRAY, BRIGHT_RED, BRIGHT_GREEN, BRIGHT_YELLOW, 
-            BRIGHT_BLUE, BRIGHT_PURPLE, BRIGHT_CYAN, BRIGHT_WHITE
-        };
+    private static String getColorfulText(String text, String type) {
+        String[] colorPool;
+        switch (type){
+            case "rainbow":
+                colorPool = new String[]{
+                    BLACK, RED, GREEN, YELLOW, BLUE, PURPLE, CYAN, WHITE,
+                    DARK_GRAY, BRIGHT_RED, BRIGHT_GREEN, BRIGHT_YELLOW, 
+                    BRIGHT_BLUE, BRIGHT_PURPLE, BRIGHT_CYAN, BRIGHT_WHITE
+                };
+                break;
+            case "redGrayWhite":
+                colorPool = new String[]{
+                    WHITE, BRIGHT_RED, DARK_GRAY
+                };
+                break;
+            default:
+                return text;
+        }
         
         StringBuilder rainbowText = new StringBuilder();
         

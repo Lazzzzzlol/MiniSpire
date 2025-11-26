@@ -229,9 +229,6 @@ public class Player {
 		drawCardList.addAll(discardCardList);
 		discardCardList.clear();
 
-
-		for (Card card : removeCardList)
-			card.setNeedRemove(false);
 		drawCardList.addAll(removeCardList);
 		removeCardList.clear();
 
@@ -517,6 +514,7 @@ public class Player {
 		return this.colorViews;
 	}
 }
+
 
 
 

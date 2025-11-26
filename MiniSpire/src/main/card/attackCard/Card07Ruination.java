@@ -12,6 +12,7 @@ public class Card07Ruination extends AttackCard {
         this.cost = 3;
         this.rarity = "legendary";
         this.baseDamage = 25;
+		this.needRemove = true;
     }
     
 
@@ -23,6 +24,5 @@ public class Card07Ruination extends AttackCard {
 		if (finalDamage > baseDamage) {
 			DamageProcessor.applyDamageToEnemy(baseDamage, Player.getInstance(), enemy);
 		}
-        setNeedRemove(true);
     }
 }

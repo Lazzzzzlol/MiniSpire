@@ -96,6 +96,10 @@ public class Main {
 		Thread.sleep(1000);
 		Util.printBlankLines(30);
 		
+		if (game.getIsVictory())
+			while (!game.getBossSpeechDone())
+				Thread.sleep(100);
+
 		printGameOverMessage(executor, game);
 		scanner.close();
 	}

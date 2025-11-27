@@ -37,6 +37,7 @@ public class Game {
 	private Boolean hasDrawnNodeInfo;
 	
 	private Enemy finalBoss;
+	private Boolean bossSpeechDone;
 	private Boolean isVictory;
 	private int score;
 	
@@ -56,6 +57,7 @@ public class Game {
 		this.hasDrawnNodeInfo = false;
 		
 		this.isVictory = false;
+		this.bossSpeechDone = false;
 		this.score = 0;
 	}
 	
@@ -146,6 +148,14 @@ public class Game {
 	
 	public Boolean getIsVictory() {
 		return isVictory;
+	}
+
+	public void setBossSpeechDone(Boolean bossSpeechDone) {
+		this.bossSpeechDone = bossSpeechDone;
+	}
+
+	public Boolean getBossSpeechDone(){
+		return bossSpeechDone;
 	}
 	
 	public void addScore(int score) {

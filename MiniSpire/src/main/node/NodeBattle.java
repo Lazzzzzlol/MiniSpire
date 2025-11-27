@@ -14,7 +14,7 @@ import main.card.passiveCard.PassiveCard;
 import main.enemy.Enemy;
 import main.game.Game;
 import main.player.Player;
-import main.processor.MessageQueue;
+import main.MessageQueue;
 import main.resourceFactory.EnemyFactory;
 import main.resourceFactory.CardFactory;
 
@@ -308,11 +308,8 @@ public class NodeBattle extends Node {
 				((PassiveCard)card).onDiscard();
 
 		player.onEndTurn();
-		try {
-			MessageQueue.waitForCompletion();
-		} catch (InterruptedException e) {
-			Thread.currentThread().interrupt();
-		}
+
+		MessageQueue.Wait();
 	
 		if (enemy.getHp() <= 0 || enemy.getIsDied()) {
 			onWin();
@@ -322,11 +319,7 @@ public class NodeBattle extends Node {
 		enemy.onMove();
 		enemy.onEndTurn();
 
-		try {
-        	MessageQueue.waitForCompletion();
-		} catch (InterruptedException e) {
-			Thread.currentThread().interrupt();
-		}
+		MessageQueue.Wait();
 	}
 
 	public void onWin(){

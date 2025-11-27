@@ -1,8 +1,7 @@
 // MessageQueue.java
-package main.processor;
+package main;
 
 import java.util.concurrent.*;
-import main.Main;
 
 public class MessageQueue {
     private static final BlockingQueue<MessageTask> messageQueue = new LinkedBlockingQueue<>();
@@ -76,6 +75,14 @@ public class MessageQueue {
         }
     }
     
+    public static void Wait() {
+        try {
+			MessageQueue.waitForCompletion();
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+		}
+    }
+
     public static void clear() {
         messageQueue.clear();
     }

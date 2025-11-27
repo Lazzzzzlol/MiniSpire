@@ -78,33 +78,33 @@ public class NodeShop extends Node {
 			if (parts[0].equals("r")){
 				switch (parts[1]){
 					case "1":
-						System.out.println(" >> Chosen: Refesh merchant's stock.");
+						TextDisplay.printLineWithDelay(" >> Chosen: Refesh merchant's stock.",150);
 						refreshShop();
 						break;
 					case "2":
-						System.out.println(" >> Chosen: Remove one card.");
+						TextDisplay.printLineWithDelay(" >> Chosen: Remove one card.",150);
 						removeCardFromDeck();
 						break;
 				}
 			}else if (parts[0].equals("b")){
 				switch (parts[1]) {
 					case "1":
-						System.out.println(" >> Chosen: Buy the leftmost card.");
+						TextDisplay.printLineWithDelay(" >> Chosen: Buy the leftmost card.",150);
 						buyCard(1);
 						break;
 					case "2":
-						System.out.println(" >> Chosen: Buy the middle card.");
+						TextDisplay.printLineWithDelay(" >> Chosen: Buy the middle card.",150);
 						buyCard(2);
 						break;
 					case "3":
-						System.out.println(" >> Chosen: Buy the rightmost card.");
+						TextDisplay.printLineWithDelay(" >> Chosen: Buy the rightmost card.",150);
 						buyCard(3);
 						break;
 				}
 			}else if (parts[0].equals("c")){
 				switch (parts[1]) {
 					case "1":
-						System.out.println(" >> Chosen: Check your deck.");
+						TextDisplay.printLineWithDelay(" >> Chosen: Check your deck.",150);
 						showDeck();
 						break;
 				}
@@ -181,20 +181,24 @@ public class NodeShop extends Node {
 		if (availableCards.length == 3) {
 			Card card1 = availableCards[0];
 			Card card2 = availableCards[1];
-			Card card3 = availableCards[2];
+			Card card3 = availableCards[2];			
 			
 			if (card1.getRarity().equals(card2.getRarity()) && 
 				card2.getRarity().equals(card3.getRarity())) {
 				isTripleCards = true;
-				System.out.println(" >> Special Offer! Triple cards found - all cards are FREE!");
 			}
 		}
 	}
 
 	private void displayAvailableCards() {
-
+		if (isTripleCards){
+			Util.printBlankLines(1);
+			TextDisplay.printLineWithDelay(Colors.getColorfulText(" >> Special Offer! Triple cards found - all cards are FREE!","rainbow"), 500);
+		}
+		
 		Util.printBlankLines(1);
 		TextDisplay.printLineWithDelay(" Cards on sale:", 200);
+
 		Util.printBlankLines(1);
 
 		for (int i = 0; i < availableCards.length; i++) {
@@ -206,12 +210,12 @@ public class NodeShop extends Node {
 
 				Card card = availableCards[i];
 
-				System.out.println("   " + (i + 1) + ") <" + Colors.colorOnForCardCost(card) + "> [" + Colors.colorOnForCardRarity(card) + "] " + Colors.colorOnForCardName(card));
-				System.out.println("      " + Colors.colorOnForCardInfo(card));
+				TextDisplay.printLineWithDelay("   " + (i + 1) + ") <" + Colors.colorOnForCardCost(card) + "> [" + Colors.colorOnForCardRarity(card) + "] " + Colors.colorOnForCardName(card),0);
+				TextDisplay.printLineWithDelay("      " + Colors.colorOnForCardInfo(card),0);
 				if (isTripleCards){
-					System.out.println("      Cost: 0 G");
+					TextDisplay.printLineWithDelay("      Cost: 0 G",0);
 				}else{
-					System.out.println("      Cost: " + getCardCost(card) + " G");
+					TextDisplay.printLineWithDelay("      Cost: " + getCardCost(card) + " G",0);
 				}
 
 				try {
@@ -245,12 +249,12 @@ public class NodeShop extends Node {
 		try {
 			int index = indexStr - 1;
 			if (index < 0 || index >= availableCards.length) {
-				System.out.println(" >> Invalid card index. Choose 1, 2, or 3.");
+				TextDisplay.printLineWithDelay(" >> Invalid card index. Choose 1, 2, or 3.",150);
 				return;
 			}
 			
 			if (availableCards[index] == null){
-				System.out.println(" >> Sold out item!");
+				TextDisplay.printLineWithDelay(" >> Sold out item!",150);
 				return;
 			}
 
@@ -264,7 +268,7 @@ public class NodeShop extends Node {
 				availableCards[index] = null;
 				
 			} else {
-				System.out.println(" >> Not enough gold! Need " + cost + " gold, but only have " + player.getGold() + ".");
+				TextDisplay.printLineWithDelay(" >> Not enough gold! Need " + cost + " gold, but only have " + player.getGold() + ".",150);
 			}
 		} catch (NumberFormatException e) {
 			System.out.println(" >> Invalid card index. Use numbers 1, 2, or 3.");
@@ -277,22 +281,22 @@ public class NodeShop extends Node {
 
 	private void removeCardFromDeck() {
 		if (player.getGold() < REMOVE_CARD_COST) {
-			System.out.println(" >> Not enough gold! Need " + REMOVE_CARD_COST + " gold, but only have " + player.getGold() + ".");
+			TextDisplay.printLineWithDelay(" >> Not enough gold! Need " + REMOVE_CARD_COST + " gold, but only have " + player.getGold() + ".",150);
 			return;
 		}
 		if (isRemoved){
-			System.out.println(" >> You've already removed one card, don't be so greedy...");
+			TextDisplay.printLineWithDelay(" >> You've already removed one card, don't be so greedy...",150);
 			return;
 		}
 		
 		Map<Integer, Card> indexToCardMap = player.showDeckWithIndex();
-		System.out.println("Enter the number of the card you want to remove, or 'cancel':");
+		TextDisplay.printLineWithDelay("Enter the number of the card you want to remove, or 'cancel':",150);
     	System.out.print("Remove >> ");
 		
 		String input = Main.scanner.nextLine().trim();
 		
 		if (input.equalsIgnoreCase("cancel")) {
-			System.out.println(" >> Removal cancelled.");
+			TextDisplay.printLineWithDelay(" >> Removal cancelled.",150);
 			return;
 		}
 		
@@ -306,28 +310,28 @@ public class NodeShop extends Node {
 				
 				if (removed) {
 					player.lostGold(REMOVE_CARD_COST);
-					System.out.println(" >> Removed: " + Colors.colorOnForCardName(cardToRemove) + " for " + REMOVE_CARD_COST + " gold.");
+					TextDisplay.printLineWithDelay(" >> Removed: " + Colors.colorOnForCardName(cardToRemove) + " for " + REMOVE_CARD_COST + " gold.",150);
 					this.isRemoved = true;
 				} else {
-					System.out.println(" >> Failed to remove the card. Please try again.");
+					TextDisplay.printLineWithDelay(" >> Failed to remove the card. Please try again.",150);
 				}
 			} else {
-				System.out.println(" >> Invalid card number. Please select a number from the list.");
+				TextDisplay.printLineWithDelay(" >> Invalid card number. Please select a number from the list.",150);
 			}
 		} catch (NumberFormatException e) {
-			System.out.println(" >> Invalid input. Please enter a number or 'cancel'.");
+			TextDisplay.printLineWithDelay(" >> Invalid input. Please enter a number or 'cancel'.",150);
 		}
 	}
 
 	private void refreshShop() {
 		if (refreshCount == MAX_REFRESH_TIMES) {
-			System.out.println(" >> No more refreshes left in this shop!");
+			TextDisplay.printLineWithDelay(" >> No more refreshes left in this shop!",150);
 			return;
 		}
 		
 		Player player = Player.getInstance();
 		if (player.getGold() < currentRefreshCost) {
-			System.out.println(" >> Not enough gold! Need " + currentRefreshCost + " gold, but only have " + player.getGold() + ".");
+			TextDisplay.printLineWithDelay(" >> Not enough gold! Need " + currentRefreshCost + " gold, but only have " + player.getGold() + " G.",150);
 			return;
 		}
 		
@@ -335,14 +339,14 @@ public class NodeShop extends Node {
 		refreshCount++;
 		
 		generateRandomCards();
-		System.out.println(" >> Shop refreshed! Cost: " + currentRefreshCost + " gold.");
+		TextDisplay.printLineWithDelay(" >> Shop refreshed! Cost: " + currentRefreshCost + " gold.", 150);
 		
 		currentRefreshCost += REFRESH_COST_INCREASE;
 		
 		if (refreshCount < MAX_REFRESH_TIMES) {
-			System.out.println(" >> You have " + (MAX_REFRESH_TIMES-refreshCount) + " more chance to refresh cards...");
+			TextDisplay.printLineWithDelay(" >> You have " + (MAX_REFRESH_TIMES-refreshCount) + " more chance to refresh cards...", 150);
 		}else{
-			System.out.println(" >> You have no more chance to refresh cards in this shop!");
+			TextDisplay.printLineWithDelay(" >> You have no more chance to refresh cards in this shop!", 150);
 		}
 	}
 

@@ -28,7 +28,7 @@ public class ScoreCalculator {
 			case "elite":
 				baseScore = 150;
 				break;
-			case "Boss":
+			case "boss":
 				baseScore = 500;
 				break;
 			default:

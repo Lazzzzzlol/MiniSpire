@@ -16,3 +16,4 @@ version 1.1.2:
     - fixed bug that Flurry of Blows card's wrong logic on copying itself
     - fixed bug that Life Drain card's logic failed on enemy with "Misty" 
     - fixed bug that Ragnarok card's logic failed on enemy with "Misty" 
+    - fixed bug that score given by defeating boss is wrong

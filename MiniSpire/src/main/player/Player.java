@@ -78,10 +78,29 @@ public class Player {
 	}
 	
 	public void onStartTurn() {
-
+		System.out.println();
 		boolean playerHasMuted = buffList.stream().anyMatch(buff -> "Muted".equals(buff.getName()));
+		boolean playerHasMentalOverload = buffList.stream().anyMatch(buff -> "Mental Overload".equals(buff.getName()));
 
 		this.actionPoints = this.maxActionPoints;
+
+		if (playerHasMentalOverload){
+			Buff MentalOverloadBuff = null;
+			int level = 0;
+			for (Buff buff : buffList) {
+				if (buff.getName().equals("Mental Overload")) {
+					MentalOverloadBuff = buff;
+					level = MentalOverloadBuff.getDuration();
+					buff.setDuration(0);
+					break;
+				}
+        	}
+			DamageProcessor.applyDamageToPlayer(5*level, null, this);
+			this.actionPoints += level;
+			System.out.println(" >> Action Point + " + level + " (" + Colors.colorOnAnyElse("Mental Overload", Colors.BLUE) + ").");
+			
+		}
+
 		if (playerHasMuted){
 			this.actionPoints = 0;
 			System.out.println(" >> Action Point becomes 0 (" + Colors.colorOnAnyElse("Muted", Colors.BLUE) + ").");
@@ -515,6 +534,7 @@ public class Player {
 		return this.colorViews;
 	}
 }
+
 
 
 

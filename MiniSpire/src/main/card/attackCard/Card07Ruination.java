@@ -18,8 +18,7 @@ public class Card07Ruination extends AttackCard {
 
     @Override
     public void onPlay(Player player, Enemy enemy) {
-        DamageProcessor.applyDamageToEnemy(baseDamage, Player.getInstance(), enemy);
-		int finalDamage = DamageProcessor.calculateDamageToEnemy(baseDamage, Player.getInstance(), enemy);
+		int finalDamage = DamageProcessor.applyDamageToEnemy(baseDamage, Player.getInstance(), enemy);
 		
 		if (finalDamage > baseDamage) {
 			DamageProcessor.applyDamageToEnemy(baseDamage, Player.getInstance(), enemy);

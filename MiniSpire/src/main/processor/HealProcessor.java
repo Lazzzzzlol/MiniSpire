@@ -7,6 +7,7 @@ import main.game.Game;
 import main.node.NodeBattle;
 import main.node.NodeBoss;
 import main.buff.Buff;
+import main.MessageQueue;
 
 public class HealProcessor {
     

@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import main.Colors;
 import main.Main;
+import main.MessageQueue;
 import main.TextDisplay;
 import main.buff.Buff;
 import main.buff.positiveBuff.BuffInvincible;
@@ -250,9 +251,9 @@ public class Player {
 		if (this.hp > this.maxHp)
 			this.hp = this.maxHp;
 		if (delta >= 0) {
-			System.out.println(" >> Max HP increases by " + delta);
+			MessageQueue.scheduleMessage("Max HP increases by " + delta,250L);
 		} else {
-			System.out.println(" >> Max HP decreases by " + (-delta));
+			MessageQueue.scheduleMessage("Max HP decreases by " + (-delta),250L);
 		}
 	}
 	
@@ -311,9 +312,9 @@ public class Player {
 		if (this.actionPoints > this.maxActionPoints)
 			this.actionPoints = this.maxActionPoints;
 		if (delta >= 0) {
-			System.out.println(" >> Max action points increases by " + delta);
+			MessageQueue.scheduleMessage("Max action points increases by " + delta,250L);
 		} else {
-			System.out.println(" >> Max action points decreases by " + (-delta));
+			MessageQueue.scheduleMessage("Max action points decreases by " + (-delta),250L);
 		}
 	}
 
@@ -343,9 +344,9 @@ public class Player {
 		if (this.drawCardNumPerTurn < 1)
 			this.drawCardNumPerTurn = 1;
 		if (delta >= 0) {
-			System.out.println(" >> Cards drawn per turn increases by " + delta);
+			MessageQueue.scheduleMessage("Cards drawn per turn increases by " + delta,250L);
 		} else {
-			System.out.println(" >> Cards drawn per turn decreases by " + (-delta));
+			MessageQueue.scheduleMessage("Cards drawn per turn decreases by " + (-delta),250L);
 		}
 	}
 	
@@ -514,7 +515,6 @@ public class Player {
 		return this.colorViews;
 	}
 }
-
 
 
 

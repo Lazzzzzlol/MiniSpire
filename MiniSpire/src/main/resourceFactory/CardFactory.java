@@ -42,6 +42,7 @@ import main.card.passiveCard.Card19RecoveryStone;
 import main.card.passiveCard.Card20OldRadiantLifegem;
 import main.card.passiveCard.Card21BlessingOfTheErdtree;
 import main.card.passiveCard.Card22DeathBrand;
+import main.card.passiveCard.Card33Overdose;
 
 public class CardFactory implements ResourceFactory {
 	
@@ -119,6 +120,8 @@ public class CardFactory implements ResourceFactory {
 
 		cardPool.add(new Card32InstantFlurry()); 			// 32   special
 
+		cardPool.add(new Card33Overdose()); 			    // 32   epic
+
 		for (Card card : cardPool) {
 			String rarity = card.getRarity().toLowerCase();
 			if (rarity.contains("normal")) {
@@ -140,10 +143,10 @@ public class CardFactory implements ResourceFactory {
 
 	public ArrayList<Card> getInitialDrawCardList(ArrayList<Card> drawCardList) {
 		
-		drawCardList.add(cardPool.get(0));
-		drawCardList.add(cardPool.get(0));
-		drawCardList.add(cardPool.get(0));
-		drawCardList.add(cardPool.get(0));
+		drawCardList.add(cardPool.get(33));
+		drawCardList.add(cardPool.get(33));
+		drawCardList.add(cardPool.get(33));
+		drawCardList.add(cardPool.get(33));
 		
 		drawCardList.add(cardPool.get(1));
 		drawCardList.add(cardPool.get(1));

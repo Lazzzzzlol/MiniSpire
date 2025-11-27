@@ -1,7 +1,7 @@
 package main.card.attackCard;
 
 import main.processor.DamageProcessor;
-import main.processor.MessageQueue;
+import main.MessageQueue;
 import main.enemy.Enemy;
 import main.player.Player;
 
@@ -26,11 +26,3 @@ public class Card30SacrificialRitual_cOLoRS extends AttackCard {
     }
 
 }
-
-
-
-
-
-
-
-

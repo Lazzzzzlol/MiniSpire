@@ -15,8 +15,8 @@ public class DamageProcessor {
     
     private static final ThreadLocal<Boolean> isReflectiveDamage = ThreadLocal.withInitial(() -> false);
     
-    public static void applyDamageToEnemy(int baseDamage, Player attacker, Enemy target) {
-        processDamage(baseDamage, attacker, target, false);
+    public static int applyDamageToEnemy(int baseDamage, Player attacker, Enemy target) {
+        return processDamage(baseDamage, attacker, target, false);
     }
     
     public static void applyDamageToPlayer(int baseDamage, Enemy attacker, Player target) {
@@ -31,19 +31,19 @@ public class DamageProcessor {
         return calculateDamageOnly(baseDamage, attacker, target, false);
     }
 
-    private static void processDamage(int baseDamage, Object attacker, Object target, boolean isReflective) {
+    private static int processDamage(int baseDamage, Object attacker, Object target, boolean isReflective) {
 
         if (isReflective && isReflectiveDamage.get()) {
-            return;
+            return 0;
         }
-        
+        int finalDamage;
         try {
 
             if (isReflective) {
                 isReflectiveDamage.set(true);
             }
             
-            int finalDamage = calculateDamageOnly(baseDamage, attacker, target, isReflective);
+            finalDamage = calculateDamageOnly(baseDamage, attacker, target, isReflective);
 
             if (finalDamage > 0) {
                 applyDamageEffect(baseDamage, finalDamage, attacker, target);
@@ -70,6 +70,7 @@ public class DamageProcessor {
             }
 
         }
+        return finalDamage;
     }
     
     private static int calculateDamageOnly(int baseDamage, Object attacker, Object target, boolean isReflective) {

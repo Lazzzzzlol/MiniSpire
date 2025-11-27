@@ -321,7 +321,7 @@ public class Player {
 		this.gold += gold;
 		this.totalGold += gold;
 		System.out.println(" >> Gained " + gold + " gold");
-		System.out.println((" >> Current gold: " + this.gold));
+		System.out.println((" >> Current gold: " + this.gold + " G"));
 	}
 	
 	public int getGold() {
@@ -334,8 +334,8 @@ public class Player {
 
 	public void lostGold(int cost) {
 		this.gold -= cost;
-		System.out.println(" >> Lost " + cost + " ");
-		System.out.println((" >> Current gold: " + this.gold));
+		System.out.println(" >> Lost " + cost + " gold");
+		System.out.println((" >> Current gold: " + this.gold + " G"));
 	}
 	
 	public void changeDrawCardNumPerTurn(int delta) {
@@ -514,6 +514,7 @@ public class Player {
 		return this.colorViews;
 	}
 }
+
 
 
 

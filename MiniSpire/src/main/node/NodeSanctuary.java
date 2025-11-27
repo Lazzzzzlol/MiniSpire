@@ -11,6 +11,7 @@ import main.processor.HealProcessor;
 import main.resourceFactory.CardFactory;
 import main.game.Game;
 import main.player.Player;
+import main.MessageQueue;
 
 public class NodeSanctuary extends Node {
 	
@@ -35,25 +36,9 @@ public class NodeSanctuary extends Node {
 		if (!hasHealed) {
 			int heal = (int)Math.floor(player.getMaxHp() * 0.3);
 			Main.executor.schedule(() -> {
-			HealProcessor.applyHeal(player, heal, null);
-			hasHealed = true;
+				HealProcessor.applyHeal(player, heal, null);
+				hasHealed = true;
 			}, 1500, TimeUnit.MILLISECONDS);
-		}
-		
-		Card card30 = CardFactory.getInstance().createCard(30);
-    	boolean hasCard30 = player.getPlayerDeck().stream().anyMatch(c -> c.getName().equals(card30.getName()));
-		if (player.getColorViewStatus() && !hasCard30){
-			int getCard30RandNum = Main.random.nextInt(10);
-			switch (getCard30RandNum) {
-				case 0:
-					player.addCardToDeck(card30);
-					TextDisplay.printCharWithDelay(" A flicker of light from the campfire's ashes catches your eye. There's something there.",10);
-					TextDisplay.printCharWithDelay(" It's a... vibrantly colorful card. Yet when you look directly at it, a sharp pain stings your eyes. It seems as though everything around the card is losing its color.", 5);
-					TextDisplay.printLineWithDelay(" >> Added " + Colors.colorOnForCardName(card30) + " to your deck!", 100);
-					break;
-				default:
-					break;
-			}
 		}
 	}
 
@@ -99,6 +84,28 @@ public class NodeSanctuary extends Node {
 				return;
 		}
 		hasChosen = true;
+
+		MessageQueue.Wait();
+
+		Card card30 = CardFactory.getInstance().createCard(30);
+    	boolean hasCard30 = player.getPlayerDeck().stream().anyMatch(c -> c.getName().equals(card30.getName()));
+		if (player.getColorViewStatus() && !hasCard30){
+			int getCard30RandNum = Main.random.nextInt(10);
+			switch (getCard30RandNum) {
+				case 5:
+					System.out.println(Main.longLine);
+					player.addCardToDeck(card30);
+					MessageQueue.scheduleMessage(" A flicker of light from the campfire's ashes catches your eye. There's something there.", 1000L);
+					MessageQueue.scheduleMessage(" It's a... vibrantly " + Colors.getColorfulText("colorful", "rainbow") + " card. Yet when you look directly at it, a sharp pain stings your eyes. It seems as though everything around the card is losing its color.", 1000L);
+					MessageQueue.scheduleMessage(" >> Added " + Colors.colorOnForCardName(card30) + " to your deck!", 2000L);
+					break;
+				default:
+					break;
+			}
+		}
+
+		MessageQueue.Wait();
+
 		Game.getInstance().advanceToNextNode();
 	}
 

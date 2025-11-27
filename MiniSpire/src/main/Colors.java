@@ -134,7 +134,7 @@ public class Colors {
         return colorOnText;
     }
 
-    private static String getColorfulText(String text, String type) {
+    public static String getColorfulText(String text, String type) {
         String[] colorPool;
         switch (type){
             case "rainbow":

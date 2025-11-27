@@ -11,6 +11,7 @@ version 1.1.1:
 version 1.1.2:
     - updated logo by adding a stick figure
     - updated shop output
+    - updated Pray For Favor card info
     - fixed bug that defeating enemy by "Scurvy" may cause output error
     - fixed bug that Flurry of Blows card's wrong logic on copying itself
     - fixed bug that Life Drain card's logic failed on enemy with "Misty" 

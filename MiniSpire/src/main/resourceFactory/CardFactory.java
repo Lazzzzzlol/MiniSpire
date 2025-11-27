@@ -159,9 +159,6 @@ public class CardFactory implements ResourceFactory {
 		drawCardList.add(cardPool.get(19));
 		drawCardList.add(cardPool.get(19));
 
-		drawCardList.add(cardPool.get(24));
-
-		
 		return drawCardList;
 	}
 
@@ -261,5 +258,6 @@ public class CardFactory implements ResourceFactory {
 		return normalCards.get(randNum);
 	}
 }
+
 
 

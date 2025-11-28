@@ -135,6 +135,9 @@ public class Colors {
     }
 
     public static String getColorfulText(String text, String type) {
+        if (!Player.getInstance().getColorViewStatus()){
+            return text;
+        }
         String[] colorPool;
         switch (type){
             case "rainbow":

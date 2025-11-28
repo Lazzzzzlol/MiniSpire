@@ -9,6 +9,7 @@ version 1.1.1:
     - fixed bug that "Strengthened" will not affect
 
 version 1.1.2:
+    - add card 33 Overdose
     - updated logo by adding a stick figure
     - updated shop output
     - updated Pray For Favor card info
@@ -17,3 +18,4 @@ version 1.1.2:
     - fixed bug that Life Drain card's logic failed on enemy with "Misty" 
     - fixed bug that Ragnarok card's logic failed on enemy with "Misty" 
     - fixed bug that score given by defeating boss is wrong
+    - fixed bug that color_rainbow is not controlled by colorview

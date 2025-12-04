@@ -179,6 +179,9 @@ public class Thanalous extends Enemy {
 		System.out.println(" >> Guillotine!");
 		int damage = 35;
 		DamageProcessor.applyDamageToPlayer(damage, this, Player.getInstance());
+		int finalDamage = DamageProcessor.calculateDamageToPlayer(damage, this, Player.getInstance());
+		if (finalDamage >= damage)
+			Player.getInstance().addBuff(new BuffWeakened(2), 2);
 		movementCounter++;
 	}
 

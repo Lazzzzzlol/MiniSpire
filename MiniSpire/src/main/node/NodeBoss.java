@@ -38,7 +38,7 @@ public class NodeBoss extends NodeBattle {
 
 	}
 
-	private void onWinDraw(){
+	public void onWinDraw(){
 
 		switch (enemy.getName()) {
 			case "Thanalous":

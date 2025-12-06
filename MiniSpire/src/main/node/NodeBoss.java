@@ -46,6 +46,7 @@ public class NodeBoss extends NodeBattle {
 				break;
 
 			case "IndOm?taB?e W?Ll":
+			case "Indomitable Will":
 				printIndomitableWillSpeech();
 		
 			default:

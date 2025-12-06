@@ -105,7 +105,7 @@ public class Main {
 	}
 
 	//begin message
-	private static void printGameBeginMessage(ScheduledExecutorService executor) {
+	public static void printGameBeginMessage(ScheduledExecutorService executor) {
 		
 		ArrayList<String> logo = new ArrayList<>();
 		logo.add(" 888b     d888 d8b           d8b     .d8888b.           d8b                 ");
@@ -144,7 +144,7 @@ public class Main {
 	}
 	
 	//end message
-	private static void printGameOverMessage(ScheduledExecutorService executor, Game game) {
+	public static void printGameOverMessage(ScheduledExecutorService executor, Game game) {
 
 		if (game.getIsVictory()) {
 			

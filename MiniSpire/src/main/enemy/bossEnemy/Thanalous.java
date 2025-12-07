@@ -87,21 +87,20 @@ public class Thanalous extends Enemy {
 	private void executePhaseTwo() {
 		switch (movementCounter) {
 			case 0:
-				declaration();
-				movementCounter++;
-				break;
-			case 1:
 				devour();
 				break;
-			case 2:
+			case 1:
 				feast();
 				break;
-			case 3:
+			case 2:
 				gluttony();
 				break;
-			case 4:
+			case 3:
 				confusion();
-				movementCounter = 0;
+				break;
+			case 4:
+				declaration();
+				movementCounter++;
 				break;
 			default:
 				movementCounter = 0;

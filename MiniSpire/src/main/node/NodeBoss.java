@@ -85,6 +85,10 @@ public class NodeBoss extends NodeBattle {
 		}, 7, TimeUnit.SECONDS);
 
 		Main.executor.schedule(() -> {
+			System.out.println("[Press 'e' to end game]");
+		}, 8, TimeUnit.SECONDS);
+
+		Main.executor.schedule(() -> {
 			Game.getInstance().setBossSpeechDone(true);
 		}, 9, TimeUnit.SECONDS);
 	}
@@ -114,7 +118,9 @@ public class NodeBoss extends NodeBattle {
 			System.out.println(" >> : Unacceptable.");
 			}, 7000 + 25 * i, TimeUnit.MILLISECONDS);
 		}
+		
 		Main.executor.schedule(() -> {
+			System.out.println("[Press 'e' to end game]");
 			Game.getInstance().setBossSpeechDone(true);
 		}, 9, TimeUnit.SECONDS);
 	}

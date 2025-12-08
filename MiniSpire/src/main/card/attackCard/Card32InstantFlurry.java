@@ -12,7 +12,7 @@ public class Card32InstantFlurry extends AttackCard {
         this.cost = 0;
         this.rarity = "special";
         this.baseDamage = 4;
-        this.Temporary = true;
+        this.temporary = true;
     }
 
     @Override

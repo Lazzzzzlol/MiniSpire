@@ -12,7 +12,8 @@ version 1.1.2:
     - add card 33 Overdose
     - updated logo by adding a stick figure
     - updated shop output
-    - updated Pray For Favor card info
+    - updated cards info
+    - updated Thanalous action cycle
     - fixed bug that defeating enemy by "Scurvy" may cause output error
     - fixed bug that Flurry of Blows card's wrong logic on copying itself
     - fixed bug that Life Drain card's logic failed on enemy with "Misty" 

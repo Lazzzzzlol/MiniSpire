@@ -8,7 +8,7 @@ public class Card14Interject extends EffectCard{
     
     public Card14Interject() {
         this.name = "Interject";
-        this.info = "Makes enemy fail to apply any buff to any target in next round.";
+        this.info = "Makes enemy fail to move in next round.";
         this.rarity = "rare";
         this.cost = 1;
     }

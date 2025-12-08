@@ -8,7 +8,7 @@ public class Card20OldRadiantLifegem extends PassiveCard{
     
     public Card20OldRadiantLifegem() {
         this.name = "Old Radiant Lifegem";
-        this.info = "When discarded, heal 12 hp and apply 3 round Recovery to seld.";
+        this.info = "When discarded, heal 12 hp and apply 3 round Recovery to self.";
         this.rarity = "rare";
         this.cost = 0;
     }

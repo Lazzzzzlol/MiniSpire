@@ -9,7 +9,7 @@ public abstract class Card {
     protected Boolean canPlay;
     protected boolean needRemove = false;
     protected boolean disposable = false;
-    protected boolean Temporary = false;
+    protected boolean temporary = false;
 
     public abstract void onPlay(main.player.Player player, main.enemy.Enemy enemy);
     
@@ -46,6 +46,6 @@ public abstract class Card {
     }
 
     public boolean getTemporary(){
-        return Temporary;
+        return temporary;
     }
 }

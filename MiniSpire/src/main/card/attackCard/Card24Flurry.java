@@ -9,7 +9,7 @@ public class Card24Flurry extends AttackCard {
     
     public Card24Flurry() {
         this.name = "Flurry of Blows";
-        this.info = "Deal 4 damage, draw 1 card. During this fight, when Effect Card is used, gain a Flurry of Blows to hand.";
+        this.info = "Deal 4 damage, draw 1 card. During this fight, when Effect Card is used, gain a Instant Flurry to hand.";
         this.cost = 0;
         this.rarity = "rare";
         this.baseDamage = 4;

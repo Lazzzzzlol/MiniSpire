@@ -9,7 +9,7 @@ public class Card18PrayForFavor extends EffectCard{
     
     public Card18PrayForFavor() {
         this.name = "Pray for Favor";
-        this.info = "Apply Blessed to self, lasts for this fight.";
+        this.info = "Apply Blessed to self, lasts for this fight. [Remove] Temporarily removed after used, regain in next battle.";
         this.rarity = "legendary";
         this.cost = 4;
         this.needRemove = true;

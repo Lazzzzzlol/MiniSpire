@@ -12,7 +12,7 @@ public class Card17PrimalRend extends EffectCard {
     
     public Card17PrimalRend() {
         this.name = "Primal Rend";
-        this.info = "Deal damage that same as the total damage of Attack Cards in hand cards.";
+        this.info = "Deal damage that same as the total damage of Attack Cards in hand cards. [Remove] Temporarily removed after used, regain in next battle.";
         this.rarity = "epic";
         this.cost = 3;
 		this.needRemove = true;

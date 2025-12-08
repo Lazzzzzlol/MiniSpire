@@ -9,7 +9,7 @@ public class Card30SacrificialRitual_cOLoRS extends AttackCard {
     
     public Card30SacrificialRitual_cOLoRS() {
         this.name = "Sacrificial Ritual - cOLoRS";
-        this.info = "Deal 100 damage. --Power demands sacrifice. Shall we begin?";
+        this.info = "Deal 100 damage. --Power demands sacrifice. Shall we begin? [Self-destruct] Permanently removed after used.";
         this.cost = 0;
         this.rarity = "special";
         this.baseDamage = 100;
